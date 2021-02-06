@@ -21,7 +21,7 @@ int main(int argc, char** argv) {
 
         // Open file with added file extension
         std::ifstream inFile;
-        inFile.open(fileName + ".fs18");
+        inFile.open(fileName + ".sp2020");
 
         // Check if the file exists
         if (inFile)
