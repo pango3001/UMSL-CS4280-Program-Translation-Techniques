@@ -1,21 +1,14 @@
-CXX	= g++
-CXXFLAGS = -g -Wall
-TARGET1	= main
-TARGET2	= tree
-OBJS1	= main.o
-OBJS2	= tree.o
-DEPS    = node.h
-RM      = rm -f
+CXX = g++
+CXXFLAGS = -std=c++0x -Wall -g
 
-all: $(TARGET1) $(TARGET2)
+P0: main.o tree.o
+	$(CXX) $(CXXFLAGS) -o P0 main.o tree.o
+	
+main.o: main.cpp
+	$(CXX) $(CXXFLAGS) -c main.cpp
 
-$(TARGET1): $(OBJS1)
-	$(CC) -o $@ $(OBJS1)
-
-$(TARGET2): $(OBJS2)
-	$(CC) -o $@ $(OBJS2) $(DEPS)
-
-.PHONY: clean
-
+tree.o: tree.cpp tree.h node.h
+	$(CXX) $(CXXFLAGS) -c tree.cpp
+	
 clean:
-	$(RM) core *.o $(TARGET1) $(TARGET2)
+	rm *.o *.inorder *.preorder *.postorder temp.txt P0
