@@ -18,7 +18,7 @@ int main(int argc, char** argv) {
 
 
 
-
+    std::string fileName;
     std::ifstream inFile;
 
     if (argc == 1) {
@@ -38,16 +38,17 @@ int main(int argc, char** argv) {
         std::ifstream inFile;
         inFile.open("file.temp", std::ios::in);
 
-        std::string fileName = "out";
+        fileName = "out";
 
     }
 
 
     if (argc == 2) {
-        std::string fileName = argv[1];
+        fileName = argv[1];
 
         inFile.open(fileName + ".sp2020");
     }
+
     if (inFile) {
 
         Tree binaryTree;
