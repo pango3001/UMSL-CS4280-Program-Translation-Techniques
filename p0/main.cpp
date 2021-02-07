@@ -2,52 +2,42 @@
 #include <fstream>
 #include <string>
 #include "tree.h"
+#include "node.h"
 
 int main(int argc, char** argv) {
 
-    // Check for too many arguments
-    if (argc > 2)
+    
+    if (argc > 2)   // Check for too many arguments
     {
-        // Error message for too many arguments
-        std::cout << "Too many arguments" << std::endl;
+        std::cout << "Too many arguments" << std::endl; // Error message for too many arguments
         return 0;
     }
 
-    // Check if file name given
-    if (argc == 2)
+    
+    if (argc == 2) // Check if file name given
     {
-        // Take in file name argument
-        std::string fileName = argv[1];
-
-        // Open file with added file extension
-        std::ifstream inFile;
+        
+        std::string fileName = argv[1]; // Take in file name argument
+        std::ifstream inFile;  // Open file with added file extension
         inFile.open(fileName + ".sp2020");
 
-        // Check if the file exists
+        // if the file exists
         if (inFile)
         {
-            // Create tree
-            Tree binaryTree;
+            Tree binaryTree;  // Create tree
 
-            // Populate tree from input file
-            binaryTree.root = binaryTree.buildTree(inFile);
+            binaryTree.root = binaryTree.buildTree(inFile);  // Populate tree from input file
+            binaryTree.traverseInorder(binaryTree.root, fileName); // Traverse tree inorder and print to $filename.inorder
+            binaryTree.traversePostorder(binaryTree.root, fileName);  // Traverse tree postorder and print to $filename.postorder
+            binaryTree.traversePreorder(binaryTree.root, fileName);  // Traverse tree preorder and print to $filename.preorder
 
-            // Traverse tree inorder and print to $filename.inorder
-            binaryTree.traverseInorder(binaryTree.root, fileName);
-
-            // Traverse tree postorder and print to $filename.postorder
-            binaryTree.traversePostorder(binaryTree.root, fileName);
-
-            // Traverse tree preorder and print to $filename.preorder
-            binaryTree.traversePreorder(binaryTree.root, fileName);
-
-            // Closing the input file
-            inFile.close();
+            
+            inFile.close();   // Closing the input file
 
             return 0;
         }
 
-        // Handling file not found under given file name
+        // if the file does not exists
         else
         {
             // Error message for file not found
@@ -59,44 +49,36 @@ int main(int argc, char** argv) {
     // Checking for no file name given
     if (argc == 1)
     {
-        // Creating a temporary file to hold console input
-        std::ofstream tempFile;
-        tempFile.open("temp.txt", std::ios::trunc); // Overwrites if file already exists
+        
+        std::ofstream tempFile;  // Creating a temporary file to hold console input
+        tempFile.open("tree.temp", std::ios::trunc); // Overwrites if file already exists
 
-        // Helper string variable
-        std::string word = "";
+        
+        std::string word = ""; // Helper string variable
 
         // Looping until EOF is reached
         while (std::cin >> word)
             tempFile << (word + ' ');
 
-        // Closing temporary file
-        tempFile.close();
+        
+        tempFile.close();  // Closing temporary file
 
-        // New input file filled with console input
-        std::ifstream inFile;
-        inFile.open("temp.txt", std::ios::in);
+        
+        std::ifstream inFile;  // New input file filled with console input
+        inFile.open("tree.temp", std::ios::in);
 
-        // Confirm the file exists
-        if (inFile)
+        
+        if (inFile)  // Confirm the file exists
         {
-            // Create tree
-            Tree binaryTree;
+            Tree binaryTree;            // Create tree
 
-            // Populate tree from input file
-            binaryTree.root = binaryTree.buildTree(inFile);
+            binaryTree.root = binaryTree.buildTree(inFile);  // Populate tree from input file
+            binaryTree.traverseInorder(binaryTree.root, "out");  // Traverse tree inorder and print to out.inorder
+            binaryTree.traversePostorder(binaryTree.root, "out");  // Traverse tree postorder and print to out.postorder
+            binaryTree.traversePreorder(binaryTree.root, "out");  // Traverse tree preorder and print to out.preorder
 
-            // Traverse tree inorder and print to out.inorder
-            binaryTree.traverseInorder(binaryTree.root, "out");
-
-            // Traverse tree postorder and print to out.postorder
-            binaryTree.traversePostorder(binaryTree.root, "out");
-
-            // Traverse tree preorder and print to out.preorder
-            binaryTree.traversePreorder(binaryTree.root, "out");
-
-            // Closing input file
-            inFile.close();
+            
+            inFile.close(); // Closing input file
 
             return 0;
         }
