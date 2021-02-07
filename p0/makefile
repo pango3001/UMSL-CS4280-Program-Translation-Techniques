@@ -1,14 +1,14 @@
 CXX = g++
-CXXFLAGS = -g -Wall
+FLAGS = -g -Wall -Wc++0x-compat
 
 P0: main.o tree.o
-	$(CXX) $(CXXFLAGS) -o P0 main.o tree.o
+	$(CXX) $(FLAGS) -o P0 main.o tree.o
 	
 main.o: main.cpp
-	$(CXX) $(CXXFLAGS) -c main.cpp
+	$(CXX) $(FLAGS) -c main.cpp
 
 tree.o: tree.cpp tree.h node.h
-	$(CXX) $(CXXFLAGS) -c tree.cpp
+	$(CXX) $(FLAGS) -c tree.cpp
 	
 clean:
-	rm *.o *.inorder *.preorder *.postorder temp.txt P0
+	rm -f P0 *.o *.inorder *.preorder *.postorder temp.txt
