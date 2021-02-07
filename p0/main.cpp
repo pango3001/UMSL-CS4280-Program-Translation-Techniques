@@ -5,23 +5,16 @@
 #include "node.h"
 
 
-void printFileNotFound();
-void tree(std::string, std::ifstream);
-
 int main(int argc, char** argv) {
-
     if (argc > 2){
         std::cout << "Too many arguments" << std::endl;
         return 0;
     }
 
-
-
     std::string fileName;
     std::ifstream inFile;
 
     if (argc == 1) {
-
         std::ofstream tempFile;
         tempFile.open("file.temp", std::ios::trunc);
 
@@ -43,12 +36,10 @@ int main(int argc, char** argv) {
 
     if (argc == 2) {
         fileName = argv[1];
-
         inFile.open(fileName + ".sp2020");
     }
 
     if (inFile) {
-
         Tree binaryTree;
 
         binaryTree.root = binaryTree.buildTree(inFile);
@@ -60,113 +51,15 @@ int main(int argc, char** argv) {
         
         std::ifstream f(fileName + ".preorder");
 
-        if (f.is_open()) {
+        if (f.is_open()
             std::cout << f.rdbuf();
-            std::cout << "output" << std::endl;
-        }
 
-
-        return 0;
     }
 
     else {
-        printFileNotFound();
+        std::cout << "Error: File not found." << std::endl;
         return 0;
     }
 
-
-
-
-
-    /*
-    if (argc == 2)
-    {
-        
-        std::string fileName = argv[1];
-        std::ifstream inFile;
-        inFile.open(fileName + ".sp2020");
-        
-        if (inFile)
-        {
-            
-            Tree binaryTree;
-
-            binaryTree.root = binaryTree.buildTree(inFile);
-            binaryTree.traverseInorder(binaryTree.root, fileName);
-            binaryTree.traversePostorder(binaryTree.root, fileName);
-            binaryTree.traversePreorder(binaryTree.root, fileName);
-            
-            inFile.close();
-
-            return 0;
-        }
-
-        else
-        {
-            printFileNotFound();
-            return 0;
-        }
-    }
-
-    if (argc == 1)
-    {
-        
-        std::ofstream tempFile;
-        tempFile.open("file.temp", std::ios::trunc);
-
-        
-        std::string word = "";
-
-        while (std::cin >> word)
-            tempFile << (word + ' ');
-
-        
-        tempFile.close();
-
-        
-        std::ifstream inFile;
-        inFile.open("file.temp", std::ios::in);
-
-        
-        if (inFile)
-        {
-            
-            Tree binaryTree;
-
-            binaryTree.root = binaryTree.buildTree(inFile);
-            binaryTree.traverseInorder(binaryTree.root, "out");
-            binaryTree.traversePostorder(binaryTree.root, "out");
-            binaryTree.traversePreorder(binaryTree.root, "out");
-            
-            
-            inFile.close();
-
-            return 0;
-        }
-
-        else
-        {
-            printFileNotFound();
-            return 0;
-        }
-
-    }
-    */
     return 0;
 }
-
-
-void printFileNotFound() {
-    std::cout << "Error: File not found." << std::endl;
-}
-
-void tree(std::string fileName, std::ifstream inFile) {
-    Tree binaryTree;
-
-    binaryTree.root = binaryTree.buildTree(inFile);
-    binaryTree.traverseInorder(binaryTree.root, fileName);
-    binaryTree.traversePostorder(binaryTree.root, fileName);
-    binaryTree.traversePreorder(binaryTree.root, fileName);
-}
-
-	
