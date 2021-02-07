@@ -1,5 +1,5 @@
 CXX = g++
-FLAGS = -g -Wall -Wc++0x -compat
+FLAGS = -g -Wall
 
 P0: main.o tree.o
 	$(CXX) $(FLAGS) -o P0 main.o tree.o
