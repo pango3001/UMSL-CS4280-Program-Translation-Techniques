@@ -3,12 +3,9 @@
 #include <string>
 #include <set>
 
-// Tree node structure
-struct Node
-{
-
+struct Node {
 	std::set <std::string> data;// set of values for this node
-	std::string twoChars; 		// string length
+	std::string twoChars; 		// first two chars
 	Node* left;        			// ptr to left child
 	Node* right;       			// ptr to right child
 
@@ -21,7 +18,5 @@ struct Node
 		this->right = nullptr;
 	}
 };
-
-
 
 #endif

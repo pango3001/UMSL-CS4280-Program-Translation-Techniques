@@ -29,7 +29,6 @@ int main(int argc, char** argv) {
         inFile.open("file.temp", std::ios::in);
 
         fileName = "p0_output";
-        std::cout << "1 arg found" << std::endl;
 
     }
 
@@ -48,12 +47,15 @@ int main(int argc, char** argv) {
         binaryTree.traversePreorder(binaryTree.root, fileName);
 
         inFile.close();
-        
-        std::ifstream f(fileName + ".preorder");
 
-        if (f.is_open())
-            std::cout << f.rdbuf();
+        std::string suffix[3] = [".preorder", ".inorder", ".postorder"];
 
+        for (auto suffix : suffix[]) {
+            std::ifstream f(fileName + suffix);
+
+            if (f.is_open())
+                std::cout << f.rdbuf();
+        }
     }
 
     else {
