@@ -35,7 +35,7 @@ int main(int argc, char** argv) {
 
         inFile.open("file.temp", std::ios::in);
 
-        fileName = "out";
+        fileName = argv[1];
         std::cout << "1 arg found" << std::endl;
 
     }
