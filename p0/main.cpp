@@ -41,7 +41,7 @@ int main(int argc, char** argv) {
         else
         {
             // Error message for file not found
-            std::cout << '"' << fileName + ".sp2020" << '"' << " could not be found" << std::endl;
+            std::cout << '"Error: File not found." << std::endl;
             return 0;
         }
     }

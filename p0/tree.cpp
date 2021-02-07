@@ -18,11 +18,10 @@ Node* Tree::buildTree(std::istream& input)
 	// Helper string variable
 	std::string word;
 
-	// Looping until EOF
-	while (input >> word)
+	
+	while (input >> word) // Looping until EOF
 	{
-		// inserting each word from the stream into the tree
-		this->insert(word);
+		this->insert(word); // inserting each word from the stream into the tree
 	}
 	return root;
 }
@@ -78,16 +77,17 @@ Node* Tree::insert(Node* node, std::string value)
 	// Adding new node to tree
 	if (node == NULL) return new Node(value);
 
+
 	// less than so go to left node
-	if (value.length() < node->length)
+	if (value.substr(0, 2) < node->length)
 		node->left = insert(node->left, value);
 
 	// greater than so go to right node
-	else if (value.length() > node->length)
+	else if (value.substr(0, 2) > node->length)
 		node->right = insert(node->right, value);
 
 	// equals so add to node set
-	else if (value.length() == node->length)
+	else if (value.substr(0, 2) == node->length)
 		node->data.insert(value);
 
 	return node;
@@ -150,7 +150,6 @@ void Tree::traversePreorder(Node* node, int level, std::ostream& output)
 	output << std::endl;
 
 	traversePreorder(node->left, (level + 1), output);
-
 	traversePreorder(node->right, (level + 1), output);
 
 }
