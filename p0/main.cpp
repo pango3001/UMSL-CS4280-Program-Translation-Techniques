@@ -16,7 +16,63 @@ int main(int argc, char** argv) {
         return 0;
     }
 
-    
+
+
+
+    std::ifstream inFile;
+
+    if (argc == 1) {
+
+        std::ofstream tempFile;
+        tempFile.open("file.temp", std::ios::trunc);
+
+        std::string word = "";
+
+        while (std::cin >> word)
+            tempFile << (word + ' ');
+
+
+        tempFile.close();
+
+
+        std::ifstream inFile;
+        inFile.open("file.temp", std::ios::in);
+
+        std::string fileName = "out";
+
+    }
+
+
+    if (argc == 2) {
+        std::string fileName = argv[1];
+
+        inFile.open(fileName + ".sp2020");
+    }
+    if (inFile) {
+
+        Tree binaryTree;
+
+        binaryTree.root = binaryTree.buildTree(inFile);
+        binaryTree.traverseInorder(binaryTree.root, fileName);
+        binaryTree.traversePostorder(binaryTree.root, fileName);
+        binaryTree.traversePreorder(binaryTree.root, fileName);
+
+        inFile.close();
+
+        return 0;
+    }
+
+    else {
+        printFileNotFound();
+        return 0;
+    }
+}
+
+
+
+
+
+    /*
     if (argc == 2)
     {
         
@@ -89,7 +145,7 @@ int main(int argc, char** argv) {
         }
 
     }
-
+    */
     return 0;
 }
 
