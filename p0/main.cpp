@@ -10,8 +10,7 @@ void tree(std::string, std::ifstream);
 
 int main(int argc, char** argv) {
 
-    if (argc > 2)
-    {
+    if (argc > 2){
         std::cout << "Too many arguments" << std::endl;
         return 0;
     }
@@ -34,8 +33,6 @@ int main(int argc, char** argv) {
 
         tempFile.close();
 
-
-        std::ifstream inFile;
         inFile.open("file.temp", std::ios::in);
 
         fileName = "out";
@@ -67,7 +64,6 @@ int main(int argc, char** argv) {
         printFileNotFound();
         return 0;
     }
-}
 
 
 
