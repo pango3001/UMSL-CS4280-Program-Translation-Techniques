@@ -9,7 +9,7 @@ struct Node
 {
 
 	std::set <std::string> data;// set of values for this node
-	std::string length; 		// string length
+	std::string twoChars; 		// string length
 	Node* left;        			// ptr to left child
 	Node* right;       			// ptr to right child
 
@@ -17,7 +17,7 @@ struct Node
 	Node(std::string data)
 	{
 		this->data.insert(data);
-		this->length = data.substr(0, 2);
+		this->twoChars = data.substr(0, 2);
 		this->left = nullptr;
 		this->right = nullptr;
 	}

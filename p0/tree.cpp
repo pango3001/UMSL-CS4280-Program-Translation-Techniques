@@ -71,7 +71,7 @@ void Tree::traversePreorder(Node* node, std::string filename)
 // Private Functions
 
 
-// This function inserts a string into a tree with a given root based on the string length
+// This function inserts a string into a tree with a given root based on the first two chars of string
 Node* Tree::insert(Node* node, std::string value)
 {
 	// Adding new node to tree
@@ -79,15 +79,15 @@ Node* Tree::insert(Node* node, std::string value)
 
 
 	// less than so go to left node
-	if (value.substr(0, 2) < node->length)
+	if (value.substr(0, 2) < node->twoChars)
 		node->left = insert(node->left, value);
 
 	// greater than so go to right node
-	else if (value.substr(0, 2) > node->length)
+	else if (value.substr(0, 2) > node->twoChars)
 		node->right = insert(node->right, value);
 
 	// equals so add to node set
-	else if (value.substr(0, 2) == node->length)
+	else if (value.substr(0, 2) == node->twoChars)
 		node->data.insert(value);
 
 	return node;
