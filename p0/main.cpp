@@ -58,7 +58,7 @@ int main(int argc, char** argv) {
 
         inFile.close();
         
-        std::ifstream f(fileName + "preorder");
+        std::ifstream f(fileName + ".preorder");
 
         if (f.is_open()) {
             std::cout << f.rdbuf();
