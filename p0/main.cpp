@@ -48,7 +48,7 @@ int main(int argc, char** argv) {
 
         inFile.close();
 
-        std::string suffix[3] = [".preorder", ".inorder", ".postorder"];
+        std::string suffix[3] = { ".preorder", ".inorder", ".postorder" };
 
         for (auto suffix : suffix[]) {
             std::ifstream f(fileName + suffix);
