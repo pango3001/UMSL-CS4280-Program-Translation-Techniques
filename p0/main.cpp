@@ -25,10 +25,10 @@ int main(int argc, char** argv) {
         std::ofstream tempFile;
         tempFile.open("file.temp", std::ios::trunc);
 
-        std::string word = "";
+        std::string string = "";
 
-        while (std::cin >> word)
-            tempFile << (word + ' ');
+        while (std::cin >> string)
+            tempFile << (string + ' ');
 
 
         tempFile.close();
@@ -45,7 +45,6 @@ int main(int argc, char** argv) {
         fileName = argv[1];
 
         inFile.open(fileName + ".sp2020");
-        std::cout << "2 args found" << std::endl;
     }
 
     if (inFile) {
@@ -58,6 +57,13 @@ int main(int argc, char** argv) {
         binaryTree.traversePreorder(binaryTree.root, fileName);
 
         inFile.close();
+        
+        std::ifstream f(fileName + "preorder");
+
+        if (f.is_open())
+            std::cout << f.rdbuf();
+
+
 
         return 0;
     }
