@@ -26,15 +26,14 @@ int main(int argc, char** argv) {
         
         if (inFile)
         {
-            tree(fileName, inFile);
-            /*
+            
             Tree binaryTree;
 
             binaryTree.root = binaryTree.buildTree(inFile);
             binaryTree.traverseInorder(binaryTree.root, fileName);
             binaryTree.traversePostorder(binaryTree.root, fileName);
             binaryTree.traversePreorder(binaryTree.root, fileName);
-            */
+            
             inFile.close();
 
             return 0;
@@ -69,16 +68,14 @@ int main(int argc, char** argv) {
         
         if (inFile)
         {
-            tree("out", inFile);
             
-            /*
             Tree binaryTree;
 
             binaryTree.root = binaryTree.buildTree(inFile);
             binaryTree.traverseInorder(binaryTree.root, "out");
             binaryTree.traversePostorder(binaryTree.root, "out");
             binaryTree.traversePreorder(binaryTree.root, "out");
-            */
+            
             
             inFile.close();
 
