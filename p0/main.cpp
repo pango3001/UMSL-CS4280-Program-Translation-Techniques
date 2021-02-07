@@ -80,7 +80,7 @@ int main(int argc, char** argv) {
             binaryTree.traversePreorder(binaryTree.root, "out");
             */
             
-            inFile.close()
+            inFile.close();
 
             return 0;
         }
