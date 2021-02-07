@@ -36,6 +36,7 @@ int main(int argc, char** argv) {
         inFile.open("file.temp", std::ios::in);
 
         fileName = "out";
+        std::cout << "1 arg found" << std::endl;
 
     }
 
@@ -44,6 +45,7 @@ int main(int argc, char** argv) {
         fileName = argv[1];
 
         inFile.open(fileName + ".sp2020");
+        std::cout << "2 args found" << std::endl;
     }
 
     if (inFile) {
