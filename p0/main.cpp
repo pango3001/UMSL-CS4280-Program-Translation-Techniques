@@ -60,9 +60,10 @@ int main(int argc, char** argv) {
         
         std::ifstream f(fileName + "preorder");
 
-        if (f.is_open())
+        if (f.is_open()) {
             std::cout << f.rdbuf();
-
+            std::cout << "output" << std::endl;
+        }
 
 
         return 0;
