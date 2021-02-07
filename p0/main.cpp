@@ -50,7 +50,7 @@ int main(int argc, char** argv) {
     {
         
         std::ofstream tempFile;
-        tempFile.open("tree.temp", std::ios::trunc);
+        tempFile.open("file.temp", std::ios::trunc);
 
         
         std::string word = "";
@@ -63,7 +63,7 @@ int main(int argc, char** argv) {
 
         
         std::ifstream inFile;
-        inFile.open("tree.temp", std::ios::in);
+        inFile.open("file.temp", std::ios::in);
 
         
         if (inFile)

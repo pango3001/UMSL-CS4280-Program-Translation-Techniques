@@ -1,21 +1,19 @@
 #include "tree.h"
 
-// Tree Constructor initializes empty tree
 Tree::Tree()
 {
 	root = NULL;
 }
 
-// Tree Destructor which deletes each node of the tree through empty() helper function
 Tree::~Tree()
 {
 	root = empty(root);
 }
 
-// This function builds a binary tree of strings from given istream based on string length
+
 Node* Tree::buildTree(std::istream& input)
 {
-	// Helper string variable
+
 	std::string word;
 
 	
