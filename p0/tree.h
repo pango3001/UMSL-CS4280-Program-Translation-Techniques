@@ -22,11 +22,11 @@ public:
     void traverseInorder(Node* node, std::string filename);
     void traversePostorder(Node* node, std::string filename);
     void traversePreorder(Node* node, std::string filename);
-    void insert(std::string value);
+    void insert(std::string chars);
 
 private:
     Node* insert(Node* node, std::string chars);
-    Node* empty(Node* node);
+    Node* remove(Node* node);
 
     void traverseInorder(Node* node, int level, std::ostream& output);
     void traversePostorder(Node* node, int level, std::ostream& output);
