@@ -37,7 +37,7 @@ int main(int argc, char** argv) {
             getline(std::cin, userInput);
             tempFile << userInput << " ";
         }
-        while (!user_input.empty());
+        while (!userInput.empty());
         
         /*
         while (std::cin >> string)          // Read in entire file
