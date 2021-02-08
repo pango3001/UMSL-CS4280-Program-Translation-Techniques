@@ -22,6 +22,7 @@ int main(int argc, char** argv) {
         return 0;
     }
 
+    std::string userInput;
     std::string fileName;                   // name of file
     std::ifstream inFile;                   // for file input
 
@@ -31,9 +32,17 @@ int main(int argc, char** argv) {
 
         std::string string = "";            // empty string for reading input
 
+        do {
+            std::cout << std::endl << ">>: ";
+            getline(std::cin, userInput);
+            tempFile << userInput << " ";
+        }
+        while (!user_input.empty());
+        
+        /*
         while (std::cin >> string)          // Read in entire file
             tempFile << (string + ' ');
-
+*/
         tempFile.close();                   // close file
 
         inFile.open("file.temp", std::ios::in); // keyboard input inputted into temp.file
