@@ -32,17 +32,15 @@ int main(int argc, char** argv) {
 
         std::string string = "";            // empty string for reading input
 
+        std::cout << "Pressing \"Enter\" on empty line will simulate EOF" << std::endl;
+
         do {
             std::cout << std::endl << "Keyboard Input: ";
-            getline(std::cin, userInput);
-            tempFile << userInput << " ";
+            getline(std::cin, userInput);   // read user input
+            tempFile << userInput << " ";   // write input to temp file
         }
-        while (!userInput.empty());
+        while (!userInput.empty());         // Pressing "Enter" on empty line will sim EOF
         
-        /*
-        while (std::cin >> string)          // Read in entire file
-            tempFile << (string + ' ');
-*/
         tempFile.close();                   // close file
 
         inFile.open("file.temp", std::ios::in); // keyboard input inputted into temp.file
