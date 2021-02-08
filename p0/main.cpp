@@ -5,6 +5,11 @@
 #include "node.h"
 
 
+void printInorder();
+void printPreorder();
+void printPostorder();
+
+
 int main(int argc, char** argv) {
     if (argc > 2){
         std::cout << "Too many arguments" << std::endl;
@@ -48,14 +53,9 @@ int main(int argc, char** argv) {
 
         inFile.close();
 
-        std::string suffix[3] = { ".preorder", ".inorder", ".postorder" };
-
-        for (auto suffix : suffix[]) {
-            std::ifstream f(fileName + suffix);
-
-            if (f.is_open())
-                std::cout << f.rdbuf();
-        }
+        printInorder();
+        printPreorder();
+        printPostorder();
     }
 
     else {
@@ -64,4 +64,26 @@ int main(int argc, char** argv) {
     }
 
     return 0;
+}
+
+void printInorder(fileName) {
+    std::cout << "Inorder traversal:" << std::endl;
+    std::ifstream f(fileName + ".inorder");
+
+    if (f.is_open())
+        std::cout << f.rdbuf()
+}
+void printPreorder(fileName) {
+    std::cout << "Preorder traversal:" << std::endl;
+    std::ifstream f(fileName + ".preorder");
+
+    if (f.is_open())
+        std::cout << f.rdbuf()
+}
+void printPostorder(fileName) {
+    std::cout << "Postorder traversal:" << std::endl;
+    std::ifstream f(fileName + ".postorder");
+
+    if (f.is_open())
+        std::cout << f.rdbuf()
 }
