@@ -31,8 +31,8 @@ Node* Tree::buildTree(std::istream& input) {
 }
 
 // inserts chars into tree
-void Tree::insert(std::string chars) {
-	root = insert(root, chars);
+void Tree::insert(std::string value) {
+	root = insert(root, value);
 }
 
 // makes preorder traverse file
