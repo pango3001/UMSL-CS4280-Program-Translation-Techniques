@@ -20,6 +20,7 @@ int main(int argc, char** argv) {
     std::ifstream inFile;
 
     if (argc == 1) {
+        std::cout << "test1" << std::endl;
         std::ofstream tempFile;
         tempFile.open("file.temp", std::ios::trunc);
 
