@@ -11,6 +11,7 @@ void printPostorder(std::string);
 
 
 int main(int argc, char** argv) {
+    std::cout << "test6" << std::endl;
     if (argc > 2){
         std::cout << "Too many arguments" << std::endl;
         return 0;
@@ -18,6 +19,7 @@ int main(int argc, char** argv) {
 
     std::string fileName;
     std::ifstream inFile;
+    std::cout << "test5" << std::endl;
 
     if (argc == 1) {
         std::cout << "test1" << std::endl;
