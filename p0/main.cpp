@@ -5,9 +5,9 @@
 #include "node.h"
 
 
-void printInorder();
-void printPreorder();
-void printPostorder();
+void printInorder(std::string);
+void printPreorder(std::string);
+void printPostorder(std::string);
 
 
 int main(int argc, char** argv) {
@@ -66,21 +66,21 @@ int main(int argc, char** argv) {
     return 0;
 }
 
-void printInorder(fileName) {
+void printInorder(std::string fileName) {
     std::cout << "Inorder traversal:" << std::endl;
     std::ifstream f(fileName + ".inorder");
 
     if (f.is_open())
         std::cout << f.rdbuf()
 }
-void printPreorder(fileName) {
+void printPreorder(std::string fileName) {
     std::cout << "Preorder traversal:" << std::endl;
     std::ifstream f(fileName + ".preorder");
 
     if (f.is_open())
         std::cout << f.rdbuf()
 }
-void printPostorder(fileName) {
+void printPostorder(std::string fileName) {
     std::cout << "Postorder traversal:" << std::endl;
     std::ifstream f(fileName + ".postorder");
 
