@@ -1,6 +1,12 @@
+// Name:    Jesse McCarville-Schueths
+// Course:  4280
+// Date:    Feb 7, 2021
+// Project: P0
+// File:    main.cpp
+
 #include <iostream>
-#include <fstream>
 #include <string>
+#include <fstream>
 #include "tree.h"
 #include "node.h"
 

@@ -1,3 +1,9 @@
+// Name:    Jesse McCarville-Schueths
+// Course:  4280
+// Date:    Feb 7, 2021
+// Project: P0
+// File:    tree.h
+
 #ifndef TREE_H_
 #define TREE_H_
 #include "node.h"

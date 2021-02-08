@@ -1,3 +1,9 @@
+// Name:    Jesse McCarville-Schueths
+// Course:  4280
+// Date:    Feb 7, 2021
+// Project: P0
+// File:    node.h
+
 #ifndef NODE_H_
 #define NODE_H_
 #include <string>
