@@ -33,7 +33,7 @@ int main(int argc, char** argv) {
         std::string string = "";            // empty string for reading input
 
         do {
-            std::cout << std::endl << ">>: ";
+            std::cout << std::endl << "Keyboard Input: ";
             getline(std::cin, userInput);
             tempFile << userInput << " ";
         }
