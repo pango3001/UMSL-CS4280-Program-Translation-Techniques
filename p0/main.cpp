@@ -71,19 +71,19 @@ void printInorder(std::string fileName) {
     std::ifstream f(fileName + ".inorder");
 
     if (f.is_open())
-        std::cout << f.rdbuf()
+        std::cout << f.rdbuf();
 }
 void printPreorder(std::string fileName) {
     std::cout << "Preorder traversal:" << std::endl;
     std::ifstream f(fileName + ".preorder");
 
     if (f.is_open())
-        std::cout << f.rdbuf()
+        std::cout << f.rdbuf();
 }
 void printPostorder(std::string fileName) {
     std::cout << "Postorder traversal:" << std::endl;
     std::ifstream f(fileName + ".postorder");
 
     if (f.is_open())
-        std::cout << f.rdbuf()
+        std::cout << f.rdbuf();
 }
