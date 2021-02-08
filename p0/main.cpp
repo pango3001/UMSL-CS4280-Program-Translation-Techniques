@@ -40,7 +40,7 @@ int main(int argc, char** argv) {
 
 
     if (argc == 2) {
-        std::cout << "test2" << std::endl;
+        std::cout << "test3" << std::endl;
         fileName = argv[1];
         inFile.open(fileName + ".sp2020");
     }
