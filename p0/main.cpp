@@ -53,9 +53,9 @@ int main(int argc, char** argv) {
 
         inFile.close();
 
-        printInorder();
-        printPreorder();
-        printPostorder();
+        printInorder(fileName);
+        printPreorder(fileName);
+        printPostorder(fileName);
     }
 
     else {
