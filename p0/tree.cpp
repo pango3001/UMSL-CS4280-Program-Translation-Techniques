@@ -18,8 +18,7 @@ Tree::~Tree() {
 Node* Tree::buildTree(std::istream& input) {
 	std::string string;
 
-	while (input >> string)
-	{
+	while (input >> string)	{
 		this->insert(string);
 	}
 	return root;
@@ -87,8 +86,8 @@ void Tree::traverseInorder(Node* node, int level, std::ostream& output) {
 
 	std::string indents((level * 2), ' ');
 	output << indents;
-	for (auto word : node->data)
-		output << word << " ";
+	for (auto string : node->data)
+		output << string << " ";
 	output << std::endl;
 
 	traverseInorder(node->right, (level + 1), output);
@@ -103,8 +102,8 @@ void Tree::traversePostorder(Node* node, int level, std::ostream& output) {
 
 	std::string indents((level * 2), ' ');
 	output << indents;
-	for (auto word : node->data)
-		output << word << " ";
+	for (auto string : node->data)
+		output << string << " ";
 	output << std::endl;
 }
 
@@ -114,8 +113,8 @@ void Tree::traversePreorder(Node* node, int level, std::ostream& output) {
 
 	std::string indents((level * 2), ' ');
 	output << indents;
-	for (auto word : node->data)
-		output << word << " ";
+	for (auto string : node->data)
+		output << string << " ";
 	output << std::endl;
 
 	traversePreorder(node->left, (level + 1), output);

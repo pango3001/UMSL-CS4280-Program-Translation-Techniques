@@ -27,14 +27,14 @@ int main(int argc, char** argv) {
 
     if (argc == 1) {                        // No argument: Keyboard input
         std::ofstream tempFile;             // Temp File for keyboard input
-        tempFile.open("file.temp", std::ios::trunc);
+        tempFile.open("file.temp", std::ios::trunc); // trunc overwrites
 
         std::string string = "";            // empty string for reading input
 
         while (std::cin >> string)          // Read in entire file
             tempFile << (string + ' ');
 
-        tempFile.close();
+        tempFile.close();                   // close file
 
         inFile.open("file.temp", std::ios::in); // keyboard input inputted into temp.file
 
@@ -56,7 +56,7 @@ int main(int argc, char** argv) {
         binaryTree.traversePostorder(binaryTree.root, fileName);// create output file for postorder traversal
         
 
-        inFile.close();
+        inFile.close();                         // close file
 
         printInorder(fileName);                 // print inorder traversal to screen
         printPreorder(fileName);                // print preorder traversal to screen
