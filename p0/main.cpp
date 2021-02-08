@@ -8,10 +8,9 @@
 void printInorder(std::string);
 void printPreorder(std::string);
 void printPostorder(std::string);
-
+// buildTree() can be found in tree.cpp
 
 int main(int argc, char** argv) {
-    std::cout << "test6" << std::endl;
     if (argc > 2){
         std::cout << "Too many arguments" << std::endl;
         return 0;
@@ -19,10 +18,8 @@ int main(int argc, char** argv) {
 
     std::string fileName;
     std::ifstream inFile;
-    std::cout << "test5" << std::endl;
 
     if (argc == 1) {
-        std::cout << "test1" << std::endl;
         std::ofstream tempFile;
         tempFile.open("file.temp", std::ios::trunc);
 
@@ -36,13 +33,10 @@ int main(int argc, char** argv) {
         inFile.open("file.temp", std::ios::in);
 
         fileName = "p0_output";
-
-        std::cout << "test" << std::endl;
     }
 
 
     if (argc == 2) {
-        std::cout << "test3" << std::endl;
         fileName = argv[1];
         inFile.open(fileName + ".sp2020");
     }
