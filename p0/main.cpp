@@ -28,13 +28,13 @@ int main(int argc, char** argv) {
         while (std::cin >> string)
             tempFile << (string + ' ');
 
-
         tempFile.close();
 
         inFile.open("file.temp", std::ios::in);
 
         fileName = "p0_output";
 
+        std::cout << "test" << std::endl;
     }
 
 
