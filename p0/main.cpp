@@ -76,6 +76,7 @@ void printInorder(std::string fileName) {
 
     if (f.is_open())
         std::cout << f.rdbuf();
+    std::cout << "\n";
 }
 void printPreorder(std::string fileName) {
     std::cout << "Preorder traversal:" << std::endl;
@@ -83,6 +84,7 @@ void printPreorder(std::string fileName) {
 
     if (f.is_open())
         std::cout << f.rdbuf();
+    std::cout << "\n";
 }
 void printPostorder(std::string fileName) {
     std::cout << "Postorder traversal:" << std::endl;
@@ -90,4 +92,5 @@ void printPostorder(std::string fileName) {
 
     if (f.is_open())
         std::cout << f.rdbuf();
+    std::cout << "\n";
 }
