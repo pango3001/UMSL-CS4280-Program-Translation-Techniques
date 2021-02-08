@@ -47,7 +47,7 @@ int main(int argc, char** argv) {
 
         inFile.open("file.temp", std::ios::in); // keyboard input inputted into temp.file
 
-        fileName = "p0_output";              // output file for tree
+        fileName = "output";              // output file for tree
     }
 
 
