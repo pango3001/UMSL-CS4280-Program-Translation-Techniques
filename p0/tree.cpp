@@ -1,99 +1,68 @@
 #include "tree.h"
 
-Tree::Tree()
-{
+Tree::Tree() {
 	root = NULL;
 }
 
-Tree::~Tree()
-{
+Tree::~Tree() {
 	root = empty(root);
 }
 
 
-Node* Tree::buildTree(std::istream& input)
-{
+Node* Tree::buildTree(std::istream& input) {
+	std::string string;
 
-	std::string word;
-
-	
-	while (input >> word) // Looping until EOF
+	while (input >> string)
 	{
-		this->insert(word); // inserting each word from the stream into the tree
+		this->insert(string);
 	}
 	return root;
 }
 
-// This function inserts a given string value into the tree
-void Tree::insert(std::string value)
-{
+void Tree::insert(std::string value) {
 	root = insert(root, value);
 }
 
-// This function opens(or creates) a file for writing and prints a tree inorder to said file
-void Tree::traverseInorder(Node* node, std::string filename)
-{
-	// Open file for writing
+void Tree::traverseInorder(Node* node, std::string filename) {
 	filename += ".inorder";
 	std::ofstream outFile;
 	outFile.open(filename, std::ios::trunc);
 
-	// Write tree inorder to the file
 	traverseInorder(node, 0, outFile);
 }
 
-// This function opens(or creates) a file for writing and prints a tree postorder to said file
-void Tree::traversePostorder(Node* node, std::string filename)
-{
-	// Open file for writing
+void Tree::traversePostorder(Node* node, std::string filename) {
 	filename += ".postorder";
 	std::ofstream outFile;
 	outFile.open(filename, std::ios::trunc);
 
-	// Write tree postorder to the file
 	traversePostorder(node, 0, outFile);
 }
 
-// This function opens(or creates) a file for writing and prints a tree preorder to said file
-void Tree::traversePreorder(Node* node, std::string filename)
-{
-	// Open file for writing
+void Tree::traversePreorder(Node* node, std::string filename) {
 	filename += ".preorder";
 	std::ofstream outFile;
 	outFile.open(filename, std::ios::trunc);
 
-	// Write tree preorder to the file
 	traversePreorder(node, 0, outFile);
 }
 
-// Private Functions
+Node* Tree::insert(Node* node, std::string chars) {
+	if (node == NULL) return new Node(chars);
+	if (chars.substr(0, 2) < node->twoChars)
+		node->left = insert(node->left, chars);
 
+	else if (chars.substr(0, 2) > node->twoChars)
+		node->right = insert(node->right, chars);
 
-// This function inserts a string into a tree with a given root based on the first two chars of string
-Node* Tree::insert(Node* node, std::string value)
-{
-	// Adding new node to tree
-	if (node == NULL) return new Node(value);
-
-
-	// less than so go to left node
-	if (value.substr(0, 2) < node->twoChars)
-		node->left = insert(node->left, value);
-
-	// greater than so go to right node
-	else if (value.substr(0, 2) > node->twoChars)
-		node->right = insert(node->right, value);
-
-	// equals so add to node set
-	else if (value.substr(0, 2) == node->twoChars)
-		node->data.insert(value);
+	else if (chars.substr(0, 2) == node->twoChars)
+		node->data.insert(chars);
 
 	return node;
 }
 
-// This function deletes every node of a tree
-Node* Tree::empty(Node* node)
-{
+// Deletes tree's nodes
+Node* Tree::empty(Node* node) {
 	if (node == NULL)
 		return NULL;
 
@@ -104,8 +73,7 @@ Node* Tree::empty(Node* node)
 	return NULL;
 }
 
-void Tree::traverseInorder(Node* node, int level, std::ostream& output)
-{
+void Tree::traverseInorder(Node* node, int level, std::ostream& output) {
 	if (node == NULL)
 		return;
 
@@ -120,13 +88,11 @@ void Tree::traverseInorder(Node* node, int level, std::ostream& output)
 	traverseInorder(node->right, (level + 1), output);
 }
 
-void Tree::traversePostorder(Node* node, int level, std::ostream& output)
-{
+void Tree::traversePostorder(Node* node, int level, std::ostream& output) {
 	if (node == NULL)
 		return;
 
 	traversePostorder(node->left, (level + 1), output);
-
 	traversePostorder(node->right, (level + 1), output);
 
 	std::string indents((level * 2), ' ');
@@ -136,8 +102,7 @@ void Tree::traversePostorder(Node* node, int level, std::ostream& output)
 	output << std::endl;
 }
 
-void Tree::traversePreorder(Node* node, int level, std::ostream& output)
-{
+void Tree::traversePreorder(Node* node, int level, std::ostream& output) {
 	if (node == NULL)
 		return;
 
@@ -149,5 +114,4 @@ void Tree::traversePreorder(Node* node, int level, std::ostream& output)
 
 	traversePreorder(node->left, (level + 1), output);
 	traversePreorder(node->right, (level + 1), output);
-
 }

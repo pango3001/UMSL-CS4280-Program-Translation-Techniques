@@ -5,25 +5,21 @@
 #include <fstream>
 #include <iostream>
 
-class Tree
-{
+class Tree {
 public:
-
     Node* root;
 
     Tree();
     ~Tree();
 
-    void insert(std::string value);
-
     Node* buildTree(std::istream& input);
     void traverseInorder(Node* node, std::string filename);
     void traversePostorder(Node* node, std::string filename);
     void traversePreorder(Node* node, std::string filename);
+    void insert(std::string value);
 
 private:
-
-    Node* insert(Node* node, std::string value);
+    Node* insert(Node* node, std::string chars);
     Node* empty(Node* node);
 
     void traverseInorder(Node* node, int level, std::ostream& output);

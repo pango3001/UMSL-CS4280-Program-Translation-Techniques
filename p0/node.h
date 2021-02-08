@@ -4,10 +4,10 @@
 #include <set>
 
 struct Node {
-	std::set <std::string> data;// set of values for this node
-	std::string twoChars; 		// first two chars
-	Node* left;        			// ptr to left child
-	Node* right;       			// ptr to right child
+	std::set <std::string> data;	// set of values for this node
+	std::string twoChars; 			// first two chars
+	Node* left;        				// ptr to left child
+	Node* right;       				// ptr to right child
 
 	// Constructor
 	Node(std::string data)
