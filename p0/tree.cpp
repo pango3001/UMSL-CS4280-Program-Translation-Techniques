@@ -67,8 +67,8 @@ Node* Tree::insert(Node* node, std::string chars) {
 	return node;
 }
 
-// Deletes tree's nodes
-Node* Tree::empty(Node* node) {
+
+Node* Tree::empty(Node* node) {	  // Deletes tree's nodes
 	if (node == NULL)
 		return NULL;
 
