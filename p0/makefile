@@ -11,4 +11,4 @@ tree.o: tree.cpp tree.h node.h
 	$(CXX) $(FLAGS) -c tree.cpp
 	
 clean:
-	rm -f P0 *.o *.inorder *.preorder *.postorder temp.txtvi
+	rm -f P0 file.temp *.o *.inorder *.preorder *.postorder 
