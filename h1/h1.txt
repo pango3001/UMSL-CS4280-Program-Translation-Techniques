@@ -1,8 +1,8 @@
 1:
-	<for>::=(<expr>;<expr>;<expr>;)<block>
+	<for> ::= for(<expression>;<expression>;<expression>;) <block> | for(<expression>;<expression>;<expression>;) <statement>
 2:
 	(11)*(00)*1010(10)*
 3:
 	infinite
 4: 
-	4 (assuming that we can use 1010 since you said "at most" 6 bits, if not then 3)
+	4 (111010, 001010, 101010 and assuming that we can use 1010 since you said "at most" 6 bits, if not then 3)
