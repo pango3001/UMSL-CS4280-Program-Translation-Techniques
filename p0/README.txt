@@ -1,5 +1,5 @@
 ########## README ###########
-
+Jesse McCarville-Schueths
 Project 0
 
 use the command "make" to compile the project
