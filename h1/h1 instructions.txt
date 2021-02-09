@@ -1,0 +1,8 @@
+Write BNF grammar for the for loop statement of C. Assume this is the 89 standard that does NOT allow new variables as C++ did (not allowed is the "int" in for (int i=0; i<5; i++). Also assume block is NOT the same as a statement (different books take different take on this) - block is {} with variables and statements inside. Further assume <expression> and <statement> and <block> nonterminals are already defined (you dont' define them, just use them).  Do not use the extended BNF notation.
+
+Design a regular language where every sentence has to start with any number of strings 11 (any number is none or more), then repeats 00 any number of times, then repeats 10 at least twice). Use regular expression notation.
+Clarification: alphabet is {0,1}. 'string' is the same as program in this context, but here the programs are written using the binary alphabet so strings here are binary; in regular expressions we use * for any number, + for one or more, | for either and () for grouping.
+
+For the above, how many valid strings there are?
+
+For the above, how many valid strings are there if we restrict the total length to a) at most 6 bits?
