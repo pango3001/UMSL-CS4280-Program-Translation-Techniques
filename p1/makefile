@@ -7,7 +7,7 @@ P0: main.o scanner.o
 main.o: main.cpp
 	$(CXX) $(FLAGS) -c main.cpp
 
-scanner.o: tree.cpp scanner.h token.h
+scanner.o: scanner.cpp scanner.h token.h
 	$(CXX) $(FLAGS) -c scanner.cpp
 	
 clean:
