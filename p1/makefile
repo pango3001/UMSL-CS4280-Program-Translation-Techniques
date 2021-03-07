@@ -1,14 +1,5 @@
 CXX = g++
-FLAGS = -std=c++0x -Wall -g
+CXXFLAGS = -std=c++0x -Wall -g
 
-P0: main.o scanner.o
-	$(CXX) $(FLAGS) -o P0 main.o scanner.o
-	
-main.o: main.cpp
-	$(CXX) $(FLAGS) -c main.cpp
-
-scanner.o: scanner.cpp scanner.h token.h
-	$(CXX) $(FLAGS) -c scanner.cpp
-	
-clean:
-	rm -f P1 *.temp *.o 
+P1: main.cpp scanner.cpp testScanner.cpp
+	$(CXX) $(CXXFLAGS) -o scanner main.cpp testScanner.cpp scanner.cpp
