@@ -1,3 +1,9 @@
+// Name:    Jesse McCarville-Schueths
+// Course:  4280
+// Date:    Mar 7, 2021
+// Project: P1
+// File:    scanner.cpp
+
 #include "scanner.h"
 #include "token.h"
 #include <string>
@@ -5,55 +11,57 @@
 #include <fstream>
 #include <iostream>
 
-int fsa_table[21][23] = {
+int fsa_table[23][23] = {
     /*   ws   lc    d    =    <    >    :    +    -    *    /    %    .    (    )    ,    {    }    ;    [    ]  eof   uc */
     {     0,   1,   2,   3,   4,   5,   6,   7,   8,   9,  10,  11,  12,  13,  14,  15,  16, 17,  18,   19,  20,  -1,  -2},
     {   100,   1,   1, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100,   1}, /*ID_TK*/
     {   101, 101,   2, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101}, /*INT_TK*/
     {   102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102}, /*EQUALS_TK*/
-    {   103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103}, /*LESS_THAN_TK*/
-    {   104, 104, 104, 104, 104, 104, 104, 104, 104, 104, 104, 104, 104, 104, 104, 104, 104, 104, 104, 104, 104, 104, 104}, /*GREATER_THAN_TK*/
-    {   105, 105, 105, 105, 105, 105, 105, 105, 105, 105, 105, 105, 105, 105, 105, 105, 105, 105, 105, 105, 105, 105, 105}, /*COLON_TK*/
-    {   106, 106, 106, 106, 106, 106, 106, 106, 106, 106, 106, 106, 106, 106, 106, 106, 106, 106, 106, 106, 106, 106, 106}, /*PLUS_TK*/
-    {   107, 107, 107, 107, 107, 107, 107, 107, 107, 107, 107, 107, 107, 107, 107, 107, 107, 107, 107, 107, 107, 107, 107}, /*MINUS_TK*/
-    {   108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108}, /*ASTERISK_TK*/
-    {   109, 109, 109, 109, 109, 109, 109, 109, 109, 109, 109, 109, 109, 109, 109, 109, 109, 109, 109, 109, 109, 109, 109}, /*SLASH_TK*/
-    {   110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110}, /*PERCENT_TK*/
-    {   111, 111, 111, 111, 111, 111, 111, 111, 111, 111, 111, 111, 111, 111, 111, 111, 111, 111, 111, 111, 111, 111, 111}, /*PERIOD_TK*/
-    {   112, 112, 112, 112, 112, 112, 112, 112, 112, 112, 112, 112, 112, 112, 112, 112, 112, 112, 112, 112, 112, 112, 112}, /*LEFT_PAREN_TK*/
-    {   113, 113, 113, 113, 113, 113, 113, 113, 113, 113, 113, 113, 113, 113, 113, 113, 113, 113, 113, 113, 113, 113, 113}, /*RIGHT_PAREN_TK*/
-    {   114, 114, 114, 114, 114, 114, 114, 114, 114, 114, 114, 114, 114, 114, 114, 114, 114, 114, 114, 114, 114, 114, 114}, /*COMMA_TK*/
-    {   115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115}, /*LEFT_BRACE_TK*/
-    {   116, 116, 116, 116, 116, 116, 116, 116, 116, 116, 116, 116, 116, 116, 116, 116, 116, 116, 116, 116, 116, 116, 116}, /*RIGHT_BRACE_TK*/
-    {   117, 117, 117, 117, 117, 117, 117, 117, 117, 117, 117, 117, 117, 117, 117, 117, 117, 117, 117, 117, 117, 117, 117}, /*SEMI_COLON_TK*/
-    {   118, 118, 118, 118, 118, 118, 118, 118, 118, 118, 118, 118, 118, 118, 118, 118, 118, 118, 118, 118, 118, 118, 118}, /*LEFT_BRACKET_TK*/
-    {   119, 119, 119, 119, 119, 119, 119, 119, 119, 119, 119, 119, 119, 119, 119, 119, 119, 119, 119, 119, 119, 119, 119}, /*RIGHT_BRACKET_TK*/
+    {   103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103}, /*EQUALS_OR_GREATER_THAN_TK*/
+    {   104, 104, 104, 104, 104, 104, 104, 104, 104, 104, 104, 104, 104, 104, 104, 104, 104, 104, 104, 104, 104, 104, 104}, /*EQUALS_OR_LESS_THAN_TK*/
+    {   105, 105, 105, 105, 105, 105, 105, 105, 105, 105, 105, 105, 105, 105, 105, 105, 105, 105, 105, 105, 105, 105, 105}, /*EQUALS_OR_EQUALS_TK*/
+    {   106, 106, 106, 106, 106, 106, 106, 106, 106, 106, 106, 106, 106, 106, 106, 106, 106, 106, 106, 106, 106, 106, 106}, /*COLON_TK*/
+    {   107, 107, 107, 107, 107, 107, 107, 107, 107, 107, 107, 107, 107, 107, 107, 107, 107, 107, 107, 107, 107, 107, 107}, /*COLON_EQUALS_TK*/
+    {   108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108}, /*PLUS_TK*/
+    {   109, 109, 109, 109, 109, 109, 109, 109, 109, 109, 109, 109, 109, 109, 109, 109, 109, 109, 109, 109, 109, 109, 109}, /*MINUS_TK*/
+    {   110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110}, /*ASTERISK_TK*/
+    {   111, 111, 111, 111, 111, 111, 111, 111, 111, 111, 111, 111, 111, 111, 111, 111, 111, 111, 111, 111, 111, 111, 111}, /*SLASH_TK*/
+    {   112, 112, 112, 112, 112, 112, 112, 112, 112, 112, 112, 112, 112, 112, 112, 112, 112, 112, 112, 112, 112, 112, 112}, /*PERCENT_TK*/
+    {   113, 113, 113, 113, 113, 113, 113, 113, 113, 113, 113, 113, 113, 113, 113, 113, 113, 113, 113, 113, 113, 113, 113}, /*PERIOD_TK*/
+    {   114, 114, 114, 114, 114, 114, 114, 114, 114, 114, 114, 114, 114, 114, 114, 114, 114, 114, 114, 114, 114, 114, 114}, /*LEFT_PAREN_TK*/
+    {   115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115}, /*RIGHT_PAREN_TK*/
+    {   116, 116, 116, 116, 116, 116, 116, 116, 116, 116, 116, 116, 116, 116, 116, 116, 116, 116, 116, 116, 116, 116, 116}, /*COMMA_TK*/
+    {   117, 117, 117, 117, 117, 117, 117, 117, 117, 117, 117, 117, 117, 117, 117, 117, 117, 117, 117, 117, 117, 117, 117}, /*LEFT_BRACE_TK*/
+    {   118, 118, 118, 118, 118, 118, 118, 118, 118, 118, 118, 118, 118, 118, 118, 118, 118, 118, 118, 118, 118, 118, 118}, /*RIGHT_BRACE_TK*/
+    {   119, 119, 119, 119, 119, 119, 119, 119, 119, 119, 119, 119, 119, 119, 119, 119, 119, 119, 119, 119, 119, 119, 119}, /*SEMI_COLON_TK*/
+    {   120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120}, /*LEFT_BRACKET_TK*/
+    {   121, 121, 121, 121, 121, 121, 121, 121, 121, 121, 121, 121, 121, 121, 121, 121, 121, 121, 121, 121, 121, 121, 121}, /*RIGHT_BRACKET_TK*/
 };
 
 /* Final State Map
  * maps tokens to corresponding final state number */
 std::map<int, token_id> final_states = {
-    /* Operators */
+    // Operators and Delimiters
     {102, EQUALS_TK},
-    {103, LESS_THAN_TK},
-    {104, GREATER_THAN_TK},
-    {105, COLON_TK},
-    {106, PLUS_TK},
-    {107, MINUS_TK},
-    {108, ASTERISK_TK},
-    {109, SLASH_TK},
-    {110, PERCENT_TK},
-    {111, PERIOD_TK},
-
-    /* Delimiters */
-    {112, LEFT_PAREN_TK},
-    {113, RIGHT_PAREN_TK},
-    {114, COMMA_TK},
-    {115, LEFT_BRACE_TK},
-    {116, RIGHT_BRACE_TK},
-    {117, SEMI_COLON_TK},
-    {118, LEFT_BRACKET_TK},
-    {119, RIGHT_BRACKET_TK},
+    {103, EQUALS_OR_GREATER_THAN_TK},
+    {104, EQUALS_OR_LESS_THAN_TK},
+    {105, EQUALS_EQUALS_TK},
+    {106, COLON_TK},
+    {107, COLON_EQUALS_TK},
+    {108, PLUS_TK},
+    {109, MINUS_TK},
+    {110, ASTERISK_TK},
+    {111, SLASH_TK},
+    {112, PERCENT_TK},
+    {113, PERIOD_TK},
+    {114, LEFT_PAREN_TK},
+    {115, RIGHT_PAREN_TK},
+    {116, COMMA_TK},
+    {117, LEFT_BRACE_TK},
+    {118, RIGHT_BRACE_TK},
+    {119, SEMI_COLON_TK},
+    {120, LEFT_BRACKET_TK},
+    {121, RIGHT_BRACKET_TK},
 
     /* Identfiers and Integers */
     {100, ID_TK},
@@ -67,20 +75,22 @@ std::map<int, token_id> final_states = {
 std::map<std::string, token_id> keywords = {
     {"begin", BEGIN_TK},
     {"end", END_TK},
-    {"iter", ITER_TK},
+    {"loop", LOOP_TK},
+    {"whole", WHOLE_TK},
     {"void", VOID_TK},
-    {"var", VAR_TK},
-    {"return", RETURN_TK},
-    {"read", READ_TK},
-    {"print", PRINT_TK},
-    {"program", PROGRAM_TK},
-    {"cond", COND_TK},
+    {"exit", EXIT_TK},
+    {"getter", GETTER_TK},
+    {"outter", OUTTER_TK},
+    {"main", MAIN_TK},
+    {"if", IF_TK},
     {"then", THEN_TK},
-    {"let", LET_TK}
+    {"assign", ASSIGN_TK},
+    {"data", DATA_TK},
+    {"proc", PROC_TK}
 };
 
 /* Character Map
- * maps allowed operators and delimeters to their corresponding column number */
+ * maps allowed operators and delimeters to their corresponding column index */
 std::map<char, int> allowed_symbols = {
     /* Operators */
     {'=', 2},
@@ -123,14 +133,14 @@ Token scan(std::ifstream& in_file, unsigned int& line_number)
         in_file.get(current_char);
 
         /* Skipping comments */
-        if (current_char == '#')
+        if (current_char == '$')
         {
-            /* Keep getting characters until another '#' is reached */
+            /* Keep getting characters until another '$' is reached */
             do
             {
                 in_file.get(current_char);
-            } while (current_char != '#');
-            /* current_char will = '#' so grab next character */
+            } while (current_char != '$');
+            /* current_char will = '$' so grab next character */
             in_file.get(current_char);
         }
         /* Character determines FSA table column */
@@ -146,7 +156,7 @@ Token scan(std::ifstream& in_file, unsigned int& line_number)
         if (fsa_column == -2)
         {
             /* Displaying the error message and invalid char */
-            std::cout << "Scanner Error: Invalid character \'" << current_char << "\'";
+            std::cout << "SCANNER ERROR: Invalid character \'" << current_char << "\'";
             std::cout << " at line: " << line_number << std::endl;
             /* Returning the error Token */
             return Token(ERROR_TK, "Invalid char", line_number);
@@ -167,7 +177,7 @@ Token scan(std::ifstream& in_file, unsigned int& line_number)
             if (next_state == -2)
             {
                 /* Displaying the error message and invalid char */
-                std::cout << "Scanner Error: Invalid character \"" << current_char << "\"";
+                std::cout << "SCANNER ERROR: Invalid character \"" << current_char << "\"";
                 std::cout << " at line: " << line_number << std::endl;
                 /* Returning the error Token */
                 return Token(ERROR_TK, "Invalid ID", line_number);
@@ -185,10 +195,10 @@ Token scan(std::ifstream& in_file, unsigned int& line_number)
                 current_word += current_char;
             }
 
-            if (current_word.length() > 8)
+            if (current_word.length() >= 9)                 // largest indiifier can be 8 chars long
             {
                 /* Displaying the error message and invalid char */
-                std::cout << "Scanner Error: Invalid length of \"" << current_word << "\"";
+                std::cout << "SCANNER ERROR: Invalid length of \"" << current_word << "\"";
                 std::cout << " at line: " << line_number << std::endl;
                 /* Returning the error Token */
                 return Token(ERROR_TK, "Invalid Length", line_number);

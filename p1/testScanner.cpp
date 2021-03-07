@@ -1,3 +1,9 @@
+// Name:    Jesse McCarville-Schueths
+// Course:  4280
+// Date:    Mar 7, 2021
+// Project: P1
+// File:    testScanner.cpp
+
 #include "testScanner.h"
 #include "scanner.h"
 #include <iostream>

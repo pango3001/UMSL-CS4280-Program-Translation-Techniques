@@ -1,4 +1,10 @@
-/* Includes */
+// Name:    Jesse McCarville-Schueths
+// Course:  4280
+// Date:    Mar 7, 2021
+// Project: P1
+// File:    main.cpp
+
+
 #include <iostream>
 #include <string>
 #include <fstream>
@@ -18,7 +24,7 @@ int main(int argc, char** argv)
     {
         /* Get filenaema and append extension */
         std::string file_name = argv[1];
-        file_name += ".fs18";
+        file_name += ".ss21";
 
         /* Opening the file */
         std::ifstream in_file;
