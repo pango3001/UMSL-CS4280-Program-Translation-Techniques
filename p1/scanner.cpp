@@ -171,7 +171,7 @@ Token scan(std::ifstream& in_file, unsigned int& line_number){
             }
 
             in_file.unget();
-            std::cout << " current state: " << current_state << " next state: " << next_state << " current_word: " << current_word << std::endl;
+            //std::cout << " current state: " << current_state << " next state: " << next_state << " current_word: " << current_word << std::endl;
             return get_token(next_state, current_word, line_number);
         }
         else
@@ -221,7 +221,7 @@ int get_fsa_column(char current_char){
     else  // valid symbol
     {
         if (allowed_symbols.find(current_char) != allowed_symbols.end())
-            std::cout << " Char: " << allowed_symbols[current_char] << std::endl;
+            //std::cout << " Char: " << allowed_symbols[current_char] << std::endl;
             return allowed_symbols[current_char];
     }
 
@@ -237,7 +237,7 @@ Token get_token(int state, std::string word, unsigned int line_number)
     /* Setting Token */
     if (final_states.find(state) != final_states.end())
     {
-        std::cout << " here" << std::endl;
+        //std::cout << " here" << std::endl;
         return_token.token_identifier = final_states[state];
         return_token.token_string = word;
         return_token.line_number = line_number;
