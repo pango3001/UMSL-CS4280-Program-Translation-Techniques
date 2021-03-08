@@ -13,20 +13,25 @@ std::string tokens[] = {
     /* Keyword Tokens */
     "BEGIN_TK",
     "END_TK",
-    "ITER_TK",
+    "LOOP_TK",
+    "WHOLE_TK",
     "VOID_TK",
-    "VAR_TK",
-    "RETURN_TK",
-    "READ_TK",
-    "PRINT_TK",
-    "PROGRAM_TK",
-    "COND_TK",
+    "EXIT_TK",
+    "GETTER_TK",
+    "OUTTER_TK",
+    "MAIN_TK",
+    "IF_TK",
     "THEN_TK",
-    "LET_TK",
+    "ASSIGN_TK",
+    "DATA_TK",
+    "PROC_TK",
     "EQUALS_TK",
-    "LESS_THAN_TK",
-    "GREATER_THAN_TK",
+    "EQUALS_OR_LESS_THAN_TK",
+
+    "EQUALS_OR_GREATER_THAN_TK",
+    "EQUALS_EQUALS_TK",
     "COLON_TK",
+    "COLON_EQUALS_TK",
     "PLUS_TK",
     "MINUS_TK",
     "ASTERISK_TK",
@@ -45,6 +50,7 @@ std::string tokens[] = {
     "INT_TK",
     "EOF_TK",
     "ERROR_TK"
+
 };
 
 void test_scanner(std::ifstream& input)
