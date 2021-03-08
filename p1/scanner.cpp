@@ -113,8 +113,8 @@ Token scan(std::ifstream& in_file, unsigned int& line_number){
     
     std::string current_word = "";   
     
-    while (current_state < 100 && current_state > -1){
-        std::cout << "here" << std::endl;
+    while (current_state < 100 ){
+        //std::cout << "here" << std::endl;
         in_file.get(current_char);
         
         /* Skipping comments */
@@ -148,7 +148,7 @@ Token scan(std::ifstream& in_file, unsigned int& line_number){
         if (fsa_column == 23)
         {
 
-            std::cout << "SCANNER ERROR 1: Invalid character \'" << current_char << "\'";
+            std::cout << "SCANNER ERROR: Invalid character \'" << current_char << "\'";
             std::cout << " at line: " << line_number << std::endl;
 
             return Token(ERROR_TK, "Invalid char", line_number);
