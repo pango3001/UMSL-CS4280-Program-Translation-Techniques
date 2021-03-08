@@ -54,15 +54,12 @@ enum token_id
 };
 
 /* Token struct */
-struct Token
+class Token
 {
     token_id token_identifier;
     std::string token_string;
     unsigned int line_number;
 
-    /* Default Token
-     * initializes a Token as an ERROR_TK because if a token is never changed after init
-     * then an some kind of error has occured */
     Token()
     {
         this->token_identifier = ERROR_TK;
