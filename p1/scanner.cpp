@@ -143,9 +143,6 @@ Token scan(std::ifstream& in_file, unsigned int& line_number){
         //std::cout << "Test Point 1" << current_char << std::endl;
         
         if (in_file.eof()){
-
-                return Token(EOF_TK, "EOF", line_number);
-
             fsa_column = 22;
         }
 
@@ -159,7 +156,7 @@ Token scan(std::ifstream& in_file, unsigned int& line_number){
         }
 
         next_state = fsa_table[current_state][fsa_column];
-
+        std::cout << " Next STatke: " << next_state << std::endl;
         if (next_state == 23) {
             std::cout << "SCANNER ERROR 2: Invalid character \"" << current_char << "\"";
             std::cout << " at line: " << line_number << std::endl;
