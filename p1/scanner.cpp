@@ -116,7 +116,7 @@ Token scan(std::ifstream& in_file, unsigned int& line_number){
     while (current_state < 100 && current_state > -1){
         
         in_file.get(current_char);
-
+        std::cout << "here" << std::endl;
         /* Skipping comments */
         if (current_char == '$'){
             in_file.get(current_char);
@@ -140,7 +140,6 @@ Token scan(std::ifstream& in_file, unsigned int& line_number){
         }
         
         int fsa_column = setFSAcol(current_char);
-        //std::cout << "Test Point 1" << current_char << std::endl;
         
         if (in_file.eof()){
             fsa_column = 22;
@@ -190,8 +189,7 @@ Token scan(std::ifstream& in_file, unsigned int& line_number){
             {
                 line_number++;
             }
-
-
+ 
             current_state = next_state;
         }
     }
