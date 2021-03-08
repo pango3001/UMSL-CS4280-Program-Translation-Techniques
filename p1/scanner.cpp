@@ -14,7 +14,7 @@
 int fsa_table[23][23] = {
  /*   ws   lc   UC  dig    =    <    >    :    +    -    *    /    %    .    (    )    ,    {    }    ;    [    ]  eof     */
     {  0,   1,   2,   3,   4,   5,   6,   7,   8,   9,  10,  11,  12,  13,  14,  15,  16,  17,  18,  19,  20,  -1,  -2},
-    {100,   1,   1, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100}, /*ID_TK*/
+    {100,   1,   1,   1, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100}, /*ID_TK*/
     {101, 101, 101,   2, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101}, /*INT_TK*/
     {102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102}, /*EQUALS_TK*/
     {103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103}, /*EQUALS_OR_GREATER_THAN_TK*/
@@ -126,19 +126,19 @@ Token scan(std::ifstream& in_file, unsigned int& line_number){
         /* Skipping comments */
         if (current_char == '$'){
             in_file.get(current_char);
-                if (current_char == '$') {
+            if (current_char == '$') {
+                in_file.get(current_char);
+                while (1) {   // loop until break
                     in_file.get(current_char);
-                    while (1) {   // loop until break
+                    if (current_char == '$') {
                         in_file.get(current_char);
                         if (current_char == '$') {
                             in_file.get(current_char);
-                            if (current_char == '$') {
-                                in_file.get(current_char);
-                                break;
-                            }
+                            break;
+                        }
                     }
                 }
-            } 
+            }        
         }
         
         int fsa_column = get_fsa_column(current_char);
@@ -204,22 +204,24 @@ Token scan(std::ifstream& in_file, unsigned int& line_number){
 
 }
 
-int get_fsa_column(char current_char)
-{
-    //std::cout << "Test Point 3" << current_char << std::endl;
+int get_fsa_column(char current_char){
+    
+    if (isspace(current_char))
+        return 0;
+    
     if (isalpha(current_char)){
         if (isupper(current_char))
             return 2;
         return 1;
     }
 
-    else if (isdigit(current_char))
+    if (isdigit(current_char))
         return 3;
 
-    else if (isspace(current_char))
+    if (isspace(current_char))
         return 0;
-
-    else if (current_char == EOF)
+    
+    if (current_char == EOF)
         return 22;
 
     else  // valid symbol
