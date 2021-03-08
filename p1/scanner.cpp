@@ -62,8 +62,6 @@ std::map<int, token_id> final_states = {
     {121, RIGHT_BRACKET_TK},
     {100, ID_TK},
     {101, INT_TK},
-
-    /* EOF */
     {-1, EOF_TK} };
 
 /* Keyword Map
@@ -173,7 +171,7 @@ Token scan(std::ifstream& in_file, unsigned int& line_number){
             }
 
             in_file.unget();
-            std::cout << " next state: " << next_state << " current_word: " << current_word << std::endl;
+            std::cout << " current state: " << current_state << " next state: " << next_state << " current_word: " << current_word << std::endl;
             return get_token(next_state, current_word, line_number);
         }
         else
