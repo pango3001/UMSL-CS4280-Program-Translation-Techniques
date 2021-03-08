@@ -48,6 +48,10 @@ int main(int argc, char** argv)
     /* No filename argument given */
     else if (argc == 1)
     {
+        std::string userInput;
+        std::string fileName;                   // name of file
+        std::ifstream inFile;                   // for file input
+
         /* Creating a temporary file to hold keyboard input */
         std::ofstream tempFile;             // Temp File for keyboard input
         tempFile.open("stdin.temp", std::ios::trunc); // trunc overwrites
