@@ -16,7 +16,8 @@ int main(int argc, char** argv) {
 
     // FILE GIVEN
     if (argc == 2) {
-        fileName = argv[1] + ".ss21";
+        fileName = argv[1];
+        fileName += ".ss21";
         inFile.open(fileName);
     }
 
