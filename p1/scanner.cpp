@@ -138,6 +138,7 @@ Token scan(std::ifstream& in_file, unsigned int& line_number){
                             in_file.get(current_char);
                             if (current_char == '$') {
                                 std::cout << "Found $$ again" << std::endl;
+                                in_file.get(current_char);
                                 break;
                             }
 
