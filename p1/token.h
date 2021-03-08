@@ -13,7 +13,7 @@ enum tokens {
     BEGIN_TK,                 // 0
     END_TK,                   // 1
     LOOP_TK,                  // 2
-    WHOLE_TK,                 // 3
+    WHILE_TK,                 // 3
     VOID_TK,                  // 4
     EXIT_TK,                  // 5
     GETTER_TK,                // 6
