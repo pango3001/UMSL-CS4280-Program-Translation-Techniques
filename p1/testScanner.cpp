@@ -17,12 +17,12 @@ void testScanner(std::ifstream& file) {
     do
     {
         // Scan in tokens from file
-        Token current_token = scan(file, lineNum);
-        if (current_token.token_ID == ERROR_TK) {
+        Token token = scanner(file, lineNum);
+        if (token.token_ID == ERROR_TK) {
             exit(EXIT_FAILURE);
         }
         else {  // print token info to screen
-            printTokenInfo(current_token);
+            printTokenInfo(token);
         }
 
     } while (file);
