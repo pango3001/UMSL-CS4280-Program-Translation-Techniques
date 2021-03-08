@@ -58,7 +58,7 @@ struct Token
 {
     token_id token_identifier;
     std::string token_string;
-    unsigned int line_number;
+    int line_number;
 
     Token()
     {
