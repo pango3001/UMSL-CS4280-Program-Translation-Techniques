@@ -23,7 +23,6 @@ std::string tokens[] = {
     "COND_TK",
     "THEN_TK",
     "LET_TK",
-    /* Operator Tokens */
     "EQUALS_TK",
     "LESS_THAN_TK",
     "GREATER_THAN_TK",
@@ -34,7 +33,6 @@ std::string tokens[] = {
     "SLASH_TK",
     "PERCENT_TK",
     "PERIOD_TK",
-    /* Delimiter Tokens */
     "LEFT_PAREN_TK",
     "RIGHT_PAREN_TK",
     "LEFT_BRACKET_TK",
@@ -43,10 +41,8 @@ std::string tokens[] = {
     "RIGHT_BRACE_TK",
     "SEMI_COLON_TK",
     "COMMA_TK",
-    /* Identifier and Integer Tokens */
     "ID_TK",
     "INT_TK",
-    /* EOF and Error Tokens */
     "EOF_TK",
     "ERROR_TK"
 };

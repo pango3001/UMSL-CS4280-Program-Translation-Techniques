@@ -38,8 +38,6 @@ int fsa_table[23][23] = {
     {   121, 121, 121, 121, 121, 121, 121, 121, 121, 121, 121, 121, 121, 121, 121, 121, 121, 121, 121, 121, 121, 121, 121}, /*RIGHT_BRACKET_TK*/
 };
 
-/* Final State Map
- * maps tokens to corresponding final state number */
 std::map<int, token_id> final_states = {
     // Operators and Delimiters
     {102, EQUALS_TK},
@@ -115,81 +113,76 @@ std::map<char, int> allowed_symbols = {
 };
 
 /* Scanner Function */
-Token scan(std::ifstream& in_file, unsigned int& line_number)
-{
-    /* Init current state and next state to start state S0 */
-    int current_state = 0;
+Token scan(std::ifstream& in_file, unsigned int& line_number){
+    int current_state = 0;             
     int next_state = 0;
-    /* Variable to hold the current character being examined */
-    char current_char = ' ';
-    /* Variable to hold the possible string of characters */
-    std::string current_word = "";
-
-    /* Loops until a final state is reached
-     * gets the next character on each loop */
-    while (current_state < 100 && current_state > -1)
-    {
-        /* Getting the next available character */
+   
+    char current_char = ' ';       
+    
+    std::string current_word = "";   
+    
+    while (current_state < 100 && current_state > -1){
+        
         in_file.get(current_char);
 
         /* Skipping comments */
-        if (current_char == '$')
-        {
-            /* Keep getting characters until another '$' is reached */
-            do
-            {
+        if (current_char == '$'){             
                 in_file.get(current_char);
-            } while (current_char != '$');
-            /* current_char will = '$' so grab next character */
-            in_file.get(current_char);
+                if (current_char == '$') {
+                    in_file.get(current_char);
+                    while (1) {   // loop until break
+                        in_file.get(current_char);
+                        if (current_char == '$') {
+                            in_file.get(current_char);
+                            if (current_char == '$') {
+                                break;
+                            }
+
+                    }
+                }
+            } 
+
         }
-        /* Character determines FSA table column */
+        
         int fsa_column = get_fsa_column(current_char);
 
-        /* If at the end of the file, return EOF token */
+        
         if (in_file.eof())
         {
             fsa_column = 21;
         }
-        /* If fsa_column = -2 then the char was invalid
-         * return an error Token and display the invalid char to the console */
+
         if (fsa_column == -2)
         {
-            /* Displaying the error message and invalid char */
+
             std::cout << "SCANNER ERROR: Invalid character \'" << current_char << "\'";
             std::cout << " at line: " << line_number << std::endl;
-            /* Returning the error Token */
+
             return Token(ERROR_TK, "Invalid char", line_number);
         }
 
-        /* Setting the next state */
         next_state = fsa_table[current_state][fsa_column];
 
-        /* If next_state is a final state then return the respective Token */
+
         if (next_state >= 100 || next_state == -1 || next_state == -2)
         {
-            /* EOF state */
-            if (next_state == -1)
-            {
+
+            if (next_state == -1) {
                 return Token(EOF_TK, "EOF", 0);
             }
 
-            if (next_state == -2)
-            {
-                /* Displaying the error message and invalid char */
+            if (next_state == -2){
                 std::cout << "SCANNER ERROR: Invalid character \"" << current_char << "\"";
                 std::cout << " at line: " << line_number << std::endl;
-                /* Returning the error Token */
                 return Token(ERROR_TK, "Invalid ID", line_number);
             }
 
-            /* Other final states */
             in_file.unget();
             return get_token(next_state, current_word, line_number);
         }
         else
         {
-            /* If the current char is not a whitespace append to the current word */
+
             if (!isspace(current_char))
             {
                 current_word += current_char;
@@ -197,10 +190,8 @@ Token scan(std::ifstream& in_file, unsigned int& line_number)
 
             if (current_word.length() >= 9)                 // largest indiifier can be 8 chars long
             {
-                /* Displaying the error message and invalid char */
                 std::cout << "SCANNER ERROR: Invalid length of \"" << current_word << "\"";
                 std::cout << " at line: " << line_number << std::endl;
-                /* Returning the error Token */
                 return Token(ERROR_TK, "Invalid Length", line_number);
             }
             if (current_char == '\n')
@@ -208,19 +199,17 @@ Token scan(std::ifstream& in_file, unsigned int& line_number)
                 line_number++;
             }
 
-            /* Go to next state */
             current_state = next_state;
         }
     }
-    /* If we have not returned a Token yet then the scanner failed */
+
     return Token(ERROR_TK, "Scanner Faliure", line_number);
 
 }
 
-/* FSA Column Getter */
 int get_fsa_column(char current_char)
 {
-    /* If letter, return column number 1 */
+
     if (isalpha(current_char))
     {
         if (isupper(current_char))
@@ -239,13 +228,10 @@ int get_fsa_column(char current_char)
     /* Else, check if it is an allowed symbol */
     else
     {
-        /* If it is an allowed symbol, return respective column number
-         * allowed_symbols.find(current_char) returns allowed_symbols.end()
-         * if current_char cannot be found in allowed_symbols map */
         if (allowed_symbols.find(current_char) != allowed_symbols.end())
             return allowed_symbols[current_char];
     }
-    /* Character is not an allowed character so return -2 to signify error */
+
     return -2;
 }
 
