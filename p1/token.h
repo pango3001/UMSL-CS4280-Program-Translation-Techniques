@@ -13,41 +13,40 @@
 enum token_id
 {
     /* Keyword Tokens */
-    BEGIN_TK,
-    END_TK,
-    LOOP_TK,
-    WHOLE_TK,
-    VOID_TK,
-    EXIT_TK,
-    GETTER_TK,
-    OUTTER_TK,
-    MAIN_TK,
-    IF_TK,
-    THEN_TK,
-    ASSIGN_TK,
-    DATA_TK,
-    PROC_TK,
-    EQUALS_TK,
-    EQUALS_OR_LESS_THAN_TK,
-    EQUALS_OR_GREATER_THAN_TK,
-    EQUALS_EQUALS_TK,
-    COLON_TK,
-    COLON_EQUALS_TK,
-    PLUS_TK,
-    MINUS_TK,
-    ASTERISK_TK,
-    SLASH_TK,
-    PERCENT_TK,
-    PERIOD_TK,
-    LEFT_PAREN_TK,
-    RIGHT_PAREN_TK,
-    LEFT_BRACKET_TK,
-    RIGHT_BRACKET_TK,
-    LEFT_BRACE_TK,
-    RIGHT_BRACE_TK,
-    SEMI_COLON_TK,
-    COMMA_TK,
-    /* Identifier and Integer Tokens */
+    BEGIN_TK,                 // 0
+    END_TK,                   // 1
+    LOOP_TK,                  // 2
+    WHOLE_TK,                 // 3
+    VOID_TK,                  // 4
+    EXIT_TK,                  // 5
+    GETTER_TK,                // 6
+    OUTTER_TK,                // 7
+    MAIN_TK,                  // 8
+    IF_TK,                    // 9
+    THEN_TK,                  // 10
+    ASSIGN_TK,                // 11
+    DATA_TK,                  // 12
+    PROC_TK,                  // 13
+    EQUALS_TK,                // 14
+    EQUALS_OR_LESS_THAN_TK,   // 15
+    EQUALS_OR_GREATER_THAN_TK,// 16
+    EQUALS_EQUALS_TK,         // 17
+    COLON_TK,                 // 18
+    COLON_EQUALS_TK,          // 19
+    PLUS_TK,                  // 20
+    MINUS_TK,                 // 21
+    ASTERISK_TK,              // 22
+    SLASH_TK,                 // 23
+    PERCENT_TK,               // 24
+    PERIOD_TK,                // 25
+    LEFT_PAREN_TK,            // 26
+    RIGHT_PAREN_TK,           // 27
+    COMMA_TK,                 // 28
+    LEFT_BRACKET_TK,          // 29
+    RIGHT_BRACKET_TK,         // 30
+    LEFT_BRACE_TK,            // 31
+    RIGHT_BRACE_TK,           // 32
+    SEMI_COLON_TK,            // 33
     ID_TK,
     INT_TK,
     /* EOF and Error Tokens */
