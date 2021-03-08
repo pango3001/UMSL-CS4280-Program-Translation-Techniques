@@ -51,17 +51,17 @@ enum tokens {
 };
 
 struct Token {
-    unsigned int linNum;      // line number
-    tokens token_ID;          // token ID
-    std::string token_string; // string of token
+    unsigned int lineNum;      // line number
+    tokens token_ID;           // token ID
+    std::string token_string;  // string of token
 
     
     // Assign token info
     Token(tokens ID, std::string string, unsigned int lineNum)
-    {
+    {   
+        this->lineNum = lineNum;
         this->token_ID = ID;
         this->token_string = string;
-        this->lineNum = lineNum;
     }
 };
 
