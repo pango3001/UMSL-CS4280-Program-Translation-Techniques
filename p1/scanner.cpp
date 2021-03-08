@@ -173,7 +173,8 @@ Token scan(std::ifstream& in_file, unsigned int& line_number){
             }
 
             in_file.unget();
-            return get_token(current_state, current_word, line_number);
+            std::cout << " next state: " << next_state << "current_word:" << current_word << std::endl;
+            return get_token(next_state, current_word, line_number);
         }
         else
         {
