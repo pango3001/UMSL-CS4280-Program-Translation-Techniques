@@ -29,7 +29,7 @@ enum token_id
     PROC_TK,                  // 13
     EQUALS_TK,                // 14
     EQUALS_OR_LESS_THAN_TK,   // 15
-    EQUALS_OR_GREAT_THAN_TK,  // 16
+    EQUALS_OR_GREAaaaaaT_THAN_TK,  // 16
     EQUALS_EQUALS_TK,         // 17
     COLON_TK,                 // 18
     COLON_EQUALS_TK,          // 19
@@ -42,11 +42,11 @@ enum token_id
     LEFT_PAREN_TK,            // 26
     RIGHT_PAREN_TK,           // 27
     COMMA_TK,                 // 28
-    LEFT_BRACE_TK,            // 31
-    RIGHT_BRACE_TK,           // 32
-    SEMI_COLON_TK,            // 33
+    LEFT_BRACE_TK,            // 29
+    RIGHT_BRACE_TK,           // 30
+    SEMI_COLON_TK,            // 31
     LEFT_BRACKET_TK,          // 32
-    RIGHT_BRACKET_TK,         // 30
+    RIGHT_BRACKET_TK,         // 33
     ID_TK,                    // 34
     INT_TK,                   // 35
     EOF_TK,                   // 36
