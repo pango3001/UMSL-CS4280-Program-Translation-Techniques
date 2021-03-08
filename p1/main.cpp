@@ -49,31 +49,23 @@ int main(int argc, char** argv)
     else if (argc == 1)
     {
         /* Creating a temporary file to hold keyboard input */
-        std::ofstream temp_file;
-        std::string file_name = "keyboard_input.txt";
-        temp_file.open(file_name, std::ios::trunc);
+        std::ofstream tempFile;             // Temp File for keyboard input
+        tempFile.open("stdin.temp", std::ios::trunc); // trunc overwrites
 
-        /* Cannot open temporary file */
-        if (!temp_file)
-        {
-            std::cout << "Error opening " << file_name << " for writing";
-            std::cout << std::endl;
-            exit(EXIT_FAILURE);
-        }
+        std::string string = "";            // empty string for reading input
 
-        /* Helper string variable */
-        char current_char;
+        std::cout << "Pressing \"Enter\" on empty line will simulate EOF" << std::endl;
 
-        /* Writing keyboard input to temporary file */
-        while (std::cin >> std::noskipws >> current_char)
-            temp_file << current_char;
+        do {
+            std::cout << std::endl << "Keyboard Input: ";
+            getline(std::cin, userInput);   // read user input
+            tempFile << userInput << " ";   // write input to temp file
+        } while (!userInput.empty());         // Pressing "Enter" on empty line will sim EOF
 
-        /* Closing the file */
-        temp_file.close();
+        tempFile.close();                   // close file
 
-        /* Opening keyboard input */
         std::ifstream in_file;
-        in_file.open(file_name);
+        in_file.open("stdin.temp");
 
         /* Cannot open temporary file */
         if (!in_file)
