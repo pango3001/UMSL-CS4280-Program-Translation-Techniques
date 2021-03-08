@@ -22,7 +22,7 @@ int main(int argc, char** argv)
     /* Filename argument given */
     else if (argc == 2)
     {
-        /* Get filenaema and append extension */
+        /* Get filename and append extension */
         std::string file_name = argv[1];
         file_name += ".ss21";
 
