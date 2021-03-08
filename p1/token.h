@@ -47,8 +47,6 @@ enum token_id
     SEMI_COLON_TK,            // 33
     LEFT_BRACKET_TK,          // 29
     RIGHT_BRACKET_TK,         // 30
-
-
     ID_TK,                    // 34
     INT_TK,                   // 35
     EOF_TK,                   // 36
