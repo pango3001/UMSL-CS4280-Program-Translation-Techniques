@@ -42,11 +42,13 @@ enum token_id
     LEFT_PAREN_TK,            // 26
     RIGHT_PAREN_TK,           // 27
     COMMA_TK,                 // 28
-    LEFT_BRACKET_TK,          // 29
-    RIGHT_BRACKET_TK,         // 30
     LEFT_BRACE_TK,            // 31
     RIGHT_BRACE_TK,           // 32
     SEMI_COLON_TK,            // 33
+    LEFT_BRACKET_TK,          // 29
+    RIGHT_BRACKET_TK,         // 30
+
+
     ID_TK,                    // 34
     INT_TK,                   // 35
     EOF_TK,                   // 36
