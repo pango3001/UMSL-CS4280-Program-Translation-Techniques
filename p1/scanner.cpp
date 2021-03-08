@@ -40,6 +40,9 @@ int fsa_table[23][23] = {   // [row] [col]
 
 std::map<int, token_id> final_states = {
     // Operators and Delimiters
+    {100, ID_TK},
+    {101, INT_TK},
+    {-1, EOF_TK},
     {102, EQUALS_TK},
     {103, EQUALS_OR_GREAT_THAN_TK},
     {104, EQUALS_OR_LESS_THAN_TK},
@@ -59,10 +62,9 @@ std::map<int, token_id> final_states = {
     {118, RIGHT_BRACE_TK},
     {119, SEMI_COLON_TK},
     {120, LEFT_BRACKET_TK},
-    {121, RIGHT_BRACKET_TK},
-    {100, ID_TK},
-    {101, INT_TK},
-    {-1, EOF_TK} };
+    {121, RIGHT_BRACKET_TK}
+}
+;
 
 /* Keyword Map
  * maps keyword tokens to their corresponding strings */
