@@ -24,15 +24,16 @@ int main(int argc, char** argv) {
         outfile << " ";
         std::cout << "stdin.temp" << std::endl;
 
-        inFile.open(fileName);
+    
     }
 
     // USER INPUT
     else if (argc == 1) {
         std::string userInput;
         std::ofstream tempFile;                 // TempFile for user input
+        fileName = "stdin.temp";
 
-        tempFile.open("stdin.temp", std::ios::trunc); // trunc overwrites
+        tempFile.open(fileName, std::ios::trunc); // trunc overwrites
 
         std::string string = "";                // empty string for reading input
 
@@ -46,9 +47,6 @@ int main(int argc, char** argv) {
 
         tempFile.close();                   // close file
 
-        std::ifstream inFile;
-        inFile.open(tempFile);
-        std::cout << "stdin.temp" << std::endl;
     }
 
     //more than 1 argument quits
@@ -57,6 +55,8 @@ int main(int argc, char** argv) {
         exit(EXIT_FAILURE);
     }
 
+    inFile.open(fileName);
+    
     // Scan file
     if (inFile) {
 
