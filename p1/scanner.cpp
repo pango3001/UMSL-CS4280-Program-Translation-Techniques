@@ -239,6 +239,14 @@ Token get_token(int state, std::string word, unsigned int line_number)
     //Token return_token = Token();
 
     /* Setting Token */
+    if (keywords.find(word) != keywords.end())
+    {
+        std::cout << " Char: " << keywords[word] << std::endl;
+
+        return Token(keywords[word], word, line_number);
+        //return_token.token_identifier = keywords[word];
+    }
+    
     if (final_states.find(state) != final_states.end())
     {
         return Token(final_states[state], word, line_number);
@@ -247,13 +255,7 @@ Token get_token(int state, std::string word, unsigned int line_number)
        // return_token.line_number = line_number;
     }
     /* If it is a keyword then modify return token to be the respective keyword token */
-    if (keywords.find(word) != keywords.end())
-    {
-        std::cout << " Char: " << keywords[word] << std::endl;
-        
-        return Token(keywords[word], word, line_number);
-        //return_token.token_identifier = keywords[word];
-    }
+
 
     /* If the return token is not modified for some reason a default error token is still returned*/
     //return return_token;
