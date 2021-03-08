@@ -17,7 +17,7 @@ int main(int argc, char** argv) {
     // FILE GIVEN
     if (argc == 2) {
         fileName = argv[1] + ".ss21";
-        in_file.open(fileName);
+        inFile.open(fileName);
     }
 
     // USER INPUT
@@ -41,8 +41,8 @@ int main(int argc, char** argv) {
 
         tempFile.close();                   // close file
 
-        std::ifstream in_file;
-        in_file.open("stdin.temp");
+        std::ifstream inFile;
+        inFile.open("stdin.temp");
 
 
     }
@@ -55,7 +55,7 @@ int main(int argc, char** argv) {
     in_file.open(fileName);
 
     /* Cannot open temporary file */
-    if (!in_file)
+    if (!inFile)
     {
         std::cout << "Error opening " << fileName << " for reading";
         std::cout << std::endl;
@@ -63,9 +63,9 @@ int main(int argc, char** argv) {
     }
 
     /* Call the test scanner */
-    testScanner(in_file);
+    testScanner(inFile);
     /* Close the input file */
-    in_file.close();
+    inFile.close();
 
 
 }
