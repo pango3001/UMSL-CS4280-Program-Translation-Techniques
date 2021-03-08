@@ -131,6 +131,7 @@ Token scan(std::ifstream& in_file, unsigned int& line_number){
                     if (current_char == '$') {
                         in_file.get(current_char);
                         if (in_file.eof()){
+                            std::cout << " EOF " << std::endl;
                             return Token(ERROR_TK, "No end to comment", line_number);
                         }
                         if (current_char == '$') {
