@@ -11,13 +11,13 @@
 #include <fstream>
 #include <iostream>
 
-int fsa_table[23][23] = {
+int fsa_table[23][23] = {   // [row] [col]
  /*   ws   lc   UC  dig    =    <    >    :    +    -    *    /    %    .    (    )    ,    {    }    ;    [    ]  eof     */
     {  0,   1,   2,   3,   4,   5,   6,   7,   8,   9,  10,  11,  12,  13,  14,  15,  16,  17,  18,  19,  20,  -1,  -2},
     {100,   1,   1,   1, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100}, /*ID_TK*/
     {101, 101, 101,   2, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101}, /*INT_TK*/
     {102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102}, /*EQUALS_TK*/
-    {103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103}, /*EQUALS_OR_GREATER_THAN_TK*/
+    {103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103}, /*EQUALS_OR_GREAT_THAN_TK*/
     {104, 104, 104, 104, 104, 104, 104, 104, 104, 104, 104, 104, 104, 104, 104, 104, 104, 104, 104, 104, 104, 104, 104}, /*EQUALS_OR_LESS_THAN_TK*/
     {105, 105, 105, 105, 105, 105, 105, 105, 105, 105, 105, 105, 105, 105, 105, 105, 105, 105, 105, 105, 105, 105, 105}, /*EQUALS_OR_EQUALS_TK*/
     {106, 106, 106, 106, 106, 106, 106, 106, 106, 106, 106, 106, 106, 106, 106, 106, 106, 106, 106, 106, 106, 106, 106}, /*COLON_TK*/
@@ -41,7 +41,7 @@ int fsa_table[23][23] = {
 std::map<int, token_id> final_states = {
     // Operators and Delimiters
     {102, EQUALS_TK},
-    {103, EQUALS_OR_GREATER_THAN_TK},
+    {103, EQUALS_OR_GREAT_THAN_TK},
     {104, EQUALS_OR_LESS_THAN_TK},
     {105, EQUALS_EQUALS_TK},
     {106, COLON_TK},
@@ -163,7 +163,7 @@ Token scan(std::ifstream& in_file, unsigned int& line_number){
         {
 
             if (next_state == -1) {
-                return Token(EOF_TK, "EOF", 0);
+                return Token(EOF_TK, "EOF", line_number);
             }
 
             if (next_state == -2){
@@ -209,15 +209,15 @@ int get_fsa_column(char current_char){
     
     if (isalpha(current_char)){
         if (isupper(current_char))
-            return 2;
-        return 1;
+            return 2;   // UC
+        return 1;       // lc
     }
 
     if (isdigit(current_char))
-        return 3;
+        return 3;       // dig
 
     if (isspace(current_char))
-        return 0;
+        return 0;       // ws
     
     if (current_char == EOF)
         return 22;
