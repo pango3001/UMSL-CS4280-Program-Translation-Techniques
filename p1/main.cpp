@@ -63,7 +63,7 @@ int main(int argc, char** argv)
         do {
             std::cout << std::endl << "Keyboard Input: ";
             getline(std::cin, userInput);   // read user input
-            tempFile << userInput << " " << std::endl;   // write input to temp file
+            tempFile << userInput << "\n";   // write input to temp file
         } while (!userInput.empty());         // Pressing "Enter" on empty line will sim EOF
 
         tempFile.close();                   // close file
