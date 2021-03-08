@@ -30,15 +30,11 @@ void test_scanner(std::ifstream& input)
         }
 
     } while (input);
-
-    return;
 }
 
-void print_token(Token token)
-{
+void print_token(Token token){
     std::cout << std::left;
     std::cout << "Line: " << std::setw(3) << token.line_number;
     std::cout << "\tType: " << std::setw(22) << tokens[token.token_identifier];
     std::cout << "\tToken: " << std::setw(10) << token.token_string << std::endl;
-    return;
 }

@@ -236,7 +236,7 @@ int get_fsa_column(char current_char){
 Token get_token(int state, std::string word, unsigned int line_number)
 {
     /* Creating a default token to be returned */
-    Token return_token = Token();
+    //Token return_token = Token();
 
     /* Setting Token */
     if (final_states.find(state) != final_states.end())
@@ -247,7 +247,7 @@ Token get_token(int state, std::string word, unsigned int line_number)
         return_token.line_number = line_number;
     }
     /* If it is a keyword then modify return token to be the respective keyword token */
-    if (keywords.find(word) != keywords.end())
+    else if (keywords.find(word) != keywords.end())
     {
         return_token.token_identifier = keywords[word];
     }
