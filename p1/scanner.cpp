@@ -91,13 +91,13 @@ std::map<std::string, token_id> keywords = {
  * maps allowed operators and delimeters to their corresponding column index */
 std::map<char, int> allowed_symbols = {
     /* Operators */
-    {'=', 4},
-    {'<', 5},
-    {'>', 6},
-    {':', 7},
-    {'+', 8},
-    {'-', 9},
-    {'*', 10},
+    {'=', 3},
+    {'<', 4},
+    {'>', 5},
+    {':', 6},
+    {'+', 7},
+    {'-', 8},
+    {'*', 9},
     {'/', 11},
     {'%', 12},
     {'.', 13},
