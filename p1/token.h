@@ -9,9 +9,7 @@
 
 #include <string>
 
-enum token_id
-{
-    /* Keyword Tokens */
+enum tokens {
     BEGIN_TK,                 // 0
     END_TK,                   // 1
     LOOP_TK,                  // 2
@@ -52,26 +50,18 @@ enum token_id
     ERROR_TK                  // 37
 };
 
-struct Token
-{
-    token_id token_identifier;
-    std::string token_string;
-    unsigned int line_number;
+struct Token {
+    unsigned int linNum;      // line number
+    tokens token_ID;          // token ID
+    std::string token_string; // string of token
+
     
-    /*
-    Token()
+    // Assign token info
+    Token(tokens ID, std::string string, unsigned int lineNum)
     {
-        this->token_identifier = ERROR_TK;
-        this->token_string = "default token";
-        this->line_number = 0;
-    }
-    */
-    /* Standard Token */
-    Token(token_id token_identifier, std::string token_string, unsigned int line_number)
-    {
-        this->token_identifier = token_identifier;
-        this->token_string = token_string;
-        this->line_number = line_number;
+        this->token_ID = ID;
+        this->token_string = string;
+        this->lineNum = lineNum;
     }
 };
 

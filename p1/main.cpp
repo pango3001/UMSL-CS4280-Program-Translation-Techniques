@@ -11,8 +11,8 @@
 #include "testScanner.h"
 
 int main(int argc, char** argv) {
-    std::ifstream inFile;
-    std::string fileName;
+    std::ifstream inFile;         // input file
+    std::string fileName;         // filename
 
     // FILE GIVEN
     if (argc == 2) {
@@ -50,6 +50,7 @@ int main(int argc, char** argv) {
         inFile.open("stdin.temp");
     }
 
+    //more than 1 argument quits
     else {
         std::cout << "Too many arguments given" << std::endl;
         exit(EXIT_FAILURE);
@@ -63,10 +64,10 @@ int main(int argc, char** argv) {
         inFile.close(); // close file
 
     }
-    else {  
+    else {  // cannot open file`
     std::cout << "ERROR: Cannot open " << fileName << " for reading" << std::endl;
 
     exit(EXIT_FAILURE);
     }
-
+    return 0;
 }

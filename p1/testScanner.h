@@ -11,7 +11,6 @@
 #include "token.h"
 
 void testScanner(std::ifstream& input);
-
-void print_token(Token token);
+void printTokenInfo(Token token);
 
 #endif

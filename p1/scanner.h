@@ -12,7 +12,7 @@
 #include <fstream>
 
 /* Scanner Function */
-Token scan(std::ifstream& in_file,unsigned int& line_number);
+Token scanner(std::ifstream& in_file,unsigned int& line_number);
 
 /* FSA Column Getter */
 int setFSAcol(char current_char);

@@ -11,8 +11,8 @@
 #include <fstream>
 #include <iostream>
 
-int fsa_table[23][23] = {   // [row] [col]
- /*   ws   lc   UC  dig    =    <    >    :    +    -    *    /    %    .    (    )    ,    {    }    ;    [    ]  eof  */
+int fsa_table[23][23] = {   // [row] [col]   ws = whitespace, lc = lowercase, UC = UpperCase, dig = digit, eof = end of file
+ //   ws   lc   UC  dig    =    <    >    :    +    -    *    /    %    .    (    )    ,    {    }    ;    [    ]  eof  
     {  0,   1,  23,   2,   3,   4,   5,   7,   9,  10,  11,  12,  13,  14,  15,  16,  17,  18,  19,  20,  21,  22,  -1}, // 0
     {100,   1,   1, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100}, // 1 id
     {101, 101, 101,   2, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101}, // 2 int
@@ -38,8 +38,48 @@ int fsa_table[23][23] = {   // [row] [col]
     {121, 121, 121, 121, 121, 121, 121, 121, 121, 121, 121, 121, 121, 121, 121, 121, 121, 121, 121, 121, 121, 121, 121}  // 22 ]
 };
 
-std::map<int, token_id> final_states = {
-    // Operators and Delimiters
+// Map for Keywords
+std::map<std::string, tokens> keywords = {
+    {"begin", BEGIN_TK},
+    {"end", END_TK},
+    {"loop", LOOP_TK},
+    {"whole", WHOLE_TK},
+    {"void", VOID_TK},
+    {"exit", EXIT_TK},
+    {"getter", GETTER_TK},
+    {"outter", OUTTER_TK},
+    {"main", MAIN_TK},
+    {"if", IF_TK},
+    {"then", THEN_TK},
+    {"assign", ASSIGN_TK},
+    {"data", DATA_TK},
+    {"proc", PROC_TK}
+};
+
+// Map for symbols
+std::map<char, int> symbols = {
+    {'=', 4},
+    {'<', 5},
+    {'>', 6},
+    {':', 7},
+    {'+', 8},
+    {'-', 9},
+    {'*', 10},
+    {'/', 11},
+    {'%', 12},
+    {'.', 13},
+    {'(', 14},
+    {')', 15},
+    {',', 16},
+    {'{', 17},
+    {'}', 18},
+    {';', 19},
+    {'[', 20},
+    {']', 21}
+};
+
+// Map for Operators and Delimiters
+std::map<int, tokens> endState = {
     {100, ID_TK},
     {101, INT_TK},
     {-1, EOF_TK},
@@ -65,58 +105,21 @@ std::map<int, token_id> final_states = {
     {121, RIGHT_BRACKET_TK}
 };
 
-std::map<std::string, token_id> keywords = {
-    {"begin", BEGIN_TK},
-    {"end", END_TK},
-    {"loop", LOOP_TK},
-    {"whole", WHOLE_TK},
-    {"void", VOID_TK},
-    {"exit", EXIT_TK},
-    {"getter", GETTER_TK},
-    {"outter", OUTTER_TK},
-    {"main", MAIN_TK},
-    {"if", IF_TK},
-    {"then", THEN_TK},
-    {"assign", ASSIGN_TK},
-    {"data", DATA_TK},
-    {"proc", PROC_TK}
-};
 
 
-std::map<char, int> allowed_symbols = {
-    {'=', 4},
-    {'<', 5},
-    {'>', 6},
-    {':', 7},
-    {'+', 8},
-    {'-', 9},
-    {'*', 10},
-    {'/', 11},
-    {'%', 12},
-    {'.', 13},
-    {'(', 14},
-    {')', 15},
-    {',', 16},
-    {'{', 17},
-    {'}', 18},
-    {';', 19},
-    {'[', 20},
-    {']', 21}
-};
-
-/* Scanner Function */
-Token scan(std::ifstream& in_file, unsigned int& line_number){
-    int current_state = 0;             
-    int next_state = 0;
+// scanner for token
+Token scanner(std::ifstream& in_file, unsigned int& lineNum){
+    int state = 0;             
+    int lookAhead = 0;
    
     char current_char = ' ';       
     
     std::string current_word = "";   
     
-    while (current_state < 100){
+    while (state < 100){
         in_file.get(current_char);
         
-        /* Skipping comments */
+        // Skips comments 
         if (current_char == '$'){
             in_file.get(current_char);
             if (current_char == '$') {
@@ -124,8 +127,8 @@ Token scan(std::ifstream& in_file, unsigned int& line_number){
                 while (1) {   // loop until break
                     in_file.get(current_char);
                     if (in_file.eof()) {
-                        std::cout << "SCANNER ERROR: Comment not closed, EOF reached at line: " << line_number << std::endl;
-                        return Token(ERROR_TK, "No end to comment", line_number);
+                        std::cout << "SCANNER ERROR: Comment not closed, EOF reached at line: " << lineNum << std::endl;   // in case comment is never closed
+                        return Token(ERROR_TK, "No end to comment", lineNum);
                     }
                     if (current_char == '$') {
                         in_file.get(current_char);  
@@ -138,37 +141,37 @@ Token scan(std::ifstream& in_file, unsigned int& line_number){
             }        
         }
         
-        int fsa_column = setFSAcol(current_char);
+        int colFSA = setFSAcol(current_char);
         
         if (in_file.eof()){
-            fsa_column = 22;
+            colFSA = 22;
         }
 
-        if (fsa_column == 23)
+        if (colFSA == 23)
         {
 
             std::cout << "SCANNER ERROR: Invalid character \'" << current_char << "\'";
-            std::cout << " at line: " << line_number << std::endl;
+            std::cout << " at line: " << lineNum << std::endl;
 
-            return Token(ERROR_TK, "Invalid char", line_number);
+            return Token(ERROR_TK, "Invalid char", lineNum);
         }
 
-        next_state = fsa_table[current_state][fsa_column];
+        lookAhead = fsa_table[state][colFSA];
 
-        if (next_state == 23) {
+        if (lookAhead == 23) {
             std::cout << "SCANNER ERROR 2: Invalid character \"" << current_char << "\"";
-            std::cout << " at line: " << line_number << std::endl;
-            return Token(ERROR_TK, "Invalid ID", line_number);
+            std::cout << " at line: " << lineNum << std::endl;
+            return Token(ERROR_TK, "Invalid ID", lineNum);
         }
 
-        else if (next_state == -1) {
-            return Token(EOF_TK, "EOF", line_number);
+        else if (lookAhead == -1) {
+            return Token(EOF_TK, "EOF", lineNum);
         }
         
-        else if (next_state >= 100)
+        else if (lookAhead >= 100)
         {
             in_file.unget();
-            return get_token(next_state, current_word, line_number);
+            return get_token(lookAhead, current_word, lineNum);
         }
         else
         {
@@ -181,19 +184,19 @@ Token scan(std::ifstream& in_file, unsigned int& line_number){
             if (current_word.length() >= 9)                 // largest indiifier can be 8 chars long
             {
                 std::cout << "SCANNER ERROR 3: Invalid length of \"" << current_word << "\"";
-                std::cout << " at line: " << line_number << std::endl;
-                return Token(ERROR_TK, "Invalid Length", line_number);
+                std::cout << " at line: " << lineNum << std::endl;
+                return Token(ERROR_TK, "Invalid Length", lineNum);
             }
             if (current_char == '\n')
             {
-                line_number++;
+                lineNum++;
             }
  
-            current_state = next_state;
+            state = lookAhead;
         }
     }
 
-    return Token(ERROR_TK, "Scanner Failed", line_number);
+    return Token(ERROR_TK, "Scanner Failed", lineNum);
 
 }
 
@@ -217,22 +220,22 @@ int setFSAcol(char current_char){
 
     else  // valid symbol
     {
-        if (allowed_symbols.find(current_char) != allowed_symbols.end())
-            return allowed_symbols[current_char];
+        if (symbols.find(current_char) != symbols.end())
+            return symbols[current_char];
     }
 
     return 23;  // Leads to error state
 }
 
 
-Token get_token(int state, std::string word, unsigned int line_number){
+Token get_token(int state, std::string word, unsigned int lineNum){
 
     if (keywords.find(word) != keywords.end()) {
-         return Token(keywords[word], word, line_number);
+         return Token(keywords[word], word, lineNum);
     }
     
     else {
-        return Token(final_states[state], word, line_number);
+        return Token(endState[state], word, lineNum);
     }
 }
 
