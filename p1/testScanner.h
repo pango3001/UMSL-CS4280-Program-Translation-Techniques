@@ -10,7 +10,7 @@
 #include <fstream>
 #include "token.h"
 
-void testScanner(std::ifstream& input);
+void testScanner(std::ifstream& file);
 void printTokenInfo(Token token);
 
 #endif
