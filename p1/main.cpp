@@ -42,20 +42,17 @@ int main(int argc, char** argv) {
 
         std::ifstream inFile;
         inFile.open("stdin.temp");
-
-
     }
 
-    else (argc > 2) {
+    else {
         std::cout << "Too many arguments given" << std::endl;
         exit(EXIT_FAILURE);
     }
 
-    in_file.open(fileName);
+    inFile.open(fileName);
 
     /* Cannot open temporary file */
-    if (!inFile)
-    {
+    if (!inFile) {
         std::cout << "Error opening " << fileName << " for reading";
         std::cout << std::endl;
         exit(EXIT_FAILURE);
