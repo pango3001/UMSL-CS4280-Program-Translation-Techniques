@@ -63,11 +63,8 @@ std::map<int, token_id> final_states = {
     {119, SEMI_COLON_TK},
     {120, LEFT_BRACKET_TK},
     {121, RIGHT_BRACKET_TK}
-}
-;
+};
 
-/* Keyword Map
- * maps keyword tokens to their corresponding strings */
 std::map<std::string, token_id> keywords = {
     {"begin", BEGIN_TK},
     {"end", END_TK},
@@ -85,8 +82,7 @@ std::map<std::string, token_id> keywords = {
     {"proc", PROC_TK}
 };
 
-/* Character Map
- * maps allowed operators and delimeters to their corresponding column index */
+
 std::map<char, int> allowed_symbols = {
     {'=', 4},
     {'<', 5},
@@ -143,7 +139,7 @@ Token scan(std::ifstream& in_file, unsigned int& line_number){
             }        
         }
         
-        int fsa_column = get_fsa_column(current_char);
+        int fsa_column = setFSAcol(current_char);
         //std::cout << "Test Point 1" << current_char << std::endl;
         
         if (in_file.eof()){
@@ -201,11 +197,11 @@ Token scan(std::ifstream& in_file, unsigned int& line_number){
         }
     }
 
-    return Token(ERROR_TK, "Scanner Faliure", line_number);
+    return Token(ERROR_TK, "Scanner Failed", line_number);
 
 }
 
-int get_fsa_column(char current_char){
+int setFSAcol(char current_char){
     
     if (isspace(current_char))
         return 0;       // ws
@@ -232,30 +228,15 @@ int get_fsa_column(char current_char){
     return 23;  // Leads to error state
 }
 
-/* Token Getter */
-Token get_token(int state, std::string word, unsigned int line_number)
-{
-    /* Creating a default token to be returned */
-    //Token return_token = Token();
 
-    /* Setting Token */
-    if (keywords.find(word) != keywords.end())
-    {
+Token get_token(int state, std::string word, unsigned int line_number){
+
+    if (keywords.find(word) != keywords.end()) {
          return Token(keywords[word], word, line_number);
-        //return_token.token_identifier = keywords[word];
     }
     
-    else
-    {
+    else {
         return Token(final_states[state], word, line_number);
-        //return_token.token_identifier = final_states[state];
-        //return_token.token_string = word;
-       // return_token.line_number = line_number;
     }
-    /* If it is a keyword then modify return token to be the respective keyword token */
-
-
-    /* If the return token is not modified for some reason a default error token is still returned*/
-    //return return_token;
 }
 

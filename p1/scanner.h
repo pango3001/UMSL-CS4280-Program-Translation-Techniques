@@ -15,7 +15,7 @@
 Token scan(std::ifstream& in_file,unsigned int& line_number);
 
 /* FSA Column Getter */
-int get_fsa_column(char current_char);
+int setFSAcol(char current_char);
 
 /* Token Getter */
 Token get_token(int state, std::string word, unsigned int line_number);
