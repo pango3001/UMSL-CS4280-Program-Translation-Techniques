@@ -45,7 +45,7 @@ enum token_id
     LEFT_BRACE_TK,            // 31
     RIGHT_BRACE_TK,           // 32
     SEMI_COLON_TK,            // 33
-    LEFT_BRACKET_TK,          // 29
+    LEFT_BRACKET_TK,          // 32
     RIGHT_BRACKET_TK,         // 30
     ID_TK,                    // 34
     INT_TK,                   // 35
