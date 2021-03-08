@@ -27,8 +27,7 @@ std::string tokens[] = {
     "PROC_TK",
     "EQUALS_TK",
     "EQUALS_OR_LESS_THAN_TK",
-
-    "EQUALS_OR_GREATER_THAN_TK",
+    "EQUALS_OR_GREAT_THAN_TK",
     "EQUALS_EQUALS_TK",
     "COLON_TK",
     "COLON_EQUALS_TK",
