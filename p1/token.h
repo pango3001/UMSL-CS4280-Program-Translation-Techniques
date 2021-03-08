@@ -68,7 +68,7 @@ struct Token
     }
 
     /* Standard Token */
-    Token(token_id token_identifier, std::string token_string, unsigned int line_number)
+    Token(token_id token_identifier, std::string token_string, int line_number)
     {
         this->token_identifier = token_identifier;
         this->token_string = token_string;
