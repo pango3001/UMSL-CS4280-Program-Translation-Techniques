@@ -57,14 +57,15 @@ struct Token
     token_id token_identifier;
     std::string token_string;
     unsigned int line_number;
-
+    
+    /*
     Token()
     {
         this->token_identifier = ERROR_TK;
         this->token_string = "default token";
         this->line_number = 0;
     }
-
+    */
     /* Standard Token */
     Token(token_id token_identifier, std::string token_string, unsigned int line_number)
     {
