@@ -213,7 +213,7 @@ int setFSAcol(char current_char){
     if (isdigit(current_char))
         return 3;       // dig
 
-    if (current_char == EOF)
+    if (current_char == (in_file.eof()))
         return 22;
 
     else  // valid symbol
