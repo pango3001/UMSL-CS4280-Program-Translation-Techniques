@@ -48,6 +48,7 @@ int main(int argc, char** argv) {
 
         std::ifstream inFile;
         inFile.open("stdin.temp");
+        std::cout << "stdin.temp" << std::endl;
     }
 
     //more than 1 argument quits
@@ -64,7 +65,7 @@ int main(int argc, char** argv) {
         inFile.close(); // close file
 
     }
-    else {  // cannot open file`
+    else {  // cannot open file
     std::cout << "ERROR: Cannot open " << fileName << " for reading" << std::endl;
 
     exit(EXIT_FAILURE);
