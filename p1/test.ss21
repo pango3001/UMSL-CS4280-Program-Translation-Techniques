@@ -1,5 +1,4 @@
 $$ ignore ignore ignore $$
-$ notIgnored notignored $
 
 getter = ;
 test
