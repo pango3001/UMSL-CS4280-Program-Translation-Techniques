@@ -143,6 +143,9 @@ Token scan(std::ifstream& in_file, unsigned int& line_number){
         //std::cout << "Test Point 1" << current_char << std::endl;
         
         if (in_file.eof()){
+
+                return Token(EOF_TK, "EOF", line_number);
+
             fsa_column = 22;
         }
 
@@ -190,9 +193,7 @@ Token scan(std::ifstream& in_file, unsigned int& line_number){
             {
                 line_number++;
             }
-            if (in_file.eof()) {
-                return Token(EOF_TK, "EOF", line_number);
-            }
+
 
             current_state = next_state;
         }
