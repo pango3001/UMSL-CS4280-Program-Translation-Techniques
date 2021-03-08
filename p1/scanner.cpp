@@ -13,7 +13,7 @@
 
 int fsa_table[23][23] = {   // [row] [col]
  /*   ws   lc   UC  dig    =    <    >    :    +    -    *    /    %    .    (    )    ,    {    }    ;    [    ]  eof  */
-    {  0,   1,  -2,   2,   3,   4,   5,   7,   9,  10,  11,  12,  13,  14,  15,  16,  17,  18,  19,  20,  21,  22,  -1}, // 0
+    {  0,   1,  23,   2,   3,   4,   5,   7,   9,  10,  11,  12,  13,  14,  15,  16,  17,  18,  19,  20,  21,  22,  -1}, // 0
     {100,   1,   1, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100}, // 1 id
     {101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101}, // 2 int
     {102, 102, 102, 102,   6,   5,   4, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102}, // 3 =
@@ -147,7 +147,7 @@ Token scan(std::ifstream& in_file, unsigned int& line_number){
             fsa_column = 22;
         }
 
-        if (fsa_column == -2)
+        if (fsa_column == 23)
         {
 
             std::cout << "SCANNER ERROR 1: Invalid character \'" << current_char << "\'";
@@ -159,19 +159,18 @@ Token scan(std::ifstream& in_file, unsigned int& line_number){
         next_state = fsa_table[current_state][fsa_column];
         //std::cout << "Test Point 2" << current_char << std::endl;
 
-        if (next_state >= 100 || next_state == -1 || next_state == -2)
+        if (next_state == 23) {
+            std::cout << "SCANNER ERROR 2: Invalid character \"" << current_char << "\"";
+            std::cout << " at line: " << line_number << std::endl;
+            return Token(ERROR_TK, "Invalid ID", line_number);
+        }
+
+        else if (next_state == -1) {
+            return Token(EOF_TK, "EOF", line_number);
+        }
+        
+        else if (next_state >= 100)
         {
-
-            if (next_state == -1) {
-                return Token(EOF_TK, "EOF", line_number);
-            }
-
-            if (next_state == -2){
-                std::cout << "SCANNER ERROR 2: Invalid character \"" << current_char << "\"";
-                std::cout << " at line: " << line_number << std::endl;
-                return Token(ERROR_TK, "Invalid ID", line_number);
-            }
-
             in_file.unget();
             //std::cout << " current state: " << current_state << " next state: " << next_state << " current_word: " << current_word << std::endl;
             return get_token(next_state, current_word, line_number);
@@ -227,7 +226,7 @@ int get_fsa_column(char current_char){
             return allowed_symbols[current_char];
     }
 
-    return -2;
+    return 23;  // Leads to error state
 }
 
 /* Token Getter */
