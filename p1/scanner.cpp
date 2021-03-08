@@ -249,6 +249,8 @@ Token get_token(int state, std::string word, unsigned int line_number)
     /* If it is a keyword then modify return token to be the respective keyword token */
     if (keywords.find(word) != keywords.end())
     {
+        std::cout << " Char: " << keywords[word] << std::endl;
+        
         return Token(keywords[word], word, line_number);
         //return_token.token_identifier = keywords[word];
     }
