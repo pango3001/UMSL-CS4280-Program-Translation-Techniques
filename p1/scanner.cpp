@@ -105,7 +105,7 @@ std::map<char, int> allowed_symbols = {
     {'}', 18},
     {';', 19},
     {'[', 20},
-    {']', 22}
+    {']', 20}
 };
 
 /* Scanner Function */
