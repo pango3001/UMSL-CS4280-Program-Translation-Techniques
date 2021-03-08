@@ -205,7 +205,7 @@ int setFSAcol(char current_char){
     if (isspace(current_char))
         return 0;       // ws
     
-    if (isalpha(current_char) ){
+    if (isalpha(current_char) || current_char = "_" ){
         if (isupper(current_char))
             return 2;   // UC
         return 1;       // lc
