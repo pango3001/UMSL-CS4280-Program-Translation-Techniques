@@ -88,7 +88,7 @@ std::map<std::string, token_id> keywords = {
 /* Character Map
  * maps allowed operators and delimeters to their corresponding column index */
 std::map<char, int> allowed_symbols = {
-    {'=', 3},
+    {'=', 4},
     {'<', 5},
     {'>', 6},
     {':', 7},
@@ -105,7 +105,7 @@ std::map<char, int> allowed_symbols = {
     {'}', 18},
     {';', 19},
     {'[', 20},
-    {']', 21}
+    {']', 22}
 };
 
 /* Scanner Function */
