@@ -47,7 +47,7 @@ int main(int argc, char** argv) {
         tempFile.close();                   // close file
 
         std::ifstream inFile;
-        inFile.open("stdin.temp");
+        inFile.open(tempFile);
         std::cout << "stdin.temp" << std::endl;
     }
 
