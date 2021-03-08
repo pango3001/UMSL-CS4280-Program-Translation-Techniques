@@ -116,9 +116,7 @@ Token scan(std::ifstream& in_file, unsigned int& line_number){
     while (current_state < 100 && current_state > -1){
         
         in_file.get(current_char);
-        if (in_file.eof()) {
-            return Token(EOF_TK, "EOF", line_number);
-        }
+
         /* Skipping comments */
         if (current_char == '$'){
             in_file.get(current_char);
@@ -191,6 +189,9 @@ Token scan(std::ifstream& in_file, unsigned int& line_number){
             if (current_char == '\n')
             {
                 line_number++;
+            }
+            if (in_file.eof()) {
+                return Token(EOF_TK, "EOF", line_number);
             }
 
             current_state = next_state;
