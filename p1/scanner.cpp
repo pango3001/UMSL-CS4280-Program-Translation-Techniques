@@ -114,9 +114,9 @@ Token scan(std::ifstream& in_file, unsigned int& line_number){
     std::string current_word = "";   
     
     while (current_state < 100 && current_state > -1){
-        
-        in_file.get(current_char);
         std::cout << "here" << std::endl;
+        in_file.get(current_char);
+        
         /* Skipping comments */
         if (current_char == '$'){
             in_file.get(current_char);
