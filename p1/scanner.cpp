@@ -222,6 +222,7 @@ int get_fsa_column(char current_char){
     else  // valid symbol
     {
         if (allowed_symbols.find(current_char) != allowed_symbols.end())
+            std::cout << " Char: " << allowed_symbols[current_char] << std::endl;
             return allowed_symbols[current_char];
     }
 
