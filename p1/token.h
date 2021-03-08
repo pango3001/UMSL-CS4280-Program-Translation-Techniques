@@ -53,7 +53,7 @@ enum token_id
     ERROR_TK                  // 37
 };
 
-/* Token struct */
+
 class Token
 {
     token_id token_identifier;
@@ -63,7 +63,7 @@ class Token
     Token()
     {
         this->token_identifier = ERROR_TK;
-        this->token_string = "default error token";
+        this->token_string = "default token";
         this->line_number = 0;
     }
 
