@@ -201,6 +201,9 @@ Token scan(std::ifstream& in_file, unsigned int& line_number){
 
 int setFSAcol(char current_char){
     
+    if (current_char == EOF)
+        return 22;
+
     if (isspace(current_char))
         return 0;       // ws
     
@@ -213,8 +216,6 @@ int setFSAcol(char current_char){
     if (isdigit(current_char))
         return 3;       // dig
 
-    if (current_char == (in_file.eof()))
-        return 22;
 
     else  // valid symbol
     {
