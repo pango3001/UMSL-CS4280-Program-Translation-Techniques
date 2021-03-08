@@ -29,7 +29,7 @@ enum token_id
     PROC_TK,                  // 13
     EQUALS_TK,                // 14
     EQUALS_OR_LESS_THAN_TK,   // 15
-    EQUALS_OR_GREAaaaaaT_THAN_TK,  // 16
+    EQUALS_OR_GREAaT_THAN_TK,  // 16
     EQUALS_EQUALS_TK,         // 17
     COLON_TK,                 // 18
     COLON_EQUALS_TK,          // 19

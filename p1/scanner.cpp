@@ -44,7 +44,7 @@ std::map<int, token_id> final_states = {
     {101, INT_TK},
     {-1, EOF_TK},
     {102, EQUALS_TK},
-    {103, EQUALS_OR_GREAT_THAN_TK},
+    {103, EQUALS_OR_GREAaT_THAN_TK},
     {104, EQUALS_OR_LESS_THAN_TK},
     {105, EQUALS_EQUALS_TK},
     {106, COLON_TK},
