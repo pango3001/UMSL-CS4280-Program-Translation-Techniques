@@ -49,19 +49,18 @@ int main(int argc, char** argv) {
         exit(EXIT_FAILURE);
     }
 
-    inFile.open(fileName);
-
     /* Cannot open temporary file */
-    if (!inFile) {
-        std::cout << "Error opening " << fileName << " for reading";
-        std::cout << std::endl;
-        exit(EXIT_FAILURE);
+    if (inFile) {
+        /* Call the test scanner */
+        testScanner(inFile);
+        /* Close the input file */
+        inFile.close();
+
     }
-
-    /* Call the test scanner */
-    testScanner(inFile);
-    /* Close the input file */
-    inFile.close();
-
+    else {
+    std::cout << "Error opening " << fileName << " for reading";
+    std::cout << std::endl;
+    exit(EXIT_FAILURE);
+    }
 
 }
