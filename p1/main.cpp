@@ -22,7 +22,7 @@ int main(int argc, char** argv) {
         std::ofstream outfile;
         outfile.open(fileName, std::ios_base::app);
         outfile << " ";
-
+        std::cout << "stdin.temp" << std::endl;
 
         inFile.open(fileName);
     }
