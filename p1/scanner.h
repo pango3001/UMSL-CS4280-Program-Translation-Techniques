@@ -11,13 +11,13 @@
 #include <map>
 #include <fstream>
 
-/* Scanner Function */
-Token scanner(std::ifstream& in_file,unsigned int& line_number);
+// scanner
+Token scanner(std::ifstream& in_file,unsigned int& lineNum);
 
-/* FSA Column Getter */
+// finds col of char in FSA table
 int setFSAcol(char current_char);
 
-/* Token Getter */
-Token get_token(int state, std::string word, unsigned int line_number);
+// sets token
+Token setToken(int state, std::string word, unsigned int lineNum);
 
 #endif

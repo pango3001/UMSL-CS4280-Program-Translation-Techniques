@@ -228,7 +228,7 @@ int setFSAcol(char current_char){
 }
 
 
-Token get_token(int state, std::string word, unsigned int lineNum){
+Token setToken(int state, std::string word, unsigned int lineNum){
 
     if (keywords.find(word) != keywords.end()) {
          return Token(keywords[word], word, lineNum);
