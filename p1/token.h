@@ -54,7 +54,7 @@ enum token_id
 };
 
 
-class Token
+struct Token
 {
     token_id token_identifier;
     std::string token_string;
