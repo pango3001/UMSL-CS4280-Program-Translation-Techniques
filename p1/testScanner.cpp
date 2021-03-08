@@ -80,7 +80,7 @@ void print_token(Token token)
 {
     std::cout << std::left;
     std::cout << "Line: " << std::setw(3) << token.line_number;
-    std::cout << "\tToken: " << std::setw(20) << tokens[token.token_identifier];
+    std::cout << "\tToken: " << std::setw(22) << tokens[token.token_identifier];
     std::cout << "\tValue: " << std::setw(10) << token.token_string << std::endl;
     return;
 }
