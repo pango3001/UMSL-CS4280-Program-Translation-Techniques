@@ -159,7 +159,7 @@ Token scan(std::ifstream& in_file, unsigned int& line_number){
         next_state = fsa_table[current_state][fsa_column];
         //std::cout << "Test Point 2" << current_char << std::endl;
 
-        if (next_state >= 100 || next_state == -1 || next_state == -2)
+        if (next_state >= 100 || next_state == -1 || next_state == 4 || next_state == 7)
         {
 
             if (next_state == -1) {
@@ -205,7 +205,7 @@ Token scan(std::ifstream& in_file, unsigned int& line_number){
 int get_fsa_column(char current_char){
     
     if (isspace(current_char))
-        return 0;
+        return 0;       // ws
     
     if (isalpha(current_char)){
         if (isupper(current_char))
@@ -216,9 +216,6 @@ int get_fsa_column(char current_char){
     if (isdigit(current_char))
         return 3;       // dig
 
-    if (isspace(current_char))
-        return 0;       // ws
-    
     if (current_char == EOF)
         return 22;
 
