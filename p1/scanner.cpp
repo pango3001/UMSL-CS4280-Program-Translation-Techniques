@@ -148,7 +148,7 @@ Token scan(std::ifstream& in_file, unsigned int& line_number){
         
         if (in_file.eof())
         {
-            fsa_column = 21;
+            fsa_column = 22;
         }
 
         if (fsa_column == -2)
