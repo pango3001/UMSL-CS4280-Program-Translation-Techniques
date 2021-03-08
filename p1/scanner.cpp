@@ -60,8 +60,8 @@ std::map<int, token_id> final_states = {
     {119, SEMI_COLON_TK},
     {120, LEFT_BRACKET_TK},
     {121, RIGHT_BRACKET_TK},
-    {100, ID_TK},
-    {101, INT_TK},
+    {101, ID_TK},
+    {100, INT_TK},
 
     /* EOF */
     {-1, EOF_TK} };
