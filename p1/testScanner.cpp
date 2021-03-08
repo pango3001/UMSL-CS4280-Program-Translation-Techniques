@@ -14,7 +14,7 @@ std::string tokens[] = {"BEGIN_TK","END_TK","LOOP_TK","WHILE_TK", "VOID_TK", "EX
 void test_scanner(std::ifstream& input)
 {
     /* Temporary blank/default token */
-    Token current_token = Token();
+    //Token current_token = Token();
     /* File line number */
     unsigned int line_number = 1;
     do

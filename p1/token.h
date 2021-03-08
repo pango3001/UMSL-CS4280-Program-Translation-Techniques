@@ -9,7 +9,6 @@
 
 #include <string>
 
-/* Enum to represent each token */
 enum token_id
 {
     /* Keyword Tokens */
@@ -52,7 +51,6 @@ enum token_id
     EOF_TK,                   // 36
     ERROR_TK                  // 37
 };
-
 
 struct Token
 {
