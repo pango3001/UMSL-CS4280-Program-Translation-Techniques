@@ -74,7 +74,7 @@ int main(int argc, char** argv)
         /* Cannot open temporary file */
         if (!in_file)
         {
-            std::cout << "Error opening " << file_name << " for reading";
+            std::cout << "Error opening " << fileName << " for reading";
             std::cout << std::endl;
             exit(EXIT_FAILURE);
         }
