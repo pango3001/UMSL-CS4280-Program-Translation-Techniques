@@ -43,7 +43,7 @@ std::map<std::string, tokens> keywords = {
     {"begin", BEGIN_TK},
     {"end", END_TK},
     {"loop", LOOP_TK},
-    {"whole", WHOLE_TK},
+    {"while", WHILE_TK},
     {"void", VOID_TK},
     {"exit", EXIT_TK},
     {"getter", GETTER_TK},
