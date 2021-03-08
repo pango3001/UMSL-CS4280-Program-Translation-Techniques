@@ -247,7 +247,7 @@ Token get_token(int state, std::string word, unsigned int line_number)
         //return_token.token_identifier = keywords[word];
     }
     
-    if (final_states.find(state) != final_states.end())
+    else
     {
         return Token(final_states[state], word, line_number);
         //return_token.token_identifier = final_states[state];
