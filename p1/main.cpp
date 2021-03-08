@@ -39,7 +39,7 @@ int main(int argc, char** argv)
         }
 
         /* Call the test scanner */
-        test_scanner(in_file);
+        testScanner(in_file);
         /* Close the input file */
         in_file.close();
 
@@ -80,7 +80,7 @@ int main(int argc, char** argv)
         }
 
         /* Call the test scanner */
-        test_scanner(in_file);
+        testScanner(in_file);
         /* Close the input file */
         in_file.close();
     }
