@@ -155,7 +155,7 @@ Token scan(std::ifstream& in_file, unsigned int& line_number){
         if (fsa_column == -2)
         {
 
-            std::cout << "SCANNER ERROR: Invalid character \'" << current_char << "\'";
+            std::cout << "SCANNER ERROR 1: Invalid character \'" << current_char << "\'";
             std::cout << " at line: " << line_number << std::endl;
 
             return Token(ERROR_TK, "Invalid char", line_number);
@@ -172,7 +172,7 @@ Token scan(std::ifstream& in_file, unsigned int& line_number){
             }
 
             if (next_state == -2){
-                std::cout << "SCANNER ERROR: Invalid character \"" << current_char << "\"";
+                std::cout << "SCANNER ERROR 2: Invalid character \"" << current_char << "\"";
                 std::cout << " at line: " << line_number << std::endl;
                 return Token(ERROR_TK, "Invalid ID", line_number);
             }
@@ -190,7 +190,7 @@ Token scan(std::ifstream& in_file, unsigned int& line_number){
 
             if (current_word.length() >= 9)                 // largest indiifier can be 8 chars long
             {
-                std::cout << "SCANNER ERROR: Invalid length of \"" << current_word << "\"";
+                std::cout << "SCANNER ERROR 3: Invalid length of \"" << current_word << "\"";
                 std::cout << " at line: " << line_number << std::endl;
                 return Token(ERROR_TK, "Invalid Length", line_number);
             }
