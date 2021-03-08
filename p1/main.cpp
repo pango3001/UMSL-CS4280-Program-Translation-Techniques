@@ -24,10 +24,8 @@ int main(int argc, char** argv) {
     // USER INPUT
     else if (argc == 1) {
         std::string userInput;
-        std::string fileName;                   // name of file
-        std::ifstream inFile;                   // for file input
-
         std::ofstream tempFile;                 // TempFile for user input
+
         tempFile.open("stdin.temp", std::ios::trunc); // trunc overwrites
 
         std::string string = "";                // empty string for reading input
