@@ -13,7 +13,7 @@
 
 int fsa_table[23][23] = {   // [row] [col]   ws = whitespace, lc = lowercase, UC = UpperCase, dig = digit, eof = end of file
  //   ws   lc   UC  dig    =    <    >    :    +    -    *    /    %    .    (    )    ,    {    }    ;    [    ]  eof  
-    {  0,   1,  23,   2,   3,   4,   5,   7,   9,  10,  11,  12,  13,  14,  15,  16,  17,  18,  19,  20,  21,  22,  -1}, // 0
+    {  0,   1,  23,   2,   3,  23,  23,   7,   9,  10,  11,  12,  13,  14,  15,  16,  17,  18,  19,  20,  21,  22,  -1}, // 0
     {100,   1,   1, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100}, // 1 id
     {101, 101, 101,   2, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101}, // 2 int
     {102, 102, 102, 102,   6,   5,   4, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102}, // 3 =
@@ -145,7 +145,7 @@ Token scanner(std::ifstream& in_file, unsigned int& lineNum){
             colFSA = 22;
         }
 
-        if (colFSA == 23)   // uppercase
+        if (colFSA == 23)   // error
         {
 
             std::cout << "SCANNER ERROR: Invalid character \'" << currentChar << "\'";
@@ -156,7 +156,7 @@ Token scanner(std::ifstream& in_file, unsigned int& lineNum){
 
         lookAhead = fsa_table[state][colFSA];
 
-        if (lookAhead == 23) {                  // uppercase
+        if (lookAhead == 23) {                  // error
             std::cout << "SCANNER ERROR 2: Invalid char \"" << currentChar << "\"";
             std::cout << " at line: " << lineNum << std::endl;
             return Token(ERROR_TK, "Invalid ID", lineNum);
