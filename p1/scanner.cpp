@@ -171,7 +171,7 @@ Token scanner(std::ifstream& in_file, unsigned int& lineNum){
         else if (lookAhead >= 100)
         {
             in_file.unget();
-            return get_token(lookAhead, current_word, lineNum);
+            return setToken(lookAhead, current_word, lineNum);
         }
         else
         {
