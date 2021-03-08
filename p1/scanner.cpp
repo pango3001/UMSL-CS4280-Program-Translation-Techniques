@@ -109,31 +109,29 @@ std::map<int, tokens> endState = {
 
 // scanner for token
 Token scanner(std::ifstream& in_file, unsigned int& lineNum){
-    int state = 0;             
-    int lookAhead = 0;
-   
-    char current_char = ' ';       
+    int state = 0;           // initialize state       
+    int lookAhead = 0;       // initialize lookahead
+    char currentChar = ' ';  // empty char for reading char    
+    std::string word = "";   // placeholder for building string
     
-    std::string current_word = "";   
-    
-    while (state < 100){
-        in_file.get(current_char);
+    while (state < 100){           // loop until end state is hit
+        in_file.get(currentChar);
         
         // Skips comments 
-        if (current_char == '$'){
-            in_file.get(current_char);
-            if (current_char == '$') {
-                in_file.get(current_char);
-                while (1) {   // loop until break
-                    in_file.get(current_char);
+        if (currentChar == '$'){
+            in_file.get(currentChar);
+            if (currentChar == '$') {              // Find $$
+                in_file.get(currentChar);
+                while (1) {                        // loop until break
+                    in_file.get(currentChar);
                     if (in_file.eof()) {
                         std::cout << "SCANNER ERROR: Comment not closed, EOF reached at line: " << lineNum << std::endl;   // in case comment is never closed
                         return Token(ERROR_TK, "No end to comment", lineNum);
                     }
-                    if (current_char == '$') {
-                        in_file.get(current_char);  
-                        if (current_char == '$') {
-                            in_file.get(current_char);
+                    if (currentChar == '$') {
+                        in_file.get(currentChar);  
+                        if (currentChar == '$') {
+                            in_file.get(currentChar);  // Find $$
                             break;
                         }
                     }
@@ -141,16 +139,16 @@ Token scanner(std::ifstream& in_file, unsigned int& lineNum){
             }        
         }
         
-        int colFSA = setFSAcol(current_char);
+        int colFSA = setFSAcol(currentChar);   // find the colomn of char
         
-        if (in_file.eof()){
+        if (in_file.eof()){   //EOF
             colFSA = 22;
         }
 
-        if (colFSA == 23)
+        if (colFSA == 23)   // uppercase
         {
 
-            std::cout << "SCANNER ERROR: Invalid character \'" << current_char << "\'";
+            std::cout << "SCANNER ERROR: Invalid character \'" << currentChar << "\'";
             std::cout << " at line: " << lineNum << std::endl;
 
             return Token(ERROR_TK, "Invalid char", lineNum);
@@ -158,8 +156,8 @@ Token scanner(std::ifstream& in_file, unsigned int& lineNum){
 
         lookAhead = fsa_table[state][colFSA];
 
-        if (lookAhead == 23) {
-            std::cout << "SCANNER ERROR 2: Invalid character \"" << current_char << "\"";
+        if (lookAhead == 23) {                  // uppercase
+            std::cout << "SCANNER ERROR 2: Invalid char \"" << currentChar << "\"";
             std::cout << " at line: " << lineNum << std::endl;
             return Token(ERROR_TK, "Invalid ID", lineNum);
         }
@@ -171,23 +169,23 @@ Token scanner(std::ifstream& in_file, unsigned int& lineNum){
         else if (lookAhead >= 100)
         {
             in_file.unget();
-            return setToken(lookAhead, current_word, lineNum);
+            return setToken(lookAhead, word, lineNum);
         }
         else
         {
 
-            if (!isspace(current_char))
+            if (!isspace(currentChar))
             {
-                current_word += current_char;
+                word += currentChar;
             }
 
-            if (current_word.length() >= 9)                 // largest indiifier can be 8 chars long
+            if (word.length() >= 9)                 // largest indiifier can be 8 chars long
             {
-                std::cout << "SCANNER ERROR 3: Invalid length of \"" << current_word << "\"";
+                std::cout << "SCANNER ERROR 3: \"" << word << "\" is longer than 8 chars";
                 std::cout << " at line: " << lineNum << std::endl;
                 return Token(ERROR_TK, "Invalid Length", lineNum);
             }
-            if (current_char == '\n')
+            if (currentChar == '\n')
             {
                 lineNum++;
             }
@@ -200,40 +198,41 @@ Token scanner(std::ifstream& in_file, unsigned int& lineNum){
 
 }
 
-int setFSAcol(char current_char){
+// finds the colomn of the char
+int setFSAcol(char currentChar){
     
-    if (current_char == EOF)
+    if (currentChar == EOF)
         return 22;
 
-    if (isspace(current_char))
+    if (isspace(currentChar))
         return 0;       // ws
     
-    if (isalpha(current_char) || current_char == '_'){
-        if (isupper(current_char))
+    if (isalpha(currentChar) || currentChar == '_'){
+        if (isupper(currentChar))
             return 2;   // UC
         return 1;       // lc
     }
 
-    if (isdigit(current_char))
+    if (isdigit(currentChar))
         return 3;       // dig
 
 
     else  // valid symbol
     {
-        if (symbols.find(current_char) != symbols.end())
-            return symbols[current_char];
+        if (symbols.find(currentChar) != symbols.end())
+            return symbols[currentChar];
     }
 
     return 23;  // Leads to error state
 }
 
-
+// sets the type of token
 Token setToken(int state, std::string word, unsigned int lineNum){
-
+    // keywords
     if (keywords.find(word) != keywords.end()) {
          return Token(keywords[word], word, lineNum);
     }
-    
+    // symbols
     else {
         return Token(endState[state], word, lineNum);
     }
