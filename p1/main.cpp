@@ -20,7 +20,7 @@ int main(int argc, char** argv) {
         fileName += ".ss21";
         
         std::ofstream outfile;
-        outfile.open(fileName, std::ios_base::app); // append instead of overwrite
+        outfile.open(fileName, std::ios_base::app);
         outfile << " ";
 
 
@@ -55,17 +55,17 @@ int main(int argc, char** argv) {
         exit(EXIT_FAILURE);
     }
 
-    /* Cannot open temporary file */
+    // Scan file
     if (inFile) {
-        /* Call the test scanner */
-        testScanner(inFile);
-        /* Close the input file */
-        inFile.close();
+
+        testScanner(inFile);  //scan file with testScanner
+
+        inFile.close(); // close file
 
     }
-    else {
-    std::cout << "Error opening " << fileName << " for reading";
-    std::cout << std::endl;
+    else {  
+    std::cout << "ERROR: Cannot open " << fileName << " for reading" << std::endl;
+
     exit(EXIT_FAILURE);
     }
 
