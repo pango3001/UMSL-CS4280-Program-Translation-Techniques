@@ -13,11 +13,11 @@ std::string tokens[] = {"BEGIN_TK","END_TK","LOOP_TK","WHILE_TK", "VOID_TK", "EX
 
 void testScanner(std::ifstream& file) {
 
-    unsigned int line_number = 1;
+    unsigned int lineNum = 1;
     do
     {
         // Scan in tokens from file
-        Token current_token = scan(file, line_number);
+        Token current_token = scan(file, lineNum);
         if (current_token.token_ID == ERROR_TK) {
             exit(EXIT_FAILURE);
         }
