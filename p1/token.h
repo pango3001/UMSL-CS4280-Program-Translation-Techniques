@@ -27,7 +27,6 @@ enum token_id
     ASSIGN_TK,
     DATA_TK,
     PROC_TK,
-    /* Operator and Delimiter Tokens */
     EQUALS_TK,
     EQUALS_OR_LESS_THAN_TK,
     EQUALS_OR_GREATER_THAN_TK,

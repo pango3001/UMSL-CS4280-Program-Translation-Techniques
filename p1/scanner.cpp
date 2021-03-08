@@ -12,7 +12,7 @@
 #include <iostream>
 
 int fsa_table[23][23] = {
-    /*   ws   lc    d    =    <    >    :    +    -    *    /    %    .    (    )    ,    {    }    ;    [    ]  eof   uc */
+    /*   ws   lc    UC   d    =    <    >    :    +    -    *    /    %    .    (    )    ,    {    }    ;    [    ]  eof     */
     {     0,   1,   2,   3,   4,   5,   6,   7,   8,   9,  10,  11,  12,  13,  14,  15,  16, 17,  18,   19,  20,  -1,  -2},
     {   100,   1,   1, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100,   1}, /*ID_TK*/
     {   101, 101,   2, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101}, /*INT_TK*/
@@ -91,25 +91,25 @@ std::map<std::string, token_id> keywords = {
  * maps allowed operators and delimeters to their corresponding column index */
 std::map<char, int> allowed_symbols = {
     /* Operators */
-    {'=', 2},
-    {'<', 3},
-    {'>', 4},
-    {':', 5},
-    {'+', 6},
-    {'-', 7},
-    {'*', 8},
-    {'/', 9},
-    {'%', 10},
-    {'.', 11},
+    {'=', 4},
+    {'<', 5},
+    {'>', 6},
+    {':', 7},
+    {'+', 8},
+    {'-', 9},
+    {'*', 10},
+    {'/', 11},
+    {'%', 12},
+    {'.', 13},
     /* Delimiters */
-    {'(', 12},
-    {')', 13},
-    {',', 14},
-    {'{', 15},
-    {'}', 16},
-    {';', 17},
-    {'[', 18},
-    {']', 19}
+    {'(', 14},
+    {')', 15},
+    {',', 16},
+    {'{', 17},
+    {'}', 18},
+    {';', 19},
+    {'[', 20},
+    {']', 21}
 };
 
 /* Scanner Function */
@@ -209,23 +209,22 @@ Token scan(std::ifstream& in_file, unsigned int& line_number){
 int get_fsa_column(char current_char)
 {
     //std::cout << "Test Point 3" << current_char << std::endl;
-    if (isalpha(current_char))
-    {
+    if (isalpha(current_char)){
         if (isupper(current_char))
-            return 22;
+            return 2;
         return 1;
     }
-    /* If digit, return column number 2 */
+
     else if (isdigit(current_char))
-        return 2;
-    /* If ws, return column number 0 */
+        return 3;
+
     else if (isspace(current_char))
         return 0;
-    /* If EOF, return column column number 21 */
+
     else if (current_char == EOF)
-        return 21;
-    /* Else, check if it is an allowed symbol */
-    else
+        return 22;
+
+    else  // valid symbol
     {
         if (allowed_symbols.find(current_char) != allowed_symbols.end())
             return allowed_symbols[current_char];
