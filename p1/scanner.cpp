@@ -159,7 +159,7 @@ Token scan(std::ifstream& in_file, unsigned int& line_number){
         next_state = fsa_table[current_state][fsa_column];
         //std::cout << "Test Point 2" << current_char << std::endl;
 
-        if (next_state >= 100 || next_state == -1 || next_state == 4 || next_state == 7)
+        if (next_state >= 100 || next_state == -1 || next_state == -2)
         {
 
             if (next_state == -1) {
