@@ -1,0 +1,47 @@
+#1 Describe how you would create a DFA to recognize all binary strings that start and end with the exact opposite two characters. For example, a string that starts with 01 and ends with 10 or a string that starts with 01 and ends with 10 and has exactly 5 total characters. If this is not possible, please describe why this is not possible.
+As we are doing this online, please list out your states and the transitions between the states
+
+q0 is the start state, it then splits off into 2 different states, q1 for 1 and q2 if it was 0. Then from q1 it splits again, if 1 then it goes q3, if then it goes to q4. that may go back to itself if a 1 is found again. from q3 if a 0 then it goes to q5, it may go back to q3 if a 1. if another 0 after q5 then it goes to q6 which is an end state but has the possibility to go back to q3 if more 1 or 0. So for q4 if 0 it would go to q6 may go back to itself if 1 but go to q7 if 0. q7 goes to q8 which is an end state but if 1 or 0 is still there then go back to q6. this is only half the DFA. this only accounts for 11(0|1)*00 and 10(0|1)*01 From q2 it just does the same except switch 1<-->0 and it will account for 00(0|1)*11 and 01(0|1)*10
+
+
+#2 Describe how you would create a DFA to recognize strings that start and end with the same 3 characters but an unlimited number of characters between them. If this is not possible, please describe why this is not possible.
+As we are doing this online, if it is possible please least out the states and the transitions between the states.
+q0 is start state then it goes to q1 then q2 then q3 which all have to be the same character then it goes to q4 -> q5 ->q6 where it does the same thing by accepting only the same char (as the first states) for all those states BUT if a different char is found and at q4, q5, or q6 it will go back to q3 which allows any random chars to be in the middle of a string that starts and ends with the same 3 chars
+
+#3 Considering Chomsky's hierarchy of languages, what level of languages are:
+a) HLL's
+type 1
+b) What scanners recognize
+type 3
+c) What parsers recognize
+type 2
+#4 The level of language recognized by the scanner, the parser and HLL's do not always match. Describe the mismatch and describe briefly how this is dealt with.
+
+During the stages of compilation the source(HLL)(context sensitive linear-bounded automata), the scanner(regular finite automata), and the parser (context free push-down automata), lexical analysis of the scanner will convert the levels of the language so the HLL can be understood by the parser. The parser will convert the chars of the HLL into tokens for the parser to understand. Also sometimes the preproccesser takes care of some things(like comments) before the scanner does its job. This all prevents mismatches during the beginning stages. If a mismatch that happens cannot be converted then an error is thrown by the compiler.
+
+#5 Nondeterministic FSAs are more powerful than deterministic FSA's.
+FALSE
+
+#6 You can always express a FSA as a CFG.
+TRUE
+
+#7 Consider the following BNF:
+S -> SS+ | SS* | a
+Given the string:
+aa+a*
+Show a rightmost derivation of this string, with all steps shown.
+
+
+S -> SS* -> Sa* -> SS+a* -> Sa+a* -> aa+a*
+
+#8
+ E -> T+E|T-E|T
+ T -> T*G|T/G|G
+ G -> -D|D
+ D -> (E)|id
+ 
+
+
+#9
+bootstrapping
+
