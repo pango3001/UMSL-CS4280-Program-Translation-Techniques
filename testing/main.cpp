@@ -9,38 +9,12 @@
 #include <fstream>
 #include <ctime>
 #include <iomanip>
-
-/*
-class Omap {
-public:
-    
-    std::string name;
-    int pos[6][6];
-
-    Omap(std::string name, int ozone_level) {
-        this->name = name;
-        this->pos = setLevel(ozone_level);
-
-    }
-
-private:
-    int** setLevels(int Olevel) {
-
-        
-    }
+#include <time.h>
 
 
-
-};
-*/
 int main(int argc, char** argv) {
-
+    srand(time(0));
     std::cout << "Starting OzoneMap" << std::endl;
-
-    // make 2d array
-
-    
-    
     
     int pos[6][6];
 
@@ -50,7 +24,7 @@ int main(int argc, char** argv) {
     std::cout << "Making OzoneMap" << std::endl;
     for (i = 0; i < 6; i++) {
         for (j = 0; j < 6; j++) {
-            pos[i][j] = k;
+            pos[i][j] = rand();
             k++;
         }
     }
