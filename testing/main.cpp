@@ -9,7 +9,6 @@
 #include <fstream>
 #include <ctime>
 
-srand((unsigned)time(NULL));
 /*
 class Omap {
 public:
