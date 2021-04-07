@@ -56,7 +56,7 @@ int main(int argc, char** argv) {
     std::cout << "printing OzoneMap" << std::endl;
     for (i = 0; i < 6; i++) {
         for (j = 0; j < 6; j++) {
-            std::cout << pos[i][j] << " ";
+            std::cout << std::setw(3) << pos[i][j] << " ";
             k++;
         }
         std::cout << "\n";
