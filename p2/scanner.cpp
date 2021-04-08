@@ -1,3 +1,9 @@
+// Name:    Jesse McCarville-Schueths
+// Course:  4280
+// Date:    Mar 7, 2021
+// Project: P1
+// File:    scanner.cpp
+
 #include "scanner.h"
 #include "token.h"
 #include <string>
@@ -5,260 +11,230 @@
 #include <fstream>
 #include <iostream>
 
-int fsa_table[21][23] = {
-    /*   ws   lc    d    =    <    >    :    +    -    *    /    %    .    (    )    ,    {    }    ;    [    ]  eof   uc */
-    {     0,   1,   2,   3,   4,   5,   6,   7,   8,   9,  10,  11,  12,  13,  14,  15,  16, 17,  18,   19,  20,  -1,  -2},
-    {   100,   1,   1, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100,   1}, /*ID_TK*/
-    {   101, 101,   2, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101}, /*INT_TK*/
-    {   102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102}, /*EQUALS_TK*/
-    {   103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103}, /*LESS_THAN_TK*/
-    {   104, 104, 104, 104, 104, 104, 104, 104, 104, 104, 104, 104, 104, 104, 104, 104, 104, 104, 104, 104, 104, 104, 104}, /*GREATER_THAN_TK*/
-    {   105, 105, 105, 105, 105, 105, 105, 105, 105, 105, 105, 105, 105, 105, 105, 105, 105, 105, 105, 105, 105, 105, 105}, /*COLON_TK*/
-    {   106, 106, 106, 106, 106, 106, 106, 106, 106, 106, 106, 106, 106, 106, 106, 106, 106, 106, 106, 106, 106, 106, 106}, /*PLUS_TK*/
-    {   107, 107, 107, 107, 107, 107, 107, 107, 107, 107, 107, 107, 107, 107, 107, 107, 107, 107, 107, 107, 107, 107, 107}, /*MINUS_TK*/
-    {   108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108}, /*ASTERISK_TK*/
-    {   109, 109, 109, 109, 109, 109, 109, 109, 109, 109, 109, 109, 109, 109, 109, 109, 109, 109, 109, 109, 109, 109, 109}, /*SLASH_TK*/
-    {   110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110}, /*PERCENT_TK*/
-    {   111, 111, 111, 111, 111, 111, 111, 111, 111, 111, 111, 111, 111, 111, 111, 111, 111, 111, 111, 111, 111, 111, 111}, /*PERIOD_TK*/
-    {   112, 112, 112, 112, 112, 112, 112, 112, 112, 112, 112, 112, 112, 112, 112, 112, 112, 112, 112, 112, 112, 112, 112}, /*LEFT_PAREN_TK*/
-    {   113, 113, 113, 113, 113, 113, 113, 113, 113, 113, 113, 113, 113, 113, 113, 113, 113, 113, 113, 113, 113, 113, 113}, /*RIGHT_PAREN_TK*/
-    {   114, 114, 114, 114, 114, 114, 114, 114, 114, 114, 114, 114, 114, 114, 114, 114, 114, 114, 114, 114, 114, 114, 114}, /*COMMA_TK*/
-    {   115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115}, /*LEFT_BRACE_TK*/
-    {   116, 116, 116, 116, 116, 116, 116, 116, 116, 116, 116, 116, 116, 116, 116, 116, 116, 116, 116, 116, 116, 116, 116}, /*RIGHT_BRACE_TK*/
-    {   117, 117, 117, 117, 117, 117, 117, 117, 117, 117, 117, 117, 117, 117, 117, 117, 117, 117, 117, 117, 117, 117, 117}, /*SEMI_COLON_TK*/
-    {   118, 118, 118, 118, 118, 118, 118, 118, 118, 118, 118, 118, 118, 118, 118, 118, 118, 118, 118, 118, 118, 118, 118}, /*LEFT_BRACKET_TK*/
-    {   119, 119, 119, 119, 119, 119, 119, 119, 119, 119, 119, 119, 119, 119, 119, 119, 119, 119, 119, 119, 119, 119, 119}, /*RIGHT_BRACKET_TK*/
+int fsa_table[23][23] = {   // [row] [col]   ws = whitespace, lc = lowercase, UC = UpperCase, dig = digit, eof = end of file
+ //   ws   lc   UC  dig    =    <    >    :    +    -    *    /    %    .    (    )    ,    {    }    ;    [    ]  eof  
+    {  0,   1,  23,   2,   3,  23,  23,   7,   9,  10,  11,  12,  13,  14,  15,  16,  17,  18,  19,  20,  21,  22,  -1}, // 0
+    {100,   1,   1, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100}, // 1 id
+    {101, 101, 101,   2, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101}, // 2 int
+    {102, 102, 102, 102,   6,   5,   4, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102}, // 3 =
+    {103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103}, // 4 =>
+    {104, 104, 104, 104, 104, 104, 104, 104, 104, 104, 104, 104, 104, 104, 104, 104, 104, 104, 104, 104, 104, 104, 104}, // 5 =<
+    {105, 105, 105, 105, 105, 105, 105, 105, 105, 105, 105, 105, 105, 105, 105, 105, 105, 105, 105, 105, 105, 105, 105}, // 6 ==
+    {106, 106, 106, 106,   8, 106, 106, 106, 106, 106, 106, 106, 106, 106, 106, 106, 106, 106, 106, 106, 106, 106, 106}, // 7 :
+    {107, 107, 107, 107, 107, 107, 107, 107, 107, 107, 107, 107, 107, 107, 107, 107, 107, 107, 107, 107, 107, 107, 107}, // 8 :=
+    {108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108}, // 9 +
+    {109, 109, 109, 109, 109, 109, 109, 109, 109, 109, 109, 109, 109, 109, 109, 109, 109, 109, 109, 109, 109, 109, 109}, // 10 -
+    {110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110}, // 11 *
+    {111, 111, 111, 111, 111, 111, 111, 111, 111, 111, 111, 111, 111, 111, 111, 111, 111, 111, 111, 111, 111, 111, 111}, // 12 /
+    {112, 112, 112, 112, 112, 112, 112, 112, 112, 112, 112, 112, 112, 112, 112, 112, 112, 112, 112, 112, 112, 112, 112}, // 13 %
+    {113, 113, 113, 113, 113, 113, 113, 113, 113, 113, 113, 113, 113, 113, 113, 113, 113, 113, 113, 113, 113, 113, 113}, // 14 .
+    {114, 114, 114, 114, 114, 114, 114, 114, 114, 114, 114, 114, 114, 114, 114, 114, 114, 114, 114, 114, 114, 114, 114}, // 15 (
+    {115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115}, // 16 )
+    {116, 116, 116, 116, 116, 116, 116, 116, 116, 116, 116, 116, 116, 116, 116, 116, 116, 116, 116, 116, 116, 116, 116}, // 17 ,
+    {117, 117, 117, 117, 117, 117, 117, 117, 117, 117, 117, 117, 117, 117, 117, 117, 117, 117, 117, 117, 117, 117, 117}, // 18 {
+    {118, 118, 118, 118, 118, 118, 118, 118, 118, 118, 118, 118, 118, 118, 118, 118, 118, 118, 118, 118, 118, 118, 118}, // 19 }
+    {119, 119, 119, 119, 119, 119, 119, 119, 119, 119, 119, 119, 119, 119, 119, 119, 119, 119, 119, 119, 119, 119, 119}, // 20 ;
+    {120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120}, // 21 [
+    {121, 121, 121, 121, 121, 121, 121, 121, 121, 121, 121, 121, 121, 121, 121, 121, 121, 121, 121, 121, 121, 121, 121}  // 22 ]
 };
 
-/* Final State Map 
- * maps tokens to corresponding final state number */
-std::map<int, token_id> final_states = {
-    /* Operators */
-    {102, EQUALS_TK},
-    {103, LESS_THAN_TK},
-    {104, GREATER_THAN_TK},
-    {105, COLON_TK},
-    {106, PLUS_TK},
-    {107, MINUS_TK},
-    {108, ASTERISK_TK},
-    {109, SLASH_TK},
-    {110, PERCENT_TK},
-    {111, PERIOD_TK},
+// Map for Keywords
+std::map<std::string, tokens> keywords = {
+    {"begin", BEGIN_TK},
+    {"end", END_TK},
+    {"loop", LOOP_TK},
+    {"while", WHILE_TK},
+    {"void", VOID_TK},
+    {"exit", EXIT_TK},
+    {"getter", GETTER_TK},
+    {"outter", OUTTER_TK},
+    {"main", MAIN_TK},
+    {"if", IF_TK},
+    {"then", THEN_TK},
+    {"assign", ASSIGN_TK},
+    {"data", DATA_TK},
+    {"proc", PROC_TK}
+};
 
-    /* Delimiters */
-    {112, LEFT_PAREN_TK},
-    {113, RIGHT_PAREN_TK},
-    {114, COMMA_TK},
-    {115, LEFT_BRACE_TK},
-    {116, RIGHT_BRACE_TK},
-    {117, SEMI_COLON_TK},
-    {118, LEFT_BRACKET_TK},
-    {119, RIGHT_BRACKET_TK},
+// Map for symbols
+std::map<char, int> symbols = {
+    {'=', 4},
+    {'<', 5},
+    {'>', 6},
+    {':', 7},
+    {'+', 8},
+    {'-', 9},
+    {'*', 10},
+    {'/', 11},
+    {'%', 12},
+    {'.', 13},
+    {'(', 14},
+    {')', 15},
+    {',', 16},
+    {'{', 17},
+    {'}', 18},
+    {';', 19},
+    {'[', 20},
+    {']', 21}
+};
 
-    /* Identfiers and Integers */
+// Map for Operators and Delimiters
+std::map<int, tokens> endState = {
     {100, ID_TK},
     {101, INT_TK},
-
-    /* EOF */
-    {-1, EOF_TK}};
-
-/* Keyword Map 
- * maps keyword tokens to their corresponding strings */
-std::map<std::string, token_id> keywords = {
-    {"begin", BEGIN_TK},
-    {"end", END_TK}, 
-    {"iter", ITER_TK}, 
-    {"void", VOID_TK}, 
-    {"var", VAR_TK}, 
-    {"return", RETURN_TK}, 
-    {"read", READ_TK}, 
-    {"print", PRINT_TK}, 
-    {"program", PROGRAM_TK}, 
-    {"cond", COND_TK}, 
-    {"then", THEN_TK}, 
-    {"let", LET_TK}
+    {-1, EOF_TK},
+    {102, EQUALS_TK},
+    {103, EQUALS_OR_GREAT_THAN_TK},
+    {104, EQUALS_OR_LESS_THAN_TK},
+    {105, EQUALS_EQUALS_TK},
+    {106, COLON_TK},
+    {107, COLON_EQUALS_TK},
+    {108, PLUS_TK},
+    {109, MINUS_TK},
+    {110, ASTERISK_TK},
+    {111, SLASH_TK},
+    {112, PERCENT_TK},
+    {113, PERIOD_TK},
+    {114, LEFT_PAREN_TK},
+    {115, RIGHT_PAREN_TK},
+    {116, COMMA_TK},
+    {117, LEFT_BRACE_TK},
+    {118, RIGHT_BRACE_TK},
+    {119, SEMI_COLON_TK},
+    {120, LEFT_BRACKET_TK},
+    {121, RIGHT_BRACKET_TK}
 };
 
-/* Character Map 
- * maps allowed operators and delimeters to their corresponding column number */
-std::map<char, int> allowed_symbols = {
-    /* Operators */
-    {'=', 3},
-    {'<', 4},
-    {'>', 5},
-    {':', 6},
-    {'+', 7},
-    {'-', 8},
-    {'*', 9},
-    {'/', 10},
-    {'%', 11},
-    {'.', 12},
-    /* Delimiters */
-    {'(', 13},
-    {')', 14},
-    {',', 15},
-    {'{', 16},
-    {'}', 17},
-    {';', 18},
-    {'[', 19},
-    {']', 20}
-};
 
-/* Scanner Function */
-Token scan(std::ifstream &in_file, unsigned int &line_number)
-{
-    /* Init current state and next state to start state S0 */
-    int current_state = 0;
-    int next_state = 0;
-    /* Variable to hold the current character being examined */
-    char current_char = ' ';
-    /* Variable to hold the possible string of characters */
-    std::string current_word = "";
 
-    /* Loops until a final state is reached 
-     * gets the next character on each loop */
-    while (current_state < 100 && current_state > -1)
-    {
-        /* Getting the next available character */
-        in_file.get(current_char);
-
-        /* Skipping comments */
-        if (current_char == '#')
-        {
-            /* Keep getting characters until another '#' is reached */
-            do
-            {
-                in_file.get(current_char);
-            } while (current_char != '#');
-            /* current_char will = '#' so grab next character */
-            in_file.get(current_char);
-        }
-        /* Character determines FSA table column */
-        int fsa_column = get_fsa_column(current_char);
-
-        /* If at the end of the file, return EOF token */
-        if (in_file.eof())
-        {
-            fsa_column = 21;
-        }
-        /* If fsa_column = -2 then the char was invalid 
-         * return an error Token and display the invalid char to the console */
-        if (fsa_column == -2)
-        {
-            /* Displaying the error message and invalid char */
-            std::cout << "Scanner Error: Invalid character \'" << current_char << "\'";
-            std::cout << " at line: " << line_number << std::endl; 
-            /* Returning the error Token */
-            return Token(ERROR_TK, "Invalid char", line_number);
-        }
-
-        /* Setting the next state */
-        next_state = fsa_table[current_state][fsa_column];
+// scanner for token
+Token scanner(std::ifstream& in_file, unsigned int& lineNum){
+    int state = 0;           // initialize state       
+    int lookAhead = 0;       // initialize lookahead
+    char currentChar = ' ';  // empty char for reading char    
+    std::string word = "";   // placeholder for building string
+    
+    while (state < 100){           // loop until end state is hit
+        in_file.get(currentChar);
         
-        /* If next_state is a final state then return the respective Token */
-        if (next_state >= 100 || next_state == -1 || next_state == -2)
+        // Skips comments 
+        if (currentChar == '$'){
+            in_file.get(currentChar);
+            if (currentChar == '$') {              // Find $$
+                in_file.get(currentChar);
+                while (1) {                        // loop until break
+                    in_file.get(currentChar);
+                    if (in_file.eof()) {
+                        std::cout << "SCANNER ERROR: Comment not closed, EOF reached at line: " << lineNum << std::endl;   // in case comment is never closed
+                        return Token(ERROR_TK, "No end to comment", lineNum);
+                    }
+                    if (currentChar == '$') {
+                        in_file.get(currentChar);  
+                        if (currentChar == '$') {
+                            in_file.get(currentChar);  // Find $$
+                            break;
+                        }
+                    }
+                }
+            }        
+        }
+        
+        int colFSA = setFSAcol(currentChar);   // find the colomn of char
+        
+        if (in_file.eof()){   //EOF
+            colFSA = 22;
+        }
+
+        if (colFSA == 23)   // error
         {
-            /* EOF state */
-            if (next_state == -1)
-            {
-                return Token(EOF_TK, "EOF", 0);
-            }
 
-            if (next_state == -2)
-            {
-                /* Displaying the error message and invalid char */
-                std::cout << "Scanner Error: Invalid character \"" << current_char << "\"";
-                std::cout << " at line: " << line_number << std::endl; 
-                /* Returning the error Token */
-                return Token(ERROR_TK, "Invalid ID", line_number);
-            }
+            std::cout << "SCANNER ERROR: Invalid character \'" << currentChar << "\'";
+            std::cout << " at line: " << lineNum << std::endl;
 
-            /* Other final states */
+            return Token(ERROR_TK, "Invalid char", lineNum);
+        }
+
+        lookAhead = fsa_table[state][colFSA];
+
+        if (lookAhead == 23) {                  // error
+            std::cout << "SCANNER ERROR 2: Invalid char \"" << currentChar << "\"";
+            std::cout << " at line: " << lineNum << std::endl;
+            return Token(ERROR_TK, "Invalid ID", lineNum);
+        }
+
+        else if (lookAhead == -1) {
+            return Token(EOF_TK, "EOF", lineNum);
+        }
+        
+        else if (lookAhead >= 100)
+        {
             in_file.unget();
-            return get_token(next_state, current_word, line_number);
+            return setToken(lookAhead, word, lineNum);
         }
         else
         {
-            /* If the current char is not a whitespace append to the current word */
-            if(!isspace(current_char))
+
+            if (!isspace(currentChar))
             {
-                current_word += current_char;
-            }
-            
-            if (current_word.length() > 8)
-            {
-                /* Displaying the error message and invalid char */
-                std::cout << "Scanner Error: Invalid length of \"" << current_word << "\"";
-                std::cout << " at line: " << line_number << std::endl; 
-                /* Returning the error Token */
-                return Token(ERROR_TK, "Invalid Length", line_number);
-            }
-            if(current_char == '\n')
-            {
-                line_number++;
+                word += currentChar;
             }
 
-            /* Go to next state */
-            current_state = next_state;
+            if (word.length() >= 9)                 // largest indiifier can be 8 chars long
+            {
+                std::cout << "SCANNER ERROR 3: \"" << word << "\" is longer than 8 chars";
+                std::cout << " at line: " << lineNum << std::endl;
+                return Token(ERROR_TK, "Invalid Length", lineNum);
+            }
+            if (currentChar == '\n')
+            {
+                lineNum++;
+            }
+ 
+            state = lookAhead;
         }
     }
-    /* If we have not returned a Token yet then the scanner failed */
-    return Token(ERROR_TK, "Scanner Faliure", line_number);
+
+    return Token(ERROR_TK, "Scanner Failed", lineNum);
 
 }
 
-/* FSA Column Getter */
-int get_fsa_column(char current_char)
-{
-    /* If letter, return column number 1 */
-    if (isalpha(current_char))
-    {
-        if(isupper(current_char))
-            return 22;
-        return 1;
+// finds the colomn of the char
+int setFSAcol(char currentChar){
+    
+    if (currentChar == EOF)
+        return 22;
+
+    if (isspace(currentChar))
+        return 0;       // ws
+    
+    if (isalpha(currentChar) || currentChar == '_'){
+        if (isupper(currentChar))
+            return 2;   // UC
+        return 1;       // lc
     }
-    /* If digit, return column number 2 */
-    else if (isdigit(current_char))
-        return 2;
-    /* If ws, return column number 0 */
-    else if (isspace(current_char))
-        return 0;
-    /* If EOF, return column column number 21 */
-    else if (current_char == EOF)
-        return 21;
-    /* Else, check if it is an allowed symbol */
-    else
+
+    if (isdigit(currentChar))
+        return 3;       // dig
+
+
+    else  // valid symbol
     {
-        /* If it is an allowed symbol, return respective column number 
-         * allowed_symbols.find(current_char) returns allowed_symbols.end() 
-         * if current_char cannot be found in allowed_symbols map */
-        if (allowed_symbols.find(current_char) != allowed_symbols.end())
-            return allowed_symbols[current_char];
+        if (symbols.find(currentChar) != symbols.end())
+            return symbols[currentChar];
     }
-    /* Character is not an allowed character so return -2 to signify error */
-    return -2;
+
+    return 23;  // Leads to error state
 }
 
-/* Token Getter */
-Token get_token(int state, std::string word, unsigned int line_number)
-{
-    /* Creating a default token to be returned */
-    Token return_token = Token();
-
-    /* Setting Token */
-    if (final_states.find(state) != final_states.end())
-    {
-        return_token.token_identifier = final_states[state];
-        return_token.token_string = word;
-        return_token.line_number = line_number;
+// sets the type of token
+Token setToken(int state, std::string word, unsigned int lineNum){
+    // keywords
+    if (keywords.find(word) != keywords.end()) {
+         return Token(keywords[word], word, lineNum);
     }
-    /* If it is a keyword then modify return token to be the respective keyword token */
-    if (keywords.find(word) != keywords.end())
-    {
-        return_token.token_identifier = keywords[word];
+    // symbols
+    else {
+        return Token(endState[state], word, lineNum);
     }
-
-    /* If the return token is not modified for some reason a default error token is still returned*/
-    return return_token;
 }
 
