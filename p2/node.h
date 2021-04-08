@@ -1,42 +1,43 @@
-// Name:    Jesse McCarville-Schueths
-// Course:  4280
-// Date:    Mar 24, 2021
-// Project: P2
-// File:    node.h
-
 #ifndef NODE_H
 #define NODE_H
 
 #include "token.h"
-#include <string>
 
-class Node {
+struct Node
+{
+    std::string name;
+    int depth;
 
-public:
-	Node();
-	Node(std::string name, unsigned int depth);
-	unsigned int getDepth() { return depth; }
-	std::string getName() { return name; }
+    Token token_1;
+    Token token_2;
 
-	Node child[4];
-	Node* childptr = child;
+    Node* child_1; 
+    Node* child_2;
+    Node* child_3;
+    Node* child_4;
 
-
-private:
-	unsigned int depth;
-	std::string name;
-
-
+    Node()
+    {
+        this->name = "";
+        this->depth = 0;
+        this->token_1 = Token();
+        this->token_2 = Token();
+        this->child_1 = nullptr;
+        this->child_2 = nullptr;
+        this->child_3 = nullptr;
+        this->child_4 = nullptr;
+    }
+    Node(std::string name, int depth)
+    {
+        this->name = name;
+        this->depth = depth;
+        this->token_1 = Token();
+        this->token_2 = Token();
+        this->child_1 = nullptr;
+        this->child_2 = nullptr;
+        this->child_3 = nullptr;
+        this->child_4 = nullptr;
+    }
 };
-
-Node::Node() {
-
-}
-
-Node::Node(std::string name, unsigned int depth) {
-	this->name = name;
-	this->depth = depth;
-}
-
 
 #endif
