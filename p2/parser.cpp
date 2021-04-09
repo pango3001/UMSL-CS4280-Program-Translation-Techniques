@@ -470,37 +470,37 @@ Node* ro(int depth)
     else
         error(EQUALS_OR_LESS_THAN_TK, EQUALS_OR_GREAT_THAN_TK, EQUALS_TK, tk);
 }
-
-/* error function for single expected token */
-void error(tokens expected, Token recieved)
-{
-    std::cout << "Parsing Error" << std::endl;
-    std::cout << "Expected token: " << tokens[expected] << std::endl;
-    std::cout << "Recieved token: " << tokens[recieved.token_ID];
-    std::cout << " At line: " << recieved.lineNum << std::endl;
-    exit(EXIT_FAILURE);
-}
-
-/* error function for two expeected tokens */
-void error(tokens expected1, tokens expected2, Token recieved)
-{
-    std::cout << "Parsing Error" << std::endl;
-    std::cout << "Expected tokens: " << tokens[expected1] << " or " << tokens[expected2] << std::endl;
-    std::cout << "Recieved token: " << tokens[recieved.token_ID];
-    std::cout << " At line: " << recieved.lineNum << std::endl;
-    exit(EXIT_FAILURE);
-}
-
-/* error function for three expected tokens */
-void error(tokens expected1, tokens expected2, tokens expected3, Token recieved)
-{
-    std::cout << "Parsing Error" << std::endl;
-    std::cout << "Expected tokens: " << tokens[expected1] << ", " << tokens[expected2];
-    std::cout << ", or " << tokens[expected3] << std::endl;
-    std::cout << "Recieved token: " << tokens[recieved.token_ID];
-    std::cout << " At line: " << recieved.lineNum << std::endl;
-    exit(EXIT_FAILURE);
-}
+//
+///* error function for single expected token */
+//void error(tokens expected, Token recieved)
+//{
+//    std::cout << "Parsing Error" << std::endl;
+//    std::cout << "Expected token: " << tokens[expected] << std::endl;
+//    std::cout << "Recieved token: " << tokens[recieved.token_ID];
+//    std::cout << " At line: " << recieved.lineNum << std::endl;
+//    exit(EXIT_FAILURE);
+//}
+//
+///* error function for two expeected tokens */
+//void error(tokens expected1, tokens expected2, Token recieved)
+//{
+//    std::cout << "Parsing Error" << std::endl;
+//    std::cout << "Expected tokens: " << tokens[expected1] << " or " << tokens[expected2] << std::endl;
+//    std::cout << "Recieved token: " << tokens[recieved.token_ID];
+//    std::cout << " At line: " << recieved.lineNum << std::endl;
+//    exit(EXIT_FAILURE);
+//}
+//
+///* error function for three expected tokens */
+//void error(tokens expected1, tokens expected2, tokens expected3, Token recieved)
+//{
+//    std::cout << "Parsing Error" << std::endl;
+//    std::cout << "Expected tokens: " << tokens[expected1] << ", " << tokens[expected2];
+//    std::cout << ", or " << tokens[expected3] << std::endl;
+//    std::cout << "Recieved token: " << tokens[recieved.token_ID];
+//    std::cout << " At line: " << recieved.lineNum << std::endl;
+//    exit(EXIT_FAILURE);
+//}
 /* error function for expected statement token */
 void error_stat(Token recieved)
 {
