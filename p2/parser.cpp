@@ -66,7 +66,7 @@ Node* vars(int depth)
     Node* node = new Node("<vars>", depth);
     /* predict: let Identifier = Integer <vars> */ 
     /* check the token and then scan for next token until end of grammar */
-    if (tk.token_ID == LET_TK)
+    if (tk.token_ID == DATA_TK)
     {
         tk = scanner(in_file, lineNum);
         if (tk.token_ID == ID_TK)
@@ -74,7 +74,7 @@ Node* vars(int depth)
             /* store identifier token*/
             node->token_1 = tk;
             tk = scanner(in_file, lineNum);
-            if (tk.token_ID == EQUALS_TK)
+            if (tk.token_ID == COLON_EQUALS_TK)
             {
                 tk = scanner(in_file, lineNum);
                 if (tk.token_ID == INT_TK)
@@ -90,7 +90,7 @@ Node* vars(int depth)
                     error(INT_TK, tk);
             }
             else
-                error(EQUALS_TK, tk);
+                error(COLON_EQUALS_TK, tk);
         }
         else
             error(ID_TK, tk);

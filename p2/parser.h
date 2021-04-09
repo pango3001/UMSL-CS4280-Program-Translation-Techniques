@@ -11,6 +11,7 @@ Node* program();
 Node* block(int depth);
 Node* vars(int depth);
 Node* expr(int depth);
+Node* n(int depth);
 Node* a(int depth);
 Node* m(int depth);
 Node* r(int depth);
