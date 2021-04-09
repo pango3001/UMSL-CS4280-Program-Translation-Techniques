@@ -275,22 +275,22 @@ Node* stat(int depth)
         node->child_1 = out(depth);
         return node;
     }
-    else if(tk.token_identifier == BEGIN_TK)
+    else if(tk.token_ID == BEGIN_TK)
     {
         node->child_1 = block(depth);
         return node;
     }
-    else if(tk.token_identifier == COND_TK)
+    else if(tk.token_ID == COND_TK)
     {
         node->child_1 = cond(depth);
         return node;
     }
-    else if(tk.token_identifier == ITER_TK)
+    else if(tk.token_ID == ITER_TK)
     {
         node->child_1 = loop(depth);
         return node;
     }
-    else if(tk.token_identifier == ID_TK)
+    else if(tk.token_ID == ID_TK)
     {
         node->child_1 = assign(depth);
         return node;
@@ -304,20 +304,20 @@ Node* in(int depth)
 {
     depth++;
     Node* node = new Node("<in>", depth);
-    if(tk.token_identifier == READ_TK)
+    if(tk.token_ID == READ_TK)
     {
         tk = scan(in_file, lineNum);
-        if(tk.token_identifier == LEFT_PAREN_TK)
+        if(tk.token_ID == LEFT_PAREN_TK)
         {
             tk = scan(in_file, lineNum);
-            if(tk.token_identifier == ID_TK)
+            if(tk.token_ID == ID_TK)
             {
                 node->token_1 = tk;
                 tk = scan(in_file, lineNum);
-                if(tk.token_identifier == RIGHT_PAREN_TK)
+                if(tk.token_ID == RIGHT_PAREN_TK)
                 {
                     tk = scan(in_file, lineNum);
-                    if(tk.token_identifier == COLON_TK)
+                    if(tk.token_ID == COLON_TK)
                     {
                         tk = scan(in_file, lineNum);
                         return node;
@@ -343,17 +343,17 @@ Node* out(int depth)
 {
     depth++;
     Node* node = new Node("<out>", depth);
-    if (tk.token_identifier == PRINT_TK)
+    if (tk.token_ID == PRINT_TK)
     {
         tk = scan(in_file, lineNum);
-        if (tk.token_identifier == LEFT_PAREN_TK)
+        if (tk.token_ID == LEFT_PAREN_TK)
         {
             tk = scan(in_file, lineNum);
             node->child_1 = expr(depth);
-            if (tk.token_identifier == RIGHT_PAREN_TK)
+            if (tk.token_ID == RIGHT_PAREN_TK)
             {
                 tk = scan(in_file, lineNum);
-                if (tk.token_identifier == COLON_TK)
+                if (tk.token_ID == COLON_TK)
                 {
                     tk = scan(in_file, lineNum);
                     return node;
@@ -376,16 +376,16 @@ Node* cond(int depth)
 {
     depth++;
     Node* node = new Node("<cond>", depth);
-    if(tk.token_identifier == COND_TK)
+    if(tk.token_ID == COND_TK)
     {
         tk = scan(in_file, lineNum);
-        if(tk.token_identifier == LEFT_PAREN_TK)
+        if(tk.token_ID == LEFT_PAREN_TK)
         {
             tk = scan(in_file, lineNum);
             node->child_1 = expr(depth);
             node->child_2 = ro(depth);
             node->child_3 = expr(depth);
-            if(tk.token_identifier == RIGHT_PAREN_TK)
+            if(tk.token_ID == RIGHT_PAREN_TK)
             {
                 tk = scan(in_file, lineNum);
                 node->child_4 = stat(depth);
@@ -409,13 +409,13 @@ Node* loop(int depth)
     if(tk.token_identifier == ITER_TK)
     {
         tk = scan(in_file, lineNum);
-        if(tk.token_identifier == LEFT_PAREN_TK)
+        if(tk.token_ID == LEFT_PAREN_TK)
         {
             tk = scan(in_file, lineNum);
             node->child_1 = expr(depth);
             node->child_2 = ro(depth);
             node->child_3 = expr(depth);
-            if(tk.token_identifier == RIGHT_PAREN_TK)
+            if(tk.token_ID == RIGHT_PAREN_TK)
             {
                 tk = scan(in_file, lineNum);
                 node->child_4 = stat(depth);
@@ -436,15 +436,15 @@ Node* assign(int depth)
 {
     depth++;
     Node* node = new Node("<assign>", depth);
-    if(tk.token_identifier == ID_TK)
+    if(tk.token_ID == ID_TK)
     {
         node->token_1 = tk;
         tk = scan(in_file, lineNum);
-        if(tk.token_identifier == EQUALS_TK)
+        if(tk.token_ID == EQUALS_TK)
         {
             tk = scan(in_file, lineNum);
             node->child_1 = expr(depth);
-            if(tk.token_identifier == COLON_TK)
+            if(tk.token_ID == COLON_TK)
             {
                 tk = scan(in_file, lineNum);
                 return node;
@@ -464,11 +464,11 @@ Node* ro(int depth)
 {
     depth++;
     Node* node = new Node("<RO>", depth);
-    if(is_ro(tk.token_identifier))
+    if(is_ro(tk.token_ID))
     {
         node->token_1 = tk;
         tk = scan(in_file, lineNum);
-        if(tk.token_identifier == EQUALS_TK)
+        if(tk.token_ID == EQUALS_TK)
         {
             node->token_2 = tk;
             tk = scan(in_file, lineNum);
@@ -486,7 +486,7 @@ void error(tokens expected, Token recieved)
 {
     std::cout << "Parsing Error" << std::endl;
     std::cout << "Expected token: " << tokens[expected] << std::endl;
-    std::cout << "Recieved token: " << tokens[recieved.token_identifier];
+    std::cout << "Recieved token: " << tokens[recieved.token_ID];
     std::cout << " At line: " << recieved.line_number << std::endl;
     exit(EXIT_FAILURE);
 }
@@ -496,7 +496,7 @@ void error(tokens expected1, tokens expected2, Token recieved)
 {
     std::cout << "Parsing Error" << std::endl;
     std::cout << "Expected tokens: " << tokens[expected1] << " or " << tokens[expected2] << std::endl;
-    std::cout << "Recieved token: " << tokens[recieved.token_identifier];
+    std::cout << "Recieved token: " << tokens[recieved.token_ID];
     std::cout << " At line: " << recieved.line_number << std::endl;
     exit(EXIT_FAILURE);
 }
@@ -507,7 +507,7 @@ void error(tokens expected1, tokens expected2, tokens expected3, Token recieved)
     std::cout << "Parsing Error" << std::endl;
     std::cout << "Expected tokens: " << tokens[expected1] << ", " << tokens[expected2];
     std::cout << ", or " << tokens[expected3] << std::endl;
-    std::cout << "Recieved token: " << tokens[recieved.token_identifier];
+    std::cout << "Recieved token: " << tokens[recieved.token_ID];
     std::cout << " At line: " << recieved.line_number << std::endl;
     exit(EXIT_FAILURE);
 }
@@ -518,7 +518,7 @@ void error_stat(Token recieved)
     std::cout << "Expected tokens: " << tokens[READ_TK] << ", " << tokens[PRINT_TK];
     std::cout << ", " << tokens[BEGIN_TK] << ", " << tokens[COND_TK]; 
     std::cout << ", " << tokens[ITER_TK] << ", or " << tokens[ID_TK] << std::endl;
-    std::cout << "Recieved token: " << tokens[recieved.token_identifier];
+    std::cout << "Recieved token: " << tokens[recieved.token_ID];
     std::cout << " At line: " << recieved.line_number << std::endl;
     exit(EXIT_FAILURE);
 }
