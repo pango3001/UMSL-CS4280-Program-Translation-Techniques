@@ -478,7 +478,7 @@ void error(tokens expected, Token recieved)
     std::cout << "expected token: " << tokes[expected] << std::endl;
     std::cout << "recieved token: " << tokes[recieved.token_ID];
     std::cout << " at line: " << recieved.lineNum << std::endl;
-    exit(exit_failure);
+    exit(EXIT_FAILURE);
 }
 
 /* error function for two expeected tokens */
@@ -488,7 +488,7 @@ void error(tokens expected1, tokens expected2, Token recieved)
     std::cout << "expected tokens: " << tokes[expected1] << " or " << tokes[expected2] << std::endl;
     std::cout << "recieved token: " << tokes[recieved.token_ID];
     std::cout << " at line: " << recieved.lineNum << std::endl;
-    exit(exit_failure);
+    exit(EXIT_FAILURE);
 }
 
 /* error function for three expected tokens */
@@ -499,7 +499,7 @@ void error(tokens expected1, tokens expected2, tokens expected3, Token recieved)
     std::cout << ", or " << tokes[expected3] << std::endl;
     std::cout << "recieved token: " << tokes[recieved.token_ID];
     std::cout << " at line: " << recieved.lineNum << std::endl;
-    exit(exit_failure);
+    exit(EXIT_FAILURE);
 }
 /* error function for expected statement token */
 void error_stat(Token recieved)
