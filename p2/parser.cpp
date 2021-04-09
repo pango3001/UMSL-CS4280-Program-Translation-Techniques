@@ -187,7 +187,7 @@ Node* m(int depth)
 {
     depth++;
     Node* node = new Node("<M>", depth);
-    if (tk.ID == MINUS_TK)
+    if (tk.token_ID == MINUS_TK)
     {
         /* strore operator */
         node->token_1 = tk;
@@ -265,12 +265,12 @@ Node* stat(int depth)
 {
     depth++;
     Node* node = new Node("<stat>", depth);
-    if(tk.token_ID == READ_TK)
+    if(tk.token_ID == GETTER_TK)
     {
         node->child_1 = in(depth);
         return node;
     }
-    else if(tk.token_ID == PRINT_TK)
+    else if(tk.token_ID == OUTTER_TK)
     {
         node->child_1 = out(depth);
         return node;
@@ -278,16 +278,6 @@ Node* stat(int depth)
     else if(tk.token_ID == BEGIN_TK)
     {
         node->child_1 = block(depth);
-        return node;
-    }
-    else if(tk.token_ID == COND_TK)
-    {
-        node->child_1 = cond(depth);
-        return node;
-    }
-    else if(tk.token_ID == ITER_TK)
-    {
-        node->child_1 = loop(depth);
         return node;
     }
     else if(tk.token_ID == ID_TK)
@@ -406,7 +396,7 @@ Node* loop(int depth)
 {
     depth++;
     Node* node = new Node("<loop>", depth);
-    if(tk.token_identifier == ITER_TK)
+    if(tk.token_ID == ITER_TK)
     {
         tk = scanner(in_file, lineNum);
         if(tk.token_ID == LEFT_PAREN_TK)
