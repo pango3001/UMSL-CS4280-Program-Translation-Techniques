@@ -325,7 +325,7 @@ Node* in(int depth)
             error(LEFT_PAREN_TK, tk);
     }
     else
-        error(READ_TK, tk);
+        error(GETTER_TK, tk);
 }
 
 /* Non-terminal function for <out> -> print ( <expr>  ) : */
@@ -396,7 +396,7 @@ Node* loop(int depth)
 {
     depth++;
     Node* node = new Node("<loop>", depth);
-    if(tk.token_ID == ITER_TK)
+    if(tk.token_ID == LOOP_TK)
     {
         tk = scanner(in_file, lineNum);
         if(tk.token_ID == LEFT_PAREN_TK)
@@ -418,7 +418,7 @@ Node* loop(int depth)
             error(LEFT_PAREN_TK, tk);
     }
     else
-        error(ITER_TK, tk);
+        error(LOOP_TK, tk);
 }
 
 /* Non-terminal function for <assign> -> Identifier  = <expr> : */
@@ -468,7 +468,7 @@ Node* ro(int depth)
             return node;
     }
     else
-        error(LESS_THAN_TK, GREATER_THAN_TK, EQUALS_TK, tk);
+        error(EQUALS_OR_LESS_THAN_TK, EQUALS_OR_GREAT_THAN_TK, EQUALS_TK, tk);
 }
 
 /* error function for single expected token */
