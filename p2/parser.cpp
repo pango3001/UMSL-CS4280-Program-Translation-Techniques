@@ -294,7 +294,7 @@ Node* in(int depth)
 {
     depth++;
     Node* node = new Node("<in>", depth);
-    if(tk.token_ID == READ_TK)
+    if(tk.token_ID == GETTER_TK)
     {
         tk = scanner(in_file, lineNum);
         if(tk.token_ID == LEFT_PAREN_TK)
@@ -333,7 +333,7 @@ Node* out(int depth)
 {
     depth++;
     Node* node = new Node("<out>", depth);
-    if (tk.token_ID == PRINT_TK)
+    if (tk.token_ID == OUTTER_TK)
     {
         tk = scanner(in_file, lineNum);
         if (tk.token_ID == LEFT_PAREN_TK)
@@ -358,38 +358,38 @@ Node* out(int depth)
             error(LEFT_PAREN_TK, tk);
     }
     else
-        error(PRINT_TK, tk);
+        error(OUTTER_TK, tk);
 }
 
-/* Non-terminal function for <cond> -> cond ( <expr> <RO> <expr> ) <stat> */
-Node* cond(int depth)
-{
-    depth++;
-    Node* node = new Node("<cond>", depth);
-    if(tk.token_ID == COND_TK)
-    {
-        tk = scanner(in_file, lineNum);
-        if(tk.token_ID == LEFT_PAREN_TK)
-        {
-            tk = scanner(in_file, lineNum);
-            node->child_1 = expr(depth);
-            node->child_2 = ro(depth);
-            node->child_3 = expr(depth);
-            if(tk.token_ID == RIGHT_PAREN_TK)
-            {
-                tk = scanner(in_file, lineNum);
-                node->child_4 = stat(depth);
-                return node;
-            }
-            else
-                error(RIGHT_PAREN_TK, tk);
-        }
-        else
-            error(LEFT_PAREN_TK, tk);
-    }
-    else
-        error(COND_TK, tk);
-}
+///* non-terminal function for <cond> -> cond ( <expr> <ro> <expr> ) <stat> */
+//node* cond(int depth)
+//{
+//    depth++;
+//    node* node = new node("<cond>", depth);
+//    if(tk.token_id == cond_tk)
+//    {
+//        tk = scanner(in_file, linenum);
+//        if(tk.token_id == left_paren_tk)
+//        {
+//            tk = scanner(in_file, linenum);
+//            node->child_1 = expr(depth);
+//            node->child_2 = ro(depth);
+//            node->child_3 = expr(depth);
+//            if(tk.token_id == right_paren_tk)
+//            {
+//                tk = scanner(in_file, linenum);
+//                node->child_4 = stat(depth);
+//                return node;
+//            }
+//            else
+//                error(right_paren_tk, tk);
+//        }
+//        else
+//            error(left_paren_tk, tk);
+//    }
+//    else
+//        error(cond_tk, tk);
+//}
 
 /* Non-terminal function for <loop> -> iter ( <expr> <RO> <expr> ) <stat> */
 Node* loop(int depth)
