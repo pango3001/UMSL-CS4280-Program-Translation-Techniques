@@ -477,7 +477,7 @@ void error(tokens expected, Token recieved)
     std::cout << "Parsing Error" << std::endl;
     std::cout << "Expected token: " << tokens[expected] << std::endl;
     std::cout << "Recieved token: " << tokens[recieved.token_ID];
-    std::cout << " At line: " << recieved.line_number << std::endl;
+    std::cout << " At line: " << recieved.lineNum << std::endl;
     exit(EXIT_FAILURE);
 }
 
@@ -487,7 +487,7 @@ void error(tokens expected1, tokens expected2, Token recieved)
     std::cout << "Parsing Error" << std::endl;
     std::cout << "Expected tokens: " << tokens[expected1] << " or " << tokens[expected2] << std::endl;
     std::cout << "Recieved token: " << tokens[recieved.token_ID];
-    std::cout << " At line: " << recieved.line_number << std::endl;
+    std::cout << " At line: " << recieved.lineNum << std::endl;
     exit(EXIT_FAILURE);
 }
 
@@ -498,7 +498,7 @@ void error(tokens expected1, tokens expected2, tokens expected3, Token recieved)
     std::cout << "Expected tokens: " << tokens[expected1] << ", " << tokens[expected2];
     std::cout << ", or " << tokens[expected3] << std::endl;
     std::cout << "Recieved token: " << tokens[recieved.token_ID];
-    std::cout << " At line: " << recieved.line_number << std::endl;
+    std::cout << " At line: " << recieved.lineNum << std::endl;
     exit(EXIT_FAILURE);
 }
 /* error function for expected statement token */
@@ -509,7 +509,7 @@ void error_stat(Token recieved)
     std::cout << ", " << tokens[BEGIN_TK] << ", " << tokens[COND_TK]; 
     std::cout << ", " << tokens[ITER_TK] << ", or " << tokens[ID_TK] << std::endl;
     std::cout << "Recieved token: " << tokens[recieved.token_ID];
-    std::cout << " At line: " << recieved.line_number << std::endl;
+    std::cout << " At line: " << recieved.lineNum << std::endl;
     exit(EXIT_FAILURE);
 }
 /* function to determine if token is a statement token */
