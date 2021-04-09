@@ -482,7 +482,7 @@ Node* ro(int depth)
 }
 
 /* error function for single expected token */
-void error(token_id expected, Token recieved)
+void error(tokens expected, Token recieved)
 {
     std::cout << "Parsing Error" << std::endl;
     std::cout << "Expected token: " << tokens[expected] << std::endl;
@@ -492,7 +492,7 @@ void error(token_id expected, Token recieved)
 }
 
 /* error function for two expeected tokens */
-void error(token_id expected1, token_id expected2, Token recieved)
+void error(tokens expected1, tokens expected2, Token recieved)
 {
     std::cout << "Parsing Error" << std::endl;
     std::cout << "Expected tokens: " << tokens[expected1] << " or " << tokens[expected2] << std::endl;
@@ -502,7 +502,7 @@ void error(token_id expected1, token_id expected2, Token recieved)
 }
 
 /* error function for three expected tokens */
-void error(token_id expected1, token_id expected2, token_id expected3, Token recieved)
+void error(tokens expected1, tokens expected2, tokens expected3, Token recieved)
 {
     std::cout << "Parsing Error" << std::endl;
     std::cout << "Expected tokens: " << tokens[expected1] << ", " << tokens[expected2];
@@ -523,7 +523,7 @@ void error_stat(Token recieved)
     exit(EXIT_FAILURE);
 }
 /* function to determine if token is a statement token */
-bool is_stat(token_id tk)
+bool is_stat(tokens tk)
 {
     if (tk == READ_TK || tk == PRINT_TK || tk == BEGIN_TK || tk == COND_TK || tk == ITER_TK || tk == ID_TK)
         return true;
@@ -531,7 +531,7 @@ bool is_stat(token_id tk)
         return false;
 }
 
-bool is_ro(token_id tk)
+bool is_ro(tokens tk)
 {
     if (tk == LESS_THAN_TK || tk == GREATER_THAN_TK || tk == EQUALS_TK)
         return true;
