@@ -11,7 +11,7 @@ unsigned int lineNum = 1;
 Token tk;
 
 /* Array of strings mapped to token_id enum */
-std::string tokens[] = { "BEGIN_TK","END_TK","LOOP_TK","WHILE_TK", "VOID_TK", "EXIT_TK", "GETTER_TK", "OUTTER_TK", "MAIN_TK", "IF_TK", "THEN_TK", "ASSIGN_TK", "DATA_TK", "PROC_TK", "EQUALS_TK", "EQUALS_OR_LESS_THAN_TK", "EQUALS_OR_GREAT_THAN_TK", "EQUALS_EQUALS_TK", "COLON_TK", "COLON_EQUALS_TK", "PLUS_TK", "MINUS_TK", "ASTERISK_TK", "SLASH_TK", "PERCENT_TK", "PERIOD_TK", "LEFT_PAREN_TK", "RIGHT_PAREN_TK", "COMMA_TK", "LEFT_BRACE_TK", "RIGHT_BRACE_TK", "SEMI_COLON_TK", "LEFT_BRACKET_TK", "RIGHT_BRACKET_TK", "ID_TK", "INT_TK", "EOF_TK", "ERROR_TK" };
+std::string tokes[] = { "BEGIN_TK","END_TK","LOOP_TK","WHILE_TK", "VOID_TK", "EXIT_TK", "GETTER_TK", "OUTTER_TK", "MAIN_TK", "IF_TK", "THEN_TK", "ASSIGN_TK", "DATA_TK", "PROC_TK", "EQUALS_TK", "EQUALS_OR_LESS_THAN_TK", "EQUALS_OR_GREAT_THAN_TK", "EQUALS_EQUALS_TK", "COLON_TK", "COLON_EQUALS_TK", "PLUS_TK", "MINUS_TK", "ASTERISK_TK", "SLASH_TK", "PERCENT_TK", "PERIOD_TK", "LEFT_PAREN_TK", "RIGHT_PAREN_TK", "COMMA_TK", "LEFT_BRACE_TK", "RIGHT_BRACE_TK", "SEMI_COLON_TK", "LEFT_BRACKET_TK", "RIGHT_BRACKET_TK", "ID_TK", "INT_TK", "EOF_TK", "ERROR_TK" };
 
 
 /* Main parsing function called from main */
@@ -470,45 +470,45 @@ Node* ro(int depth)
     else
         error(EQUALS_OR_LESS_THAN_TK, EQUALS_OR_GREAT_THAN_TK, EQUALS_TK, tk);
 }
-//
-///* error function for single expected token */
-//void error(tokens expected, Token recieved)
-//{
-//    std::cout << "Parsing Error" << std::endl;
-//    std::cout << "Expected token: " << tokens[expected] << std::endl;
-//    std::cout << "Recieved token: " << tokens[recieved.token_ID];
-//    std::cout << " At line: " << recieved.lineNum << std::endl;
-//    exit(EXIT_FAILURE);
-//}
-//
-///* error function for two expeected tokens */
-//void error(tokens expected1, tokens expected2, Token recieved)
-//{
-//    std::cout << "Parsing Error" << std::endl;
-//    std::cout << "Expected tokens: " << tokens[expected1] << " or " << tokens[expected2] << std::endl;
-//    std::cout << "Recieved token: " << tokens[recieved.token_ID];
-//    std::cout << " At line: " << recieved.lineNum << std::endl;
-//    exit(EXIT_FAILURE);
-//}
-//
-///* error function for three expected tokens */
-//void error(tokens expected1, tokens expected2, tokens expected3, Token recieved)
-//{
-//    std::cout << "Parsing Error" << std::endl;
-//    std::cout << "Expected tokens: " << tokens[expected1] << ", " << tokens[expected2];
-//    std::cout << ", or " << tokens[expected3] << std::endl;
-//    std::cout << "Recieved token: " << tokens[recieved.token_ID];
-//    std::cout << " At line: " << recieved.lineNum << std::endl;
-//    exit(EXIT_FAILURE);
-//}
+
+/* error function for single expected token */
+void error(tokens expected, token recieved)
+{
+    std::cout << "parsing error" << std::endl;
+    std::cout << "expected token: " << tokes[expected] << std::endl;
+    std::cout << "recieved token: " << tokes[recieved.token_id];
+    std::cout << " at line: " << recieved.linenum << std::endl;
+    exit(exit_failure);
+}
+
+/* error function for two expeected tokens */
+void error(tokens expected1, tokens expected2, token recieved)
+{
+    std::cout << "parsing error" << std::endl;
+    std::cout << "expected tokens: " << tokes[expected1] << " or " << tokes[expected2] << std::endl;
+    std::cout << "recieved token: " << tokes[recieved.token_id];
+    std::cout << " at line: " << recieved.linenum << std::endl;
+    exit(exit_failure);
+}
+
+/* error function for three expected tokens */
+void error(tokens expected1, tokens expected2, tokens expected3, token recieved)
+{
+    std::cout << "parsing error" << std::endl;
+    std::cout << "expected tokens: " << tokes[expected1] << ", " << tokes[expected2];
+    std::cout << ", or " << tokes[expected3] << std::endl;
+    std::cout << "recieved token: " << tokes[recieved.token_id];
+    std::cout << " at line: " << recieved.linenum << std::endl;
+    exit(exit_failure);
+}
 /* error function for expected statement token */
 void error_stat(Token recieved)
 {
     std::cout << "Parsing Error" << std::endl;
-    std::cout << "Expected tokens: " << tokens[READ_TK] << ", " << tokens[PRINT_TK];
-    std::cout << ", " << tokens[BEGIN_TK] << ", " << tokens[COND_TK]; 
-    std::cout << ", " << tokens[ITER_TK] << ", or " << tokens[ID_TK] << std::endl;
-    std::cout << "Recieved token: " << tokens[recieved.token_ID];
+    std::cout << "Expected tokens: " << tokes[READ_TK] << ", " << tokes[PRINT_TK];
+    std::cout << ", " << tokes[BEGIN_TK] << ", " << tokes[COND_TK]; 
+    std::cout << ", " << tokes[ITER_TK] << ", or " << tokes[ID_TK] << std::endl;
+    std::cout << "Recieved token: " << tokes[recieved.token_ID];
     std::cout << " At line: " << recieved.lineNum << std::endl;
     exit(EXIT_FAILURE);
 }
