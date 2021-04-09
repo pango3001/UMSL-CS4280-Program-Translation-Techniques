@@ -1,6 +1,5 @@
 #include "parser.h"
 #include "scanner.h"
-#include "token.h"
 #include <iostream>
 
 /*Globals*/
