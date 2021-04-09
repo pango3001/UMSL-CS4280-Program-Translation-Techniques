@@ -24,7 +24,7 @@ Node* parser()
     /* calling first non-terminal function */
     node = program();
     /* check for EOF tk */
-    if (tk.token_identifier == EOF_TK)
+    if (tk.token_ID == EOF_TK)
     {
         /* no errors and EOF tk recieved so parse was successful */
         std::cout << "Parse Success" << std::endl;
@@ -270,7 +270,7 @@ Node* stat(int depth)
         node->child_1 = in(depth);
         return node;
     }
-    else if(tk.token_identifier == PRINT_TK)
+    else if(tk.token_ID == PRINT_TK)
     {
         node->child_1 = out(depth);
         return node;
@@ -533,7 +533,7 @@ bool is_stat(tokens tk)
 
 bool is_ro(tokens tk)
 {
-    if (tk == LESS_THAN_TK || tk == GREATER_THAN_TK || tk == EQUALS_TK)
+    if (tk == EQUALS_OR_LESS_THAN_TK || tk == EQUALS_OR_GREAT_THAN_TK || tk == EQUALS_TK)
         return true;
     else
         return false;
