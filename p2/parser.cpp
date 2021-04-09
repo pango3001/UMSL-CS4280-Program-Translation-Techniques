@@ -11,46 +11,8 @@ unsigned int line_number = 1;
 Token tk;
 
 /* Array of strings mapped to token_id enum */
-std::string tokens[] = {
-    /* Keyword Tokens */
-    "BEGIN_TK",
-    "END_TK",
-    "ITER_TK",
-    "VOID_TK",
-    "VAR_TK",
-    "RETURN_TK",
-    "READ_TK",
-    "PRINT_TK",
-    "PROGRAM_TK",
-    "COND_TK",
-    "THEN_TK",
-    "LET_TK",
-    /* Operator Tokens */
-    "EQUALS_TK",
-    "LESS_THAN_TK",
-    "GREATER_THAN_TK",
-    "COLON_TK",
-    "PLUS_TK",
-    "MINUS_TK",
-    "ASTERISK_TK",
-    "SLASH_TK",
-    "PERCENT_TK",
-    "PERIOD_TK",
-    /* Delimiter Tokens */
-    "LEFT_PAREN_TK",
-    "RIGHT_PAREN_TK",
-    "LEFT_BRACKET_TK",
-    "RIGHT_BRACKET_TK",
-    "LEFT_BRACE_TK",
-    "RIGHT_BRACE_TK",
-    "SEMI_COLON_TK",
-    "COMMA_TK",
-    /* Identifier and Integer Tokens */
-    "ID_TK",
-    "INT_TK",
-    /* EOF and Error Tokens */
-    "EOF_TK",
-    "ERROR_TK"};
+std::string tokens[] = { "BEGIN_TK","END_TK","LOOP_TK","WHILE_TK", "VOID_TK", "EXIT_TK", "GETTER_TK", "OUTTER_TK", "MAIN_TK", "IF_TK", "THEN_TK", "ASSIGN_TK", "DATA_TK", "PROC_TK", "EQUALS_TK", "EQUALS_OR_LESS_THAN_TK", "EQUALS_OR_GREAT_THAN_TK", "EQUALS_EQUALS_TK", "COLON_TK", "COLON_EQUALS_TK", "PLUS_TK", "MINUS_TK", "ASTERISK_TK", "SLASH_TK", "PERCENT_TK", "PERIOD_TK", "LEFT_PAREN_TK", "RIGHT_PAREN_TK", "COMMA_TK", "LEFT_BRACE_TK", "RIGHT_BRACE_TK", "SEMI_COLON_TK", "LEFT_BRACKET_TK", "RIGHT_BRACKET_TK", "ID_TK", "INT_TK", "EOF_TK", "ERROR_TK" };
+
 
 /* Main parsing function called from main */
 Node* parser()
