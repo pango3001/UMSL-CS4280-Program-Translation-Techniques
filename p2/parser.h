@@ -24,13 +24,13 @@ Node* loop(int depth);
 Node* assign(int depth);
 Node* ro(int depth);
 
-void error(token_id expected, Token recieved);
-void error(token_id expected1, token_id expected2, Token recieved);
-void error(token_id expected1, token_id expected2, token_id expected3, Token recieved);
+void error(tokens expected, Token recieved);
+void error(tokens expected1, tokens expected2, Token recieved);
+void error(tokens expected1, tokens expected2, tokens expected3, Token recieved);
 void error_stat(Token recieved);
 
-bool is_stat(token_id tk);
-bool is_ro(token_id tk);
+bool is_stat(tokens tk);
+bool is_ro(tokens tk);
 
 void print_tree(Node* node);
 
