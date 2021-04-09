@@ -20,7 +20,7 @@ Node* parser()
     /* creating the root node */
     Node* node;
     /* scanning for the first token */
-    tk = scan(in_file, lineNum);
+    tk = scanner(in_file, lineNum);
     /* calling first non-terminal function */
     node = program();
     /* check for EOF tk */
@@ -46,7 +46,7 @@ Node* program()
     if (tk.token_ID == VOID_TK)
     {
         /* scan for next token */
-        tk = scan(in_file, lineNum);
+        tk = scanner(in_file, lineNum);
         /* children are <vars> and <block> */
         node->child_1 = vars(depth);
         node->child_2 = block(depth);
@@ -68,20 +68,20 @@ Node* vars(int depth)
     /* check the token and then scan for next token until end of grammar */
     if (tk.token_ID == LET_TK)
     {
-        tk = scan(in_file, lineNum);
+        tk = scanner(in_file, lineNum);
         if (tk.token_ID == ID_TK)
         {
             /* store identifier token*/
             node->token_1 = tk;
-            tk = scan(in_file, lineNum);       
+            tk = scanner(in_file, lineNum);
             if (tk.token_ID == EQUALS_TK)
             {
-                tk = scan(in_file, lineNum);
+                tk = scanner(in_file, lineNum);
                 if (tk.token_ID == INT_TK)
                 {
                     /* store integer token */
                     node->token_2 = tk;
-                    tk = scan(in_file, lineNum);
+                    tk = scanner(in_file, lineNum);
                     /* child is <vars> */
                     node->child_1 = vars(depth);
                     return node;
@@ -110,13 +110,13 @@ Node* block(int depth)
     /* predict: begin <vars> <stats> end */
     if (tk.token_ID == BEGIN_TK)
     {
-        tk = scan(in_file, lineNum);
+        tk = scanner(in_file, lineNum);
         /* children are <vars> and <stats> */
         node->child_1 = vars(depth);
         node->child_2 = stats(depth);
         if (tk.token_ID == END_TK)
         {
-            tk = scan(in_file, lineNum);
+            tk = scanner(in_file, lineNum);
             return node;
         }
         else
@@ -138,7 +138,7 @@ Node* expr(int depth)
     {
         /* store operator */
         node->token_1 = tk;
-        tk = scan(in_file, lineNum);
+        tk = scanner(in_file, lineNum);
         node->child_2 = expr(depth);
         return node;
     }
@@ -147,7 +147,7 @@ Node* expr(int depth)
     {
         /* store operator */
         node->token_1 = tk;
-        tk = scan(in_file, lineNum);
+        tk = scanner(in_file, lineNum);
         node->child_2 = expr(depth);
         return node;
     }
@@ -166,7 +166,7 @@ Node* a(int depth)
     {
         /* store operator */
         node->token_1 = tk;
-        tk = scan(in_file, lineNum);
+        tk = scanner(in_file, lineNum);
         node->child_2 = a(depth);
         return node;
     }
@@ -174,7 +174,7 @@ Node* a(int depth)
     {
         /* store operator */
         node->token_1 = tk;
-        tk = scan(in_file, lineNum);
+        tk = scanner(in_file, lineNum);
         node->child_2 = a(depth);
         return node;
     }
@@ -191,7 +191,7 @@ Node* m(int depth)
     {
         /* strore operator */
         node->token_1 = tk;
-        tk = scan(in_file, lineNum);
+        tk = scanner(in_file, lineNum);
         node->child_1 = m(depth);
         return node;
     }
@@ -209,11 +209,11 @@ Node* r(int depth)
     Node* node = new Node("<R>", depth);
     if (tk.token_ID == LEFT_PAREN_TK)
     {
-        tk = scan(in_file, lineNum);
+        tk = scanner(in_file, lineNum);
         node->child_1 = expr(depth);
         if (tk.token_ID == RIGHT_PAREN_TK)
         {
-            tk = scan(in_file, lineNum);
+            tk = scanner(in_file, lineNum);
             return node;
         }
         else
@@ -222,13 +222,13 @@ Node* r(int depth)
     else if (tk.token_ID == ID_TK)
     {
         node->token_1 = tk;
-        tk = scan(in_file, lineNum);
+        tk = scanner(in_file, lineNum);
         return node;
     }
     else if (tk.token_ID == INT_TK)
     {
         node->token_1 = tk;
-        tk = scan(in_file, lineNum);
+        tk = scanner(in_file, lineNum);
         return node;
     }
     else
@@ -306,20 +306,20 @@ Node* in(int depth)
     Node* node = new Node("<in>", depth);
     if(tk.token_ID == READ_TK)
     {
-        tk = scan(in_file, lineNum);
+        tk = scanner(in_file, lineNum);
         if(tk.token_ID == LEFT_PAREN_TK)
         {
-            tk = scan(in_file, lineNum);
+            tk = scanner(in_file, lineNum);
             if(tk.token_ID == ID_TK)
             {
                 node->token_1 = tk;
-                tk = scan(in_file, lineNum);
+                tk = scanner(in_file, lineNum);
                 if(tk.token_ID == RIGHT_PAREN_TK)
                 {
-                    tk = scan(in_file, lineNum);
+                    tk = scanner(in_file, lineNum);
                     if(tk.token_ID == COLON_TK)
                     {
-                        tk = scan(in_file, lineNum);
+                        tk = scanner(in_file, lineNum);
                         return node;
                     }
                     else
@@ -345,17 +345,17 @@ Node* out(int depth)
     Node* node = new Node("<out>", depth);
     if (tk.token_ID == PRINT_TK)
     {
-        tk = scan(in_file, lineNum);
+        tk = scanner(in_file, lineNum);
         if (tk.token_ID == LEFT_PAREN_TK)
         {
-            tk = scan(in_file, lineNum);
+            tk = scanner(in_file, lineNum);
             node->child_1 = expr(depth);
             if (tk.token_ID == RIGHT_PAREN_TK)
             {
-                tk = scan(in_file, lineNum);
+                tk = scanner(in_file, lineNum);
                 if (tk.token_ID == COLON_TK)
                 {
-                    tk = scan(in_file, lineNum);
+                    tk = scanner(in_file, lineNum);
                     return node;
                 }
                 else
@@ -378,16 +378,16 @@ Node* cond(int depth)
     Node* node = new Node("<cond>", depth);
     if(tk.token_ID == COND_TK)
     {
-        tk = scan(in_file, lineNum);
+        tk = scanner(in_file, lineNum);
         if(tk.token_ID == LEFT_PAREN_TK)
         {
-            tk = scan(in_file, lineNum);
+            tk = scanner(in_file, lineNum);
             node->child_1 = expr(depth);
             node->child_2 = ro(depth);
             node->child_3 = expr(depth);
             if(tk.token_ID == RIGHT_PAREN_TK)
             {
-                tk = scan(in_file, lineNum);
+                tk = scanner(in_file, lineNum);
                 node->child_4 = stat(depth);
                 return node;
             }
@@ -408,16 +408,16 @@ Node* loop(int depth)
     Node* node = new Node("<loop>", depth);
     if(tk.token_identifier == ITER_TK)
     {
-        tk = scan(in_file, lineNum);
+        tk = scanner(in_file, lineNum);
         if(tk.token_ID == LEFT_PAREN_TK)
         {
-            tk = scan(in_file, lineNum);
+            tk = scanner(in_file, lineNum);
             node->child_1 = expr(depth);
             node->child_2 = ro(depth);
             node->child_3 = expr(depth);
             if(tk.token_ID == RIGHT_PAREN_TK)
             {
-                tk = scan(in_file, lineNum);
+                tk = scanner(in_file, lineNum);
                 node->child_4 = stat(depth);
                 return node;
             }
@@ -439,14 +439,14 @@ Node* assign(int depth)
     if(tk.token_ID == ID_TK)
     {
         node->token_1 = tk;
-        tk = scan(in_file, lineNum);
+        tk = scanner(in_file, lineNum);
         if(tk.token_ID == EQUALS_TK)
         {
-            tk = scan(in_file, lineNum);
+            tk = scanner(in_file, lineNum);
             node->child_1 = expr(depth);
             if(tk.token_ID == COLON_TK)
             {
-                tk = scan(in_file, lineNum);
+                tk = scanner(in_file, lineNum);
                 return node;
             }
             else
@@ -467,11 +467,11 @@ Node* ro(int depth)
     if(is_ro(tk.token_ID))
     {
         node->token_1 = tk;
-        tk = scan(in_file, lineNum);
+        tk = scanner(in_file, lineNum);
         if(tk.token_ID == EQUALS_TK)
         {
             node->token_2 = tk;
-            tk = scan(in_file, lineNum);
+            tk = scanner(in_file, lineNum);
             return node;
         }
         else
