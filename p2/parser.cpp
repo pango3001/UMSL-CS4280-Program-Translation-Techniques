@@ -472,7 +472,7 @@ Node* ro(int depth)
 }
 
 /* error function for single expected token */
-void error(tokens expected, token recieved)
+void error(tokens expected, Token recieved)
 {
     std::cout << "parsing error" << std::endl;
     std::cout << "expected token: " << tokes[expected] << std::endl;
@@ -482,7 +482,7 @@ void error(tokens expected, token recieved)
 }
 
 /* error function for two expeected tokens */
-void error(tokens expected1, tokens expected2, token recieved)
+void error(tokens expected1, tokens expected2, Token recieved)
 {
     std::cout << "parsing error" << std::endl;
     std::cout << "expected tokens: " << tokes[expected1] << " or " << tokes[expected2] << std::endl;
@@ -492,7 +492,7 @@ void error(tokens expected1, tokens expected2, token recieved)
 }
 
 /* error function for three expected tokens */
-void error(tokens expected1, tokens expected2, tokens expected3, token recieved)
+void error(tokens expected1, tokens expected2, tokens expected3, Token recieved)
 {
     std::cout << "parsing error" << std::endl;
     std::cout << "expected tokens: " << tokes[expected1] << ", " << tokes[expected2];
