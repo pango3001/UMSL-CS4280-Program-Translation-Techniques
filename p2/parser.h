@@ -20,7 +20,6 @@ Node* mstat(int depth);
 Node* stat(int depth);
 Node* in(int depth);
 Node* out(int depth);
-Node* cond(int depth);
 Node* loop(int depth);
 Node* assign(int depth);
 Node* ro(int depth);

@@ -55,8 +55,7 @@ struct Token {
     tokens token_ID;           // token ID
     std::string token_string;  // string of token
 
-    Token()
-    {
+    Token(){
         this->token_ID = ERROR_TK;
         this->token_string = "";
         this->lineNum = 0;
