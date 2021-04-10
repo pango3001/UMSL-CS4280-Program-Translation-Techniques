@@ -120,8 +120,10 @@ Node* vars(int depth)
                         node->child_1 = vars(depth);
                         return node;
                     }
-                    else
+                    else {
+                        if (debug) { std::cout << "yep" << "\n"; }
                         error(SEMI_COLON_TK, tk);
+                    }
                 }
                 else
                     error(INT_TK, tk);
