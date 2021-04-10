@@ -194,14 +194,6 @@ Node* a(int depth)
         node->child_2 = a(depth);
         return node;
     }
-    else if (tk.token_ID == MINUS_TK)
-    {
-        /* store operator */
-        node->token_1 = tk;
-        tk = scanner(in_file, lineNum);
-        node->child_2 = a(depth);
-        return node;
-    }
     else
         return node;
 }
@@ -294,22 +286,100 @@ Node* stat(int depth)
     if(tk.token_ID == GETTER_TK)
     {
         node->child_1 = in(depth);
-        return node;
+        tk = scanner(in_file, lineNum);
+        if (tk.token_ID == SEMI_COLON_TK)
+        {
+            node->token_1 = tk;
+            
+            return node;
+
+        }
+        else
+            error(SEMI_COLON_TK, tk);
     }
     else if(tk.token_ID == OUTTER_TK)
     {
         node->child_1 = out(depth);
-        return node;
+        tk = scanner(in_file, lineNum);
+        if (tk.token_ID == SEMI_COLON_TK)
+        {
+            node->token_1 = tk;
+
+            return node;
+
+        }
+        else
+            error(SEMI_COLON_TK, tk);
     }
     else if(tk.token_ID == BEGIN_TK)
     {
         node->child_1 = block(depth);
-        return node;
+        tk = scanner(in_file, lineNum);
+        if (tk.token_ID == SEMI_COLON_TK)
+        {
+            node->token_1 = tk;
+
+            return node;
+
+        }
+        else
+            error(SEMI_COLON_TK, tk);
     }
     else if(tk.token_ID == ID_TK)
     {
         node->child_1 = assign(depth);
-        return node;
+        tk = scanner(in_file, lineNum);
+        if (tk.token_ID == SEMI_COLON_TK)
+        {
+            node->token_1 = tk;
+
+            return node;
+
+        }
+        else
+            error(SEMI_COLON_TK, tk);
+    }
+    else if (tk.token_ID == LOOP_TK)
+    {
+        node->child_1 = loop(depth);
+        tk = scanner(in_file, lineNum);
+        if (tk.token_ID == SEMI_COLON_TK)
+        {
+            node->token_1 = tk;
+
+            return node;
+
+        }
+        else
+            error(SEMI_COLON_TK, tk);
+    }
+    else if (tk.token_ID == PROC_TK)
+    {
+        node->child_1 = gotoo(depth);
+        tk = scanner(in_file, lineNum);
+        if (tk.token_ID == SEMI_COLON_TK)
+        {
+            node->token_1 = tk;
+
+            return node;
+
+        }
+        else
+            error(SEMI_COLON_TK, tk);
+    }
+    else if (tk.token_ID == VOID_TK)
+    {
+        node->child_1 = label(depth);
+        tk = scanner(in_file, lineNum);
+        if (tk.token_ID == SEMI_COLON_TK)
+        {
+            node->token_1 = tk;
+
+            return node;
+
+        }
+        else
+            error(SEMI_COLON_TK, tk);
     }
     else
         error_stat(tk);
@@ -430,6 +500,50 @@ Node* ro(int depth)
     else
         error(EQUALS_OR_LESS_THAN_TK, EQUALS_OR_GREAT_THAN_TK, EQUALS_TK, tk);
 }
+/* Non-terminal function for <in> -> read ( Identifier ) : */
+Node* label(int depth)
+{
+    depth++;
+    Node* node = new Node("<label>", depth);
+    if (tk.token_ID == VOID_TK)
+    {
+        tk = scanner(in_file, lineNum);
+        if (tk.token_ID == ID_TK)
+        {
+            node->token_1 = tk;
+            return node;
+
+        }
+        else
+            error(ID_TK, tk);
+    }
+    else
+        error(VOID_TK, tk);
+}
+
+/* Non-terminal function for <in> -> read ( Identifier ) : */
+Node* gotoo(int depth)
+{
+    depth++;
+    Node* node = new Node("<goto>", depth);
+    if (tk.token_ID == PROC_TK)
+    {
+        tk = scanner(in_file, lineNum);
+        if (tk.token_ID == ID_TK)
+        {
+            node->token_1 = tk;
+            return node;
+
+        }
+        else
+            error(ID_TK, tk);
+    }
+    else
+        error(PROC_TK, tk);
+}
+
+
+
 
 /* error function for single expected token */
 void error(tokens expected, Token recieved)

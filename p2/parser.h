@@ -23,6 +23,8 @@ Node* out(int depth);
 Node* loop(int depth);
 Node* assign(int depth);
 Node* ro(int depth);
+Node* gotoo(int depth);
+Node* label(int depth);
 
 void error(tokens expected, Token recieved);
 void error(tokens expected1, tokens expected2, Token recieved);
