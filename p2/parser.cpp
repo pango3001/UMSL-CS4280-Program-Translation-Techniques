@@ -431,8 +431,9 @@ Node* out(int depth)
     Node* node = new Node("<out>", depth);
     if (tk.token_ID == OUTTER_TK)
     {
-            node->child_1 = expr(depth);
-            return node;
+        tk = scanner(in_file, lineNum);
+        node->child_1 = expr(depth);
+        return node;
     }
     else
         error(OUTTER_TK, tk);
