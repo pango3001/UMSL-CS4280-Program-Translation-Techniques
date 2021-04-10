@@ -265,7 +265,7 @@ Node* stats(int depth)
     std::cout << "stats" << "\n";
     depth++;
     Node* node = new Node("<stats>", depth);
-    tk = scanner(in_file, lineNum);
+    
     node->child_1 = stat(depth);
     node->child_2 = mstat(depth);
     return node;
