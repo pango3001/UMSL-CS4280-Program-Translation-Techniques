@@ -24,10 +24,7 @@ int main(int argc, char** argv) {
         outfile << " ";
         std::cout << "stdin.temp" << std::endl;
 
-        Node* root = parser();
-        print_tree(root);        
-        /* Close the input file */
-        in_file.close();
+
 
     }
 
@@ -63,10 +60,11 @@ int main(int argc, char** argv) {
 
     // Scan file
     if (inFile) {
+        Node* root = parser();
+        print_tree(root);
+        /* Close the input file */
+        inFile.close();
 
-        parser();  // starts the parser
-
-        inFile.close(); // close file
 
     }
     else {  // cannot open file
@@ -88,14 +86,6 @@ int main(int argc, char** argv) {
 
 
 
-
-//
-//
-//
-//
-//
-//
-//
 ///* Includes */
 //#include <iostream>
 //#include <string>
