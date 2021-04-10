@@ -314,6 +314,7 @@ Node* stat(int depth)
     }
     else if(tk.token_ID == OUTTER_TK)
     {
+        if (debug) { std::cout << "out= tru" << "\n"; }
         node->child_1 = out(depth);
         tk = scanner(in_file, lineNum);
         if (tk.token_ID == SEMI_COLON_TK)
