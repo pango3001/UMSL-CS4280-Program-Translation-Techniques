@@ -65,7 +65,7 @@ Node* program()
 /* Non-terminal function for <block> -> begin <vars> <stats> end */
 Node* block(int depth)
 {
-    std::cout << "block" << "\n";
+    if (debug) {std::cout << "block" << "\n";}
     depth++;
     Node* node = new Node("<block>", depth);
     /* predict: begin <vars> <stats> end */
@@ -90,7 +90,7 @@ Node* block(int depth)
 /* Function for <vars> -> empty | let Identifier = Integer <vars> */
 Node* vars(int depth)
 {
-    std::cout << "vars" << "\n";
+    if (debug) {std::cout << "vars" << "\n";}
     /* increase depth */
     depth++;
     /* create <vars> node */
@@ -140,7 +140,7 @@ Node* vars(int depth)
 /* Non-terminal function for <expr> -> <A> / <expr> | <A> * <expr> | <A> */
 Node* expr(int depth)
 {
-    std::cout << "expr" << "\n";
+    if (debug) {std::cout << "expr" << "\n";}
     depth++;
     Node* node = new Node("<expr>", depth);
     /* children are <a> and <expr> or just <a> */
@@ -161,7 +161,7 @@ Node* expr(int depth)
 /* Non-terminal function for <M> -> <M> + <A> | <M> - <A> | <M> */
 Node* n(int depth)
 {
-    std::cout << "n" << "\n";
+    if (debug) {std::cout << "n" << "\n";}
     depth++;
     Node* node = new Node("<N>", depth);
     /* children are <M> and <A> or just <M> */
@@ -189,7 +189,7 @@ Node* n(int depth)
 /* Non-terminal function for <M> -> <M> + <A> | <M> - <A> | <M> */
 Node* a(int depth)
 {
-    std::cout << "a" << "\n";
+    if (debug) {std::cout << "a" << "\n";}
     depth++;
     Node* node = new Node("<A>", depth);
     /* children are <M> and <A> or just <M> */
@@ -209,7 +209,7 @@ Node* a(int depth)
 /* Non-terminal function for <M> -> * <M> |  <R> */
 Node* m(int depth)
 {
-    std::cout << "m" << "\n";
+    if (debug) {std::cout << "m" << "\n";}
     depth++;
     Node* node = new Node("<M>", depth);
     if (tk.token_ID == ASTERISK_TK)
@@ -230,7 +230,7 @@ Node* m(int depth)
 /* Non-terminal function for <R> -> ( <expr> ) | Identifier | Integer */
 Node* r(int depth)
 {
-    std::cout << "r" << "\n";
+    if (debug) {std::cout << "r" << "\n";}
     depth++;
     Node* node = new Node("<R>", depth);
     if (tk.token_ID == LEFT_PAREN_TK)
@@ -264,7 +264,7 @@ Node* r(int depth)
 /* Non-terminal function for <stats> -> <stat>  <mStat> */
 Node* stats(int depth)
 {
-    std::cout << "stats" << "\n";
+    if (debug) {std::cout << "stats" << "\n";}
     depth++;
     Node* node = new Node("<stats>", depth);
     
@@ -276,7 +276,7 @@ Node* stats(int depth)
 /* Non-terminal function for <mstat> -> empty |  <stat>  <mStat> */
 Node* mstat(int depth)
 {
-    std::cout << "mstat" << "\n";
+    if (debug) {std::cout << "mstat" << "\n";}
     depth++;
     Node* node = new Node("<mstat>", depth);
     if (is_stat(tk.token_ID))
@@ -293,7 +293,7 @@ Node* mstat(int depth)
 /* Non-terminal function for <stat> -> <in> | <out> | <block> | <cond> | <loop> | <assign> */
 Node* stat(int depth)
 {
-    std::cout << "stat" << "\n";
+    if (debug) {std::cout << "stat" << "\n";}
     depth++;
     Node* node = new Node("<stat>", depth);
     
@@ -320,7 +320,7 @@ Node* stat(int depth)
         if (tk.token_ID == SEMI_COLON_TK)
         {
             node->token_1 = tk;
-
+            tk = scanner(in_file, lineNum);
             return node;
 
         }
@@ -334,7 +334,7 @@ Node* stat(int depth)
         if (tk.token_ID == SEMI_COLON_TK)
         {
             node->token_1 = tk;
-
+            tk = scanner(in_file, lineNum);
             return node;
 
         }
@@ -348,7 +348,7 @@ Node* stat(int depth)
         if (tk.token_ID == SEMI_COLON_TK)
         {
             node->token_1 = tk;
-
+            tk = scanner(in_file, lineNum);
             return node;
 
         }
@@ -362,7 +362,7 @@ Node* stat(int depth)
         if (tk.token_ID == SEMI_COLON_TK)
         {
             node->token_1 = tk;
-
+            tk = scanner(in_file, lineNum);
             return node;
 
         }
@@ -376,7 +376,7 @@ Node* stat(int depth)
         if (tk.token_ID == SEMI_COLON_TK)
         {
             node->token_1 = tk;
-
+            tk = scanner(in_file, lineNum);
             return node;
 
         }
@@ -390,7 +390,7 @@ Node* stat(int depth)
         if (tk.token_ID == SEMI_COLON_TK)
         {
             node->token_1 = tk;
-
+            tk = scanner(in_file, lineNum);
             return node;
 
         }
@@ -404,7 +404,7 @@ Node* stat(int depth)
 /* Non-terminal function for <in> -> read ( Identifier ) : */
 Node* in(int depth)
 {
-    std::cout << "in" << "\n";
+    if (debug) {std::cout << "in" << "\n";}
     depth++;
     Node* node = new Node("<in>", depth);
     if(tk.token_ID == GETTER_TK)
@@ -426,7 +426,7 @@ Node* in(int depth)
 /* Non-terminal function for <out> -> print ( <expr>  ) : */
 Node* out(int depth)
 {
-    std::cout << "out" << "\n";
+    if (debug) {std::cout << "out" << "\n";}
     depth++;
     Node* node = new Node("<out>", depth);
     if (tk.token_ID == OUTTER_TK)
@@ -442,7 +442,7 @@ Node* out(int depth)
 /* Non-terminal function for <loop> -> iter ( <expr> <RO> <expr> ) <stat> */
 Node* loop(int depth)
 {
-    std::cout << "loop" << "\n";
+    if (debug) {std::cout << "loop" << "\n";}
     depth++;
     Node* node = new Node("<loop>", depth);
     if(tk.token_ID == LOOP_TK)
@@ -473,7 +473,7 @@ Node* loop(int depth)
 /* Non-terminal function for <assign> -> Identifier  = <expr> : */
 Node* assign(int depth)
 {
-    std::cout << "assign" << "\n";
+    if (debug) {std::cout << "assign" << "\n";}
     depth++;
     Node* node = new Node("<assign>", depth);
     //tk = scanner(in_file, lineNum);
@@ -504,7 +504,7 @@ Node* assign(int depth)
 /* Non-terminal function for <RO> ->  < | <  = | > | >  = | =  = | = */
 Node* ro(int depth)
 {
-    std::cout << "ro" << "\n";
+    if (debug) {std::cout << "ro" << "\n";}
     depth++;
     Node* node = new Node("<RO>", depth);
     if(is_ro(tk.token_ID))
@@ -526,7 +526,7 @@ Node* ro(int depth)
 /* Non-terminal function for <in> -> read ( Identifier ) : */
 Node* label(int depth)
 {
-    std::cout << "label" << "\n";
+    if (debug) {std::cout << "label" << "\n";}
     depth++;
     Node* node = new Node("<label>", depth);
     if (tk.token_ID == VOID_TK)
@@ -548,7 +548,7 @@ Node* label(int depth)
 /* Non-terminal function for <in> -> read ( Identifier ) : */
 Node* gotoo(int depth)
 {
-    std::cout << "gotoo" << "\n";
+    if (debug) {std::cout << "gotoo" << "\n";}
     depth++;
     Node* node = new Node("<goto>", depth);
     if (tk.token_ID == PROC_TK)
