@@ -273,6 +273,7 @@ Node* stats(int depth)
 /* Non-terminal function for <mstat> -> empty |  <stat>  <mStat> */
 Node* mstat(int depth)
 {
+    std::cout << "mstat" << "\n";
     depth++;
     Node* node = new Node("<mstat>", depth);
     if (is_stat(tk.token_ID))
@@ -288,6 +289,7 @@ Node* mstat(int depth)
 /* Non-terminal function for <stat> -> <in> | <out> | <block> | <cond> | <loop> | <assign> */
 Node* stat(int depth)
 {
+    std::cout << "stat" << "\n";
     depth++;
     Node* node = new Node("<stat>", depth);
     
@@ -397,6 +399,7 @@ Node* stat(int depth)
 /* Non-terminal function for <in> -> read ( Identifier ) : */
 Node* in(int depth)
 {
+    std::cout << "in" << "\n";
     depth++;
     Node* node = new Node("<in>", depth);
     if(tk.token_ID == GETTER_TK)
@@ -418,6 +421,7 @@ Node* in(int depth)
 /* Non-terminal function for <out> -> print ( <expr>  ) : */
 Node* out(int depth)
 {
+    std::cout << "out" << "\n";
     depth++;
     Node* node = new Node("<out>", depth);
     if (tk.token_ID == OUTTER_TK)
@@ -433,6 +437,7 @@ Node* out(int depth)
 /* Non-terminal function for <loop> -> iter ( <expr> <RO> <expr> ) <stat> */
 Node* loop(int depth)
 {
+    std::cout << "loop" << "\n";
     depth++;
     Node* node = new Node("<loop>", depth);
     if(tk.token_ID == LOOP_TK)
@@ -463,6 +468,7 @@ Node* loop(int depth)
 /* Non-terminal function for <assign> -> Identifier  = <expr> : */
 Node* assign(int depth)
 {
+    std::cout << "assign" << "\n";
     depth++;
     Node* node = new Node("<assign>", depth);
     //tk = scanner(in_file, lineNum);
@@ -493,6 +499,7 @@ Node* assign(int depth)
 /* Non-terminal function for <RO> ->  < | <  = | > | >  = | =  = | = */
 Node* ro(int depth)
 {
+    std::cout << "ro" << "\n";
     depth++;
     Node* node = new Node("<RO>", depth);
     if(is_ro(tk.token_ID))
@@ -514,6 +521,7 @@ Node* ro(int depth)
 /* Non-terminal function for <in> -> read ( Identifier ) : */
 Node* label(int depth)
 {
+    std::cout << "label" << "\n";
     depth++;
     Node* node = new Node("<label>", depth);
     if (tk.token_ID == VOID_TK)
@@ -535,6 +543,7 @@ Node* label(int depth)
 /* Non-terminal function for <in> -> read ( Identifier ) : */
 Node* gotoo(int depth)
 {
+    std::cout << "gotoo" << "\n";
     depth++;
     Node* node = new Node("<goto>", depth);
     if (tk.token_ID == PROC_TK)
