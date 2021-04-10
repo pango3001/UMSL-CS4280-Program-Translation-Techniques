@@ -456,27 +456,29 @@ Node* assign(int depth)
 {
     depth++;
     Node* node = new Node("<assign>", depth);
-    if(tk.token_ID == ID_TK)
+    tk = scanner(in_file, lineNum);
+    if (tk.token_ID == ASSIGN_TK)
     {
-        node->token_1 = tk;
-        tk = scanner(in_file, lineNum);
-        if(tk.token_ID == EQUALS_TK)
+        if (tk.token_ID == ID_TK)
         {
+            node->token_1 = tk;
             tk = scanner(in_file, lineNum);
-            node->child_1 = expr(depth);
-            if(tk.token_ID == COLON_TK)
+            if (tk.token_ID == COLON_EQUALS_TK)
             {
                 tk = scanner(in_file, lineNum);
+                node->child_1 = expr(depth);
                 return node;
+
+
             }
             else
-                error(COLON_TK, tk);
+                error(COLON_EQUALS_TK, tk);
         }
         else
-            error(EQUALS_TK, tk);
+            error(ID_TK, tk);
     }
     else
-        error(ID_TK, tk);
+        error(ASSIGN_TK, tk);
 }
 
 /* Non-terminal function for <RO> ->  < | <  = | > | >  = | =  = | = */
