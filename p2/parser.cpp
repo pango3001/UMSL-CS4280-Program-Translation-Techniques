@@ -43,61 +43,18 @@ Node* program()
     int depth = 0;
     /* creating a node for <program> */
     Node* node = new Node("<program>", depth);
-    if (tk.token_ID == VOID_TK)
+
+    node->child_1 = vars(depth);
+    if (tk.token_ID == MAIN_TK)
     {
         /* scan for next token */
         tk = scanner(in_file, lineNum);
-        /* children are <vars> and <block> */
-        node->child_1 = vars(depth);
         node->child_2 = block(depth);
         /* return node with attached children */
         return node;
     }
     else
-        error(VOID_TK, tk);
-}
-
-/* Function for <vars> -> empty | let Identifier = Integer <vars> */
-Node* vars(int depth)
-{
-    /* increase depth */
-    depth++;
-    /* create <vars> node */
-    Node* node = new Node("<vars>", depth);
-    /* predict: let Identifier = Integer <vars> */ 
-    /* check the token and then scan for next token until end of grammar */
-    if (tk.token_ID == DATA_TK)
-    {
-        tk = scanner(in_file, lineNum);
-        if (tk.token_ID == ID_TK)
-        {
-            /* store identifier token*/
-            node->token_1 = tk;
-            tk = scanner(in_file, lineNum);
-            if (tk.token_ID == COLON_EQUALS_TK)
-            {
-                tk = scanner(in_file, lineNum);
-                if (tk.token_ID == INT_TK)
-                {
-                    /* store integer token */
-                    node->token_2 = tk;
-                    tk = scanner(in_file, lineNum);
-                    /* child is <vars> */
-                    node->child_1 = vars(depth);
-                    return node;
-                }
-                else
-                    error(INT_TK, tk);
-            }
-            else
-                error(COLON_EQUALS_TK, tk);
-        }
-        else
-            error(ID_TK, tk);
-    }
-    /* empty production */
-    else
-        return nullptr;
+        error(MAIN_TK, tk);
 }
 
 
@@ -126,24 +83,64 @@ Node* block(int depth)
         error(BEGIN_TK, tk);
 }
 
+/* Function for <vars> -> empty | let Identifier = Integer <vars> */
+Node* vars(int depth)
+{
+    /* increase depth */
+    depth++;
+    /* create <vars> node */
+    Node* node = new Node("<vars>", depth);
+    /* predict: let Identifier = Integer <vars> */
+    /* check the token and then scan for next token until end of grammar */
+    if (tk.token_ID == DATA_TK)
+    {
+        tk = scanner(in_file, lineNum);
+        if (tk.token_ID == ID_TK)
+        {
+            /* store identifier token*/
+            node->token_1 = tk;
+            tk = scanner(in_file, lineNum);
+            if (tk.token_ID == COLON_EQUALS_TK)
+            {
+                tk = scanner(in_file, lineNum);
+                if (tk.token_ID == INT_TK)
+                {
+                    /* store integer token */
+                    node->token_2 = tk;
+                    tk = scanner(in_file, lineNum);
+                    if (tk.token_ID == SEMI_COLON_TK)
+                    {
+                        tk = scanner(in_file, lineNum);
+                        /* child is <vars> */
+                        node->child_1 = vars(depth);
+                        return node;
+                    }
+                    else
+                        error(SEMI_COLON_TK, tk);
+                }
+                else
+                    error(INT_TK, tk);
+            }
+            else
+                error(COLON_EQUALS_TK, tk);
+        }
+        else
+            error(ID_TK, tk);
+    }
+    /* empty production */
+    else
+        return nullptr;
+}
+
 /* Non-terminal function for <expr> -> <A> / <expr> | <A> * <expr> | <A> */
 Node* expr(int depth)
 {
     depth++;
     Node* node = new Node("<expr>", depth);
     /* children are <a> and <expr> or just <a> */
-    node->child_1 = a(depth);
+    node->child_1 = n(depth);
     /* predict: / <expr> */
-    if (tk.token_ID == SLASH_TK)
-    {
-        /* store operator */
-        node->token_1 = tk;
-        tk = scanner(in_file, lineNum);
-        node->child_2 = expr(depth);
-        return node;
-    }
-    /* predict: * <expr> */
-    else if (tk.token_ID == ASTERISK_TK)
+    if (tk.token_ID == MINUS_TK)
     {
         /* store operator */
         node->token_1 = tk;
@@ -182,12 +179,12 @@ Node* a(int depth)
         return node;
 }
 
-/* Non-terminal function for <M> -> - <M> |  <R> */
+/* Non-terminal function for <M> -> * <M> |  <R> */
 Node* m(int depth)
 {
     depth++;
     Node* node = new Node("<M>", depth);
-    if (tk.token_ID == MINUS_TK)
+    if (tk.token_ID == ASTERISK_TK)
     {
         /* strore operator */
         node->token_1 = tk;
@@ -265,6 +262,8 @@ Node* stat(int depth)
 {
     depth++;
     Node* node = new Node("<stat>", depth);
+    
+
     if(tk.token_ID == GETTER_TK)
     {
         node->child_1 = in(depth);
@@ -297,32 +296,14 @@ Node* in(int depth)
     if(tk.token_ID == GETTER_TK)
     {
         tk = scanner(in_file, lineNum);
-        if(tk.token_ID == LEFT_PAREN_TK)
+        if(tk.token_ID == ID_TK)
         {
-            tk = scanner(in_file, lineNum);
-            if(tk.token_ID == ID_TK)
-            {
-                node->token_1 = tk;
-                tk = scanner(in_file, lineNum);
-                if(tk.token_ID == RIGHT_PAREN_TK)
-                {
-                    tk = scanner(in_file, lineNum);
-                    if(tk.token_ID == COLON_TK)
-                    {
-                        tk = scanner(in_file, lineNum);
-                        return node;
-                    }
-                    else
-                        error(COLON_TK, tk);
-                }
-                else
-                    error(RIGHT_PAREN_TK, tk);
-            }
-            else
-                error(ID_TK, tk);
+            node->token_1 = tk;
+            return node;
+
         }
         else
-            error(LEFT_PAREN_TK, tk);
+            error(ID_TK, tk);
     }
     else
         error(GETTER_TK, tk);
@@ -335,61 +316,13 @@ Node* out(int depth)
     Node* node = new Node("<out>", depth);
     if (tk.token_ID == OUTTER_TK)
     {
-        tk = scanner(in_file, lineNum);
-        if (tk.token_ID == LEFT_PAREN_TK)
-        {
-            tk = scanner(in_file, lineNum);
             node->child_1 = expr(depth);
-            if (tk.token_ID == RIGHT_PAREN_TK)
-            {
-                tk = scanner(in_file, lineNum);
-                if (tk.token_ID == COLON_TK)
-                {
-                    tk = scanner(in_file, lineNum);
-                    return node;
-                }
-                else
-                    error(COLON_TK, tk);
-            }
-            else
-                error(RIGHT_PAREN_TK, tk);
-        }
-        else
-            error(LEFT_PAREN_TK, tk);
+            return node;
     }
     else
         error(OUTTER_TK, tk);
 }
 
-///* non-terminal function for <cond> -> cond ( <expr> <ro> <expr> ) <stat> */
-//node* cond(int depth)
-//{
-//    depth++;
-//    node* node = new node("<cond>", depth);
-//    if(tk.token_id == cond_tk)
-//    {
-//        tk = scanner(in_file, linenum);
-//        if(tk.token_id == left_paren_tk)
-//        {
-//            tk = scanner(in_file, linenum);
-//            node->child_1 = expr(depth);
-//            node->child_2 = ro(depth);
-//            node->child_3 = expr(depth);
-//            if(tk.token_id == right_paren_tk)
-//            {
-//                tk = scanner(in_file, linenum);
-//                node->child_4 = stat(depth);
-//                return node;
-//            }
-//            else
-//                error(right_paren_tk, tk);
-//        }
-//        else
-//            error(left_paren_tk, tk);
-//    }
-//    else
-//        error(cond_tk, tk);
-//}
 
 /* Non-terminal function for <loop> -> iter ( <expr> <RO> <expr> ) <stat> */
 Node* loop(int depth)
@@ -515,7 +448,7 @@ void error_stat(Token recieved)
 /* function to determine if token is a statement token */
 bool is_stat(tokens tk)
 {
-    if (tk == READ_TK || tk == PRINT_TK || tk == BEGIN_TK || tk == COND_TK || tk == ITER_TK || tk == ID_TK)
+    if (tk == GETTER_TK || tk == OUTTER_TK || tk == BEGIN_TK || tk == IF_TK || tk == THEN_TK || tk == ID_TK)
         return true;
     else
         return false;
