@@ -279,7 +279,7 @@ Node* mstat(int depth)
     Node* node = new Node("<mstat>", depth);
     if (is_stat(tk.token_ID))
     {
-        tk = scanner(in_file, lineNum);
+        std::cout << "stat = true" << "\n";
         node->child_1 = stat(depth);
         node->child_2 = mstat(depth);
         return node;
