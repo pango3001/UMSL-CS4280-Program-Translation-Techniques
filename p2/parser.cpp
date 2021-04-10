@@ -414,7 +414,7 @@ void error(tokens expected, Token recieved)
     exit(EXIT_FAILURE);
 }
 
-/* error function for two expeected tokens */
+/* error function for two expected tokens */
 void error(tokens expected1, tokens expected2, Token recieved)
 {
     std::cout << "parsing error" << std::endl;
@@ -438,9 +438,9 @@ void error(tokens expected1, tokens expected2, tokens expected3, Token recieved)
 void error_stat(Token recieved)
 {
     std::cout << "Parsing Error" << std::endl;
-    std::cout << "Expected tokens: " << tokes[READ_TK] << ", " << tokes[PRINT_TK];
-    std::cout << ", " << tokes[BEGIN_TK] << ", " << tokes[COND_TK]; 
-    std::cout << ", " << tokes[ITER_TK] << ", or " << tokes[ID_TK] << std::endl;
+    std::cout << "Expected tokens: " << tokes[GETTER_TK] << ", " << tokes[OUTTER_TK];
+    std::cout << ", " << tokes[BEGIN_TK] << ", " << tokes[IF_TK]; 
+    std::cout << ", " << tokes[WHILE_TK] << ", or " << tokes[ID_TK] << std::endl;
     std::cout << "Recieved token: " << tokes[recieved.token_ID];
     std::cout << " At line: " << recieved.lineNum << std::endl;
     exit(EXIT_FAILURE);
@@ -448,7 +448,7 @@ void error_stat(Token recieved)
 /* function to determine if token is a statement token */
 bool is_stat(tokens tk)
 {
-    if (tk == GETTER_TK || tk == OUTTER_TK || tk == BEGIN_TK || tk == IF_TK || tk == THEN_TK || tk == ID_TK)
+    if (tk == GETTER_TK || tk == OUTTER_TK || tk == BEGIN_TK || tk == IF_TK || tk == WHILE_TK || tk == ID_TK)
         return true;
     else
         return false;
