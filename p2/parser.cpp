@@ -17,6 +17,7 @@ std::string tokes[] = { "BEGIN_TK","END_TK","LOOP_TK","WHILE_TK", "VOID_TK", "EX
 /* Main parsing function called from main */
 Node* parser()
 {
+    std::cout << "parser" << "\n";
     /* creating the root node */
     Node* node;
     /* scanning for the first token */
@@ -39,6 +40,7 @@ Node* parser()
 /* Function for <program> -> void <vars> <block> */
 Node* program()
 {
+    std::cout << "program" << "\n";
     /* depth of node in tree */
     int depth = 0;
     /* creating a node for <program> */
@@ -61,7 +63,7 @@ Node* program()
 /* Non-terminal function for <block> -> begin <vars> <stats> end */
 Node* block(int depth)
 {
-
+    std::cout << "block" << "\n";
     depth++;
     Node* node = new Node("<block>", depth);
     /* predict: begin <vars> <stats> end */
@@ -86,6 +88,7 @@ Node* block(int depth)
 /* Function for <vars> -> empty | let Identifier = Integer <vars> */
 Node* vars(int depth)
 {
+    std::cout << "vars" << "\n";
     /* increase depth */
     depth++;
     /* create <vars> node */
@@ -135,6 +138,7 @@ Node* vars(int depth)
 /* Non-terminal function for <expr> -> <A> / <expr> | <A> * <expr> | <A> */
 Node* expr(int depth)
 {
+    std::cout << "expr" << "\n";
     depth++;
     Node* node = new Node("<expr>", depth);
     /* children are <a> and <expr> or just <a> */
@@ -155,6 +159,7 @@ Node* expr(int depth)
 /* Non-terminal function for <M> -> <M> + <A> | <M> - <A> | <M> */
 Node* n(int depth)
 {
+    std::cout << "n" << "\n";
     depth++;
     Node* node = new Node("<N>", depth);
     /* children are <M> and <A> or just <M> */
@@ -182,6 +187,7 @@ Node* n(int depth)
 /* Non-terminal function for <M> -> <M> + <A> | <M> - <A> | <M> */
 Node* a(int depth)
 {
+    std::cout << "a" << "\n";
     depth++;
     Node* node = new Node("<A>", depth);
     /* children are <M> and <A> or just <M> */
@@ -201,6 +207,7 @@ Node* a(int depth)
 /* Non-terminal function for <M> -> * <M> |  <R> */
 Node* m(int depth)
 {
+    std::cout << "m" << "\n";
     depth++;
     Node* node = new Node("<M>", depth);
     if (tk.token_ID == ASTERISK_TK)
@@ -221,6 +228,7 @@ Node* m(int depth)
 /* Non-terminal function for <R> -> ( <expr> ) | Identifier | Integer */
 Node* r(int depth)
 {
+    std::cout << "r" << "\n";
     depth++;
     Node* node = new Node("<R>", depth);
     if (tk.token_ID == LEFT_PAREN_TK)
@@ -254,6 +262,7 @@ Node* r(int depth)
 /* Non-terminal function for <stats> -> <stat>  <mStat> */
 Node* stats(int depth)
 {
+    std::cout << "stats" << "\n";
     depth++;
     Node* node = new Node("<stats>", depth);
     node->child_1 = stat(depth);
