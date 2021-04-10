@@ -302,6 +302,7 @@ Node* stat(int depth)
         tk = scanner(in_file, lineNum);
         if (tk.token_ID == SEMI_COLON_TK)
         {
+            std::cout << "semiC = true" << "\n";
             node->token_1 = tk;
             
             return node;
