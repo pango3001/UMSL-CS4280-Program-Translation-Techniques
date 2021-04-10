@@ -17,7 +17,7 @@ int main(int argc, char** argv) {
     // FILE GIVEN
     if (argc == 2) {
         fileName = argv[1];
-        fileName += ".fs";
+        fileName += ".fs18";
 
         std::ofstream outfile;
         outfile.open(fileName, std::ios_base::app);
