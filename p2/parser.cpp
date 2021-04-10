@@ -153,6 +153,33 @@ Node* expr(int depth)
 }
 
 /* Non-terminal function for <M> -> <M> + <A> | <M> - <A> | <M> */
+Node* n(int depth)
+{
+    depth++;
+    Node* node = new Node("<N>", depth);
+    /* children are <M> and <A> or just <M> */
+    node->child_1 = a(depth);
+    if (tk.token_ID == SLASH_TK)
+    {
+        /* store operator */
+        node->token_1 = tk;
+        tk = scanner(in_file, lineNum);
+        node->child_2 = n(depth);
+        return node;
+    }
+    else if (tk.token_ID == ASTERISK_TK)
+    {
+        /* store operator */
+        node->token_1 = tk;
+        tk = scanner(in_file, lineNum);
+        node->child_2 = n(depth);
+        return node;
+    }
+    else
+        return node;
+}
+
+/* Non-terminal function for <M> -> <M> + <A> | <M> - <A> | <M> */
 Node* a(int depth)
 {
     depth++;
