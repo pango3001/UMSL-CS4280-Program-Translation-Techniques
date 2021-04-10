@@ -456,7 +456,7 @@ Node* assign(int depth)
 {
     depth++;
     Node* node = new Node("<assign>", depth);
-    tk = scanner(in_file, lineNum);
+    //tk = scanner(in_file, lineNum);
     if (tk.token_ID == ASSIGN_TK)
     {
         if (tk.token_ID == ID_TK)
