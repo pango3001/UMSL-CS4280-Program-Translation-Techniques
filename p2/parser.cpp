@@ -236,9 +236,9 @@ Node* r(int depth)
     Node* node = new Node("<R>", depth);
     if (tk.token_ID == LEFT_PAREN_TK)
     {
-        
-        node->child_1 = expr(depth);
         tk = scanner(in_file, lineNum);
+        node->child_1 = expr(depth);
+        
         if (tk.token_ID == RIGHT_PAREN_TK)
         {
             tk = scanner(in_file, lineNum);
@@ -269,7 +269,6 @@ Node* stats(int depth)
     if (debug) {std::cout << "stats" << "\n";}
     depth++;
     Node* node = new Node("<stats>", depth);
-    
     node->child_1 = stat(depth);
     node->child_2 = mstat(depth);
     return node;
