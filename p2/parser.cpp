@@ -304,7 +304,7 @@ Node* stat(int depth)
         {
             std::cout << "semiC = true" << "\n";
             node->token_1 = tk;
-            
+            tk = scanner(in_file, lineNum);
             return node;
 
         }
