@@ -95,8 +95,7 @@ Node* vars(int depth)
     depth++;
     /* create <vars> node */
     Node* node = new Node("<vars>", depth);
-    /* predict: let Identifier = Integer <vars> */
-    /* check the token and then scan for next token until end of grammar */
+
     if (tk.token_ID == DATA_TK)
     {
         tk = scanner(in_file, lineNum);
@@ -237,8 +236,9 @@ Node* r(int depth)
     Node* node = new Node("<R>", depth);
     if (tk.token_ID == LEFT_PAREN_TK)
     {
-        tk = scanner(in_file, lineNum);
+        
         node->child_1 = expr(depth);
+        tk = scanner(in_file, lineNum);
         if (tk.token_ID == RIGHT_PAREN_TK)
         {
             tk = scanner(in_file, lineNum);
