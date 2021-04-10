@@ -3,5 +3,6 @@ data x := 5 ;
 main
 begin
 data y := 67 ;
+getter x ;
 outter y ;
 end
