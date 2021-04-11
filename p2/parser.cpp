@@ -230,8 +230,7 @@ Node* m(int depth)
     {
         /* strore operator */
         node->token_1 = tk;
-        tk = scanner(in_file, lineNum);
-        if (debug2) { std::cout << "Working on token15: " << tk.token_string << "\n"; }
+        tk = scanner(in_file, lineNum); if (debug2) { std::cout << "Working on token15: " << tk.token_string << "\n"; }
         node->child_1 = m(depth);
         return node;
     }
@@ -251,14 +250,12 @@ Node* r(int depth)
     //tk = scanner(in_file, lineNum);
     if (tk.token_ID == LEFT_PAREN_TK)
     {
-        tk = scanner(in_file, lineNum);
-        if (debug2) { std::cout << "Working on token16: " << tk.token_string << "\n"; }
+        tk = scanner(in_file, lineNum); if (debug2) { std::cout << "Working on token16: " << tk.token_string << "\n"; }
         node->child_1 = expr(depth);
         
         if (tk.token_ID == RIGHT_PAREN_TK)
         {
-            tk = scanner(in_file, lineNum);
-            if (debug2) { std::cout << "Working on token17: " << tk.token_string << "\n"; }
+            tk = scanner(in_file, lineNum);  if (debug2) { std::cout << "Working on token17: " << tk.token_string << "\n"; }
             return node;
         }
         else
@@ -425,7 +422,7 @@ Node* in(int depth)
         if(tk.token_ID == ID_TK)
         {
             node->token_1 = tk;
-            //tk = scanner(in_file, lineNum);
+            tk = scanner(in_file, lineNum);   // i think this should uncommented //
             return node;
 
         }
@@ -444,8 +441,7 @@ Node* out(int depth)
     Node* node = new Node("<out>", depth);
     if (tk.token_ID == OUTTER_TK)
     {
-        tk = scanner(in_file, lineNum); if (debug2) { std::cout << "Working on token37: " << tk.token_string << "\n"; }
-        //tk = scanner(in_file, lineNum);
+        //tk = scanner(in_file, lineNum); if (debug2) { std::cout << "Working on token37: " << tk.token_string << "\n"; } //working before this
         node->child_1 = expr(depth);
         return node;
     }
