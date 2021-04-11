@@ -346,7 +346,7 @@ Node* stat(int depth)
     {
         if (debug) { std::cout << "out= tru" << "\n"; }
         node->child_1 = out(depth);
-        tk = scanner(in_file, lineNum); if (debug2) { std::cout << "Working on token23: " << tk.token_string << "\n"; }
+        //tk = scanner(in_file, lineNum); if (debug2) { std::cout << "Working on token23: " << tk.token_string << "\n"; }
         if (tk.token_ID == SEMI_COLON_TK)
         {
             node->token_1 = tk;
