@@ -349,20 +349,12 @@ Node* stat(int depth)
     else if(tk.token_ID == BEGIN_TK)
     {
         node->child_1 = block(depth);
-        tk = scanner(in_file, lineNum); if (debug2) { std::cout << "Working on token25: " << tk.token_string << "\n"; }
-        if (tk.token_ID == SEMI_COLON_TK)
-        {
-            node->token_1 = tk;
-            tk = scanner(in_file, lineNum); if (debug2) { std::cout << "Working on token26: " << tk.token_string << "\n"; }
-            return node;
+        return node;
 
-        }
-        else
-            error(SEMI_COLON_TK, tk);
     }
-    else if(tk.token_ID == ID_TK)
+    else if(tk.token_ID == IF_TK)
     {
-        node->child_1 = assign(depth);
+        //node->child_1 = iff(depth);   NEDEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEED TO FIX
         tk = scanner(in_file, lineNum); if (debug2) { std::cout << "Working on token27: " << tk.token_string << "\n"; }
         if (tk.token_ID == SEMI_COLON_TK)
         {
@@ -388,6 +380,20 @@ Node* stat(int depth)
         else
             error(SEMI_COLON_TK, tk);
     }
+    else if (tk.token_ID == ASSIGN_TK)
+    {
+        node->child_1 = assign(depth);
+        tk = scanner(in_file, lineNum); if (debug2) { std::cout << "Working on token34: " << tk.token_string << "\n"; }
+        if (tk.token_ID == SEMI_COLON_TK)
+        {
+            node->token_1 = tk;
+            tk = scanner(in_file, lineNum); if (debug2) { std::cout << "Working on token35: " << tk.token_string << "\n"; }
+            return node;
+
+        }
+        else
+            error(SEMI_COLON_TK, tk);
+    }
     else if (tk.token_ID == PROC_TK)
     {
         node->child_1 = gotoo(depth);
@@ -402,20 +408,7 @@ Node* stat(int depth)
         else
             error(SEMI_COLON_TK, tk);
     }
-    else if (tk.token_ID == VOID_TK)
-    {
-        node->child_1 = label(depth);
-        tk = scanner(in_file, lineNum); if (debug2) { std::cout << "Working on token34: " << tk.token_string << "\n"; }
-        if (tk.token_ID == SEMI_COLON_TK)
-        {
-            node->token_1 = tk;
-            tk = scanner(in_file, lineNum); if (debug2) { std::cout << "Working on token35: " << tk.token_string << "\n"; }
-            return node;
 
-        }
-        else
-            error(SEMI_COLON_TK, tk);
-    }
     else
         error_stat(tk);
 }
