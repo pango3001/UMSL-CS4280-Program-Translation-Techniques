@@ -366,7 +366,7 @@ Node* stat(int depth)
     else if(tk.token_ID == IF_TK)
     {
         node->child_1 = iff(depth);
-        tk = scanner(in_file, lineNum); if (debug2) { std::cout << "Working on token27: " << tk.token_string << "\n"; }
+        //tk = scanner(in_file, lineNum); if (debug2) { std::cout << "Working on token27: " << tk.token_string << "\n"; }
         if (tk.token_ID == SEMI_COLON_TK)
         {
             node->token_1 = tk;
@@ -380,7 +380,7 @@ Node* stat(int depth)
     else if (tk.token_ID == LOOP_TK)
     {
         node->child_1 = loop(depth);
-        tk = scanner(in_file, lineNum); if (debug2) { std::cout << "Working on token29: " << tk.token_string << "\n"; }
+        //tk = scanner(in_file, lineNum); if (debug2) { std::cout << "Working on token29: " << tk.token_string << "\n"; }
         if (tk.token_ID == SEMI_COLON_TK)
         {
             node->token_1 = tk;
@@ -394,7 +394,7 @@ Node* stat(int depth)
     else if (tk.token_ID == ASSIGN_TK)
     {
         node->child_1 = assign(depth);
-        tk = scanner(in_file, lineNum); if (debug2) { std::cout << "Working on token34: " << tk.token_string << "\n"; }
+        //tk = scanner(in_file, lineNum); if (debug2) { std::cout << "Working on token34: " << tk.token_string << "\n"; }
         if (tk.token_ID == SEMI_COLON_TK)
         {
             node->token_1 = tk;
@@ -408,7 +408,7 @@ Node* stat(int depth)
     else if (tk.token_ID == PROC_TK)
     {
         node->child_1 = gotoo(depth);
-        tk = scanner(in_file, lineNum); if (debug2) { std::cout << "Working on token32: " << tk.token_string << "\n"; }
+        //tk = scanner(in_file, lineNum); if (debug2) { std::cout << "Working on token32: " << tk.token_string << "\n"; }
         if (tk.token_ID == SEMI_COLON_TK)
         {
             node->token_1 = tk;
