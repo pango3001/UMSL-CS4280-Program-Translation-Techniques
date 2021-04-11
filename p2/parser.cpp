@@ -78,6 +78,7 @@ Node* block(int depth)
         /* children are <vars> and <stats> */
         node->child_1 = vars(depth);
         node->child_2 = stats(depth);
+        
         if (tk.token_ID == END_TK)
         {
             tk = scanner(in_file, lineNum); if (debug2) { std::cout << "Working on token4: " << tk.token_string << "\n"; }
@@ -285,7 +286,7 @@ Node* stats(int depth)
     depth++;
     Node* node = new Node("<stats>", depth);
     node->child_1 = stat(depth);
-    if (debug) { std::cout << "lets check mstat" << "\n"; }
+    if (debug) { std::cout << "WHYYYYYYYYYYYYYYYYYYYY" << "\n"; }
     node->child_2 = mstat(depth);
     return node;
 }
@@ -629,7 +630,8 @@ void error_stat(Token recieved)
 /* function to determine if token is a statement token */
 bool is_stat(tokens tk)
 {
-    if (tk == GETTER_TK || tk == OUTTER_TK || tk == BEGIN_TK || tk == IF_TK || tk == LOOP_TK || tk == PROC_TK || tk == ASSIGN_TK || tk == VOID_TK)
+    if (tk == GETTER_TK || tk == OUTTER_TK || tk == BEGIN_TK || tk == IF_TK || tk == LOOP_TK || tk == PROC_TK || tk == ASSIGN_TK || tk == VOID_TK) {
+        if (debug2) { std::cout << "stat =========== tru" << tk.token_string << "\n"; }
         return true;
     else
         return false;
