@@ -10,6 +10,7 @@ struct Node
 
     Token token_1;
     Token token_2;
+    Token token_3;
 
     Node* child_1; 
     Node* child_2;
@@ -22,6 +23,7 @@ struct Node
         this->depth = 0;
         this->token_1 = Token();
         this->token_2 = Token();
+        this->token_3 = Token();
         this->child_1 = nullptr;
         this->child_2 = nullptr;
         this->child_3 = nullptr;
