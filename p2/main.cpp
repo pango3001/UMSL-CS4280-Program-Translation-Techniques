@@ -103,7 +103,7 @@
 #include "parser.h"
 
 int main(int argc, char** argv) {
-    std::ifstream in_file;         // input file
+    //std::ifstream in_file;         // input file
     std::string file_name;         // filename
 
     // FILE GIVEN
