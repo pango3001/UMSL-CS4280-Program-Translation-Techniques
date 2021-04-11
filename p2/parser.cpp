@@ -285,7 +285,7 @@ Node* stats(int depth)
     depth++;
     Node* node = new Node("<stats>", depth);
     node->child_1 = stat(depth);
-    node->child_2 = mstat(depth);
+    //node->child_2 = mstat(depth);
     return node;
 }
 
