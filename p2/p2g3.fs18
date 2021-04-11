@@ -2,8 +2,6 @@ $$ p2g3 $$
 data x := 5 ;
 main
 begin
-getter x ;
 data y := 67 ;
-getter x ;
 outter y ;
 end
