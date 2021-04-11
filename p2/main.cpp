@@ -114,7 +114,7 @@ int main(int argc, char** argv) {
         std::ofstream outfile;
         outfile.open(fileName, std::ios_base::app);
         outfile << " ";
-        outfile.close();
+
 
     }
 
