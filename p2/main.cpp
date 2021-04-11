@@ -159,7 +159,7 @@ int main(int argc, char** argv) {
     }
     else {  // cannot open file
         std::cout << "ERROR: Cannot open " << file_name << " for reading" << std::endl;
-        n_file.close();
+        in_file.close();
         exit(EXIT_FAILURE);
     }
     return 0;
