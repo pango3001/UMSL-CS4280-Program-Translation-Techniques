@@ -124,6 +124,7 @@ Node* vars(int depth)
                     if (debug2) { std::cout << "Working on token8: " << tk.token_string << "\n"; }
                     if (tk.token_ID == SEMI_COLON_TK)
                     {
+                        node->token_3 = tk; // 4-11 fix
                         tk = scanner(in_file, lineNum);
                         if (debug2) { std::cout << "Working on token9: " << tk.token_string << "\n"; }
                         /* child is <vars> */
