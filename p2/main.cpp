@@ -109,17 +109,17 @@ int main(int argc, char** argv) {
     // FILE GIVEN
     if (argc == 2) {
         fileName = argv[1];
-        fileName += ".fs28";
+        fileName += ".fs18";
 
         std::ofstream outfile;
         outfile.open(fileName, std::ios_base::app);
         outfile << " ";
 
-        /* Call the parser */
-        Node* root = parser();
-        print_tree(root);
-        /* Close the input file */
-        in_file.close();
+        ///* Call the parser */
+        //Node* root = parser();
+        //print_tree(root);
+        ///* Close the input file */
+        //in_file.close();
 
     }
 
