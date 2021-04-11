@@ -408,11 +408,6 @@ Node* stat(int depth)
         else
             error(SEMI_COLON_TK, tk);
     }
-    else if (tk.token_ID == SEMI_COLON_TK)
-    {
-        tk = scanner(in_file, lineNum); if (debug2) { std::cout << "Working on token33: " << tk.token_string << "\n"; }
-        return node;
-    }
 
     else
         error_stat(tk);
@@ -476,7 +471,7 @@ Node* loop(int depth)
             node->child_3 = expr(depth);
             if(tk.token_ID == RIGHT_BRACKET_TK)
             {
-                tk = scanner(in_file, lineNum); if (debug2) { std::cout << "Working on token40: " << tk.token_string << "\n"; }
+                //tk = scanner(in_file, lineNum); if (debug2) { std::cout << "Working on token40: " << tk.token_string << "\n"; }
                 node->child_4 = stat(depth);
                 return node;
             }
