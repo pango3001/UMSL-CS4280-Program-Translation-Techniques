@@ -234,6 +234,7 @@ Node* r(int depth)
     if (debug) {std::cout << "r" << "\n";}
     depth++;
     Node* node = new Node("<R>", depth);
+    tk = scanner(in_file, lineNum);
     if (tk.token_ID == LEFT_PAREN_TK)
     {
         tk = scanner(in_file, lineNum);
@@ -433,7 +434,7 @@ Node* out(int depth)
     Node* node = new Node("<out>", depth);
     if (tk.token_ID == OUTTER_TK)
     {
-        tk = scanner(in_file, lineNum);
+        //tk = scanner(in_file, lineNum);
         node->child_1 = expr(depth);
         return node;
     }
