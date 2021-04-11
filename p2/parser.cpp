@@ -408,6 +408,11 @@ Node* stat(int depth)
         else
             error(SEMI_COLON_TK, tk);
     }
+    else if (tk.token_ID == SEMI_COLON_TK)
+    {
+        tk = scanner(in_file, lineNum); if (debug2) { std::cout << "Working on token33: " << tk.token_string << "\n"; }
+        return node;
+    }
 
     else
         error_stat(tk);
