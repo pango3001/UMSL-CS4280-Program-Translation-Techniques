@@ -267,8 +267,8 @@ Node* r(int depth)
     else if (tk.token_ID == ID_TK)
     {
         node->token_1 = tk;
-        tk = scanner(in_file, lineNum);
-        if (debug2) { std::cout << "Working on token18: " << tk.token_string << "\n"; }
+        tk = scanner(in_file, lineNum); if (debug2) { std::cout << "Working on token18: " << tk.token_string << "\n"; }
+        
         return node;
     }
     else if (tk.token_ID == INT_TK)
