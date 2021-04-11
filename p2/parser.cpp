@@ -501,7 +501,7 @@ Node* assign(int depth)
             tk = scanner(in_file, lineNum); if (debug2) { std::cout << "Working on token41: " << tk.token_string << "\n"; }
             if (tk.token_ID == COLON_EQUALS_TK)
             {
-                //tk = scanner(in_file, lineNum); if (debug2) { std::cout << "Working on token42: " << tk.token_string << "\n"; }
+                tk = scanner(in_file, lineNum); if (debug2) { std::cout << "Working on token42: " << tk.token_string << "\n"; }
                 node->child_1 = expr(depth);
                 return node;
 
