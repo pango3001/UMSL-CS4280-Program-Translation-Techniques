@@ -470,23 +470,23 @@ Node* loop(int depth)
     if(tk.token_ID == LOOP_TK)
     {
         tk = scanner(in_file, lineNum); if (debug2) { std::cout << "Working on token38: " << tk.token_string << "\n"; }
-        if(tk.token_ID == LEFT_PAREN_TK)
+        if(tk.token_ID == LEFT_BRACKET_TK)
         {
             tk = scanner(in_file, lineNum); if (debug2) { std::cout << "Working on token39: " << tk.token_string << "\n"; }
             node->child_1 = expr(depth);
             node->child_2 = ro(depth);
             node->child_3 = expr(depth);
-            if(tk.token_ID == RIGHT_PAREN_TK)
+            if(tk.token_ID == RIGHT_BRACKET_TK)
             {
                 tk = scanner(in_file, lineNum); if (debug2) { std::cout << "Working on token40: " << tk.token_string << "\n"; }
                 node->child_4 = stat(depth);
                 return node;
             }
             else
-                error(RIGHT_PAREN_TK, tk);
+                error(RIGHT_BRACKET_TK, tk);
         }
         else
-            error(LEFT_PAREN_TK, tk);
+            error(LEFT_BRACKET_TK, tk);
     }
     else
         error(LOOP_TK, tk);
