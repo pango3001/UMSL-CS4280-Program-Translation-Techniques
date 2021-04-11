@@ -53,6 +53,7 @@ Node* program()
     node->child_1 = vars(depth);
     if (tk.token_ID == MAIN_TK)
     {
+        node->token_1 = tk;
         /* scan for next token */
         tk = scanner(in_file, lineNum);
         if (debug2) { std::cout << "Working on token2: " << tk.token_string << "\n"; }
