@@ -633,6 +633,7 @@ bool is_stat(tokens tk)
     if (tk == GETTER_TK || tk == OUTTER_TK || tk == BEGIN_TK || tk == IF_TK || tk == LOOP_TK || tk == PROC_TK || tk == ASSIGN_TK || tk == VOID_TK) {
         if (debug2) { std::cout << "stat =========== tru" << tk.token_string << "\n"; }
         return true;
+    }
     else
         return false;
 }
