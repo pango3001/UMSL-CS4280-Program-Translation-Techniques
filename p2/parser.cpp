@@ -712,7 +712,7 @@ void print_tree(Node* node)
         std::string indents((node->depth * 2), ' ');
         std::cout << indents;
         std::cout << node->name << "  ";
-        std::cout << node->token_1.token_string << "  " << node->token_2.token_string << "  " << node->token_3.token_string << "  " << node->token_4.token_string << "  " << node->token_5.token_string << std::endl;
+        std::cout << node->token_1.token_string << " " << node->token_2.token_string << " " << node->token_3.token_string << " " << node->token_4.token_string << " " << node->token_5.token_string << std::endl;
 
         if(node->child_1 != nullptr)
             print_tree(node->child_1);
