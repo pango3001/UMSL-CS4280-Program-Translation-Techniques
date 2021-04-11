@@ -154,7 +154,7 @@ int main(int argc, char** argv) {
         Node* root = parser();
         print_tree(root);        
         /* Close the input file */
-        in_file.close();
+        infile.close();
 
     }
     else {  // cannot open file
