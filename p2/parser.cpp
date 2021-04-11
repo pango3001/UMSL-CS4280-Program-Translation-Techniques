@@ -638,7 +638,7 @@ void error_stat(Token recieved)
 /* function to determine if token is a statement token */
 bool is_stat(tokens tk)
 {
-    if (tk == GETTER_TK || tk == OUTTER_TK || tk == BEGIN_TK || tk == IF_TK || tk == WHILE_TK || tk == ID_TK)
+    if (tk == GETTER_TK || tk == OUTTER_TK || tk == ASSIGN_TK || tk == IF_TK || tk == LOOP_TK || tk == PROC_TK || tk == ASSIGN_TK)
         return true;
     else
         return false;
