@@ -150,7 +150,7 @@ int main(int argc, char** argv) {
 
     // Scan file
     if (inFile) {
-        /* Call the parser */
+        std::cout << "Starting the parser..." << std::endl;
         Node* root = parser();
         print_tree(root);        
         /* Close the input file */
