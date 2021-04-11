@@ -103,7 +103,7 @@
 #include "parser.h"
 
 int main(int argc, char** argv) {
-    std::ifstream inFile;         // input file
+    std::ifstream in_file;         // input file
     std::string fileName;         // filename
 
     // FILE GIVEN
@@ -111,9 +111,9 @@ int main(int argc, char** argv) {
         fileName = argv[1];
         fileName += ".fs18";
 
-        //std::ofstream outfile;
-        //outfile.open(fileName, std::ios_base::app);
-        //outfile << " ";
+        std::ofstream outfile;
+        outfile.open(fileName, std::ios_base::app);
+        outfile << " ";
 
 
     }
@@ -146,15 +146,15 @@ int main(int argc, char** argv) {
         exit(EXIT_FAILURE);
     }
 
-    inFile.open(fileName);
+    in_file.open(fileName);
 
     // Scan file
-    if (inFile) {
+    if (in_file) {
         std::cout << "Starting the parser..." << std::endl;
         Node* root = parser();
         print_tree(root);        
         /* Close the input file */
-        inFile.close();
+        in_file.close();
 
     }
     else {  // cannot open file
