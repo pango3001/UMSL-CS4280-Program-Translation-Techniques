@@ -145,7 +145,7 @@ Node* vars(int depth)
     }
     /* empty production */
     else
-        return node;
+        return NULL;
 }
 
 /* Non-terminal function for <expr> -> <A> / <expr> | <A> * <expr> | <A> */
@@ -305,7 +305,7 @@ Node* mstat(int depth)
         return node;
     }
     else
-        return node;
+        return NULL;
 }
 
 /* Non-terminal function for <stat> -> <in> | <out> | <block> | <cond> | <loop> | <assign> */
