@@ -436,7 +436,7 @@ Node* in(int depth)
         if(tk.token_ID == ID_TK)
         {
             node->token_1 = tk;
-            //tk = scanner(in_file, lineNum);   // i think this should uncommented //
+            tk = scanner(in_file, lineNum);   // i think this should uncommented //
             return node;
 
         }
