@@ -260,11 +260,14 @@ Node* r(int depth)
     //tk = scanner(in_file, lineNum);
     if (tk.token_ID == LEFT_PAREN_TK)
     {
+        node->token_1 = tk;
         tk = scanner(in_file, lineNum); if (debug2) { std::cout << "Working on token16: " << tk.token_string << "\n"; }
         node->child_1 = expr(depth);
         
         if (tk.token_ID == RIGHT_PAREN_TK)
         {
+            node->token_2 = tk;
+
             tk = scanner(in_file, lineNum);  if (debug2) { std::cout << "Working on token17: " << tk.token_string << "\n"; }
             return node;
         }
@@ -305,10 +308,10 @@ Node* mstat(int depth)
     if (debug) {std::cout << "mstat" << "\n";}
     depth++;
     Node* node = new Node("<mstat>", depth);
-    if (debug2) { std::cout << "STill working on: " << tk.token_string << "\n"; }
+
     if (tk.token_ID == GETTER_TK || tk.token_ID == OUTTER_TK || tk.token_ID == BEGIN_TK || tk.token_ID == IF_TK || tk.token_ID == LOOP_TK || tk.token_ID == PROC_TK || tk.token_ID == ASSIGN_TK || tk.token_ID == VOID_TK)
     {
-        std::cout << "stat = true" << "\n";
+        if (debug2) { std::cout << "STill working on: " << tk.token_string << "\n"; }
         node->child_1 = stat(depth);
         node->child_2 = mstat(depth);
         return node;
@@ -343,7 +346,7 @@ Node* stat(int depth)
     {
         if (debug) { std::cout << "out= tru" << "\n"; }
         node->child_1 = out(depth);
-        //tk = scanner(in_file, lineNum); if (debug2) { std::cout << "Working on token23: " << tk.token_string << "\n"; }
+        tk = scanner(in_file, lineNum); if (debug2) { std::cout << "Working on token23: " << tk.token_string << "\n"; }
         if (tk.token_ID == SEMI_COLON_TK)
         {
             node->token_1 = tk;
