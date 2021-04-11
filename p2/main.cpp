@@ -114,12 +114,7 @@ int main(int argc, char** argv) {
         std::ofstream outfile;
         outfile.open(fileName, std::ios_base::app);
         outfile << " ";
-
-        ///* Call the parser */
-        //Node* root = parser();
-        //print_tree(root);
-        ///* Close the input file */
-        //in_file.close();
+        outfile.close();
 
     }
 
