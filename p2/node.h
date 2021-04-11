@@ -33,6 +33,7 @@ struct Node
         this->depth = depth;
         this->token_1 = Token();
         this->token_2 = Token();
+        this->token_3 = Token();
         this->child_1 = nullptr;
         this->child_2 = nullptr;
         this->child_3 = nullptr;
