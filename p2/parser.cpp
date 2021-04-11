@@ -107,27 +107,29 @@ Node* vars(int depth)
 
     if (tk.token_ID == DATA_TK)
     {
+        node->token_1 = tk;
         tk = scanner(in_file, lineNum);
         if (debug2) { std::cout << "Working on token5: " << tk.token_string << "\n"; }
         if (tk.token_ID == ID_TK)
         {
             
-            node->token_1 = tk;
+            node->token_2 = tk;
             tk = scanner(in_file, lineNum);
             if (debug2) { std::cout << "Working on token6: " << tk.token_string << "\n"; }
             if (tk.token_ID == COLON_EQUALS_TK)
             {
+                node->token_3 = tk;
                 tk = scanner(in_file, lineNum);
                 if (debug2) { std::cout << "Working on token7: " << tk.token_string << "\n"; }
                 if (tk.token_ID == INT_TK)
                 {
                     
-                    node->token_2 = tk;
+                    node->token_4 = tk;
                     tk = scanner(in_file, lineNum);
                     if (debug2) { std::cout << "Working on token8: " << tk.token_string << "\n"; }
                     if (tk.token_ID == SEMI_COLON_TK)
                     {
-                        node->token_3 = tk; // 4-11 fix
+                        node->token_5 = tk; // 4-11 fix
                         tk = scanner(in_file, lineNum);
                         if (debug2) { std::cout << "Working on token9: " << tk.token_string << "\n"; }
                         /* child is <vars> */
