@@ -76,6 +76,7 @@ Node* block(int depth)
     /* predict: begin <vars> <stats> end */
     if (tk.token_ID == BEGIN_TK)
     {
+        node->token_1 = tk;
         tk = scanner(in_file, lineNum); if (debug2) { std::cout << "Working on token3: " << tk.token_string << "\n"; }
         /* children are <vars> and <stats> */
         node->child_1 = vars(depth);
@@ -83,6 +84,7 @@ Node* block(int depth)
         
         if (tk.token_ID == END_TK)
         {
+            node->token_2 = tk;
             tk = scanner(in_file, lineNum); if (debug2) { std::cout << "Working on token4: " << tk.token_string << "\n"; }
             
             return node;
