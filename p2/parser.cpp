@@ -312,7 +312,7 @@ Node* mstat(int depth)
         return node;
     }
     else
-        return nade;
+        return node;
 }
 
 /* Non-terminal function for <stat> -> <in> | <out> | <block> | <cond> | <loop> | <assign> */
