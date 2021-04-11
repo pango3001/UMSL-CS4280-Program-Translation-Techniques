@@ -285,7 +285,7 @@ Node* stats(int depth)
     depth++;
     Node* node = new Node("<stats>", depth);
     node->child_1 = stat(depth);
-    //node->child_2 = mstat(depth);
+    node->child_2 = mstat(depth);
     return node;
 }
 
@@ -628,7 +628,7 @@ void error_stat(Token recieved)
 /* function to determine if token is a statement token */
 bool is_stat(tokens tk)
 {
-    if (tk == GETTER_TK || tk == OUTTER_TK || tk == ASSIGN_TK || tk == IF_TK || tk == LOOP_TK || tk == PROC_TK || tk == ASSIGN_TK)
+    if (tk == GETTER_TK || tk == OUTTER_TK || tk == BEGIN_TK || tk == IF_TK || tk == LOOP_TK || tk == PROC_TK || tk == ASSIGN_TK || tk == VOID_TK)
         return true;
     else
         return false;
