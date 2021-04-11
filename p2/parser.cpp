@@ -297,7 +297,7 @@ Node* mstat(int depth)
     if (debug) {std::cout << "mstat" << "\n";}
     depth++;
     Node* node = new Node("<mstat>", depth);
-    if (is_stat(tk.token_ID))
+    if (tk.token_ID == GETTER_TK || tk.token_ID == OUTTER_TK || tk.token_ID == BEGIN_TK || tk.token_ID == IF_TK || tk.token_ID == LOOP_TK || tk.token_ID == PROC_TK || tk.token_ID == ASSIGN_TK || tk.token_ID == VOID_TK)
     {
         std::cout << "stat = true" << "\n";
         node->child_1 = stat(depth);
@@ -631,7 +631,7 @@ void error_stat(Token recieved)
 bool is_stat(tokens tk)
 {
     if (tk == GETTER_TK || tk == OUTTER_TK || tk == BEGIN_TK || tk == IF_TK || tk == LOOP_TK || tk == PROC_TK || tk == ASSIGN_TK || tk == VOID_TK) {
-        if (debug2) { std::cout << "stat =========== tru" << tk.token_string << "\n"; }
+        
         return true;
     }
     else
