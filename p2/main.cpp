@@ -114,7 +114,7 @@ int main(int argc, char** argv) {
         std::ofstream outfile;
         outfile.open(file_name, std::ios_base::app);
         outfile << " ";
-
+        in_file.open(file_name);
 
     }
 
@@ -137,7 +137,7 @@ int main(int argc, char** argv) {
         } while (!userInput.empty());         // Pressing "Enter" on empty line will sim EOF
 
         tempFile.close();                   // close file
-
+        in_file.open(file_name);
     }
 
     //more than 1 argument quits
@@ -146,7 +146,7 @@ int main(int argc, char** argv) {
         exit(EXIT_FAILURE);
     }
 
-    in_file.open(file_name);
+    
 
     // Scan file
     if (in_file) {
@@ -159,7 +159,7 @@ int main(int argc, char** argv) {
     }
     else {  // cannot open file
         std::cout << "ERROR: Cannot open " << file_name << " for reading" << std::endl;
-
+        n_file.close();
         exit(EXIT_FAILURE);
     }
     return 0;
