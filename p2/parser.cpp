@@ -305,7 +305,7 @@ Node* mstat(int depth)
         return node;
     }
     else
-        return nullptr;
+        return node;
 }
 
 /* Non-terminal function for <stat> -> <in> | <out> | <block> | <cond> | <loop> | <assign> */
