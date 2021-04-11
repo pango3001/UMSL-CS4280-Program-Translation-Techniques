@@ -3,7 +3,7 @@
 #include "token.h"
 #include "node.h"
 
-extern std::ifstream in_file;
+extern std::ifstream infile;
 
 Node* parser();
 
