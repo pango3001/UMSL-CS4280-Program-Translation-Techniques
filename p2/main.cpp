@@ -111,9 +111,9 @@ int main(int argc, char** argv) {
         fileName = argv[1];
         fileName += ".fs18";
 
-        std::ofstream outfile;
-        outfile.open(fileName, std::ios_base::app);
-        outfile << " ";
+        //std::ofstream outfile;
+        //outfile.open(fileName, std::ios_base::app);
+        //outfile << " ";
 
 
     }
