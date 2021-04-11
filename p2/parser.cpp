@@ -494,6 +494,7 @@ Node* assign(int depth)
     //tk = scanner(in_file, lineNum);
     if (tk.token_ID == ASSIGN_TK)
     {
+        tk = scanner(in_file, lineNum); if (debug2) { std::cout << "Working on token49: " << tk.token_string << "\n"; }
         if (tk.token_ID == ID_TK)
         {
             node->token_1 = tk;
