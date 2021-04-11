@@ -471,7 +471,7 @@ Node* loop(int depth)
             node->child_3 = expr(depth);
             if(tk.token_ID == RIGHT_BRACKET_TK)
             {
-                //tk = scanner(in_file, lineNum); if (debug2) { std::cout << "Working on token40: " << tk.token_string << "\n"; }
+                tk = scanner(in_file, lineNum); if (debug2) { std::cout << "Working on token40: " << tk.token_string << "\n"; }
                 node->child_4 = stat(depth);
                 return node;
             }
