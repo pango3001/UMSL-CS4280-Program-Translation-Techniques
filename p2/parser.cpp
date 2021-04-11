@@ -58,10 +58,11 @@ Node* program()
         if (debug2) { std::cout << "Working on token2: " << tk.token_string << "\n"; }
         node->child_2 = block(depth);
         /* return node with attached children */
-        return node;
+        //return node; // 4-11 to
     }
     else
         error(MAIN_TK, tk);
+    return node; // 4-11 fix
 }
 
 
@@ -107,7 +108,7 @@ Node* vars(int depth)
         if (debug2) { std::cout << "Working on token5: " << tk.token_string << "\n"; }
         if (tk.token_ID == ID_TK)
         {
-            /* store identifier token*/
+            
             node->token_1 = tk;
             tk = scanner(in_file, lineNum);
             if (debug2) { std::cout << "Working on token6: " << tk.token_string << "\n"; }
@@ -117,7 +118,7 @@ Node* vars(int depth)
                 if (debug2) { std::cout << "Working on token7: " << tk.token_string << "\n"; }
                 if (tk.token_ID == INT_TK)
                 {
-                    /* store integer token */
+                    
                     node->token_2 = tk;
                     tk = scanner(in_file, lineNum);
                     if (debug2) { std::cout << "Working on token8: " << tk.token_string << "\n"; }
@@ -217,8 +218,10 @@ Node* a(int depth)
         node->child_2 = a(depth);
         return node;
     }
-    else
+    else { //4-11 fix
         return node;
+    }// 4-11 fix
+        
 }
 
 /* Non-terminal function for <M> -> * <M> |  <R> */
