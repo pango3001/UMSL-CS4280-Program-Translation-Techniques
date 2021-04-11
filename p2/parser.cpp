@@ -285,6 +285,7 @@ Node* stats(int depth)
     depth++;
     Node* node = new Node("<stats>", depth);
     node->child_1 = stat(depth);
+    if (debug) { std::cout << "lets check mstat" << "\n"; }
     node->child_2 = mstat(depth);
     return node;
 }
