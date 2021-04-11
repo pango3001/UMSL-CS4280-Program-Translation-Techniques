@@ -145,7 +145,7 @@ Node* vars(int depth)
     }
     /* empty production */
     else
-        return nullptr;
+        return node;
 }
 
 /* Non-terminal function for <expr> -> <A> / <expr> | <A> * <expr> | <A> */
