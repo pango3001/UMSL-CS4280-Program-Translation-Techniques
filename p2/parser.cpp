@@ -189,7 +189,7 @@ Node* n(unsigned int depth)
         return node;
 }
 
-/* Non-terminal function for <M> -> <M> + <A> | <M> - <A> | <M> */
+// <A>             ->        <M> + <A> | <M>
 Node* a(unsigned int depth)
 {
     if (debug) {std::cout << "a" << "\n";}  // for debugging
@@ -212,7 +212,7 @@ Node* a(unsigned int depth)
         
 }
 
-/* Non-terminal function for <M> -> * <M> |  <R> */
+// <M>              ->     * <M> |  <R>
 Node* m(unsigned int depth)
 {
     if (debug) {std::cout << "m" << "\n";}  // for debugging
@@ -233,7 +233,7 @@ Node* m(unsigned int depth)
     }
 }
 
-/* Non-terminal function for <R> -> ( <expr> ) | Identifier | Integer */
+// <R>              ->      ( <expr> ) | Identifier | Integer
 Node* r(unsigned int depth)
 {
     if (debug) {std::cout << "r" << "\n";}  // for debugging
@@ -270,10 +270,10 @@ Node* r(unsigned int depth)
         return node;
     }
     else
-        error(LEFT_PAREN_TK, ID_TK, INT_TK, tokey);
+        error3(LEFT_PAREN_TK, ID_TK, INT_TK, tokey);
 }
 
-/* Non-terminal function for <stats> -> <stat>  <mStat> */
+// <stats>         ->      <stat>  <mStat>
 Node* stats(unsigned int depth)
 {
     if (debug) {std::cout << "stats" << "\n";}  // for debugging
@@ -284,7 +284,7 @@ Node* stats(unsigned int depth)
     return node;
 }
 
-/* Non-terminal function for <mstat> -> empty |  <stat>  <mStat> */
+// <mStat>       ->      empty |  <stat>  <mStat>
 Node* mstat(unsigned int depth)
 {
     if (debug) {std::cout << "mstat" << "\n";}  // for debugging
@@ -302,7 +302,7 @@ Node* mstat(unsigned int depth)
         return node;
 }
 
-/* Non-terminal function for <stat> -> <in> | <out> | <block> | <cond> | <loop> | <assign> */
+// <stat>           ->      <in> ;  | <out> ;  | <block> | <if> ;  | <loop> ;  | <assign> ; | <goto> ; | <label> ;
 Node* stat(unsigned int depth)
 {
     if (debug) {std::cout << "stat" << "\n";}  // for debugging
@@ -405,7 +405,7 @@ Node* stat(unsigned int depth)
         error_mult(tokey);
 }
 
-/* Non-terminal function for <in> -> read ( Identifier ) : */
+// <in>              ->      getter  Identifier  
 Node* in(unsigned int depth)
 {
     if (debug) {std::cout << "in" << "\n";}
@@ -428,7 +428,7 @@ Node* in(unsigned int depth)
         error1(GETTER_TK, tokey);
 }
 
-/* Non-terminal function for <out> -> print ( <expr>  ) : */
+// <out>            ->      outter <expr>
 Node* out(unsigned int depth)
 {
     if (debug) {std::cout << "out" << "\n";}
@@ -445,7 +445,7 @@ Node* out(unsigned int depth)
         error1(OUTTER_TK, tokey);
 }
 
-/* Non-terminal function for <loop> -> iter ( <expr> <RO> <expr> ) <stat> */
+// <if>               ->      if [ <expr> <RO> <expr> ] then <stat>
 Node* iff(unsigned int depth)
 {
     if (debug) { std::cout << "if" << "\n"; }
@@ -487,7 +487,7 @@ Node* iff(unsigned int depth)
 
 
 
-/* Non-terminal function for <loop> -> iter ( <expr> <RO> <expr> ) <stat> */
+// <loop>          ->      loop  [ <expr> <RO> <expr> ]  <stat>
 Node* loop(unsigned int depth)
 {
     if (debug) {std::cout << "loop" << "\n";}
@@ -521,7 +521,7 @@ Node* loop(unsigned int depth)
         error1(LOOP_TK, tokey);
 }
 
-/* Non-terminal function for <assign> -> Identifier  = <expr> : */
+// <assign>       ->      assign Identifier  := <expr>  
 Node* assign(unsigned int depth)
 {
     if (debug) {std::cout << "assign" << "\n";}
@@ -553,7 +553,7 @@ Node* assign(unsigned int depth)
         error1(ASSIGN_TK, tokey);
 }
 
-/* Non-terminal function for <RO> ->  < | <  = | > | >  = | =  = | = */
+// <RO>            ->       =>  | =< |  ==  |   [ == ]  (three tokens)  | %
 Node* ro(unsigned int depth)
 {
     if (debug) {std::cout << "ro" << "\n";}
@@ -618,7 +618,7 @@ Node* ro(unsigned int depth)
         error_mult(tokey);
 
 }
-/* Non-terminal function for <in> -> read ( Identifier ) : */
+// <label>          ->    void Identifier
 Node* label(unsigned int depth)
 {
     if (debug) {std::cout << "label" << "\n";}
@@ -641,7 +641,7 @@ Node* label(unsigned int depth)
         error1(VOID_TK, tokey);
 }
 
-/* Non-terminal function for <in> -> read ( Identifier ) : */
+// <goto>           ->    proc Identifier
 Node* gotoo(unsigned int depth)
 {
     if (debug) {std::cout << "gotoo" << "\n";}
@@ -678,7 +678,7 @@ void error1(tokens need, Token got)
 }
 
 /* error function for two expected tokens */
-void error(tokens need_1, tokens need_2, Token got)
+void error2(tokens need_1, tokens need_2, Token got)
 {
     std::cout << "!!! ERROR !!!" << std::endl;
     std::cout << "expected tokens: " << tokes[need_1] << " or " << tokes[need_2] << std::endl;
@@ -688,7 +688,7 @@ void error(tokens need_1, tokens need_2, Token got)
 }
 
 /* error function for three expected tokens */
-void error(tokens need_1, tokens need_2, tokens need_3, Token got)
+void error3(tokens need_1, tokens need_2, tokens need_3, Token got)
 {
     std::cout << "!!! ERROR !!!" << std::endl;
     std::cout << "expected tokens: " << tokes[need_1] << ", " << tokes[need_2];
@@ -704,24 +704,24 @@ void error_mult(Token recieved)
     std::cout << " LINE NUMBER: " << recieved.lineNum << std::endl;
     exit(EXIT_FAILURE);
 }
-/* function to determine if token is a statement token */
-bool is_stat(tokens tk)
-{
-    if (tk == GETTER_TK || tk == OUTTER_TK || tk == BEGIN_TK || tk == IF_TK || tk == LOOP_TK || tk == PROC_TK || tk == ASSIGN_TK || tk == VOID_TK) {
-        
-        return true;
-    }
-    else
-        return false;
-}
+///* function to determine if token is a statement token */
+//bool is_stat(tokens tk)
+//{
+//    if (tk == GETTER_TK || tk == OUTTER_TK || tk == BEGIN_TK || tk == IF_TK || tk == LOOP_TK || tk == PROC_TK || tk == ASSIGN_TK || tk == VOID_TK) {
+//        
+//        return true;
+//    }
+//    else
+//        return false;
+//}
 
-bool is_ro(tokens tk)
-{
-    if (tk == EQUALS_OR_LESS_THAN_TK || tk == EQUALS_OR_GREAT_THAN_TK || tk == EQUALS_TK)
-        return true;
-    else
-        return false;
-}
+//bool is_ro(tokens tk)
+//{
+//    if (tk == EQUALS_OR_LESS_THAN_TK || tk == EQUALS_OR_GREAT_THAN_TK || tk == EQUALS_TK)
+//        return true;
+//    else
+//        return false;
+//}
 
 void print_tree(Node* node)
 {
