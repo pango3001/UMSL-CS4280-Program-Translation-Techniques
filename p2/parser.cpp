@@ -642,42 +642,38 @@ Node* gotoo(unsigned int depth)
 /* error function for single expected token */
 void error(tokens expected, Token recieved)
 {
-    std::cout << "parsing error" << std::endl;
+    std::cout << "!!! ERROR !!!" << std::endl;
     std::cout << "expected token: " << tokes[expected] << std::endl;
     std::cout << "recieved token: " << tokes[recieved.token_ID];
-    std::cout << " at line: " << recieved.lineNum << std::endl;
+    std::cout << " LINE NUMBER: " << recieved.lineNum << std::endl;
     exit(EXIT_FAILURE);
 }
 
 /* error function for two expected tokens */
 void error(tokens expected1, tokens expected2, Token recieved)
 {
-    std::cout << "parsing error" << std::endl;
+    std::cout << "!!! ERROR !!!" << std::endl;
     std::cout << "expected tokens: " << tokes[expected1] << " or " << tokes[expected2] << std::endl;
     std::cout << "recieved token: " << tokes[recieved.token_ID];
-    std::cout << " at line: " << recieved.lineNum << std::endl;
+    std::cout << " LINE NUMBER: " << recieved.lineNum << std::endl;
     exit(EXIT_FAILURE);
 }
 
 /* error function for three expected tokens */
 void error(tokens expected1, tokens expected2, tokens expected3, Token recieved)
 {
-    std::cout << "parsing error" << std::endl;
+    std::cout << "!!! ERROR !!!" << std::endl;
     std::cout << "expected tokens: " << tokes[expected1] << ", " << tokes[expected2];
     std::cout << ", or " << tokes[expected3] << std::endl;
     std::cout << "recieved token: " << tokes[recieved.token_ID];
-    std::cout << " at line: " << recieved.lineNum << std::endl;
+    std::cout << " LINE NUMBER: " << recieved.lineNum << std::endl;
     exit(EXIT_FAILURE);
 }
 /* error function for expected statement token */
 void error_stat(Token recieved)
 {
-    std::cout << "Parsing Error" << std::endl;
-    std::cout << "Expected tokens: " << tokes[GETTER_TK] << ", " << tokes[OUTTER_TK];
-    std::cout << ", " << tokes[BEGIN_TK] << ", " << tokes[IF_TK]; 
-    std::cout << ", " << tokes[WHILE_TK] << ", or " << tokes[ID_TK] << std::endl;
     std::cout << "Recieved token: " << tokes[recieved.token_ID];
-    std::cout << " At line: " << recieved.lineNum << std::endl;
+    std::cout << " LINE NUMBER: " << recieved.lineNum << std::endl;
     exit(EXIT_FAILURE);
 }
 /* function to determine if token is a statement token */
