@@ -313,7 +313,6 @@ Node* stat(unsigned int depth)
     if(tokey.token_ID == GETTER_TK)
     {
         node->child_1 = in(depth);
-}
         if (tokey.token_ID == SEMI_COLON_TK)
         {
             node->token_1 = tokey;
