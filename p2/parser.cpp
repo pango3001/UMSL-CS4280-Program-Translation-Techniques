@@ -687,8 +687,8 @@ void error(tokens need_1, tokens need_2, Token got)
 void error(tokens need_1, tokens need_2, tokens need_3, Token got)
 {
     std::cout << "!!! ERROR !!!" << std::endl;
-    std::cout << "expected tokens: " << tokes[need_1] << ", " << tokes[expected2];
-    std::cout << ", or " << tokes[expected3] << std::endl;
+    std::cout << "expected tokens: " << tokes[need_1] << ", " << tokes[need_2];
+    std::cout << ", or " << tokes[need_3] << std::endl;
     std::cout << "recieved token: " << tokes[got.token_ID];
     std::cout << " LINE NUMBER: " << got.lineNum << std::endl;
     exit(EXIT_FAILURE);
