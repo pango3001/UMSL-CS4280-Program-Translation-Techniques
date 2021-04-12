@@ -5,6 +5,12 @@
 
 I assumed every test file ends with the extension ".ss21" 
 
+to run p2: type "./frontEnd [file]"
+
+for example to run p2g1.ss21, type "./frontEnd p2g1"
+
+I have all the good tests saved already as p2g# (# being 1-6)
+
 BNF for p2:
 <program>  ->     <vars> main <block>
 <block>       ->      begin <vars> <stats> end
