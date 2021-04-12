@@ -27,12 +27,9 @@ Node* gotoo(unsigned int depth);
 Node* label(unsigned int depth);
 
 void error1(tokens need, Token got);
-void error(tokens need_1, tokens need_2, Token got);
-void error(tokens need_1, tokens need_2, tokens need_3, Token got);
+void error2(tokens need_1, tokens need_2, Token got);
+void error3(tokens need_1, tokens need_2, tokens need_3, Token got);
 void error_mult(Token got);
-
-bool is_stat(tokens tk);
-bool is_ro(tokens tk);
 
 void print_tree(Node* node);
 
