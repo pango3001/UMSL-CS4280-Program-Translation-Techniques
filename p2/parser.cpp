@@ -667,7 +667,7 @@ Node* gotoo(unsigned int depth)
 
 
 
-/* error function for single expected token */
+//error for single token
 void error1(tokens need, Token got)
 {
     std::cout << "!!! ERROR !!!" << std::endl;
@@ -677,7 +677,7 @@ void error1(tokens need, Token got)
     exit(EXIT_FAILURE);
 }
 
-/* error function for two expected tokens */
+// error for 2 tokens
 void error2(tokens need_1, tokens need_2, Token got)
 {
     std::cout << "!!! ERROR !!!" << std::endl;
@@ -687,7 +687,7 @@ void error2(tokens need_1, tokens need_2, Token got)
     exit(EXIT_FAILURE);
 }
 
-/* error function for three expected tokens */
+// error for 3 tokens
 void error3(tokens need_1, tokens need_2, tokens need_3, Token got)
 {
     std::cout << "!!! ERROR !!!" << std::endl;
@@ -697,7 +697,7 @@ void error3(tokens need_1, tokens need_2, tokens need_3, Token got)
     std::cout << " LINE NUMBER: " << got.lineNum << std::endl;
     exit(EXIT_FAILURE);
 }
-/* error function for expected statement token */
+// multiple tokens (4+) error
 void error_mult(Token recieved)
 {
     std::cout << "Token did not follow rule: " << tokes[recieved.token_ID];
