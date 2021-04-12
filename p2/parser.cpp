@@ -1,3 +1,9 @@
+// Name:    Jesse McCarville-Schueths
+// Course:  4280
+// Date:    April 11, 2021
+// Project: P2
+// File:    parser.cpp
+
 #include "parser.h"
 #include "scanner.h"
 #include <iostream>

@@ -1,3 +1,9 @@
+// Name:    Jesse McCarville-Schueths
+// Course:  4280
+// Date:    April 11, 2021
+// Project: P2
+// File:    parser.h
+
 #ifndef PARSER_H
 #define PARSER_H
 #include "token.h"
