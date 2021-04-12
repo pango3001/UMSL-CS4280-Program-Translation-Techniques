@@ -64,7 +64,7 @@ Node* program()
 
 
 /* Non-terminal function for <block> -> begin <vars> <stats> end */
-Node* block(int depth)
+Node* block(unsigned int depth)
 {
     if (debug) {std::cout << "block" << "\n";}
     depth++;
@@ -93,7 +93,7 @@ Node* block(int depth)
 }
 
 /* Function for <vars> -> empty | let Identifier = Integer <vars> */
-Node* vars(int depth)
+Node* vars(unsigned int depth)
 {
     if (debug) {std::cout << "vars" << "\n";}
     /* increase depth */
@@ -152,7 +152,7 @@ Node* vars(int depth)
 }
 
 /* Non-terminal function for <expr> -> <A> / <expr> | <A> * <expr> | <A> */
-Node* expr(int depth)
+Node* expr(unsigned int depth)
 {
     if (debug) {std::cout << "expr" << "\n";}
     depth++;
@@ -174,7 +174,7 @@ Node* expr(int depth)
 }
 
 /* Non-terminal function for <M> -> <M> + <A> | <M> - <A> | <M> */
-Node* n(int depth)
+Node* n(unsigned int depth)
 {
     if (debug) {std::cout << "n" << "\n";}
     depth++;
@@ -204,7 +204,7 @@ Node* n(int depth)
 }
 
 /* Non-terminal function for <M> -> <M> + <A> | <M> - <A> | <M> */
-Node* a(int depth)
+Node* a(unsigned int depth)
 {
     if (debug) {std::cout << "a" << "\n";}
     depth++;
@@ -227,7 +227,7 @@ Node* a(int depth)
 }
 
 /* Non-terminal function for <M> -> * <M> |  <R> */
-Node* m(int depth)
+Node* m(unsigned int depth)
 {
     if (debug) {std::cout << "m" << "\n";}
     depth++;
@@ -248,7 +248,7 @@ Node* m(int depth)
 }
 
 /* Non-terminal function for <R> -> ( <expr> ) | Identifier | Integer */
-Node* r(int depth)
+Node* r(unsigned int depth)
 {
     if (debug) {std::cout << "r" << "\n";}
     depth++;
@@ -288,7 +288,7 @@ Node* r(int depth)
 }
 
 /* Non-terminal function for <stats> -> <stat>  <mStat> */
-Node* stats(int depth)
+Node* stats(unsigned int depth)
 {
     if (debug) {std::cout << "stats" << "\n";}
     depth++;
@@ -299,7 +299,7 @@ Node* stats(int depth)
 }
 
 /* Non-terminal function for <mstat> -> empty |  <stat>  <mStat> */
-Node* mstat(int depth)
+Node* mstat(unsigned int depth)
 {
     if (debug) {std::cout << "mstat" << "\n";}
     depth++;
@@ -317,7 +317,7 @@ Node* mstat(int depth)
 }
 
 /* Non-terminal function for <stat> -> <in> | <out> | <block> | <cond> | <loop> | <assign> */
-Node* stat(int depth)
+Node* stat(unsigned int depth)
 {
     if (debug) {std::cout << "stat" << "\n";}
     depth++;
@@ -421,7 +421,7 @@ Node* stat(int depth)
 }
 
 /* Non-terminal function for <in> -> read ( Identifier ) : */
-Node* in(int depth)
+Node* in(unsigned int depth)
 {
     if (debug) {std::cout << "in" << "\n";}
     depth++;
@@ -444,7 +444,7 @@ Node* in(int depth)
 }
 
 /* Non-terminal function for <out> -> print ( <expr>  ) : */
-Node* out(int depth)
+Node* out(unsigned int depth)
 {
     if (debug) {std::cout << "out" << "\n";}
     depth++;
@@ -461,7 +461,7 @@ Node* out(int depth)
 }
 
 /* Non-terminal function for <loop> -> iter ( <expr> <RO> <expr> ) <stat> */
-Node* iff(int depth)
+Node* iff(unsigned int depth)
 {
     if (debug) { std::cout << "if" << "\n"; }
     depth++;
@@ -503,7 +503,7 @@ Node* iff(int depth)
 
 
 /* Non-terminal function for <loop> -> iter ( <expr> <RO> <expr> ) <stat> */
-Node* loop(int depth)
+Node* loop(unsigned int depth)
 {
     if (debug) {std::cout << "loop" << "\n";}
     depth++;
@@ -537,7 +537,7 @@ Node* loop(int depth)
 }
 
 /* Non-terminal function for <assign> -> Identifier  = <expr> : */
-Node* assign(int depth)
+Node* assign(unsigned int depth)
 {
     if (debug) {std::cout << "assign" << "\n";}
     depth++;
@@ -569,7 +569,7 @@ Node* assign(int depth)
 }
 
 /* Non-terminal function for <RO> ->  < | <  = | > | >  = | =  = | = */
-Node* ro(int depth)
+Node* ro(unsigned int depth)
 {
     if (debug) {std::cout << "ro" << "\n";}
     depth++;
@@ -591,7 +591,7 @@ Node* ro(int depth)
         error(EQUALS_OR_LESS_THAN_TK, EQUALS_OR_GREAT_THAN_TK, EQUALS_TK, tk);
 }
 /* Non-terminal function for <in> -> read ( Identifier ) : */
-Node* label(int depth)
+Node* label(unsigned int depth)
 {
     if (debug) {std::cout << "label" << "\n";}
     depth++;
@@ -614,7 +614,7 @@ Node* label(int depth)
 }
 
 /* Non-terminal function for <in> -> read ( Identifier ) : */
-Node* gotoo(int depth)
+Node* gotoo(unsigned int depth)
 {
     if (debug) {std::cout << "gotoo" << "\n";}
     depth++;
