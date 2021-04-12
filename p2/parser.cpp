@@ -671,8 +671,8 @@ Node* gotoo(unsigned int depth)
 void error1(tokens need, Token got)
 {
     std::cout << "!!! ERROR !!!" << std::endl;
-    std::cout << "expected token: " << tokes[need] << std::endl;
-    std::cout << "recieved token: " << tokes[got.token_ID];
+    std::cout << "Needed token: " << tokes[need] << std::endl;
+    std::cout << "Got token: " << tokes[got.token_ID];
     std::cout << " LINE NUMBER: " << got.lineNum << std::endl;
     exit(EXIT_FAILURE);
 }
@@ -681,8 +681,8 @@ void error1(tokens need, Token got)
 void error2(tokens need_1, tokens need_2, Token got)
 {
     std::cout << "!!! ERROR !!!" << std::endl;
-    std::cout << "expected tokens: " << tokes[need_1] << " or " << tokes[need_2] << std::endl;
-    std::cout << "recieved token: " << tokes[got.token_ID];
+    std::cout << "Needed tokens: " << tokes[need_1] << " or " << tokes[need_2] << std::endl;
+    std::cout << "Got token: " << tokes[got.token_ID];
     std::cout << " LINE NUMBER: " << got.lineNum << std::endl;
     exit(EXIT_FAILURE);
 }
@@ -691,43 +691,25 @@ void error2(tokens need_1, tokens need_2, Token got)
 void error3(tokens need_1, tokens need_2, tokens need_3, Token got)
 {
     std::cout << "!!! ERROR !!!" << std::endl;
-    std::cout << "expected tokens: " << tokes[need_1] << ", " << tokes[need_2];
+    std::cout << "Needed tokens: " << tokes[need_1] << ", " << tokes[need_2];
     std::cout << ", or " << tokes[need_3] << std::endl;
-    std::cout << "recieved token: " << tokes[got.token_ID];
+    std::cout << "Got token: " << tokes[got.token_ID];
     std::cout << " LINE NUMBER: " << got.lineNum << std::endl;
     exit(EXIT_FAILURE);
 }
 /* error function for expected statement token */
 void error_mult(Token recieved)
 {
-    std::cout << "Recieved token: " << tokes[recieved.token_ID];
+    std::cout << "Token did not follow rule: " << tokes[recieved.token_ID];
     std::cout << " LINE NUMBER: " << recieved.lineNum << std::endl;
     exit(EXIT_FAILURE);
 }
-///* function to determine if token is a statement token */
-//bool is_stat(tokens tk)
-//{
-//    if (tk == GETTER_TK || tk == OUTTER_TK || tk == BEGIN_TK || tk == IF_TK || tk == LOOP_TK || tk == PROC_TK || tk == ASSIGN_TK || tk == VOID_TK) {
-//        
-//        return true;
-//    }
-//    else
-//        return false;
-//}
-
-//bool is_ro(tokens tk)
-//{
-//    if (tk == EQUALS_OR_LESS_THAN_TK || tk == EQUALS_OR_GREAT_THAN_TK || tk == EQUALS_TK)
-//        return true;
-//    else
-//        return false;
-//}
 
 void print_tree(Node* node)
 {
     if(node == nullptr)
     {
-        std::cout << "<Empty Tree>" << std::endl;
+        std::cout << "EMPTY" << std::endl;
         return;
     }
     else
@@ -735,7 +717,7 @@ void print_tree(Node* node)
         std::string indents((node->depth * 2), ' ');
         std::cout << indents;
         std::cout << node->name << "  ";
-        std::cout << node->token_1.token_string << " " << node->token_2.token_string << " " << node->token_3.token_string << " " << node->token_4.token_string << " " << node->token_5.token_string << std::endl;
+        std::cout << node->token_1.token_string << " " << node->token_2.token_string << " " << node->token_3.token_string << " " << node->token_4.token_string << " " << node->token_5.token_string << " " << node->token_6.token_string << std::endl;
 
         if(node->child_1 != nullptr)
             print_tree(node->child_1);
