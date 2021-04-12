@@ -13,6 +13,7 @@ struct Node
     Token token_3;
     Token token_4;
     Token token_5;
+    Token token_6;
     Node* child_1; 
     Node* child_2;
     Node* child_3;
