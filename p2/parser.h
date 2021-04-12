@@ -6,7 +6,6 @@
 extern std::ifstream in_file;
 
 Node* parser();
-
 Node* program();
 Node* block(unsigned int depth);
 Node* vars(unsigned int depth);
@@ -27,7 +26,7 @@ Node* ro(unsigned int depth);
 Node* gotoo(unsigned int depth);
 Node* label(unsigned int depth);
 
-void error(tokens expected, Token recieved);
+void error1(tokens expected, Token recieved);
 void error(tokens expected1, tokens expected2, Token recieved);
 void error(tokens expected1, tokens expected2, tokens expected3, Token recieved);
 void error_stat(Token recieved);

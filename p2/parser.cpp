@@ -34,7 +34,7 @@ Node* parser()
     }
     /* unexpected token recieved */
     else
-        error(EOF_TK, tk);
+        error1(EOF_TK, tk);
 }
 
 /* Function for <program> -> void <vars> <block> */
@@ -58,7 +58,7 @@ Node* program()
         //return node; // 4-11 to
     }
     else
-        error(MAIN_TK, tk);
+        error1(MAIN_TK, tk);
     return node; // 4-11 fix
 }
 
@@ -86,10 +86,10 @@ Node* block(unsigned int depth)
             return node;
         }
         else
-            error(END_TK, tk);
+            error1(END_TK, tk);
     }
     else
-        error(BEGIN_TK, tk);
+        error1(BEGIN_TK, tk);
 }
 
 /* Function for <vars> -> empty | let Identifier = Integer <vars> */
@@ -134,17 +134,17 @@ Node* vars(unsigned int depth)
                     }
                     else {
                         if (debug) { std::cout << "yep" << "\n"; }
-                        error(SEMI_COLON_TK, tk);
+                        error1(SEMI_COLON_TK, tk);
                     }
                 }
                 else
-                    error(INT_TK, tk);
+                    error1(INT_TK, tk);
             }
             else
-                error(COLON_EQUALS_TK, tk);
+                error1(COLON_EQUALS_TK, tk);
         }
         else
-            error(ID_TK, tk);
+            error1(ID_TK, tk);
     }
     /* empty production */
     else
@@ -268,7 +268,7 @@ Node* r(unsigned int depth)
             return node;
         }
         else
-            error(RIGHT_PAREN_TK, tk);
+            error1(RIGHT_PAREN_TK, tk);
     }
     else if (tk.token_ID == ID_TK)
     {
@@ -336,7 +336,7 @@ Node* stat(unsigned int depth)
 
         }
         else
-            error(SEMI_COLON_TK, tk);
+            error1(SEMI_COLON_TK, tk);
     }
     else if(tk.token_ID == OUTTER_TK)
     {
@@ -351,7 +351,7 @@ Node* stat(unsigned int depth)
 
         }
         else
-            error(SEMI_COLON_TK, tk);
+            error1(SEMI_COLON_TK, tk);
     }
     else if(tk.token_ID == BEGIN_TK)
     {
@@ -371,7 +371,7 @@ Node* stat(unsigned int depth)
 
         }
         else
-            error(SEMI_COLON_TK, tk);
+            error1(SEMI_COLON_TK, tk);
     }
     else if (tk.token_ID == LOOP_TK)
     {
@@ -385,7 +385,7 @@ Node* stat(unsigned int depth)
 
         }
         else
-            error(SEMI_COLON_TK, tk);
+            error1(SEMI_COLON_TK, tk);
     }
     else if (tk.token_ID == ASSIGN_TK)
     {
@@ -399,7 +399,7 @@ Node* stat(unsigned int depth)
 
         }
         else
-            error(SEMI_COLON_TK, tk);
+            error1(SEMI_COLON_TK, tk);
     }
     else if (tk.token_ID == PROC_TK)
     {
@@ -413,7 +413,7 @@ Node* stat(unsigned int depth)
 
         }
         else
-            error(SEMI_COLON_TK, tk);
+            error1(SEMI_COLON_TK, tk);
     }
 
     else
@@ -437,10 +437,10 @@ Node* in(unsigned int depth)
 
         }
         else
-            error(ID_TK, tk);
+            error1(ID_TK, tk);
     }
     else
-        error(GETTER_TK, tk);
+        error1(GETTER_TK, tk);
 }
 
 /* Non-terminal function for <out> -> print ( <expr>  ) : */
@@ -457,7 +457,7 @@ Node* out(unsigned int depth)
         return node;
     }
     else
-        error(OUTTER_TK, tk);
+        error1(OUTTER_TK, tk);
 }
 
 /* Non-terminal function for <loop> -> iter ( <expr> <RO> <expr> ) <stat> */
@@ -488,16 +488,16 @@ Node* iff(unsigned int depth)
                     return node;
                 }
                 else
-                    error(THEN_TK, tk);
+                    error1(THEN_TK, tk);
             }
             else
-                error(RIGHT_BRACKET_TK, tk);
+                error1(RIGHT_BRACKET_TK, tk);
         }
         else
-            error(LEFT_BRACKET_TK, tk);
+            error1(LEFT_BRACKET_TK, tk);
     }
     else
-        error(LOOP_TK, tk);
+        error1(LOOP_TK, tk);
 }
 
 
@@ -527,13 +527,13 @@ Node* loop(unsigned int depth)
                 return node;
             }
             else
-                error(RIGHT_BRACKET_TK, tk);
+                error1(RIGHT_BRACKET_TK, tk);
         }
         else
-            error(LEFT_BRACKET_TK, tk);
+            error1(LEFT_BRACKET_TK, tk);
     }
     else
-        error(LOOP_TK, tk);
+        error1(LOOP_TK, tk);
 }
 
 /* Non-terminal function for <assign> -> Identifier  = <expr> : */
@@ -559,13 +559,13 @@ Node* assign(unsigned int depth)
 
             }
             else
-                error(COLON_EQUALS_TK, tk);
+                error1(COLON_EQUALS_TK, tk);
         }
         else
-            error(ID_TK, tk);
+            error1(ID_TK, tk);
     }
     else
-        error(ASSIGN_TK, tk);
+        error1(ASSIGN_TK, tk);
 }
 
 /* Non-terminal function for <RO> ->  < | <  = | > | >  = | =  = | = */
@@ -607,10 +607,10 @@ Node* label(unsigned int depth)
 
         }
         else
-            error(ID_TK, tk);
+            error1(ID_TK, tk);
     }
     else
-        error(VOID_TK, tk);
+        error1(VOID_TK, tk);
 }
 
 /* Non-terminal function for <in> -> read ( Identifier ) : */
@@ -630,17 +630,17 @@ Node* gotoo(unsigned int depth)
 
         }
         else
-            error(ID_TK, tk);
+            error1(ID_TK, tk);
     }
     else
-        error(PROC_TK, tk);
+        error1(PROC_TK, tk);
 }
 
 
 
 
 /* error function for single expected token */
-void error(tokens expected, Token recieved)
+void error1(tokens expected, Token recieved)
 {
     std::cout << "!!! ERROR !!!" << std::endl;
     std::cout << "expected token: " << tokes[expected] << std::endl;
