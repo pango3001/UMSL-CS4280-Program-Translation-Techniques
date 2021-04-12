@@ -563,22 +563,26 @@ Node* ro(unsigned int depth)
     if (tokey.token_ID == EQUALS_OR_LESS_THAN_TK)
     {
         node->token_1 = tokey;
+        tokey = scanner(in_file, lineNum); if (debug2) { std::cout << "Working on token49: " << tokey.token_string << "\n"; }
         return node;
     }
 
     else if (tokey.token_ID == EQUALS_OR_GREAT_THAN_TK)
     {
         node->token_1 = tokey;
+        tokey = scanner(in_file, lineNum); if (debug2) { std::cout << "Working on token49: " << tokey.token_string << "\n"; }
         return node;
     }
     else if (tokey.token_ID == EQUALS_EQUALS_TK)
     {
         node->token_1 = tokey;
+        tokey = scanner(in_file, lineNum); if (debug2) { std::cout << "Working on token49: " << tokey.token_string << "\n"; }
         return node;
     }
     else if (tokey.token_ID == PERCENT_TK)
     {
         node->token_1 = tokey;
+        tokey = scanner(in_file, lineNum); if (debug2) { std::cout << "Working on token49: " << tokey.token_string << "\n"; }
         return node;
     }
     else if (tokey.token_ID == LEFT_BRACKET_TK)
