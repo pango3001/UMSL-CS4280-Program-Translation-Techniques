@@ -29,7 +29,7 @@ Node* label(unsigned int depth);
 void error1(tokens need, Token got);
 void error(tokens need_1, tokens need_2, Token got);
 void error(tokens need_1, tokens need_2, tokens need_3, Token got);
-void error_stat(Token got);
+void error_mult(Token got);
 
 bool is_stat(tokens tk);
 bool is_ro(tokens tk);

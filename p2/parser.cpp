@@ -2,9 +2,9 @@
 #include "scanner.h"
 #include <iostream>
 
-std::ifstream in_file;
-unsigned int lineNum = 1;
-Token tokey;
+std::ifstream in_file; // file to read
+unsigned int lineNum = 1;  // for counting lines
+Token tokey; // so many things are named around token so tokey it is
 
 std::string tokes[] = { "BEGIN_TK","END_TK","LOOP_TK","WHILE_TK", "VOID_TK", "EXIT_TK", "GETTER_TK", "OUTTER_TK", "MAIN_TK", "IF_TK", "THEN_TK", "ASSIGN_TK", "DATA_TK", "PROC_TK", "EQUALS_TK", "EQUALS_OR_LESS_THAN_TK", "EQUALS_OR_GREAT_THAN_TK", "EQUALS_EQUALS_TK", "COLON_TK", "COLON_EQUALS_TK", "PLUS_TK", "MINUS_TK", "ASTERISK_TK", "SLASH_TK", "PERCENT_TK", "PERIOD_TK", "LEFT_PAREN_TK", "RIGHT_PAREN_TK", "COMMA_TK", "LEFT_BRACE_TK", "RIGHT_BRACE_TK", "SEMI_COLON_TK", "LEFT_BRACKET_TK", "RIGHT_BRACKET_TK", "ID_TK", "INT_TK", "EOF_TK", "ERROR_TK" };
 
@@ -59,21 +59,21 @@ Node* program() {
 
 // <block>       ->      begin <vars> <stats> end
 Node* block(unsigned int depth) {
-    if (debug) {std::cout << "block" << "\n";}
+    if (debug) {std::cout << "block" << "\n";}  // for debugging
     depth++;
     Node* node = new Node("<block>", depth);
     // check for begin token
     if (tokey.token_ID == BEGIN_TK)
     {
         node->token_1 = tokey;
-        tokey = scanner(in_file, lineNum); if (debug2) { std::cout << "Working on token3: " << tokey.token_string << "\n"; }
+        tokey = scanner(in_file, lineNum); if (debug2) { std::cout << "Working on token3: " << tokey.token_string << "\n"; }// for debugging
         node->child_1 = vars(depth);  // child node
         node->child_2 = stats(depth);
         
         if (tokey.token_ID == END_TK)
         {
             node->token_2 = tokey;
-            tokey = scanner(in_file, lineNum); if (debug2) { std::cout << "Working on token4: " << tokey.token_string << "\n"; }
+            tokey = scanner(in_file, lineNum); if (debug2) { std::cout << "Working on token4: " << tokey.token_string << "\n"; }  // for debugging
             
             return node;
         }
@@ -89,34 +89,34 @@ Node* vars(unsigned int depth)
 {
     if (debug) {std::cout << "vars" << "\n";} // debugging
     depth++;
-    /* create <vars> node */
+    // vars node
     Node* node = new Node("<vars>", depth);
 
     if (tokey.token_ID == DATA_TK)
     {
         node->token_1 = tokey;
         tokey = scanner(in_file, lineNum);
-        if (debug2) { std::cout << "Working on token5: " << tokey.token_string << "\n"; }
+        if (debug2) { std::cout << "Working on token5: " << tokey.token_string << "\n"; }  // for debugging
         if (tokey.token_ID == ID_TK)
         {
             node->token_2 = tokey;
             tokey = scanner(in_file, lineNum);
-            if (debug2) { std::cout << "Working on token6: " << tokey.token_string << "\n"; }
+            if (debug2) { std::cout << "Working on token6: " << tokey.token_string << "\n"; }  // for debugging
             if (tokey.token_ID == COLON_EQUALS_TK)
             {
                 node->token_3 = tokey;
                 tokey = scanner(in_file, lineNum);
-                if (debug2) { std::cout << "Working on token7: " << tokey.token_string << "\n"; }
+                if (debug2) { std::cout << "Working on token7: " << tokey.token_string << "\n"; }  // for debugging
                 if (tokey.token_ID == INT_TK)
                 {
                     node->token_4 = tokey;
                     tokey = scanner(in_file, lineNum);
-                    if (debug2) { std::cout << "Working on token8: " << tokey.token_string << "\n"; }
+                    if (debug2) { std::cout << "Working on token8: " << tokey.token_string << "\n"; }  // for debugging
                     if (tokey.token_ID == SEMI_COLON_TK)
                     {
                         node->token_5 = tokey; // 4-11 fix
                         tokey = scanner(in_file, lineNum);
-                        if (debug2) { std::cout << "Working on token9: " << tokey.token_string << "\n"; }
+                        if (debug2) { std::cout << "Working on token9: " << tokey.token_string << "\n"; }  // for debugging
                         node->child_1 = vars(depth);
                         return node;
                     }
@@ -134,26 +134,25 @@ Node* vars(unsigned int depth)
         else
             error1(ID_TK, tokey);
     }
-    /* empty production */
+    // empty is ok
     else
         return NULL;
 }
 
-/* Non-terminal function for <expr> -> <A> / <expr> | <A> * <expr> | <A> */
+// <expr>        ->      <N> - <expr>  | <N>
 Node* expr(unsigned int depth)
 {
     if (debug) {std::cout << "expr" << "\n";}
     depth++;
     Node* node = new Node("<expr>", depth);
-    /* children are <a> and <expr> or just <a> */
+    
     node->child_1 = n(depth);
-    /* predict: / <expr> */
+    // check for minus sign
     if (tokey.token_ID == MINUS_TK)
     {
-        /* store operator */
         node->token_1 = tokey;
         tokey = scanner(in_file, lineNum);
-        if (debug2) { std::cout << "Working on token11: " << tokey.token_string << "\n"; }
+        if (debug2) { std::cout << "Working on token11: " << tokey.token_string << "\n"; }  // for debugging
         node->child_2 = expr(depth);
         return node;
     }
@@ -161,29 +160,28 @@ Node* expr(unsigned int depth)
         return node;
 }
 
-/* Non-terminal function for <M> -> <M> + <A> | <M> - <A> | <M> */
+// <N>             ->       <A> / <N> | <A> * <N> | <A>
 Node* n(unsigned int depth)
 {
     if (debug) {std::cout << "n" << "\n";}
     depth++;
     Node* node = new Node("<N>", depth);
-    /* children are <M> and <A> or just <M> */
     node->child_1 = a(depth);
+    // check for slash token
     if (tokey.token_ID == SLASH_TK)
     {
-        /* store operator */
         node->token_1 = tokey;
         tokey = scanner(in_file, lineNum);
-        if (debug2) { std::cout << "Working on token12: " << tokey.token_string << "\n"; }
+        if (debug2) { std::cout << "Working on token12: " << tokey.token_string << "\n"; }  // for debugging
         node->child_2 = n(depth);
         return node;
     }
+    // check for asterisk token
     else if (tokey.token_ID == ASTERISK_TK)
     {
-        /* store operator */
         node->token_1 = tokey;
         tokey = scanner(in_file, lineNum);
-        if (debug2) { std::cout << "Working on token13: " << tokey.token_string << "\n"; }
+        if (debug2) { std::cout << "Working on token13: " << tokey.token_string << "\n"; }  // for debugging
         node->child_2 = n(depth);
         return node;
     }
@@ -194,7 +192,7 @@ Node* n(unsigned int depth)
 /* Non-terminal function for <M> -> <M> + <A> | <M> - <A> | <M> */
 Node* a(unsigned int depth)
 {
-    if (debug) {std::cout << "a" << "\n";}
+    if (debug) {std::cout << "a" << "\n";}  // for debugging
     depth++;
     Node* node = new Node("<A>", depth);
     /* children are <M> and <A> or just <M> */
@@ -204,7 +202,7 @@ Node* a(unsigned int depth)
         /* store operator */
         node->token_1 = tokey;
         tokey = scanner(in_file, lineNum);
-        if (debug2) { std::cout << "Working on token14: " << tokey.token_string << "\n"; }
+        if (debug2) { std::cout << "Working on token14: " << tokey.token_string << "\n"; }  // for debugging
         node->child_2 = a(depth);
         return node;
     }
@@ -217,14 +215,14 @@ Node* a(unsigned int depth)
 /* Non-terminal function for <M> -> * <M> |  <R> */
 Node* m(unsigned int depth)
 {
-    if (debug) {std::cout << "m" << "\n";}
+    if (debug) {std::cout << "m" << "\n";}  // for debugging
     depth++;
     Node* node = new Node("<M>", depth);
     if (tokey.token_ID == ASTERISK_TK)
     {
         /* strore operator */
         node->token_1 = tokey;
-        tokey = scanner(in_file, lineNum); if (debug2) { std::cout << "Working on token15: " << tokey.token_string << "\n"; }
+        tokey = scanner(in_file, lineNum); if (debug2) { std::cout << "Working on token15: " << tokey.token_string << "\n"; }  // for debugging
         node->child_1 = m(depth);
         return node;
     }
@@ -238,21 +236,21 @@ Node* m(unsigned int depth)
 /* Non-terminal function for <R> -> ( <expr> ) | Identifier | Integer */
 Node* r(unsigned int depth)
 {
-    if (debug) {std::cout << "r" << "\n";}
+    if (debug) {std::cout << "r" << "\n";}  // for debugging
     depth++;
     Node* node = new Node("<R>", depth);
     //tk = scanner(in_file, lineNum);
     if (tokey.token_ID == LEFT_PAREN_TK)
     {
         node->token_1 = tokey;
-        tokey = scanner(in_file, lineNum); if (debug2) { std::cout << "Working on token16: " << tokey.token_string << "\n"; }
+        tokey = scanner(in_file, lineNum); if (debug2) { std::cout << "Working on token16: " << tokey.token_string << "\n"; }  // for debugging
         node->child_1 = expr(depth);
         
         if (tokey.token_ID == RIGHT_PAREN_TK)
         {
             node->token_2 = tokey;
 
-            tokey = scanner(in_file, lineNum);  if (debug2) { std::cout << "Working on token17: " << tokey.token_string << "\n"; }
+            tokey = scanner(in_file, lineNum);  if (debug2) { std::cout << "Working on token17: " << tokey.token_string << "\n"; }  // for debugging
             return node;
         }
         else
@@ -261,14 +259,14 @@ Node* r(unsigned int depth)
     else if (tokey.token_ID == ID_TK)
     {
         node->token_1 = tokey;
-        tokey = scanner(in_file, lineNum); if (debug2) { std::cout << "Working on token18: " << tokey.token_string << "\n"; }
+        tokey = scanner(in_file, lineNum); if (debug2) { std::cout << "Working on token18: " << tokey.token_string << "\n"; }  // for debugging
         
         return node;
     }
     else if (tokey.token_ID == INT_TK)
     {
         node->token_1 = tokey;
-        tokey = scanner(in_file, lineNum); if (debug2) { std::cout << "Working on token19: " << tokey.token_string << "\n"; }
+        tokey = scanner(in_file, lineNum); if (debug2) { std::cout << "Working on token19: " << tokey.token_string << "\n"; }  // for debugging
         return node;
     }
     else
@@ -278,7 +276,7 @@ Node* r(unsigned int depth)
 /* Non-terminal function for <stats> -> <stat>  <mStat> */
 Node* stats(unsigned int depth)
 {
-    if (debug) {std::cout << "stats" << "\n";}
+    if (debug) {std::cout << "stats" << "\n";}  // for debugging
     depth++;
     Node* node = new Node("<stats>", depth);
     node->child_1 = stat(depth);
@@ -289,7 +287,7 @@ Node* stats(unsigned int depth)
 /* Non-terminal function for <mstat> -> empty |  <stat>  <mStat> */
 Node* mstat(unsigned int depth)
 {
-    if (debug) {std::cout << "mstat" << "\n";}
+    if (debug) {std::cout << "mstat" << "\n";}  // for debugging
     depth++;
     Node* node = new Node("<mstat>", depth);
 
@@ -307,7 +305,7 @@ Node* mstat(unsigned int depth)
 /* Non-terminal function for <stat> -> <in> | <out> | <block> | <cond> | <loop> | <assign> */
 Node* stat(unsigned int depth)
 {
-    if (debug) {std::cout << "stat" << "\n";}
+    if (debug) {std::cout << "stat" << "\n";}  // for debugging
     depth++;
     Node* node = new Node("<stat>", depth);
     
@@ -315,11 +313,11 @@ Node* stat(unsigned int depth)
     if(tokey.token_ID == GETTER_TK)
     {
         node->child_1 = in(depth);
-        //tk = scanner(in_file, lineNum); if (debug2) { std::cout << "Working on token21: " << tk.token_string << "\n"; }
+}
         if (tokey.token_ID == SEMI_COLON_TK)
         {
             node->token_1 = tokey;
-            tokey = scanner(in_file, lineNum); if (debug2) { std::cout << "Working on token22: " << tokey.token_string << "\n"; }
+            tokey = scanner(in_file, lineNum); if (debug2) { std::cout << "Working on token22: " << tokey.token_string << "\n"; }  // for debugging
             return node;
 
         }
@@ -328,13 +326,13 @@ Node* stat(unsigned int depth)
     }
     else if(tokey.token_ID == OUTTER_TK)
     {
-        if (debug) { std::cout << "out= tru" << "\n"; }
+        if (debug) { std::cout << "out= tru" << "\n"; }  // for debugging
         node->child_1 = out(depth);
-        //tk = scanner(in_file, lineNum); if (debug2) { std::cout << "Working on token23: " << tk.token_string << "\n"; }
+        // check for ; token
         if (tokey.token_ID == SEMI_COLON_TK)
         {
             node->token_1 = tokey;
-            tokey = scanner(in_file, lineNum); if (debug2) { std::cout << "Working on token24: " << tokey.token_string << "\n"; }
+            tokey = scanner(in_file, lineNum); if (debug2) { std::cout << "Working on token24: " << tokey.token_string << "\n"; }  // for debugging
             return node;
 
         }
@@ -562,21 +560,60 @@ Node* ro(unsigned int depth)
     if (debug) {std::cout << "ro" << "\n";}
     depth++;
     Node* node = new Node("<RO>", depth);
-    if(is_ro(tokey.token_ID))
+
+    if (tokey.token_ID == EQUALS_OR_LESS_THAN_TK)
     {
         node->token_1 = tokey;
-        tokey = scanner(in_file, lineNum); if (debug2) { std::cout << "Working on token43: " << tokey.token_string << "\n"; }
-        if(tokey.token_ID == EQUALS_TK)
+        return node;
+    }
+
+    else if (tokey.token_ID == EQUALS_OR_GREAT_THAN_TK)
+    {
+        node->token_1 = tokey;
+        return node;
+    }
+    else if (tokey.token_ID == EQUALS_EQUALS_TK)
+    {
+        node->token_1 = tokey;
+        return node;
+    }
+    else if (tokey.token_ID == PERCENT_TK)
+    {
+        node->token_1 = tokey;
+        return node;
+    }
+    else if (tokey.token_ID == LEFT_BRACKET_TK)
+    {
+        node->token_1 = tokey;
+        tokey = scanner(in_file, lineNum); if (debug2) { std::cout << "Working on token49: " << tokey.token_string << "\n"; }
+        if (tokey.token_ID == EQUALS_EQUALS_TK)
         {
             node->token_2 = tokey;
-            tokey = scanner(in_file, lineNum); if (debug2) { std::cout << "Working on token44: " << tokey.token_string << "\n"; }
-            return node;
+            tokey = scanner(in_file, lineNum); if (debug2) { std::cout << "Working on token41: " << tokey.token_string << "\n"; }
+            if (tokey.token_ID == RIGHT_BRACKET_TK)
+            {
+                // take any 3 tokens
+                node->token_3 = tokey;
+                tokey = scanner(in_file, lineNum); if (debug2) { std::cout << "Working on token61: " << tokey.token_string << "\n"; }
+                node->token_4 = tokey;
+                tokey = scanner(in_file, lineNum); if (debug2) { std::cout << "Working on token62: " << tokey.token_string << "\n"; }
+                node->token_5 = tokey;
+                tokey = scanner(in_file, lineNum); if (debug2) { std::cout << "Working on token63: " << tokey.token_string << "\n"; }
+                node->token_6 = tokey;
+                return node;
+
+
+            }
+            else
+                error1(RIGHT_BRACKET_TK, tokey);
         }
         else
-            return node;
+            error1(EQUALS_EQUALS_TK, tokey);
     }
+    
     else
-        error(EQUALS_OR_LESS_THAN_TK, EQUALS_OR_GREAT_THAN_TK, EQUALS_TK, tokey);
+        error_stat(tokey);
+
 }
 /* Non-terminal function for <in> -> read ( Identifier ) : */
 Node* label(unsigned int depth)
@@ -628,12 +665,12 @@ Node* gotoo(unsigned int depth)
 
 
 /* error function for single expected token */
-void error1(tokens expected, Token recieved)
+void error1(tokens need, Token got)
 {
     std::cout << "!!! ERROR !!!" << std::endl;
     std::cout << "expected token: " << tokes[expected] << std::endl;
-    std::cout << "recieved token: " << tokes[recieved.token_ID];
-    std::cout << " LINE NUMBER: " << recieved.lineNum << std::endl;
+    std::cout << "recieved token: " << tokes[got.token_ID];
+    std::cout << " LINE NUMBER: " << got.lineNum << std::endl;
     exit(EXIT_FAILURE);
 }
 
@@ -658,7 +695,7 @@ void error(tokens expected1, tokens expected2, tokens expected3, Token recieved)
     exit(EXIT_FAILURE);
 }
 /* error function for expected statement token */
-void error_stat(Token recieved)
+void error_mult(Token recieved)
 {
     std::cout << "Recieved token: " << tokes[recieved.token_ID];
     std::cout << " LINE NUMBER: " << recieved.lineNum << std::endl;

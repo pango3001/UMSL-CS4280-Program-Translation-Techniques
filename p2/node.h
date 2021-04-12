@@ -27,6 +27,8 @@ struct Node
         this->token_3 = Token();
         this->token_4 = Token();
         this->token_5 = Token();
+        this->token_6 = Token();
+
         this->child_1 = nullptr;
         this->child_2 = nullptr;
         this->child_3 = nullptr;
@@ -41,6 +43,7 @@ struct Node
         this->token_3 = Token();
         this->token_4 = Token();
         this->token_5 = Token();
+        this->token_6 = Token();
         this->child_1 = nullptr;
         this->child_2 = nullptr;
         this->child_3 = nullptr;
