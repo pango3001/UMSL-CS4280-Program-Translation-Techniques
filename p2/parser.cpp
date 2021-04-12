@@ -2,12 +2,8 @@
 #include "scanner.h"
 #include <iostream>
 
-/*Globals*/
-/* File to be scanned and parsed */
-//std::ifstream in_file;
-/* Line number in in_file */
+std::ifstream in_file;
 unsigned int lineNum = 1;
-/* Current working token */
 Token tk;
 
 /* Array of strings mapped to token_id enum */
