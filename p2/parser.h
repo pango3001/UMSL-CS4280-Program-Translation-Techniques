@@ -26,10 +26,10 @@ Node* ro(unsigned int depth);
 Node* gotoo(unsigned int depth);
 Node* label(unsigned int depth);
 
-void error1(tokens expected, Token recieved);
-void error(tokens expected1, tokens expected2, Token recieved);
-void error(tokens expected1, tokens expected2, tokens expected3, Token recieved);
-void error_stat(Token recieved);
+void error1(tokens need, Token got);
+void error(tokens need_1, tokens need_2, Token got);
+void error(tokens need_1, tokens need_2, tokens need_3, Token got);
+void error_stat(Token got);
 
 bool is_stat(tokens tk);
 bool is_ro(tokens tk);
