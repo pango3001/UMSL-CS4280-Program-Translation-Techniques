@@ -5,4 +5,4 @@ P2: main.cpp scanner.cpp parser.cpp
 	$(CXX) $(CXXFLAGS) -o frontEnd main.cpp parser.cpp scanner.cpp
 
 clean:
-	rm -f scanner *.o stdin.temp keyboard_input.txt
+	rm -f frontEnd *.o stdin.temp keyboard_input.txt
