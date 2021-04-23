@@ -9,6 +9,7 @@
 #include <string>
 #include <fstream>
 #include "parser.h"
+#include "semantics.h"
 
 int main(int argc, char** argv) {
     std::string file_name;         // filename
@@ -57,10 +58,10 @@ int main(int argc, char** argv) {
 
     // Scan and parse file
     if (in_file) {
-        std::cout << "Starting the parser..." << std::endl;
+        //std::cout << "Starting the parser..." << std::endl;
         Node* root = parser(); // run parser
-        print_tree(root);      // print tree
-        
+        //print_tree(root);      // print tree
+        semantic_check(root, 0);
         in_file.close(); // close file
 
     }
