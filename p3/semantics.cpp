@@ -118,7 +118,7 @@ void semantic_check(Node* node, int count)
     }
     else if (node->name == "<expr>")
     {
-        if (node->token_1.token_ID == SLASH_TK || node->token_1.token_ID == ASTERISK_TK)
+        if (node->token_1.token_ID == MINUS_TK)
         {
             if (node->child_1 != nullptr)
                 semantic_check(node->child_1, count);
@@ -130,7 +130,7 @@ void semantic_check(Node* node, int count)
     }
     else if (node->name == "<A>")
     {
-        if (node->token_1.token_ID == PLUS_TK || node->token_1.token_ID == MINUS_TK)
+        if (node->token_1.token_ID == PLUS_TK)
         {
             if (node->child_1 != nullptr)
                 semantic_check(node->child_1, count);
