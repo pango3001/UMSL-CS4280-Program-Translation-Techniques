@@ -9,6 +9,8 @@ Token stack[max_stack_size];
 int var_count = 0;
 int scope_begin = 0;
 
+bool debug = true;
+
 void build_stack()
 {
     for (int i = 0; i <= max_stack_size; i++)
@@ -32,7 +34,7 @@ void push(Token tk)
                 exit(EXIT_FAILURE);
             }
         }
-        stack[var_count] = tk;
+        stack[var_count] = tk; if(debug) { std::cout << "Working: " << var_count << "\n"; }  // for debugging
         var_count++;
     }
 }
