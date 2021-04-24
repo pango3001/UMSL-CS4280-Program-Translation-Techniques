@@ -34,8 +34,8 @@ void push(Token tk)
                 exit(EXIT_FAILURE);
             }
         }
-        stack[var_count] = tk; if(debug1) { std::cout << "VAR COUNT: " << var_count << "\n"; }  // for debugging
         var_count++;
+        stack[var_count] = tk; if (debug1) { std::cout << "VAR COUNT: " << var_count << "\n"; }  // for debugging
     }
 }
 
@@ -95,17 +95,17 @@ void semantic_check(Node* node, int count)
     }
     else if (node->name == "<vars>")
     {
-        int tos_distance = find(node->token_1);
+        int tos_distance = find(node->token_2);
         scope_begin = var_count;
 
         if (tos_distance == -1 || tos_distance > count)
         {
-            push(node->token_1);
+            push(node->token_2);
             count++;
         }
         else if (tos_distance < count)
         {
-            std::cout << "ERROR: " << node->token_1.token_string << " has already been defined in this scope" << std::endl;
+            std::cout << "ERROR: " << node->token_2.token_string << " has already been defined in this scope" << std::endl;
             exit(EXIT_FAILURE);
         }
 
@@ -130,7 +130,7 @@ void semantic_check(Node* node, int count)
     }
     else if (node->name == "<expr>")
     {
-        if (node->token_1.token_ID == MINUS_TK)
+        if (node->token_2.token_ID == MINUS_TK)
         {
             if (node->child_1 != nullptr)
                 semantic_check(node->child_1, count);
@@ -146,7 +146,7 @@ void semantic_check(Node* node, int count)
     }
     else if (node->name == "<N>")
     {
-        if (node->token_1.token_ID == SLASH_TK || node->token_1.token_ID == ASTERISK_TK)
+        if (node->token_2.token_ID == SLASH_TK || node->token_2.token_ID == ASTERISK_TK)
         {
             if (node->child_1 != nullptr)
                 semantic_check(node->child_1, count);
@@ -162,7 +162,7 @@ void semantic_check(Node* node, int count)
     }
     else if (node->name == "<M>")
     {
-        if (node->token_1.token_ID == ASTERISK_TK)
+        if (node->token_2.token_ID == ASTERISK_TK)
         {
             if (node->child_1 != nullptr)
                 semantic_check(node->child_1, count);
@@ -181,7 +181,7 @@ void semantic_check(Node* node, int count)
 
     else if (node->name == "<A>")
     {
-        if (node->token_1.token_ID == PLUS_TK)
+        if (node->token_2.token_ID == PLUS_TK)
         {
             if (node->child_1 != nullptr)
                 semantic_check(node->child_1, count);
@@ -198,11 +198,11 @@ void semantic_check(Node* node, int count)
 
     else if (node->name == "<R>")
     {
-        if (node->token_1.token_ID == ID_TK || node->token_1.token_ID == INT_TK)
+        if (node->token_2.token_ID == ID_TK || node->token_2.token_ID == INT_TK)
         {
-            if (!var_exists(node->token_1))
+            if (!var_exists(node->token_2))
             {
-                std::cout << "ERROR: " << node->token_1.token_string << " has not been declared in this scope" << std::endl;
+                std::cout << "ERROR: " << node->token_2.token_string << " has not been declared in this scope" << std::endl;
                 exit(EXIT_FAILURE);
             }
         }
@@ -211,17 +211,17 @@ void semantic_check(Node* node, int count)
     }
     else if (node->name == "<in>")
     {
-        if (!var_exists(node->token_1))
+        if (!var_exists(node->token_2))
         {
-            std::cout << "ERROR: " << node->token_1.token_string << " has not been declared in this scope" << std::endl;
+            std::cout << "ERROR: " << node->token_2.token_string << " has not been declared in this scope" << std::endl;
             exit(EXIT_FAILURE);
         }
     }
     else if (node->name == "<assign>")
     {
-        if (!var_exists(node->token_1))
+        if (!var_exists(node->token_2))
         {
-            std::cout << "ERROR: " << node->token_1.token_string << " has not been declared in this scope" << std::endl;
+            std::cout << "ERROR: " << node->token_2.token_string << " has not been declared in this scope" << std::endl;
             exit(EXIT_FAILURE);
         }
         if (node->child_1 != nullptr)
