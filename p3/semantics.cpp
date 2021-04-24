@@ -204,7 +204,7 @@ void semantic_check(Node* node, int count)
 
     else if (node->name == "<R>")
     {
-        if (node->token_1.token_ID == ID_TK || node->token_1.token_ID == INT_TK)
+        if (node->token_1.token_ID == ID_TK)
         {
             if (!var_exists(node->token_1))
             {
