@@ -86,6 +86,10 @@ void semantic_check(Node* node, int count)
             semantic_check(node->child_1, num_vars);
         if (node->child_2 != nullptr)
             semantic_check(node->child_2, num_vars);
+        if (node->child_3 != nullptr)
+            semantic_check(node->child_1, count);
+        if (node->child_4 != nullptr)
+            semantic_check(node->child_2, count);
     }
     else if (node->name == "<vars>")
     {
@@ -115,6 +119,10 @@ void semantic_check(Node* node, int count)
             semantic_check(node->child_1, num_vars);
         if (node->child_2 != nullptr)
             semantic_check(node->child_2, num_vars);
+        if (node->child_3 != nullptr)
+            semantic_check(node->child_1, count);
+        if (node->child_4 != nullptr)
+            semantic_check(node->child_2, count);
 
         pop(scope_begin);
     }
@@ -125,6 +133,10 @@ void semantic_check(Node* node, int count)
             if (node->child_1 != nullptr)
                 semantic_check(node->child_1, count);
             if (node->child_2 != nullptr)
+                semantic_check(node->child_2, count);
+            if (node->child_3 != nullptr)
+                semantic_check(node->child_1, count);
+            if (node->child_4 != nullptr)
                 semantic_check(node->child_2, count);
         }
         else if (node->child_1 != nullptr)
@@ -137,6 +149,10 @@ void semantic_check(Node* node, int count)
             if (node->child_1 != nullptr)
                 semantic_check(node->child_1, count);
             if (node->child_2 != nullptr)
+                semantic_check(node->child_2, count);
+            if (node->child_3 != nullptr)
+                semantic_check(node->child_1, count);
+            if (node->child_4 != nullptr)
                 semantic_check(node->child_2, count);
         }
         else if (node->child_1 != nullptr)
