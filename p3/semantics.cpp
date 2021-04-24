@@ -34,8 +34,9 @@ void push(Token tk)
                 exit(EXIT_FAILURE);
             }
         }
-        var_count++;
-        stack[var_count] = tk; if (debug1) { std::cout << "VAR COUNT: " << var_count << "\n"; }  // for debugging
+        var_count++; if (debug1) { std::cout << "VAR COUNT: " << var_count << "\n"; }  // for debugging
+        stack[var_count] = tk; if (debug1) { std::cout << "Adding: " << node->name << " to the stack\n"; }  // for debugging 
+       
     }
 }
 
@@ -100,6 +101,7 @@ void semantic_check(Node* node, int count)
 
         if (tos_distance == -1 || tos_distance > count)
         {
+            
             push(node->token_2);
             count++;
         }
