@@ -1,0 +1,6 @@
+data x := 1;
+main
+begin
+  data y := x - 1;
+  outter y;
+end
