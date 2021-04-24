@@ -1,6 +1,7 @@
-$$ p3b6 $$
-data x := 0 ;
+data x := 1;
 main
 begin
-    assign x := 1 - y ; $$ ERROR: y has not been declared $$
+  assign x := x - 1;
+  assign x := 1 - x;
+  outter x;
 end
