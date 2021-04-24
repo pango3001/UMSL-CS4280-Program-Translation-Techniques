@@ -536,10 +536,11 @@ Node* assign(unsigned int depth)
     //tk = scanner(in_file, lineNum);
     if (tokey.token_ID == ASSIGN_TK)
     {
+        node->token_1 = tokey;
         tokey = scanner(in_file, lineNum); if (debug2) { std::cout << "Working on token49: " << tokey.token_string << "\n"; }
         if (tokey.token_ID == ID_TK)
         {
-            node->token_1 = tokey;
+            node->token_2 = tokey;
             tokey = scanner(in_file, lineNum); if (debug2) { std::cout << "Working on token41: " << tokey.token_string << "\n"; }
             if (tokey.token_ID == COLON_EQUALS_TK)
             {
