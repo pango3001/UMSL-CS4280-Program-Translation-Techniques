@@ -8,7 +8,7 @@ void pop(int scope_begin);
 void build_stack();
 int find(Token tk);
 bool var_exists(Token tk);
-
+void print_stack();
 void semantic_check(Node* node, int count);
 
 

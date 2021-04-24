@@ -34,7 +34,7 @@ void push(Token tk)
                 exit(EXIT_FAILURE);
             }
         }
-        stack[var_count] = tk; if(debug1) { std::cout << "Working: " << var_count << "\n"; }  // for debugging
+        stack[var_count] = tk; if(debug1) { std::cout << "VAR COUNT: " << var_count << "\n"; }  // for debugging
         var_count++;
     }
 }
@@ -79,6 +79,8 @@ void semantic_check(Node* node, int count)
     if (node == nullptr)
         return;
     if (debug1) { std::cout << "Working on: " << node->name << "\n"; }  // for debugging
+    if (debug1) { print_stack(); }  // for debugging
+
     if (node->name == "<program>")
     {
         unsigned int num_vars = 0;
@@ -236,4 +238,12 @@ void semantic_check(Node* node, int count)
         if (node->child_4 != nullptr)
             semantic_check(node->child_4, count);
     }
+}
+
+void print_stack() {
+    for (auto i = 0; i < max_stack_size; i++) {
+        if (stack[i].value == "")break;
+        std::cout << stack[i].value << "";
+    }
+    std::cout << std::endl;
 }
