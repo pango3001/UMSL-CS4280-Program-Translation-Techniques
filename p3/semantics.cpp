@@ -1,5 +1,6 @@
 #include "semantics.h"
 #include <iostream>
+#include <iomanip>
 
 /* assume no more than 100 items in a program and generate stack overflow if more */
 const int max_stack_size = 100;
@@ -79,7 +80,7 @@ void semantic_check(Node* node, int count)
 {
     if (node == nullptr)
         return;
-    if (debug1) { std::cout << "Working on: " << node->name << ", Token: " << node->token_2.token_string << ", "; }  // for debugging
+    if (debug1) { std::cout << std::setw(4) << "Working on: " << node->name << ", Token: " << node->token_2.token_string << ", "; }  // for debugging
     if (debug1) { print_stack(); }  // for debugging
 
     if (node->name == "<program>")
