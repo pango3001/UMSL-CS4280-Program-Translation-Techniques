@@ -78,7 +78,7 @@ void semantic_check(Node* node, int count)
 {
     if (node == nullptr)
         return;
-
+    if (debug1) { std::cout << "Working on: " << node->name << "\n"; }  // for debugging
     if (node->name == "<program>")
     {
         unsigned int num_vars = 0;
