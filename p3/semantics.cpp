@@ -246,21 +246,19 @@ void semantic_check(Node* node, int count)
     }
 }
 
-//void print_stack() {
-//    std::cout << "Stack: ";
-//    for (auto i = 0; i < max_stack_size; i++) {
-//        if (stack[i].token_string == "")break;
-//        std::cout << stack[i].token_string << "";
-//    }
-//    std::cout << std::endl;
-//}
 
 void print_stack() {
     std::cout << "Stack: ";
     int i;
-    for (i = 0; i < max_stack_size; i++) {
-        std::cout << stack[i].token_string << "";
+    //for (i = 0; i < max_stack_size; i++) {
+    //    std::cout << stack[i].token_string << "";
+    //    if (stack[i].token_string == "")break;
+    //}
+
+    for (auto& stack : i) {
         if (stack[i].token_string == "")break;
+        std::cout << stack[i].token_string << "";
+
     }
     std::cout << std::endl;
 }
