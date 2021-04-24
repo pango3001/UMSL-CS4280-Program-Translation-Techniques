@@ -254,7 +254,7 @@ void semantic_check(Node* node, int count)
 
 void print_stack() {
     std::cout << "Stack: ";
-    int i
+    int i;
     for (i = 0; i < max_stack_size; i++) {
         std::cout << stack[i].token_string << "";
         if (stack[i].token_string == "")break;
