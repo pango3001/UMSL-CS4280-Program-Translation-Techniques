@@ -54,7 +54,7 @@ int find(Token tk)
 {
     for (int i = var_count; i >= scope_begin; i--)
     {
-        std::cout << scope_begin << " " << var_count << std::endl;
+        //std::cout << scope_begin << " " << var_count << std::endl;
         if (stack[i].token_string == tk.token_string)
         {
             int tos_distance = var_count - 1 - i;
