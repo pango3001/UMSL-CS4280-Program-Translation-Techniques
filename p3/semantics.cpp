@@ -142,14 +142,10 @@ void semantic_check(Node* node, int count)
         else if (node->child_1 != nullptr)
             semantic_check(node->child_1, count);
     }
-    // else if(node->name == "<M>")
-    // {
-    //     if(node->child_1 != nullptr)
-    //         semantic_check(node->child_1, count);
-    // }
+
     else if (node->name == "<R>")
     {
-        if (node->token_1.token_ID == ID_TK)
+        if (node->token_1.token_ID == ID_TK || node->token_1.token_ID == INT_TK)
         {
             if (!var_exists(node->token_1))
             {
