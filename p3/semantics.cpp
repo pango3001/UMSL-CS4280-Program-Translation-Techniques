@@ -206,9 +206,9 @@ void semantic_check(Node* node, int count)
     {
         if (node->token_1.token_ID == ID_TK || node->token_1.token_ID == INT_TK)
         {
-            if (!var_exists(node->token_2))
+            if (!var_exists(node->token_1))
             {
-                std::cout << "ERROR: " << node->token_2.token_string << " has not been declared in this scope" << std::endl;
+                std::cout << "ERROR: " << node->token_1.token_string << " has not been declared in this scope" << std::endl;
                 exit(EXIT_FAILURE);
             }
         }
@@ -219,7 +219,7 @@ void semantic_check(Node* node, int count)
     {
         if (!var_exists(node->token_2))
         {
-            std::cout << "ERROR: " << node->token_2.token_string << " has not been declared in this scope" << std::endl;
+            std::cout << "ERROR: " << node->token_1.token_string << " has not been declared in this scope" << std::endl;
             exit(EXIT_FAILURE);
         }
     }
