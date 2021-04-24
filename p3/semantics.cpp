@@ -81,8 +81,9 @@ void semantic_check(Node* node, int count)
     if (node == nullptr)
         return;
     if (debug1) {
-        if (node->name == "<vars>") { std::cout << "Working on: " << std::setw(10) << std::left << node->name << "| Token: " << std::setw(9) << std::left << node->token_2.token_string << "| " << print_stack(); }  // for debugging
-        else { std::cout << "Working on: " << std::setw(10) << std::left << node->name << "| Token: " << std::setw(9) << std::left << node->token_1.token_string << "| " << print_stack(); }  // for debugging
+        if (node->name == "<vars>") { std::cout << "Working on: " << std::setw(10) << std::left << node->name << "| Token: " << std::setw(9) << std::left << node->token_2.token_string << "| "; }  // for debugging
+        else { std::cout << "Working on: " << std::setw(10) << std::left << node->name << "| Token: " << std::setw(9) << std::left << node->token_1.token_string << "| "; }  // for debugging
+        print_stack();
     }
     if (node->name == "<program>")
     {
