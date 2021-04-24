@@ -142,6 +142,41 @@ void semantic_check(Node* node, int count)
         else if (node->child_1 != nullptr)
             semantic_check(node->child_1, count);
     }
+    else if (node->name == "<N>")
+    {
+        if (node->token_1.token_ID == SLASH_TK || node->token_1.token_ID == ASTERISK_TK)
+        {
+            if (node->child_1 != nullptr)
+                semantic_check(node->child_1, count);
+            if (node->child_2 != nullptr)
+                semantic_check(node->child_2, count);
+            if (node->child_3 != nullptr)
+                semantic_check(node->child_1, count);
+            if (node->child_4 != nullptr)
+                semantic_check(node->child_2, count);
+        }
+        else if (node->child_1 != nullptr)
+            semantic_check(node->child_1, count);
+    }
+    else if (node->name == "<M>")
+    {
+        if (node->token_1.token_ID == ASTERISK_TK)
+        {
+            if (node->child_1 != nullptr)
+                semantic_check(node->child_1, count);
+            if (node->child_2 != nullptr)
+                semantic_check(node->child_2, count);
+            if (node->child_3 != nullptr)
+                semantic_check(node->child_1, count);
+            if (node->child_4 != nullptr)
+                semantic_check(node->child_2, count);
+        }
+        else if (node->child_1 != nullptr)
+            semantic_check(node->child_1, count);
+    }
+
+
+
     else if (node->name == "<A>")
     {
         if (node->token_1.token_ID == PLUS_TK)
