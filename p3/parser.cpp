@@ -100,12 +100,12 @@ Node* vars(unsigned int depth)
 
     if (tokey.token_ID == DATA_TK)
     {
-        //node->token_1 = tokey;
+        node->token_1 = tokey;
         tokey = scanner(in_file, lineNum);
         if (debug2) { std::cout << "Working on token5: " << tokey.token_string << "\n"; }  // for debugging
         if (tokey.token_ID == ID_TK)
         {
-            node->token_1 = tokey;
+            node->token_2 = tokey;
             tokey = scanner(in_file, lineNum);
             if (debug2) { std::cout << "Working on token6: " << tokey.token_string << "\n"; }  // for debugging
             if (tokey.token_ID == COLON_EQUALS_TK)
