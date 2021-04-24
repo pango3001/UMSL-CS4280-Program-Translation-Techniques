@@ -78,7 +78,7 @@ void semantic_check(Node* node, int count)
 {
     if (node == nullptr)
         return;
-    if (debug1) { std::cout << "Working on: " << node->name << "\n"; }  // for debugging
+    if (debug1) { std::cout << "Working on: " << node->name << ", Token: " << node->token_2.token_string << "\n"; }  // for debugging
     if (debug1) { print_stack(); }  // for debugging
 
     if (node->name == "<program>")
@@ -239,6 +239,15 @@ void semantic_check(Node* node, int count)
             semantic_check(node->child_4, count);
     }
 }
+
+//void print_stack() {
+//    std::cout << "Stack: ";
+//    for (auto i = 0; i < max_stack_size; i++) {
+//        if (stack[i].token_string == "")break;
+//        std::cout << stack[i].token_string << "";
+//    }
+//    std::cout << std::endl;
+//}
 
 void print_stack() {
     std::cout << "Stack: ";
