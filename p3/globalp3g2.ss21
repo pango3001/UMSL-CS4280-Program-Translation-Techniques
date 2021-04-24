@@ -1,9 +1,15 @@
-$$ p2g4 $$
+$$ p3g2 $$
 data z := 321 ;
+data y := 567 ;
 main
 begin
-data y := 5 ;
+data x := 5 ;
 loop [ y => z ]
-    assign x := y ; ;
+  begin
+  data m := 3 ;
+     begin
+     proc x ; 
+     end
+  end ;
 outter x ;
 end
