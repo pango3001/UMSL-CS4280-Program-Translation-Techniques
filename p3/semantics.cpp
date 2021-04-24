@@ -37,7 +37,7 @@ void push(Token tk)
         }
         var_count++; if (debug1) { std::cout << "VAR COUNT: " << var_count << "\n"; }  // for debugging
         stack[var_count] = tk; if (debug1) { std::cout << "Adding \'" << tk.token_string << "\' to the stack\n"; }  // for debugging 
-       
+        print_stack();
     }
 }
 
