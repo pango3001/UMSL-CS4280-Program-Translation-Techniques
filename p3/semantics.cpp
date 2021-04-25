@@ -10,7 +10,8 @@ Token stack[max_stack_size];
 int var_count = 0;
 int scope_begin = 0;
 
-bool debug1 = true;
+bool debug1 = false;
+bool debug2 = true;
 
 void build_stack()
 {
@@ -36,8 +37,8 @@ void push(Token tk)
             }
         }
         
-        stack[var_count] = tk; if (debug1) { std::cout << "Adding \'" << tk.token_string << "\' to the stack\n"; }  // for debugging
-        var_count++; if (debug1) { std::cout << "VAR COUNT: " << var_count << "\n"; }  // for debugging
+        stack[var_count] = tk; if (debug2) { std::cout << "Adding \'" << tk.token_string << "\' to the stack\n"; }  // for debugging
+        var_count++; if (debug2) { std::cout << "VAR COUNT: " << var_count << "\n"; }  // for debugging
         print_stack();
     }
 }
@@ -111,7 +112,7 @@ void semantic_check(Node* node, int count)
         }
         else if (tos_distance < count)
         {
-            std::cout << "ERROR: " << node->token_2.token_string << " has already been defined in this scope" << std::endl;
+            error_declared(node->token_2.token_string);
             exit(EXIT_FAILURE);
         }
 
@@ -208,7 +209,7 @@ void semantic_check(Node* node, int count)
         {
             if (!var_exists(node->token_1))
             {
-                std::cout << "ERROR: " << node->token_1.token_string << " has not been declared in this scope" << std::endl;
+                error_declared(node->token_1.token_string);
                 exit(EXIT_FAILURE);
             }
         }
@@ -219,7 +220,7 @@ void semantic_check(Node* node, int count)
     {
         if (!var_exists(node->token_2))
         {
-            std::cout << "ERROR: " << node->token_1.token_string << " has not been declared in this scope" << std::endl;
+            error_declared(node->token_1.token_string);
             exit(EXIT_FAILURE);
         }
     }
@@ -248,7 +249,7 @@ void semantic_check(Node* node, int count)
 
 void error_declared(std::string tokenString)
 {
-    std::cout << "ERROR: " << tokenString << " has not been declared in this scope" << std::endl;
+    std::cout << "Semantics error... \'" << tokenString << "\' has not been declared in this scope" << std::endl;
 }
 
 
