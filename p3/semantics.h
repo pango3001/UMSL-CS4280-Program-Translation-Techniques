@@ -11,7 +11,7 @@ bool var_exists(Token tk);
 void print_stack();
 void semantic_check(Node* node, int count);
 
-void error_declared(Node* node);
+void error_declared(std::string tokenString);
 
 
 #endif
