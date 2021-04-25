@@ -6,7 +6,7 @@
 
 Token stack[MAX_STACK];
 
-bool debug1 = false;
+bool debug1 = true;
 bool debugger2 = true;
 
 int var_count = 0;
