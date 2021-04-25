@@ -34,8 +34,9 @@ void push(Token tk) {
 // pops stack
 void pop(int scope_start) {
     for (int i = var_count; i > scope_start; i--){
-        var_count--;
+        if (debugger2) { std::cout << "Popping \'" << stack[i].token_string << "\' from the stack\n"; }  // for debugging
         stack[i].token_string == "";
+        var_count--; if (debugger2) { std::cout << "VAR COUNT: " << var_count << "\n"; }  // for debugging
     }
 }
 
