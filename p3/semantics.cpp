@@ -9,8 +9,9 @@ Token stack[MAX_STACK];
 bool debug1 = true;
 bool debugger2 = true;
 
-int var_count = 0, scope = 0;
+int var_count = 0, scope = 0;  //initialize the var count and the level of scope
 
+// for pushing a new varibale onto stack, also checks if var already exists in scope
 void push(Token tk) {
     if (var_count >= MAX_STACK){
         std::cout << "Stack has reached size of 100 \nExiting..." << std::endl;
@@ -26,17 +27,19 @@ void push(Token tk) {
 
         stack[var_count] = tk; if (debugger2) { std::cout << "Adding \'" << tk.token_string << "\' to the stack\n"; }  // for debugging
         var_count++; if (debugger2) { std::cout << "VAR COUNT: " << var_count << "\n"; }  // for debugging
-        print_stack();
+        show_stack();
     }
 }
 
-void pop(int scope_begin) {
-    for (int i = var_count; i > scope_begin; i--){
+// pops stack
+void pop(int scope_start) {
+    for (int i = var_count; i > scope_start; i--){
         var_count--;
         stack[i].token_string == "";
     }
 }
 
+// return the distance from top of stack
 int topOfStackD(Token tk) {
     for (int i = var_count; i >= scope; i--){
         if (stack[i].token_string == tk.token_string){
@@ -48,6 +51,7 @@ int topOfStackD(Token tk) {
     return -1;
 }
 
+// checks if variable already exists
 bool var_exists(Token tk)
 {
     for (int i = var_count - 1; i > -1; i--){
@@ -56,6 +60,7 @@ bool var_exists(Token tk)
     return false;
 }
 
+// goes through parsetree to check semantics
 void semantic_check(Node* node, int index)
 {
     if (node == nullptr)
@@ -63,7 +68,7 @@ void semantic_check(Node* node, int index)
     if (debug1) {
         if (node->name == "<vars>" || node->name == "<assign>") { std::cout << "Working on: " << std::setw(10) << std::left << node->name << "| Token: " << std::setw(9) << std::left << node->token_2.token_string << "| "; }  // for debugging
         else { std::cout << "Working on: " << std::setw(10) << std::left << node->name << "| Token: " << std::setw(9) << std::left << node->token_1.token_string << "| "; }  // for debugging
-        print_stack();
+        show_stack();
     }
     if (node->name == "<program>")
     {
@@ -93,7 +98,6 @@ void semantic_check(Node* node, int index)
         scope = var_count;
 
         check_children(node, vars);
-
         pop(scope);
     }
     else if (node->name == "<expr>"){
@@ -154,6 +158,7 @@ void semantic_check(Node* node, int index)
     }
 }
 
+// continues semantic check through children
 void check_children(Node* node, int index)
 {
     if (node->child_1 != nullptr)
@@ -166,12 +171,13 @@ void check_children(Node* node, int index)
         semantic_check(node->child_4, index);
 }
 
+// error for declared variables
 void error_declared(std::string tokenString){
     std::cout << "Semantics error... \'" << tokenString << "\' has not been declared in this scope." << std::endl;
 }
 
-
-void print_stack() {
+// prints stack
+void show_stack() {
     std::cout << "Stack: ";
     int i;
     for (i = 0; i < 100; i++) {
