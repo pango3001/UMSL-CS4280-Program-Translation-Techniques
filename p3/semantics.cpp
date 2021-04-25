@@ -227,7 +227,7 @@ void semantic_check(Node* node, int count)
     {
         if (!var_exists(node->token_2))
         {
-            std::cout << "ERROR: " << node->token_2.token_string << " has not been declared in this scope" << std::endl;
+            error_declared(node->token_2.token_string);
             exit(EXIT_FAILURE);
         }
         if (node->child_1 != nullptr)
@@ -244,6 +244,11 @@ void semantic_check(Node* node, int count)
         if (node->child_4 != nullptr)
             semantic_check(node->child_4, count);
     }
+}
+
+void error_declared(std::string tokenString)
+{
+    std::cout << "ERROR: " << tokenString << " has not been declared in this scope" << std::endl;
 }
 
 
