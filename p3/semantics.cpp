@@ -11,7 +11,7 @@ int var_count = 0;
 int scope_begin = 0;
 
 bool debug1 = false;
-bool debug2 = true;
+bool debugger2 = true;
 
 void build_stack()
 {
@@ -37,8 +37,8 @@ void push(Token tk)
             }
         }
         
-        stack[var_count] = tk; if (debug2) { std::cout << "Adding \'" << tk.token_string << "\' to the stack\n"; }  // for debugging
-        var_count++; if (debug2) { std::cout << "VAR COUNT: " << var_count << "\n"; }  // for debugging
+        stack[var_count] = tk; if (debugger2) { std::cout << "Adding \'" << tk.token_string << "\' to the stack\n"; }  // for debugging
+        var_count++; if (debugger2) { std::cout << "VAR COUNT: " << var_count << "\n"; }  // for debugging
         print_stack();
     }
 }
