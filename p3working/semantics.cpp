@@ -13,12 +13,12 @@ int var_count = 0;
 int scope = 0;
 
 
-//void build_stack() {
-//    for (int i = 0; i <= MAX_STACK; i++)
-//        stack[i].token_string = "";
-//}
+void build_stack(){
+    for (int i = 0; i <= MAX_STACK; i++)
+        stack[i].token_string = "";
+}
 
-void push(Token tk) {
+void push(Token tk){
     if (var_count >= MAX_STACK)
     {
         std::cout << "Semantics error... Stack has reached size of 100 \nExiting..." << std::endl;
@@ -34,14 +34,14 @@ void push(Token tk) {
                 exit(EXIT_FAILURE);
             }
         }
-
+        
         stack[var_count] = tk; if (debugger2) { std::cout << "Adding \'" << tk.token_string << "\' to the stack\n"; }  // for debugging
         var_count++; if (debugger2) { std::cout << "VAR COUNT: " << var_count << "\n"; }  // for debugging
         print_stack();
     }
 }
 
-void pop(int scope_begin) {
+void pop(int scope_begin){
     for (int i = var_count; i > scope_begin; i--)
     {
         var_count--;
@@ -49,7 +49,7 @@ void pop(int scope_begin) {
     }
 }
 
-int find(Token tk) {
+int find(Token tk){
     for (int i = var_count; i >= scope; i--)
     {
         if (stack[i].token_string == tk.token_string)
@@ -73,7 +73,7 @@ bool var_exists(Token tk)
     return false;
 }
 
-void semantic_check(Node* node, int index)
+void semantic_check(Node* node, int count)
 {
     if (node == nullptr)
         return;
@@ -99,34 +99,34 @@ void semantic_check(Node* node, int index)
         int tos_distance = find(node->token_2);
         scope = var_count;
 
-        if (tos_distance == -1 || tos_distance > index)
+        if (tos_distance == -1 || tos_distance > count)
         {
-
+            
             push(node->token_2);
-            index++;
+            count++;
         }
-        else if (tos_distance < index)
+        else if (tos_distance < count)
         {
             error_declared(node->token_2.token_string);
             exit(EXIT_FAILURE);
         }
 
         if (node->child_1 != nullptr)
-            semantic_check(node->child_1, index);
+            semantic_check(node->child_1, count);
     }
     else if (node->name == "<block>")
     {
-        unsigned int vars = 0;
+        unsigned int num_vars = 0;
         scope = var_count;
 
         if (node->child_1 != nullptr)
-            semantic_check(node->child_1, vars);
+            semantic_check(node->child_1, num_vars);
         if (node->child_2 != nullptr)
-            semantic_check(node->child_2, vars);
+            semantic_check(node->child_2, num_vars);
         if (node->child_3 != nullptr)
-            semantic_check(node->child_3, vars);
+            semantic_check(node->child_3, num_vars);
         if (node->child_4 != nullptr)
-            semantic_check(node->child_4, vars);
+            semantic_check(node->child_4, num_vars);
 
         pop(scope);
     }
@@ -135,64 +135,67 @@ void semantic_check(Node* node, int index)
         if (node->token_1.token_ID == MINUS_TK)
         {
             if (node->child_1 != nullptr)
-                semantic_check(node->child_1, index);
+                semantic_check(node->child_1, count);
             if (node->child_2 != nullptr)
-                semantic_check(node->child_2, index);
+                semantic_check(node->child_2, count);
             if (node->child_3 != nullptr)
-                semantic_check(node->child_3, index);
+                semantic_check(node->child_3, count);
             if (node->child_4 != nullptr)
-                semantic_check(node->child_4, index);
+                semantic_check(node->child_4, count);
         }
         else if (node->child_1 != nullptr)
-            semantic_check(node->child_1, index);
+            semantic_check(node->child_1, count);
     }
     else if (node->name == "<N>")
     {
         if (node->token_1.token_ID == SLASH_TK || node->token_1.token_ID == ASTERISK_TK)
         {
             if (node->child_1 != nullptr)
-                semantic_check(node->child_1, index);
+                semantic_check(node->child_1, count);
             if (node->child_2 != nullptr)
-                semantic_check(node->child_2, index);
+                semantic_check(node->child_2, count);
             if (node->child_3 != nullptr)
-                semantic_check(node->child_3, index);
+                semantic_check(node->child_3, count);
             if (node->child_4 != nullptr)
-                semantic_check(node->child_4, index);
+                semantic_check(node->child_4, count);
         }
         else if (node->child_1 != nullptr)
-            semantic_check(node->child_1, index);
+            semantic_check(node->child_1, count);
     }
     else if (node->name == "<M>")
     {
         if (node->token_1.token_ID == ASTERISK_TK)
         {
             if (node->child_1 != nullptr)
-                semantic_check(node->child_1, index);
+                semantic_check(node->child_1, count);
             if (node->child_2 != nullptr)
-                semantic_check(node->child_2, index);
+                semantic_check(node->child_2, count);
             if (node->child_3 != nullptr)
-                semantic_check(node->child_3, index);
+                semantic_check(node->child_3, count);
             if (node->child_4 != nullptr)
-                semantic_check(node->child_4, index);
+                semantic_check(node->child_4, count);
         }
         else if (node->child_1 != nullptr)
-            semantic_check(node->child_1, index);
+            semantic_check(node->child_1, count);
     }
+
+
+
     else if (node->name == "<A>")
     {
         if (node->token_1.token_ID == PLUS_TK)
         {
             if (node->child_1 != nullptr)
-                semantic_check(node->child_1, index);
+                semantic_check(node->child_1, count);
             if (node->child_2 != nullptr)
-                semantic_check(node->child_2, index);
+                semantic_check(node->child_2, count);
             if (node->child_3 != nullptr)
-                semantic_check(node->child_3, index);
+                semantic_check(node->child_3, count);
             if (node->child_4 != nullptr)
-                semantic_check(node->child_4, index);
+                semantic_check(node->child_4, count);
         }
         else if (node->child_1 != nullptr)
-            semantic_check(node->child_1, index);
+            semantic_check(node->child_1, count);
     }
 
     else if (node->name == "<R>")
@@ -206,7 +209,7 @@ void semantic_check(Node* node, int index)
             }
         }
         else if (node->child_1 != nullptr)
-            semantic_check(node->child_1, index);
+            semantic_check(node->child_1, count);
     }
     else if (node->name == "<in>")
     {
@@ -224,24 +227,24 @@ void semantic_check(Node* node, int index)
             exit(EXIT_FAILURE);
         }
         if (node->child_1 != nullptr)
-            semantic_check(node->child_1, index);
+            semantic_check(node->child_1, count);
     }
     else
     {
         if (node->child_1 != nullptr)
-            semantic_check(node->child_1, index);
+            semantic_check(node->child_1, count);
         if (node->child_2 != nullptr)
-            semantic_check(node->child_2, index);
+            semantic_check(node->child_2, count);
         if (node->child_3 != nullptr)
-            semantic_check(node->child_3, index);
+            semantic_check(node->child_3, count);
         if (node->child_4 != nullptr)
-            semantic_check(node->child_4, index);
+            semantic_check(node->child_4, count);
     }
 }
 
 void error_declared(std::string tokenString)
 {
-    std::cout << "Semantics error... \'" << tokenString << "\' has not been declared in this scope." << std::endl;
+    std::cout << "Semantics error... \'" << tokenString << "\' has not been declared in this scope" << std::endl;
 }
 
 
