@@ -10,6 +10,7 @@ int topOfStackD(Token tk);
 bool var_exists(Token tk);
 void print_stack();
 void semantic_check(Node* node, int index);
+void check_children(Node* node, int index);
 void error_declared(std::string tokenString);
 
 
