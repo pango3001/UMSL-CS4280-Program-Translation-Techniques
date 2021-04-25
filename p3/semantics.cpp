@@ -49,7 +49,7 @@ void pop(int scope_begin) {
     }
 }
 
-int find(Token tk) {
+int topOfStackD(Token tk) {
     for (int i = var_count; i >= scope; i--)
     {
         if (stack[i].token_string == tk.token_string)
@@ -96,7 +96,7 @@ void semantic_check(Node* node, int index)
     }
     else if (node->name == "<vars>")
     {
-        int tos_distance = find(node->token_2);
+        int tos_distance = topOfStackD(node->token_2);
         scope = var_count;
 
         if (tos_distance == -1 || tos_distance > index)
