@@ -60,7 +60,7 @@ int main(int argc, char** argv) {
     if (in_file) {
         //std::cout << "Starting the parser..." << std::endl;
         Node* root = parser(); // run parser
-        print_tree(root);      // print tree
+        //print_tree(root);      // print tree
         semantic_check(root, 0);
         in_file.close(); // close file
 

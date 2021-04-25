@@ -2,37 +2,35 @@
 #include <iostream>
 #include <iomanip>
 
-/* assume no more than 100 items in a program and generate stack overflow if more */
-const int max_stack_size = 100;
+#define MAX_STACK 100
 
-Token stack[max_stack_size];
-
-int var_count = 0;
-int scope_begin = 0;
+Token stack[MAX_STACK];
 
 bool debug1 = false;
 bool debugger2 = true;
 
-void build_stack()
-{
-    for (int i = 0; i <= max_stack_size; i++)
+int var_count = 0;
+int scope = 0;
+
+
+void build_stack(){
+    for (int i = 0; i <= MAX_STACK; i++)
         stack[i].token_string = "";
 }
 
-void push(Token tk)
-{
-    if (var_count >= max_stack_size)
+void push(Token tk){
+    if (var_count >= MAX_STACK)
     {
-        std::cout << "ERROR: Full stack" << std::endl;
+        std::cout << "Semantics error... Stack has reached size of 100 \nExiting..." << std::endl;
         exit(EXIT_FAILURE);
     }
     else
     {
-        for (int i = scope_begin; i < var_count; i++)
+        for (int i = scope; i < var_count; i++)
         {
             if (stack[i].token_string == tk.token_string)
             {
-                std::cout << "ERROR: " << tk.token_string << " has already been declared in this scope" << std::endl;
+                std::cout << "Semantics error... \'" << tk.token_string << "\' has already been declared in this scope" << std::endl;
                 exit(EXIT_FAILURE);
             }
         }
@@ -43,8 +41,7 @@ void push(Token tk)
     }
 }
 
-void pop(int scope_begin)
-{
+void pop(int scope_begin){
     for (int i = var_count; i > scope_begin; i--)
     {
         var_count--;
@@ -52,11 +49,9 @@ void pop(int scope_begin)
     }
 }
 
-int find(Token tk)
-{
-    for (int i = var_count; i >= scope_begin; i--)
+int find(Token tk){
+    for (int i = var_count; i >= scope; i--)
     {
-        //std::cout << scope_begin << " " << var_count << std::endl;
         if (stack[i].token_string == tk.token_string)
         {
             int tos_distance = var_count - 1 - i;
@@ -89,20 +84,20 @@ void semantic_check(Node* node, int count)
     }
     if (node->name == "<program>")
     {
-        unsigned int num_vars = 0;
+        int vars = 0;
         if (node->child_1 != nullptr)
-            semantic_check(node->child_1, num_vars);
+            semantic_check(node->child_1, vars);
         if (node->child_2 != nullptr)
-            semantic_check(node->child_2, num_vars);
+            semantic_check(node->child_2, vars);
         if (node->child_3 != nullptr)
-            semantic_check(node->child_3, num_vars);
+            semantic_check(node->child_3, vars);
         if (node->child_4 != nullptr)
-            semantic_check(node->child_4, num_vars);
+            semantic_check(node->child_4, vars);
     }
     else if (node->name == "<vars>")
     {
         int tos_distance = find(node->token_2);
-        scope_begin = var_count;
+        scope = var_count;
 
         if (tos_distance == -1 || tos_distance > count)
         {
@@ -122,7 +117,7 @@ void semantic_check(Node* node, int count)
     else if (node->name == "<block>")
     {
         unsigned int num_vars = 0;
-        scope_begin = var_count;
+        scope = var_count;
 
         if (node->child_1 != nullptr)
             semantic_check(node->child_1, num_vars);
@@ -133,7 +128,7 @@ void semantic_check(Node* node, int count)
         if (node->child_4 != nullptr)
             semantic_check(node->child_4, num_vars);
 
-        pop(scope_begin);
+        pop(scope);
     }
     else if (node->name == "<expr>")
     {
