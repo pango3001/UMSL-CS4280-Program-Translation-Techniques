@@ -255,7 +255,7 @@ void print_stack() {
     //    if (stack[i].token_string == "")break;
     //}
 
-    for (int i : stack) {
+    for (Token i : stack) {
         if (stack[i].token_string == "")break;
         std::cout << stack[i].token_string << "";
 
