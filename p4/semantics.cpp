@@ -10,7 +10,11 @@ bool debugger2 = true;
 
 int var_count = 0, scope = 0;  //initialize the var count and the level of scope
 
-
+static int temp_var_count = 0;
+/* total number of labels */
+static int label_count = 0;
+/* array to hold temp variables */
+std::string temp_vars[max_stack_size];
 unsigned int current_temp_vars_num = 0;
 unsigned int carry_labels_num = 0;
 unsigned int current_labels_num = 0;
