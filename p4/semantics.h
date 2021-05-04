@@ -21,7 +21,7 @@ typedef struct symbol_table
 
 
 //SymbolTable st_holder;
-vector<SymbolTable> st;
+//vector<SymbolTable> st;
 
 void push(Token tk);
 void pop(int scope_begin);
