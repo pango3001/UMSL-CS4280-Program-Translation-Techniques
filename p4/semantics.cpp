@@ -14,7 +14,7 @@ static int temp_var_count = 0;
 /* total number of labels */
 static int label_count = 0;
 /* array to hold temp variables */
-std::string temp_vars[max_stack_size];
+std::string temp_vars[MAX_STACK];
 unsigned int current_temp_vars_num = 0;
 unsigned int carry_labels_num = 0;
 unsigned int current_labels_num = 0;
@@ -197,9 +197,9 @@ void semantic_check(Node* node, int index)
         }
         else {
             std::string temp_var = get_temp_var();
-            out_file << "\t\tREAD " << temp_var << "\n";
-            out_file << "\t\tLOAD " << temp_var << "\n";
-            out_file << "\t\tSTACKW " << var_location << "\n";
+            file << "\t\tREAD " << temp_var << "\n";
+            file << "\t\tLOAD " << temp_var << "\n";
+            file << "\t\tSTACKW " << var_location << "\n";
         }
     }
 
