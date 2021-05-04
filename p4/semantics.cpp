@@ -105,10 +105,10 @@ void semantic_check(Node* node, int index)
 
         //Initialize global variable and temporary variable
         for (unsigned int i = 0; i < st.size(); i++) {
-            file << st[i].identifier.value << " " << st[i].value.token_string << endl;
+            file << st[i].identifier.token_string << " " << st[i].value.token_string << std::endl;
         }
         for (unsigned int i = 0; i < current_temp_vars_num; i++) {
-            file << "_T" << i << " 0" << endl;
+            file << "_T" << i << " 0" << std::endl;
         }
 
 
