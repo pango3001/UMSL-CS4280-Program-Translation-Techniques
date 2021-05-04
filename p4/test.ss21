@@ -1,0 +1,7 @@
+data x := 1;
+main
+begin
+  assign x := x - 1;
+  assign x := 1 - x;
+  outter x;
+end
