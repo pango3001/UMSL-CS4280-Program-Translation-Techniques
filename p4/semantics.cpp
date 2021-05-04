@@ -12,11 +12,10 @@ bool debugger2 = true;
 int var_count = 0, scope = 0;  //initialize the var count and the level of scope
 
 
-ofstream file;
-string output_file_name;
+std::ofstream file;
+std::string output_file_name;
 
 output_file_name.assign("file.asm");
-
 
 
 
