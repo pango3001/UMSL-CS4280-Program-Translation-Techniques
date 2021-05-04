@@ -11,6 +11,10 @@
 #include "parser.h"
 #include "semantics.h"
 
+
+
+std::ofstream file;
+
 int main(int argc, char** argv) {
     std::string file_name;         // filename
 
