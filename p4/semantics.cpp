@@ -140,7 +140,7 @@ void semantic_check(Node* node, int index)
             int vars_num = current_temp_vars_num++;
             
             file << "STORE _T" << vars_num << std::endl;
-            if (node->token_1.token_ID == "SLASH_TK") {
+            if (node->token_1.token_ID == SLASH_TK) {
                 file << "DIV _T" << vars_num << std::endl;
             }
             else if (node->token_1.token_ID == ASTERISK_TK) {
