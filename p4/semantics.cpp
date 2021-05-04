@@ -23,8 +23,9 @@ unsigned int current_labels_num = 0;
 
 void codeGen(Node* node, int index) {
    
-    
+    file.open("file.asm", std::ios_base::trunc);
     semantic_check(node, index);  //checks semantics
+    file.close();
     //file << "STOP1" << std::endl;
 }
 
@@ -83,7 +84,7 @@ bool var_exists(Token tk)
 // goes through parsetree to check semantics
 void semantic_check(Node* node, int index)
 {
-    std::ofstream file("file.asm");
+    
     if (node == nullptr)
         return;
     if (debug1) {
