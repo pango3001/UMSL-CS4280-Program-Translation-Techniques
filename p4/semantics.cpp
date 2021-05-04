@@ -21,6 +21,7 @@ void codeGen(Node* node, int index) {
    
     std::ofstream file("test.asm");
     semantic_check(node, index);  //checks semantics
+    file << "STOP1" << std::endl;
 }
 
 
