@@ -19,16 +19,16 @@ std::string output_file_name = "file.asm";
 file.open(output_file_name, std::ios_base::app);
 
 
-void Semantics::codeGeneration(NodeT* node)
-{
-    validate(node);
-    cout << ">>: semantic validate complete with no error... continue to the next step." << endl;
-    file.open(output_file_name.c_str());
-    generate(node);
-    cout << ">>: code generation complete..." << endl;
-    cout << ">>: file output => \"" << output_file_name << "\"" << endl;
-    file.close();
-}
+//void Semantics::codeGeneration(NodeT* node)
+//{
+//    validate(node);
+//    cout << ">>: semantic validate complete with no error... continue to the next step." << endl;
+//    file.open(output_file_name.c_str());
+//    generate(node);
+//    cout << ">>: code generation complete..." << endl;
+//    cout << ">>: file output => \"" << output_file_name << "\"" << endl;
+//    file.close();
+//}
 
 
 
