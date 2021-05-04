@@ -137,10 +137,22 @@ void semantic_check(Node* node, int index)
     }
     else if (node->name == "<N>"){
         if (node->token_1.token_ID == SLASH_TK || node->token_1.token_ID == ASTERISK_TK){
+            int vars_num = current_temp_vars_num++;
             check_children(node, index);
+            file << "STORE _T" << vars_num << std::endl;
+            if (node->token_1.token_ID == "SLASH_TK") {
+                file << "DIV _T" << vars_num << endl;
+            }
+            else if (node->token_1.token_ID == ASTERISK_TK) {
+                file << "MULT _T" << vars_num << endl;
+            }
         }
-        else if (node->child_1 != nullptr)
+        else if (node->child_1 != nullptr){
+            
             semantic_check(node->child_1, index);
+            
+        }
+            
     }
     else if (node->name == "<M>"){
         if (node->token_1.token_ID == ASTERISK_TK){
