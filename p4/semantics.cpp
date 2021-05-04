@@ -17,7 +17,9 @@ std::string output_file_name = "file.asm";
 
 
 file.open(output_file_name, std::ios_base::app);
-
+unsigned int current_temp_vars_num = 0;
+unsigned int carry_labels_num = 0;
+unsigned int current_labels_num = 0;
 
 //void Semantics::codeGeneration(NodeT* node)
 //{
@@ -103,7 +105,7 @@ void semantic_check(Node* node, int index)
 
         //Initialize global variable and temporary variable
         for (unsigned int i = 0; i < st.size(); i++) {
-            file << st[i].identifier.value << " " << st[i].value.value << endl;
+            file << st[i].identifier.value << " " << st[i].value.token_string << endl;
         }
         for (unsigned int i = 0; i < current_temp_vars_num; i++) {
             file << "_T" << i << " 0" << endl;
