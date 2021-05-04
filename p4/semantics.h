@@ -20,7 +20,7 @@ typedef struct symbol_table
 } SymbolTable;
 
 
-SymbolTable st_holder;
+//SymbolTable st_holder;
 vector<SymbolTable> st;
 
 void push(Token tk);
