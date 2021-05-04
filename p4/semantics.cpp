@@ -141,10 +141,10 @@ void semantic_check(Node* node, int index)
             check_children(node, index);
             file << "STORE _T" << vars_num << std::endl;
             if (node->token_1.token_ID == "SLASH_TK") {
-                file << "DIV _T" << vars_num << endl;
+                file << "DIV _T" << vars_num << std::endl;
             }
             else if (node->token_1.token_ID == ASTERISK_TK) {
-                file << "MULT _T" << vars_num << endl;
+                file << "MULT _T" << vars_num << std::endl;
             }
         }
         else if (node->child_1 != nullptr){
