@@ -1,6 +1,5 @@
 #include "semantics.h"
-#include <iostream>
-#include <iomanip>
+
 
 #define MAX_STACK 100
 

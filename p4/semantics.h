@@ -4,6 +4,9 @@
 #include "node.h"
 #include <fstream>
 #include <vector>
+#include <iostream>
+#include <iomanip>
+#include <string>
 
 extern std::ofstream out_file;
 
