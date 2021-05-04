@@ -13,13 +13,15 @@
 
 
 
-std::ofstream file;
+
 
 
 
 int main(int argc, char** argv) {
     std::string file_name;         // filename
     std::string out_file_name;
+
+    std::ofstream file;
     // FILE GIVEN
     if (argc == 2) {
         file_name = argv[1];
