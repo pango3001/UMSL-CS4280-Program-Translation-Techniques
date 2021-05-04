@@ -13,7 +13,7 @@
 
 
 
-
+std::ofstream file;
 
 
 
@@ -21,7 +21,7 @@ int main(int argc, char** argv) {
     std::string file_name;         // filename
     std::string out_file_name;
 
-    std::ofstream file;
+    
     // FILE GIVEN
     if (argc == 2) {
         file_name = argv[1];
@@ -69,7 +69,7 @@ int main(int argc, char** argv) {
     // Scan and parse file
     if (in_file) {
         
-        file.open(out_file_name, std::ios::trunc);
+        
         //std::cout << "Starting the parser..." << std::endl;
         Node* root = parser(); // run parser
         //print_tree(root);      // print tree

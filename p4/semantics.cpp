@@ -15,20 +15,11 @@ unsigned int current_temp_vars_num = 0;
 unsigned int carry_labels_num = 0;
 unsigned int current_labels_num = 0;
 
-//void Semantics::codeGeneration(NodeT* node)
-//{
-//    validate(node);
-//    cout << ">>: semantic validate complete with no error... continue to the next step." << endl;
-//    file.open(output_file_name.c_str());
-//    generate(node);
-//    cout << ">>: code generation complete..." << endl;
-//    cout << ">>: file output => \"" << output_file_name << "\"" << endl;
-//    file.close();
-//}
+
 
 void codeGen(Node* node, int index) {
    
-
+    std::ofstream file("test.asm");
     semantic_check(node, index);  //checks semantics
 }
 
@@ -102,12 +93,12 @@ void semantic_check(Node* node, int index)
         file << "STOP" << std::endl;
 
         //Initialize global variable and temporary variable
-        for (unsigned int i = 0; i < st.size(); i++) {
-            file << st[i].identifier.token_string << " " << st[i].value.token_string << std::endl;
-        }
-        for (unsigned int i = 0; i < current_temp_vars_num; i++) {
-            file << "_T" << i << " 0" << std::endl;
-        }
+        //for (unsigned int i = 0; i < st.size(); i++) {
+        //    file << st[i].identifier.token_string << " " << st[i].value.token_string << std::endl;
+        //}
+        //for (unsigned int i = 0; i < current_temp_vars_num; i++) {
+        //    file << "_T" << i << " 0" << std::endl;
+        //}
 
 
     }
