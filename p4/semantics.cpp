@@ -101,7 +101,7 @@ void semantic_check(Node* node, int index)
         int vars = 0;
         check_children(node, vars);
         //Program stopping point
-        file << "STOP" << endl;
+        file << "STOP" << std::endl;
 
         //Initialize global variable and temporary variable
         for (unsigned int i = 0; i < st.size(); i++) {
