@@ -17,6 +17,21 @@ std::string output_file_name;
 
 output_file_name.assign("file.asm");
 
+file.open(output_file_name, std::ios_base::app);
+
+
+void Semantics::codeGeneration(NodeT* node)
+{
+    validate(node);
+    cout << ">>: semantic validate complete with no error... continue to the next step." << endl;
+    file.open(output_file_name.c_str());
+    generate(node);
+    cout << ">>: code generation complete..." << endl;
+    cout << ">>: file output => \"" << output_file_name << "\"" << endl;
+    file.close();
+}
+
+
 
 
 // for pushing a new varibale onto stack, also checks if var already exists in scope
@@ -84,6 +99,18 @@ void semantic_check(Node* node, int index)
     {
         int vars = 0;
         check_children(node, vars);
+        //Program stopping point
+        file << "STOP" << endl;
+
+        //Initialize global variable and temporary variable
+        for (unsigned int i = 0; i < st.size(); i++) {
+            file << st[i].identifier.value << " " << st[i].value.value << endl;
+        }
+        for (unsigned int i = 0; i < current_temp_vars_num; i++) {
+            file << "_T" << i << " 0" << endl;
+        }
+
+
     }
     else if (node->name == "<vars>")
     {

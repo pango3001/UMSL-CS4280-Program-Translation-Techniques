@@ -3,9 +3,22 @@
 #include "token.h"
 #include "node.h"
 #include <fstream>
+#include <vector>
 
 extern std::ofstream out_file;
 
+using std::vector;
+
+typedef struct symbol_table
+{
+	Token identifier;
+	Token value;
+	//Can add more expansion later...
+} SymbolTable;
+
+
+SymbolTable st_holder;
+vector<SymbolTable> st;
 
 void push(Token tk);
 void pop(int scope_begin);
