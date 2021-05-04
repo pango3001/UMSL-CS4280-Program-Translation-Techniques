@@ -186,8 +186,8 @@ void semantic_check(Node* node, int index)
         if (node->child_1 != nullptr)
             semantic_check(node->child_1, index);
         std::string temp_var = get_temp_var();
-        out_file << "\t\tSTORE " << temp_var << "\n";
-        out_file << "\t\tWRITE " << temp_var << "\n";
+        file << "\t\tSTORE " << temp_var << "\n";
+        file << "\t\tWRITE " << temp_var << "\n";
     }
 
     else if (node->name == "<in>"){
@@ -196,6 +196,13 @@ void semantic_check(Node* node, int index)
             exit(EXIT_FAILURE);
         }
         else {
+            int var_location = var_exists(node->token_1);
+            if (var_location == -1)
+            {
+                std::cout << "ERROR: " << node->token_1.token_string << " has not been declared in this scope" << std::endl;
+                exit(EXIT_FAILURE);
+            }
+
             std::string temp_var = get_temp_var();
             file << "\t\tREAD " << temp_var << "\n";
             file << "\t\tLOAD " << temp_var << "\n";
