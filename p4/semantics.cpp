@@ -19,7 +19,7 @@ unsigned int current_labels_num = 0;
 
 void codeGen(Node* node, int index) {
    
-    std::ofstream file("test.asm");
+    std::ofstream file("file.asm");
     semantic_check(node, index);  //checks semantics
     file << "STOP1" << std::endl;
 }
@@ -92,14 +92,6 @@ void semantic_check(Node* node, int index)
         check_children(node, vars);
         //Program stopping point
         file << "STOP" << std::endl;
-
-        //Initialize global variable and temporary variable
-        //for (unsigned int i = 0; i < st.size(); i++) {
-        //    file << st[i].identifier.token_string << " " << st[i].value.token_string << std::endl;
-        //}
-        //for (unsigned int i = 0; i < current_temp_vars_num; i++) {
-        //    file << "_T" << i << " 0" << std::endl;
-        //}
 
 
     }
@@ -185,10 +177,25 @@ void semantic_check(Node* node, int index)
         }
     }
 
+    else if (node->name == "<out>")
+    {
+        if (node->child_1 != nullptr)
+            semantic_check(node->child_1, index);
+        std::string temp_var = get_temp_var();
+        out_file << "\t\tSTORE " << temp_var << "\n";
+        out_file << "\t\tWRITE " << temp_var << "\n";
+    }
+
     else if (node->name == "<in>"){
         if (!var_exists(node->token_2)){
             error_declared(node->token_1.token_string);
             exit(EXIT_FAILURE);
+        }
+        else {
+            std::string temp_var = get_temp_var();
+            out_file << "\t\tREAD " << temp_var << "\n";
+            out_file << "\t\tLOAD " << temp_var << "\n";
+            out_file << "\t\tSTACKW " << var_location << "\n";
         }
     }
 
@@ -233,4 +240,16 @@ void show_stack() {
     }
 
     std::cout << std::endl;
+}
+
+std::string get_temp_var()
+{
+    /* create the temp_var name */
+    std::string temp_var = "T" + std::to_string(temp_var_count + 1);
+    /* put the temp_var in the temp_var array */
+    temp_vars[temp_var_count] = temp_var;
+    /* created new temp_var so increment the count of the variables */
+    temp_var_count++;
+    /* return the temp_var name */
+    return temp_var;
 }

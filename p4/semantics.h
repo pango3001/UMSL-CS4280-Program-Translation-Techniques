@@ -33,7 +33,7 @@ void semantic_check(Node* node, int index);
 void check_children(Node* node, int index);
 void error_declared(std::string tokenString);
 
-
+std::string get_temp_var();
 void codeGen(Node* node, int index);
 
 #endif
