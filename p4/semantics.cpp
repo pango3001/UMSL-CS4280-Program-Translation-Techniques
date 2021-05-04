@@ -138,7 +138,7 @@ void semantic_check(Node* node, int index)
     else if (node->name == "<N>"){
         if (node->token_1.token_ID == SLASH_TK || node->token_1.token_ID == ASTERISK_TK){
             int vars_num = current_temp_vars_num++;
-            check_children(node, index);
+            
             file << "STORE _T" << vars_num << std::endl;
             if (node->token_1.token_ID == "SLASH_TK") {
                 file << "DIV _T" << vars_num << std::endl;
@@ -146,6 +146,7 @@ void semantic_check(Node* node, int index)
             else if (node->token_1.token_ID == ASTERISK_TK) {
                 file << "MULT _T" << vars_num << std::endl;
             }
+            check_children(node, index);
         }
         else if (node->child_1 != nullptr){
             
@@ -154,6 +155,7 @@ void semantic_check(Node* node, int index)
         }
             
     }
+
     else if (node->name == "<M>"){
         if (node->token_1.token_ID == ASTERISK_TK){
             check_children(node, index);
@@ -161,6 +163,7 @@ void semantic_check(Node* node, int index)
         else if (node->child_1 != nullptr)
             semantic_check(node->child_1, index);
     }
+
     else if (node->name == "<A>"){
         if (node->token_1.token_ID == PLUS_TK){
             check_children(node, index);
@@ -176,15 +179,18 @@ void semantic_check(Node* node, int index)
                 exit(EXIT_FAILURE);
             }
         }
-        else if (node->child_1 != nullptr)
+        else if (node->child_1 != nullptr){
+            file << "LOAD " << node->token_1.token_string << std::endl;
             semantic_check(node->child_1, index);
     }
+
     else if (node->name == "<in>"){
         if (!var_exists(node->token_2)){
             error_declared(node->token_1.token_string);
             exit(EXIT_FAILURE);
         }
     }
+
     else if (node->name == "<assign>"){
         if (!var_exists(node->token_2)){
             error_declared(node->token_2.token_string);
