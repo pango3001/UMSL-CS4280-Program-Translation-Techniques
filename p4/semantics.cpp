@@ -179,9 +179,10 @@ void semantic_check(Node* node, int index)
                 exit(EXIT_FAILURE);
             }
         }
-        else if (node->child_1 != nullptr){
+        else if (node->child_1 != nullptr) {
             file << "LOAD " << node->token_1.token_string << std::endl;
             semantic_check(node->child_1, index);
+        }
     }
 
     else if (node->name == "<in>"){
