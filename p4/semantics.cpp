@@ -11,6 +11,15 @@ bool debugger2 = true;
 
 int var_count = 0, scope = 0;  //initialize the var count and the level of scope
 
+
+ofstream file;
+string output_file_name;
+
+output_file_name.assign("file.asm");
+
+
+
+
 // for pushing a new varibale onto stack, also checks if var already exists in scope
 void push(Token tk) {
     if (var_count >= MAX_STACK){

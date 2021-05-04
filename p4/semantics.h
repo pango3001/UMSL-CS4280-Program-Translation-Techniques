@@ -2,6 +2,10 @@
 #define SEMANTICS_H
 #include "token.h"
 #include "node.h"
+#include <fstream>
+
+extern std::ofstream out_file;
+
 
 void push(Token tk);
 void pop(int scope_begin);
