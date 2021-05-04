@@ -27,8 +27,7 @@ unsigned int current_labels_num = 0;
 //}
 
 void codeGen(Node* node, int index) {
-    
-    file.open("file.asm");
+   
 
     semantic_check(node, index);  //checks semantics
 }
