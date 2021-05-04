@@ -34,4 +34,6 @@ void check_children(Node* node, int index);
 void error_declared(std::string tokenString);
 
 
+void codeGen(Node* node, int index);
+
 #endif
