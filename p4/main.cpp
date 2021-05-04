@@ -23,6 +23,8 @@ int main(int argc, char** argv) {
         file_name = argv[1];
         file_name += ".ss21";
 
+        out_file_name = file_name + ".asm";
+
         std::ofstream outfile;
         outfile.open(file_name, std::ios_base::app);
         outfile << " ";
@@ -62,6 +64,8 @@ int main(int argc, char** argv) {
 
     // Scan and parse file
     if (in_file) {
+        
+        file.open(out_file_name, std::ios::trunc)
         //std::cout << "Starting the parser..." << std::endl;
         Node* root = parser(); // run parser
         //print_tree(root);      // print tree

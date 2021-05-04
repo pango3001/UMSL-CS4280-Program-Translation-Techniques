@@ -11,12 +11,6 @@ bool debugger2 = true;
 int var_count = 0, scope = 0;  //initialize the var count and the level of scope
 
 
-//std::ofstream file;
-//std::string output_file_name = "file.asm";
-//extern std::ofstream file;
-//file.open("file.asm");
-
-//file.open(output_file_name, std::ios_base::app);
 unsigned int current_temp_vars_num = 0;
 unsigned int carry_labels_num = 0;
 unsigned int current_labels_num = 0;
@@ -33,7 +27,7 @@ unsigned int current_labels_num = 0;
 //}
 
 void codeGen(Node* node, int index) {
-    extern std::ofstream file;
+    
     file.open("file.asm");
 
     semantic_check(node, index);  //checks semantics
