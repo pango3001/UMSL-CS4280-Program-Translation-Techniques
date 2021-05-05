@@ -27,7 +27,7 @@ typedef struct var_hold
 {
 	std::string ID;
 	std::string value;
-}
+};
 
 //SymbolTable st_holder;
 
