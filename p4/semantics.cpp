@@ -222,8 +222,8 @@ void semantic_check(Node* node, int index)
         if (node->child_1 != nullptr)
             semantic_check(node->child_1, index);
         std::string temp_var = get_temp_var();
-        file << "\tSTORE " << temp_var << "\n";
-        file << "\tWRITE " << temp_var << "\n";
+        file << "STORE " << temp_var << "\n";
+        file << "WRITE " << temp_var << "\n";
     }
 
     else if (node->name == "<in>"){
