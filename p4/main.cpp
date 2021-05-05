@@ -71,7 +71,7 @@ int main(int argc, char** argv) {
         
         //std::cout << "Starting the parser..." << std::endl;
         Node* root = parser(); // run parser
-        //print_tree(root);      // print tree
+        print_tree(root);      // print tree
         //semantic_check(root, 0);  //checks semantics
         codeGen(root, 0, out_file_name);  //checks semantics
         in_file.close(); // close file
