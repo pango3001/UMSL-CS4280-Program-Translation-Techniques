@@ -156,6 +156,7 @@ void semantic_check(Node* node, int index)
     else if (node->name == "<M>"){
         if (node->token_1.token_ID == ASTERISK_TK){
             check_children(node, index);
+            file << "MULT -1" << std::endl;
         }
         else if (node->child_1 != nullptr)
             semantic_check(node->child_1, index);
@@ -163,7 +164,10 @@ void semantic_check(Node* node, int index)
 
     else if (node->name == "<A>"){
         if (node->token_1.token_ID == PLUS_TK){
+            int vars_num = current_temp_vars_num++;
+            file << "ADD _T" << vars_num << std::endl;
             check_children(node, index);
+
         }
         else if (node->child_1 != nullptr)
             semantic_check(node->child_1, index);
