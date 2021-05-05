@@ -9,8 +9,8 @@
 #include <string>
 
 
-ofstream file;
-string output_file_name;
+std::ofstream file;
+std::string output_file_name;
 
 using std::vector;
 
