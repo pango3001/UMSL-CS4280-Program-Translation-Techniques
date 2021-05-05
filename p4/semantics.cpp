@@ -209,9 +209,10 @@ void semantic_check(Node* node, int index)
                 error_declared(node->token_1.token_string);
                 exit(EXIT_FAILURE);
             }
+            file << "LOAD " << node->token_1.token_string << std::endl;
         }
         else if (node->child_1 != nullptr) {
-            file << "LOAD " << node->token_1.token_string << std::endl;
+            
             semantic_check(node->child_1, index);
         }
     }
