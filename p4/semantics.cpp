@@ -102,7 +102,7 @@ void semantic_check(Node* node, int index)
         //Program stopping point
         file << "STOP" << std::endl;
 
-        for (int i = 0; i < max_stack_size; i++)
+        for (int i = 0; i < MAX_STACK; i++)
         {
             if (temp_vars[i] != "")
                 file << temp_vars[i] << " 0\n";
