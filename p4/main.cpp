@@ -14,12 +14,12 @@
 
 
 std::ofstream file;
-
+std::string out_file_name;
 
 
 int main(int argc, char** argv) {
     std::string file_name;         // filename
-    std::string out_file_name;
+    
 
     
     // FILE GIVEN
