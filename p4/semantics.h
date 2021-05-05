@@ -10,7 +10,7 @@
 
 
 extern std::ofstream file;
-std::string output_file_name;
+extern std::string output_file_name;
 
 using std::vector;
 
