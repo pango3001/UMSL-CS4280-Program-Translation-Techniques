@@ -96,7 +96,7 @@ void semantic_check(Node* node, int index)
         int vars = 0;
         check_children(node, vars);
         //Program stopping point
-        file << "STOP" << std::endl;
+        file << "STOP1" << std::endl;
 
 
     }
