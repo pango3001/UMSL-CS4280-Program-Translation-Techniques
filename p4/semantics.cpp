@@ -149,7 +149,7 @@ void semantic_check(Node* node, int index)
     else if (node->name == "<expr>"){
         if (node->token_1.token_ID == MINUS_TK){
             int vars_num = current_temp_vars_num++;
-            file << "SUB _T" << vars_num << std::endl;
+            file << "SUB T" << vars_num << std::endl;
             check_children(node, index);
         }
         else if (node->child_1 != nullptr)
@@ -159,16 +159,16 @@ void semantic_check(Node* node, int index)
 
     else if (node->name == "<N>"){
         int vars_num = current_temp_vars_num++;
-        file << "STORE _T" << vars_num << std::endl;
+        file << "STORE T" << vars_num << std::endl;
         if (node->token_1.token_ID == SLASH_TK || node->token_1.token_ID == ASTERISK_TK){
             
             
             
             if (node->token_1.token_ID == SLASH_TK) {
-                file << "DIV _T" << vars_num << std::endl;
+                file << "DIV T" << vars_num << std::endl;
             }
             else if (node->token_1.token_ID == ASTERISK_TK) {
-                file << "MULT _T" << vars_num << std::endl;
+                file << "MULT T" << vars_num << std::endl;
             }
             check_children(node, index);
         }
@@ -194,7 +194,7 @@ void semantic_check(Node* node, int index)
     else if (node->name == "<A>"){
         if (node->token_1.token_ID == PLUS_TK){
             int vars_num = current_temp_vars_num++;
-            file << "ADD _T" << vars_num << std::endl;
+            file << "ADD T" << vars_num << std::endl;
             check_children(node, index);
 
         }
@@ -250,18 +250,18 @@ void semantic_check(Node* node, int index)
         int loop_num = current_labels_num++;
         int vars_num = current_temp_vars_num++;
 
-        file << "_L" << loop_num << ": NOOP" << std::endl;
+        file << "L" << loop_num << ": NOOP" << std::endl;
         semantic_check(node->child_1, index);
-        file << "STORE _T" << vars_num << std::endl;
+        file << "STORE T" << vars_num << std::endl;
         semantic_check(node->child_3, index);
-        file << "SUB _T" << vars_num << std::endl;
+        file << "SUB T" << vars_num << std::endl;
 
         int exit_loop_num = current_labels_num;
         carry_labels_num = current_labels_num++;
         semantic_check(node->child_2, index);
         semantic_check(node->child_4, index);
-        file << "BR _L" << loop_num << std::endl;
-        file << "_L" << exit_loop_num << ": NOOP" << std::endl;
+        file << "BR L" << loop_num << std::endl;
+        file << "L" << exit_loop_num << ": NOOP" << std::endl;
     }
 
 
