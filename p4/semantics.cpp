@@ -19,7 +19,7 @@ unsigned int current_temp_vars_num = 0;
 unsigned int carry_labels_num = 0;
 unsigned int current_labels_num = 0;
 
-
+vector<var_hold> VARIABLE;
 
 void codeGen(Node* node, int index, std::string output_file_name) {
 
@@ -149,7 +149,7 @@ void semantic_check(Node* node, int index)
     else if (node->name == "<expr>"){
         if (node->token_1.token_ID == MINUS_TK){
             int vars_num = current_temp_vars_num++;
-            file << "SUB _T" << vars_num << endl;
+            file << "SUB _T" << vars_num << std::endl;
             check_children(node, index);
         }
         else if (node->child_1 != nullptr)

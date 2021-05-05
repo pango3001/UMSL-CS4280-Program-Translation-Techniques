@@ -22,12 +22,19 @@ typedef struct symbol_table
 } SymbolTable;
 
 
+
+typedef struct var_hold
+{
+	std::string ID;
+	std::string value;
+}
+
 //SymbolTable st_holder;
-//vector<SymbolTable> st;
+
 
 void push(Token tk);
 void pop(int scope_begin);
-void build_stack();
+//void build_stack();
 int topOfStackD(Token tk);
 bool var_exists(Token tk);
 void show_stack();
