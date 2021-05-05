@@ -9,7 +9,7 @@
 #include <string>
 
 
-std::ofstream file;
+extern std::ofstream file;
 std::string output_file_name;
 
 using std::vector;
