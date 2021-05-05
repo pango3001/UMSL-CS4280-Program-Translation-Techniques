@@ -220,8 +220,11 @@ void semantic_check(Node* node, int index)
             error_declared(node->token_2.token_string);
             exit(EXIT_FAILURE);
         }
-        if (node->child_1 != nullptr)
+        if (node->child_1 != nullptr) {
+            file << "STORE " << node->token_2.token_string << std::endl;
             semantic_check(node->child_1, index);
+
+        }
     }
     else {
     check_children(node, index);
