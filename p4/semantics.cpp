@@ -5,7 +5,7 @@
 
 Token stack[MAX_STACK];
 
-bool debug1 = true;
+bool debug1 = false;
 bool debugger2 = true;
 
 int var_count = 0, scope = 0;  //initialize the var count and the level of scope
@@ -44,8 +44,9 @@ void push(Token tk) {
         }
 
         stack[var_count] = tk; if (debugger2) { std::cout << "Adding \'" << tk.token_string << "\' to the stack\n"; }  // for debugging
+        file << "\tPUSH\n";
         var_count++; if (debugger2) { std::cout << "VAR COUNT: " << var_count << "\n"; }  // for debugging
-        show_stack();
+        //show_stack();
     }
 }
 
@@ -54,8 +55,9 @@ void pop(int scope_start) {
     for (int i = var_count; i > scope_start; i--){
         if (debugger2) { std::cout << "Popping \'" << stack[i-1].token_string << "\' from the stack\n"; }  // for debugging
         stack[i-1].token_string = "";
+        file << "\tPOP\n";
         var_count--; if (debugger2) { std::cout << "VAR COUNT: " << var_count << "\n"; }  // for debugging
-        show_stack();
+        //show_stack();
     }
 }
 
@@ -91,6 +93,8 @@ void semantic_check(Node* node, int index)
         else { std::cout << "Working on: " << std::setw(10) << std::left << node->name << "| Token: " << std::setw(9) << std::left << node->token_1.token_string << "| "; }  // for debugging
         show_stack();
     }
+
+
     if (node->name == "<program>")
     {
         int vars = 0;
@@ -98,8 +102,16 @@ void semantic_check(Node* node, int index)
         //Program stopping point
         file << "STOP" << std::endl;
 
+        for (int i = 0; i < max_stack_size; i++)
+        {
+            if (temp_vars[i] != "")
+                file << temp_vars[i] << " 0\n";
+        }
+
 
     }
+
+
     else if (node->name == "<vars>")
     {
         int tos_distance = topOfStackD(node->token_2);
@@ -118,6 +130,8 @@ void semantic_check(Node* node, int index)
         if (node->child_1 != nullptr)
             semantic_check(node->child_1, index);
     }
+
+
     else if (node->name == "<block>"){
         unsigned int vars = 0;
         scope = var_count;
@@ -125,6 +139,8 @@ void semantic_check(Node* node, int index)
         check_children(node, vars);
         pop(scope);
     }
+
+
     else if (node->name == "<expr>"){
         if (node->token_1.token_ID == MINUS_TK){
             check_children(node, index);
@@ -132,6 +148,8 @@ void semantic_check(Node* node, int index)
         else if (node->child_1 != nullptr)
             semantic_check(node->child_1, index);
     }
+
+
     else if (node->name == "<N>"){
         if (node->token_1.token_ID == SLASH_TK || node->token_1.token_ID == ASTERISK_TK){
             int vars_num = current_temp_vars_num++;
@@ -153,6 +171,7 @@ void semantic_check(Node* node, int index)
             
     }
 
+
     else if (node->name == "<M>"){
         if (node->token_1.token_ID == ASTERISK_TK){
             check_children(node, index);
@@ -161,6 +180,7 @@ void semantic_check(Node* node, int index)
         else if (node->child_1 != nullptr)
             semantic_check(node->child_1, index);
     }
+
 
     else if (node->name == "<A>"){
         if (node->token_1.token_ID == PLUS_TK){
@@ -172,6 +192,7 @@ void semantic_check(Node* node, int index)
         else if (node->child_1 != nullptr)
             semantic_check(node->child_1, index);
     }
+
 
     else if (node->name == "<R>"){
         if (node->token_1.token_ID == ID_TK){
