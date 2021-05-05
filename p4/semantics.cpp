@@ -25,7 +25,7 @@ void codeGen(Node* node, int index) {
    
 
     static std::string file_name = "file";
-    output_file_name.assign(file_name + ".asm");
+    //output_file_name.assign(file_name + ".asm");
 
     file.open(output_file_name, std::ios_base::trunc);
     semantic_check(node, index);  //checks semantics
