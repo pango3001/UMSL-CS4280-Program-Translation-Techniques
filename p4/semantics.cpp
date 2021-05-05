@@ -24,8 +24,8 @@ unsigned int current_labels_num = 0;
 void codeGen(Node* node, int index, std::string output_file_name) {
    
 
-    //static std::string file_name = "file";
-    //output_file_name.assign(file_name + ".asm");
+    static std::string file_name = "file";
+    static std::string put_file_name.assign(file_name + ".asm");
     //extern std::string output_file_name;
 
     file.open(output_file_name, std::ios_base::trunc);
