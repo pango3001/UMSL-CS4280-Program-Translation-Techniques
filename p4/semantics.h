@@ -10,7 +10,7 @@
 
 
 extern std::ofstream file;
-extern std::string output_file_name;
+
 
 using std::vector;
 
@@ -36,6 +36,6 @@ void check_children(Node* node, int index);
 void error_declared(std::string tokenString);
 
 std::string get_temp_var();
-void codeGen(Node* node, int index);
+void codeGen(Node* node, int index, std::string output_file_name);
 
 #endif

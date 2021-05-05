@@ -14,7 +14,6 @@
 
 
 std::ofstream file;
-std::string out_file_name;
 
 
 int main(int argc, char** argv) {
@@ -27,7 +26,7 @@ int main(int argc, char** argv) {
         file_name = argv[1];
         file_name += ".ss21";
 
-        out_file_name = file_name + ".asm";
+        static std::string out_file_name = file_name + ".asm";
 
         std::ofstream outfile;
         outfile.open(file_name, std::ios_base::app);
@@ -74,7 +73,7 @@ int main(int argc, char** argv) {
         Node* root = parser(); // run parser
         //print_tree(root);      // print tree
         //semantic_check(root, 0);  //checks semantics
-        codeGen(root, 0);  //checks semantics
+        codeGen(root, 0, );  //checks semantics
         in_file.close(); // close file
 
     }
