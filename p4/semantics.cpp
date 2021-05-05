@@ -44,7 +44,7 @@ void push(Token tk) {
         }
 
         stack[var_count] = tk; if (debugger2) { std::cout << "Adding \'" << tk.token_string << "\' to the stack\n"; }  // for debugging
-        file << "\tPUSH\n";
+        //file << "\tPUSH\n";
         var_count++; if (debugger2) { std::cout << "VAR COUNT: " << var_count << "\n"; }  // for debugging
         //show_stack();
     }
@@ -55,7 +55,7 @@ void pop(int scope_start) {
     for (int i = var_count; i > scope_start; i--){
         if (debugger2) { std::cout << "Popping \'" << stack[i-1].token_string << "\' from the stack\n"; }  // for debugging
         stack[i-1].token_string = "";
-        file << "\tPOP\n";
+        //file << "\tPOP\n";
         var_count--; if (debugger2) { std::cout << "VAR COUNT: " << var_count << "\n"; }  // for debugging
         //show_stack();
     }
