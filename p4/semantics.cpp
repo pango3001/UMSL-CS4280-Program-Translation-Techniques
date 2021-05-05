@@ -23,7 +23,11 @@ unsigned int current_labels_num = 0;
 
 void codeGen(Node* node, int index) {
    
-    file.open("file.asm", std::ios_base::trunc);
+
+    static std::string file_name = "file";
+    output_file_name.assign(file_name + ".asm");
+
+    file.open(output_file_name, std::ios_base::trunc);
     semantic_check(node, index);  //checks semantics
     file.close();
     //file << "STOP1" << std::endl;

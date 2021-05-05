@@ -8,7 +8,9 @@
 #include <iomanip>
 #include <string>
 
-extern std::ofstream file;
+
+ofstream file;
+string output_file_name;
 
 using std::vector;
 
