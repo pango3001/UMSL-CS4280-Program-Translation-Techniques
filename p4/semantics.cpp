@@ -22,16 +22,10 @@ unsigned int current_labels_num = 0;
 
 
 void codeGen(Node* node, int index, std::string output_file_name) {
-   
-
-    //static std::string file_name = "file";
-    //static std::string put_file_name.assign("file.asm");
-    //extern std::string output_file_name;
 
     file.open("file.asm", std::ios_base::trunc);
     semantic_check(node, index);  //checks semantics
     file.close();
-    //file << "STOP1" << std::endl;
 }
 
 
@@ -193,8 +187,8 @@ void semantic_check(Node* node, int index)
         if (node->child_1 != nullptr)
             semantic_check(node->child_1, index);
         std::string temp_var = get_temp_var();
-        file << "\t\tSTORE11111 " << temp_var << "\n";
-        file << "\t\tWRITE " << temp_var << "\n";
+        file << "\tSTORE " << temp_var << "\n";
+        file << "\tWRITE " << temp_var << "\n";
     }
 
     else if (node->name == "<in>"){
