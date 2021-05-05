@@ -250,15 +250,15 @@ void semantic_check(Node* node, int index)
         int vars_num = current_temp_vars_num++;
 
         file << "_L" << loop_num << ": NOOP" << endl;
-        semantic_check(node->child1);
+        semantic_check(node->child_1, index);
         file << "STORE _T" << vars_num << endl;
-        semantic_check(node->child3);
+        semantic_check(node->child_3, index);
         file << "SUB _T" << vars_num << endl;
 
         int exit_loop_num = current_labels_num;
         carry_labels_num = current_labels_num++;
-        semantic_check(node->child2);
-        semantic_check(node->child4);
+        semantic_check(node->child_2, index);
+        semantic_check(node->child_4, index);
         file << "BR _L" << loop_num << endl;
         file << "_L" << exit_loop_num << ": NOOP" << endl;
     }
