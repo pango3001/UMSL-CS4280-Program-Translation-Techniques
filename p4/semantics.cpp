@@ -134,9 +134,9 @@ void semantic_check(Node* node, int index)
         scope = var_count;
 
         if (tos_distance == -1 || tos_distance > index){
-            VARIABLE.push_back(node->token_2.token_string, node->token_4.token_string);
+            VARIABLE.insert(var_,node->token_2.token_string, node->token_4.token_string);
             //VARIABLE[var_].value = node->token_4.token_string;
-            //var_++;
+            var_++;
             push(node->token_2);
             index++;
         }
