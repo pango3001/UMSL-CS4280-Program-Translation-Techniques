@@ -19,7 +19,7 @@ unsigned int current_temp_vars_num = 0;
 unsigned int carry_labels_num = 0;
 unsigned int current_labels_num = 0;
 
-vector<var_hold> VARIABLE;
+vector<var_hold> VARIABLE(100);
 
 int var_ = 0;
 int var_value = 0;
@@ -48,6 +48,9 @@ void push(Token tk) {
 
         stack[var_count] = tk; if (debugger2) { std::cout << "Adding \'" << tk.token_string << "\' to the stack\n"; }  // for debugging
         //file << "\tPUSH\n";
+        VARIABLE[var_count].ID = node->token_2.token_ID;
+        VARIABLE[var_count].value = node->token_4.token_ID;
+        //var_++;
         var_count++; if (debugger2) { std::cout << "VAR COUNT: " << var_count << "\n"; }  // for debugging
         //show_stack();
     }
@@ -135,9 +138,6 @@ void semantic_check(Node* node, int index)
         if (tos_distance == -1 || tos_distance > index){
 
             push(node->token_2);
-            //VARIABLE[var_].ID = node->token_2.token_ID;
-            //VARIABLE[var_].value = node->token_4.token_ID;
-            //var_++;
             index++;
         }
         else if (tos_distance < index){
