@@ -48,9 +48,7 @@ void push(Token tk) {
 
         stack[var_count] = tk; if (debugger2) { std::cout << "Adding \'" << tk.token_string << "\' to the stack\n"; }  // for debugging
         //file << "\tPUSH\n";
-        VARIABLE[var_count].ID = tk.token_ID;
-        VARIABLE[var_count].value = tk.token_ID;
-        //var_++;
+
         var_count++; if (debugger2) { std::cout << "VAR COUNT: " << var_count << "\n"; }  // for debugging
         //show_stack();
     }
@@ -136,7 +134,9 @@ void semantic_check(Node* node, int index)
         scope = var_count;
 
         if (tos_distance == -1 || tos_distance > index){
-
+            VARIABLE[var_].ID = node->token_2.token_ID;
+            VARIABLE[var_].value = node->token_4.token_ID;
+            var_++;
             push(node->token_2);
             index++;
         }
