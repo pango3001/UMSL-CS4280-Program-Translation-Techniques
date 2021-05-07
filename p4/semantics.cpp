@@ -115,7 +115,10 @@ void semantic_check(Node* node, int index)
 
 
         for (unsigned int i = 0; i < VARIABLE.size(); i++) {
-            if (!VARIABLE[i].ID == NULL) {
+            if (VARIABLE[i].ID.empty) {
+                break;
+            }
+            else
                 file << VARIABLE[i].ID << " " << VARIABLE[i].value << std::endl;
             }
         }
