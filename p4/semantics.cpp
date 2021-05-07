@@ -138,10 +138,6 @@ void semantic_check(Node* node, int index)
             tempVar.ID = node->token_2.token_string;
             tempVar.value = node->token_4.token_string;
             VARIABLE.resize(++var_, tempVar);
-            //var_--;
-            //VARIABLE[var_].ID = node->token_2.token_string;
-            //VARIABLE[var_].value = node->token_4.token_string;
-            //var_++;
             push(node->token_2);
             index++;
         }
