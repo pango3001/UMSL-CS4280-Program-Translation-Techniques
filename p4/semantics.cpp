@@ -125,10 +125,10 @@ void semantic_check(Node* node, int index)
                 file << VARIABLE[i].ID << " " << VARIABLE[i].value << std::endl;
         }
 
-        for (int i = 0; i < MAX_STACK; i++)
+        for (int i = 0; i < vars_num; i++)
         {
-            if (temp_vars[i] != "")
-                file << temp_vars[i] << " 0\n";
+            
+                file << "T" << i << " 0\n";
         }
 
 
