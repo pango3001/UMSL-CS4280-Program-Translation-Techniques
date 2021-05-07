@@ -118,7 +118,7 @@ void semantic_check(Node* node, int index)
             if (VARIABLE[i].ID.empty) {
                 break;
             }
-            else
+            else{
                 file << VARIABLE[i].ID << " " << VARIABLE[i].value << std::endl;
             }
         }
