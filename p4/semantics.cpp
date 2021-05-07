@@ -115,7 +115,7 @@ void semantic_check(Node* node, int index)
 
 
         for (unsigned int i = 0; i < VARIABLE.size(); i++) {
-            if (!VARIABLE[i] == NULL) {
+            if (!VARIABLE[i].ID == NULL) {
                 file << VARIABLE[i].ID << " " << VARIABLE[i].value << std::endl;
             }
         }
