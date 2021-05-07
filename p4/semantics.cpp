@@ -267,6 +267,9 @@ void semantic_check(Node* node, int index)
             }
             file << "LOAD " << node->token_1.token_string << std::endl;
         }
+        if (node->token_1.token_ID == INT_TK) {
+            file << "LOAD " << node->token_1.token_string << std::endl;
+        }
         else if (node->child_1 != nullptr) {
             
             semantic_check(node->child_1, index);
