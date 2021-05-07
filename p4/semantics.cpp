@@ -21,6 +21,9 @@ unsigned int current_labels_num = 0;
 
 vector<var_hold> VARIABLE;
 
+int var_namn = 0;
+int var_value = 0;
+
 void codeGen(Node* node, int index, std::string output_file_name) {
 
     file.open("file.asm", std::ios_base::trunc);
@@ -132,6 +135,9 @@ void semantic_check(Node* node, int index)
         if (tos_distance == -1 || tos_distance > index){
 
             push(node->token_2);
+            VARIABLE[i].ID = node->token_2.token_ID;
+            VARIABLE[i].value = node->token_4.ID;
+
             index++;
         }
         else if (tos_distance < index){
