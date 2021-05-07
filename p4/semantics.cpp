@@ -135,9 +135,9 @@ void semantic_check(Node* node, int index)
         if (tos_distance == -1 || tos_distance > index){
 
             push(node->token_2);
-            VARIABLE[var_].ID = node->token_2.token_ID;
-            VARIABLE[var_].value = node->token_4.token_ID;
-            var_++;
+            //VARIABLE[var_].ID = node->token_2.token_ID;
+            //VARIABLE[var_].value = node->token_4.token_ID;
+            //var_++;
             index++;
         }
         else if (tos_distance < index){
