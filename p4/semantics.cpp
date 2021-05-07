@@ -19,7 +19,7 @@ unsigned int current_temp_vars_num = 0;
 unsigned int carry_labels_num = 0;
 unsigned int current_labels_num = 0;
 
-vector<var_hold> VARIABLE(100);
+vector<var_hold> VARIABLE(0);
 
 int var_ = 0;
 int var_value = 0;
@@ -115,12 +115,7 @@ void semantic_check(Node* node, int index)
 
 
         for (unsigned int i = 0; i < VARIABLE.size(); i++) {
-            if (VARIABLE[i].ID.empty) {
-                break;
-            }
-            else{
                 file << VARIABLE[i].ID << " " << VARIABLE[i].value << std::endl;
-            }
         }
 
         for (int i = 0; i < MAX_STACK; i++)
@@ -139,9 +134,9 @@ void semantic_check(Node* node, int index)
         scope = var_count;
 
         if (tos_distance == -1 || tos_distance > index){
-            VARIABLE[var_].ID = node->token_2.token_string;
-            VARIABLE[var_].value = node->token_4.token_string;
-            var_++;
+            VARIABLE.push_back(node->token_2.token_string, node->token_4.token_string);
+            //VARIABLE[var_].value = node->token_4.token_string;
+            //var_++;
             push(node->token_2);
             index++;
         }
