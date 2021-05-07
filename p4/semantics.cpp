@@ -48,6 +48,13 @@ void push(Token tk) {
 
         stack[var_count] = tk; if (debugger2) { std::cout << "Adding \'" << tk.token_string << "\' to the stack\n"; }  // for debugging
         //file << "\tPUSH\n";
+        //var_hold tempvar;
+        //tempvar.id = node->token_2.token_string;
+        //tempvar.value = node->token_4.token_string;
+        //variable.resize(++var_, tempvar);
+
+
+        file << "PUSH " << VARIABLE[var_].ID << std::endl;
 
         var_count++; if (debugger2) { std::cout << "VAR COUNT: " << var_count << "\n"; }  // for debugging
         //show_stack();
