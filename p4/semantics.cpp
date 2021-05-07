@@ -136,7 +136,7 @@ void semantic_check(Node* node, int index)
 
             push(node->token_2);
             VARIABLE[i].ID = node->token_2.token_ID;
-            VARIABLE[i].value = node->token_4.ID;
+            VARIABLE[i].value = node->token_4.token_ID;
 
             index++;
         }
