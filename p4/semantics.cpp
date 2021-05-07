@@ -98,7 +98,14 @@ void semantic_check(Node* node, int index)
     if (node->name == "<program>")
     {
         int vars = 0;
-        check_children(node, vars);
+        if (node->child_1 != nullptr)
+            semantic_check(node->child_1, index);
+        if (node->child_2 != nullptr)
+            semantic_check(node->child_2, index);
+        if (node->child_3 != nullptr)
+            semantic_check(node->child_3, index);
+        if (node->child_4 != nullptr)
+            semantic_check(node->child_4, index);
         //Program stopping point
         file << "STOP" << std::endl;
 
@@ -141,7 +148,14 @@ void semantic_check(Node* node, int index)
         unsigned int vars = 0;
         scope = var_count;
 
-        check_children(node, vars);
+        if (node->child_1 != nullptr)
+            semantic_check(node->child_1, index);
+        if (node->child_2 != nullptr)
+            semantic_check(node->child_2, index);
+        if (node->child_3 != nullptr)
+            semantic_check(node->child_3, index);
+        if (node->child_4 != nullptr)
+            semantic_check(node->child_4, index);
         pop(scope);
     }
 
@@ -150,7 +164,14 @@ void semantic_check(Node* node, int index)
         if (node->token_1.token_ID == MINUS_TK){
             int vars_num = current_temp_vars_num++;
             file << "SUB T" << vars_num << std::endl;
-            check_children(node, index);
+            if (node->child_1 != nullptr)
+                semantic_check(node->child_1, index);
+            if (node->child_2 != nullptr)
+                semantic_check(node->child_2, index);
+            if (node->child_3 != nullptr)
+                semantic_check(node->child_3, index);
+            if (node->child_4 != nullptr)
+                semantic_check(node->child_4, index);
         }
         else if (node->child_1 != nullptr)
             semantic_check(node->child_1, index);
@@ -170,7 +191,14 @@ void semantic_check(Node* node, int index)
             else if (node->token_1.token_ID == ASTERISK_TK) {
                 file << "MULT T" << vars_num << std::endl;
             }
-            check_children(node, index);
+            if (node->child_1 != nullptr)
+                semantic_check(node->child_1, index);
+            if (node->child_2 != nullptr)
+                semantic_check(node->child_2, index);
+            if (node->child_3 != nullptr)
+                semantic_check(node->child_3, index);
+            if (node->child_4 != nullptr)
+                semantic_check(node->child_4, index);
         }
         else if (node->child_1 != nullptr){
             
@@ -183,7 +211,14 @@ void semantic_check(Node* node, int index)
 
     else if (node->name == "<M>"){
         if (node->token_1.token_ID == ASTERISK_TK){
-            check_children(node, index);
+            if (node->child_1 != nullptr)
+                semantic_check(node->child_1, index);
+            if (node->child_2 != nullptr)
+                semantic_check(node->child_2, index);
+            if (node->child_3 != nullptr)
+                semantic_check(node->child_3, index);
+            if (node->child_4 != nullptr)
+                semantic_check(node->child_4, index);
             file << "MULT -1" << std::endl;
         }
         else if (node->child_1 != nullptr)
@@ -195,7 +230,14 @@ void semantic_check(Node* node, int index)
         if (node->token_1.token_ID == PLUS_TK){
             int vars_num = current_temp_vars_num++;
             file << "ADD T" << vars_num << std::endl;
-            check_children(node, index);
+            if (node->child_1 != nullptr)
+                semantic_check(node->child_1, index);
+            if (node->child_2 != nullptr)
+                semantic_check(node->child_2, index);
+            if (node->child_3 != nullptr)
+                semantic_check(node->child_3, index);
+            if (node->child_4 != nullptr)
+                semantic_check(node->child_4, index);
 
         }
         else if (node->child_1 != nullptr)
@@ -277,7 +319,14 @@ void semantic_check(Node* node, int index)
         }
     }
     else {
-    check_children(node, index);
+    if (node->child_1 != nullptr)
+        semantic_check(node->child_1, index);
+    if (node->child_2 != nullptr)
+        semantic_check(node->child_2, index);
+    if (node->child_3 != nullptr)
+        semantic_check(node->child_3, index);
+    if (node->child_4 != nullptr)
+        semantic_check(node->child_4, index);
     }
 }
 
