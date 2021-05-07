@@ -134,7 +134,9 @@ void semantic_check(Node* node, int index)
         scope = var_count;
 
         if (tos_distance == -1 || tos_distance > index){
-            var_hold tempVar = (node->token_2.token_string, node->token_4.token_string);
+            var_hold tempVar;
+            tempVar.ID = node->token_2.token_string;
+            tempVar.value = node->token_4.token_string);
             VARIABLE.resize(++var_, tempVar);
             //var_--;
             //VARIABLE[var_].ID = node->token_2.token_string;
