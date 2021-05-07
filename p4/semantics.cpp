@@ -125,7 +125,7 @@ void semantic_check(Node* node, int index)
                 file << VARIABLE[i].ID << " " << VARIABLE[i].value << std::endl;
         }
 
-        for (int i = 0; i < vars_num; i++)
+        for (int i = 0; i < current_temp_vars_num; i++)
         {
             
                 file << "T" << i << " 0\n";
