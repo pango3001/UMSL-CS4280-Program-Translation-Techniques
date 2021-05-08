@@ -241,21 +241,23 @@ void semantic_check(Node* node, int index)
 
 
     else if (node->name == "<A>"){
-        if (node->token_1.token_ID == PLUS_TK){
-            int vars_num = current_temp_vars_num++;
-            file << "ADD T" << vars_num << std::endl;
-            if (node->child_1 != nullptr)
-                semantic_check(node->child_1, index);
-            if (node->child_2 != nullptr)
-                semantic_check(node->child_2, index);
-            if (node->child_3 != nullptr)
-                semantic_check(node->child_3, index);
-            if (node->child_4 != nullptr)
-                semantic_check(node->child_4, index);
-
-        }
-        else if (node->child_1 != nullptr)
+        if (node->child_1 != nullptr)
             semantic_check(node->child_1, index);
+        else {
+            semantic_check(node->child_1, index);
+            int vars_num = current_temp_vars_num++;
+
+            file << "STORE T" << vars_num << endl;
+
+            if (node->token_1.token_ID == PLUS_TK) {
+
+                file << "ADD T" << vars_num << std::endl;
+                if (node->child_2 != nullptr)
+                    semantic_check(node->child_2, index);
+            }
+        }
+        
+        
     }
 
 
