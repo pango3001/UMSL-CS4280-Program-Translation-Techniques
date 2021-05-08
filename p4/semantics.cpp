@@ -54,7 +54,7 @@ void push(Token tk) {
         //variable.resize(++var_, tempvar);
 
 
-        file << "PUSH " << VARIABLE[var_ - 1].ID << std::endl;
+        file << "PUSH " <<  std::endl;
 
         var_count++; if (debugger2) { std::cout << "VAR COUNT: " << var_count << "\n"; }  // for debugging
         //show_stack();
