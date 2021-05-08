@@ -247,7 +247,7 @@ void semantic_check(Node* node, int index)
             semantic_check(node->child_1, index);
             int vars_num = current_temp_vars_num++;
 
-            file << "STORE T" << vars_num << endl;
+            file << "STORE T" << vars_num << std::endl;
 
             if (node->token_1.token_ID == PLUS_TK) {
 
