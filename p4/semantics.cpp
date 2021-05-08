@@ -247,7 +247,7 @@ void semantic_check(Node* node, int index)
     if (node->token_1.token_ID == PLUS_TK){
             
             if (node->child_1 != nullptr)
-                semantic_check(node->child_1, index);
+                semantic_check(node->child_2, index);
             file << "ADD T" << vars_num << std::endl;
             if (node->child_2 != nullptr)
                 semantic_check(node->child_2, index);
@@ -258,7 +258,7 @@ void semantic_check(Node* node, int index)
 
         }
         else if (node->child_1 != nullptr)
-            semantic_check(node->child_2, index);
+            semantic_check(node->child_1, index);
     }
 
 
