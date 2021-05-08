@@ -260,6 +260,11 @@ void semantic_check(Node* node, int index)
 
 
     else if (node->name == "<R>"){
+        if (node->child_1 != nullptr) {
+
+        semantic_check(node->child_1, index);
+        }
+    
         if (node->token_1.token_ID == ID_TK){
             if (!var_exists(node->token_1)){
                 error_declared(node->token_1.token_string);
@@ -270,10 +275,7 @@ void semantic_check(Node* node, int index)
         if (node->token_1.token_ID == INT_TK) {
             file << "LOAD " << node->token_1.token_string << std::endl;
         }
-        else if (node->child_1 != nullptr) {
-            
-            semantic_check(node->child_1, index);
-        }
+        
     }
 
     else if (node->name == "<out>")
