@@ -39,7 +39,6 @@ int topOfStackD(Token tk);
 bool var_exists(Token tk);
 void show_stack();
 void semantic_check(Node* node, int index);
-void check_children(Node* node, int index);
 void error_declared(std::string tokenString);
 
 std::string get_temp_var();
