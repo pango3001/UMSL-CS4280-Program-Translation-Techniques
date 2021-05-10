@@ -26,7 +26,7 @@ int var_value = 0;
 
 void codeGen(Node* node, int index, std::string output_file_name) {
 
-    file.open("file.asm", std::ios_base::trunc);
+    file.open(output_file_name, std::ios_base::trunc);
     semantic_check(node, index);  //checks semantics
     file.close();
 }

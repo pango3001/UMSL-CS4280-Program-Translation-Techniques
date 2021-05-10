@@ -18,12 +18,14 @@ std::ofstream file;
 
 int main(int argc, char** argv) {
     std::string file_name;         // filename
+    std::string file_n;         // filename
     
     static std::string out_file_name;
     
     // FILE GIVEN
     if (argc == 2) {
         file_name = argv[1];
+        file_n = argv[1];
         file_name += ".ss21";
 
         out_file_name = file_name + ".asm";
