@@ -28,7 +28,7 @@ int main(int argc, char** argv) {
         file_n = argv[1];
         file_name += ".ss21";
 
-        out_file_name = file_name + ".asm";
+        out_file_name = file_n + ".asm";
 
         std::ofstream outfile;
         outfile.open(file_name, std::ios_base::app);
