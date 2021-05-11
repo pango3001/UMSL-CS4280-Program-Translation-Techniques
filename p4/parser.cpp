@@ -33,7 +33,7 @@ Node* parser()
     // Check for end of file
     if (tokey.token_ID == EOF_TK)
     {
-        std::cout << "Parsing completed!" << std::endl;
+        //std::cout << "Parsing completed!" << std::endl;
         return node; //return root
     }
     // error, no eof token

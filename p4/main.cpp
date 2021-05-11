@@ -79,6 +79,8 @@ int main(int argc, char** argv) {
         codeGen(root, 0, out_file_name);  //checks semantics
         in_file.close(); // close file
 
+        std::cout << "Successfully created: " << out_file_name << std::endl;
+
     }
     else {  // cannot open file
         std::cout << "ERROR: Cannot open " << file_name << " for reading" << std::endl;

@@ -10,7 +10,7 @@
 Token stack[MAX_STACK];
 
 bool debug1 = false;
-bool debugger2 = true;
+bool debugger2 = false;
 
 int var_count = 0, scope = 0;  //initialize the var count and the level of scope
 
