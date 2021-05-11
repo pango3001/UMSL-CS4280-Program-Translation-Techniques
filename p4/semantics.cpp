@@ -1,3 +1,7 @@
+// Name:    Jesse McCarville-Schueths
+// Course:  4280
+// Date:    May 9, 2021
+// Project: P4
 #include "semantics.h"
 
 
@@ -59,7 +63,7 @@ void pop(int scope_start) {
     for (int i = var_count; i > scope_start; i--){
         if (debugger2) { std::cout << "Popping \'" << stack[i-1].token_string << "\' from the stack\n"; }  // for debugging
         stack[i-1].token_string = "";
-        //file << "\tPOP\n";
+        ile << "POP" << std::endl;
         var_count--; if (debugger2) { std::cout << "VAR COUNT: " << var_count << "\n"; }  // for debugging
         //show_stack();
     }
