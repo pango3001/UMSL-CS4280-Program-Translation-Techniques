@@ -10,14 +10,13 @@ bool debugger2 = true;
 
 int var_count = 0, scope = 0;  //initialize the var count and the level of scope
 
-static int temp_var_count = 0;
+static int var_count_t = 0;
 /* total number of labels */
 static int label_count = 0;
 /* array to hold temp variables */
 std::string temp_vars[MAX_STACK];
-unsigned int current_temp_vars_num = 0;
-unsigned int carry_labels_num = 0;
-unsigned int current_labels_num = 0;
+unsigned int t_var_index = 0;
+unsigned int loop_index = 0;
 
 vector<var_hold> VARIABLE(0);
 
@@ -47,12 +46,6 @@ void push(Token tk) {
         }
 
         stack[var_count] = tk; if (debugger2) { std::cout << "Adding \'" << tk.token_string << "\' to the stack\n"; }  // for debugging
-        //file << "\tPUSH\n";
-        //var_hold tempvar;
-        //tempvar.id = node->token_2.token_string;
-        //tempvar.value = node->token_4.token_string;
-        //variable.resize(++var_, tempvar);
-
 
         file << "PUSH " <<  std::endl;
 
@@ -125,7 +118,7 @@ void semantic_check(Node* node, int index)
                 file << VARIABLE[i].ID << " " << VARIABLE[i].value << std::endl;
         }
 
-        for (int i = 0; i < current_temp_vars_num; i++)
+        for (int i = 0; i < t_var_index; i++)
         {
             
                 file << "T" << i << " 0\n";
@@ -176,7 +169,7 @@ void semantic_check(Node* node, int index)
 
     else if (node->name == "<expr>"){
         if (node->token_1.token_ID == MINUS_TK){
-            int vars_num = current_temp_vars_num++;
+            int vars_num = t_var_index++;
             file << "SUB T" << vars_num << std::endl;
             if (node->child_1 != nullptr)
                 semantic_check(node->child_1, index);
@@ -193,7 +186,7 @@ void semantic_check(Node* node, int index)
 
 
     else if (node->name == "<N>"){
-        int vars_num = current_temp_vars_num++;
+        int vars_num = t_var_index++;
         file << "STORE T" << vars_num << std::endl;
         if (node->token_1.token_ID == SLASH_TK || node->token_1.token_ID == ASTERISK_TK){
             
@@ -246,7 +239,7 @@ void semantic_check(Node* node, int index)
             
             if (node->child_1 != nullptr)
                 semantic_check(node->child_1, index);
-            int vars_num = current_temp_vars_num++;
+            int vars_num = t_var_index++;
 
             file << "STORE T" << vars_num << std::endl;
             file << "ADD T" << vars_num << std::endl;
@@ -286,7 +279,7 @@ void semantic_check(Node* node, int index)
     {
         if (node->child_1 != nullptr)
             semantic_check(node->child_1, index);
-        std::string temp_var = get_temp_var();
+        std::string temp_var = make_t_var();
         file << "STORE " << temp_var << "\n";
         file << "WRITE " << temp_var << "\n";
     }
@@ -304,7 +297,7 @@ void semantic_check(Node* node, int index)
                 exit(EXIT_FAILURE);
             }
 
-            std::string temp_var = get_temp_var();
+            std::string temp_var = make_t_var();
             file << "\t\tREAD " << temp_var << "\n";
             file << "\t\tLOAD " << temp_var << "\n";
             file << "\t\tSTACKW " << var_location << "\n";
@@ -312,8 +305,8 @@ void semantic_check(Node* node, int index)
     }
 
     else if (node->name == "<loop>") {
-        int loop_num = current_labels_num++;
-        int vars_num = current_temp_vars_num++;
+        int loop_num = loop_index++;
+        int vars_num = t_var_index++;
 
         file << "L" << loop_num << ": NOOP" << std::endl;
         semantic_check(node->child_1, index);
@@ -321,8 +314,8 @@ void semantic_check(Node* node, int index)
         semantic_check(node->child_3, index);
         file << "SUB T" << vars_num << std::endl;
 
-        int exit_loop_num = current_labels_num;
-        carry_labels_num = current_labels_num++;
+        int exit_loop_num = loop_index;
+        
         semantic_check(node->child_2, index);
         semantic_check(node->child_4, index);
         file << "BR L" << loop_num << std::endl;
@@ -383,14 +376,12 @@ void show_stack() {
     std::cout << std::endl;
 }
 
-std::string get_temp_var()
+// makes a temp variable
+std::string make_t_var()
 {
-    /* create the temp_var name */
-    std::string temp_var = "T" + std::to_string(temp_var_count + 1);
-    /* put the temp_var in the temp_var array */
-    temp_vars[temp_var_count] = temp_var;
-    /* created new temp_var so increment the count of the variables */
-    temp_var_count++;
-    /* return the temp_var name */
+    std::string temp_var = "T" + std::to_string(var_count_t + 1);
+    temp_vars[var_count_t] = temp_var;
+    var_count_t++;
+
     return temp_var;
 }

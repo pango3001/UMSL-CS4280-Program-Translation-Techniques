@@ -41,7 +41,7 @@ void show_stack();
 void semantic_check(Node* node, int index);
 void error_declared(std::string tokenString);
 
-std::string get_temp_var();
+std::string make_t_var();
 void codeGen(Node* node, int index, std::string output_file_name);
 
 #endif
